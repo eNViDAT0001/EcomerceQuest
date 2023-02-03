@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-const ctLayout = "02-01-2006 15:04:05 Z07:00"
-
-type DateOnly time.Time
-
 type SoftDeleteModel struct {
 	ID        uint           `gorm:"primarykey" json:"id"`
 	CreatedAt DateOnly       `json:"created_at"`
@@ -24,6 +20,9 @@ type HardDeleteModel struct {
 	CreatedAt DateOnly `json:"created_at"`
 	UpdatedAt DateOnly `json:"updated_at"`
 }
+type DateOnly time.Time
+
+const ctLayout = "2006-01-02 15:04:05 Z07:00"
 
 // UnmarshalJSON Parses the json string in the custom format
 func (ct *DateOnly) UnmarshalJSON(b []byte) (err error) {
@@ -35,11 +34,9 @@ func (ct *DateOnly) UnmarshalJSON(b []byte) (err error) {
 
 // MarshalJSON writes a quoted string in the custom format
 func (ct DateOnly) MarshalJSON() ([]byte, error) {
-	date := ct.String()
-	if len(date) > 0 {
-		date = strings.Split(strings.Trim(ct.String(), `"`), " ")[0]
-	}
-	return json.Marshal(date)
+	fullDate := strings.Trim(ct.String(), `"`)
+	dateOnly := strings.Split(fullDate, ` `)
+	return json.Marshal(fmt.Sprintf("%s %s", dateOnly[0], dateOnly[1]))
 }
 
 // String returns the time in the custom format
