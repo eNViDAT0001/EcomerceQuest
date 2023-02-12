@@ -11,7 +11,7 @@ var viper *wrap_viper.WrapViper
 
 func init() {
 	viper = wrap_viper.GetViper()
-	viper.LoadConfigFile("../config", "dev")
+	viper.LoadConfigFile("../BaseProject/config", "dev")
 }
 func main() {
 	r := gin.Default()
