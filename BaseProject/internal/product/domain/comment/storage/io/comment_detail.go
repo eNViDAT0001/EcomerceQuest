@@ -6,13 +6,13 @@ import (
 )
 
 type CommentDetail struct {
-	ID          uint
-	ProductID   uint
-	UserID      uint
-	Description string
-	Rating      int
-	Name        string
-	Avatar      string
-	Media       datatypes.JSON
-	CreatedAt   time.Time
+	ID          uint           `json:"id"`
+	ProductID   uint           `json:"product_id"`
+	UserID      uint           `json:"user_id"`
+	Description string         `json:"description"`
+	Rating      int            `json:"rating"`
+	Name        string         `json:"name"`
+	Avatar      string         `json:"avatar"`
+	Media       datatypes.JSON `json:"media"`
+	CreatedAt   time.Time      `json:"created_at"`
 }

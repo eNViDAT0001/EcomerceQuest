@@ -12,7 +12,7 @@ type ProductSpecificationCreateForm struct {
 	Properties      string
 }
 type ProductSpecificationFullDetail struct {
-	ID         uint
-	Properties string
-	Options    datatypes.JSON
+	ID         uint           `json:"id"`
+	Properties string         `json:"properties"`
+	Options    datatypes.JSON `json:"options"`
 }

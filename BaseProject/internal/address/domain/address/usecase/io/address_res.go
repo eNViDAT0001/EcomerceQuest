@@ -1,12 +1,12 @@
 package io
 
 type AddressRes struct {
-	UserID       string
-	Name         string
-	Gender       bool
-	Phone        string
-	ProvinceCode string
-	DistrictCode string
-	WardCode     string
-	Street       string
+	UserID       string `json:"user_id"`
+	Name         string `json:"name"`
+	Gender       bool   `json:"gender"`
+	Phone        string `json:"phone"`
+	ProvinceCode string `json:"province_code"`
+	DistrictCode string `json:"district_code"`
+	WardCode     string `json:"ward_code"`
+	Street       string `json:"street"`
 }

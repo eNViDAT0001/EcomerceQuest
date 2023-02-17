@@ -6,17 +6,17 @@ import (
 )
 
 type OrderPreview struct {
-	ID       uint
-	Name     string
-	Gender   *bool
-	Phone    string
-	Province string
-	District string
-	Ward     string
-	Street   string
-	Quantity int
-	Total    int
-	Discount int
-	Status   entities.OrderStatus
-	Items    datatypes.JSON
+	ID       uint                 `json:"id"`
+	Name     string               `json:"name"`
+	Gender   *bool                `json:"gender"`
+	Phone    string               `json:"phone"`
+	Province string               `json:"province"`
+	District string               `json:"district"`
+	Ward     string               `json:"ward"`
+	Street   string               `json:"street"`
+	Quantity int                  `json:"quantity"`
+	Total    int                  `json:"total"`
+	Discount int                  `json:"discount"`
+	Status   entities.OrderStatus `json:"status"`
+	Items    datatypes.JSON       `json:"items"`
 }
