@@ -16,4 +16,5 @@ type UseCase interface {
 	SetPassword(ctx context.Context, userID uint32, password string, newPassword string) error
 	DeleteUserByIDs(ctx context.Context, IDs []uint) error
 	GetUserByUsername(ctx context.Context, username string) (*entities.User, error)
+	GetUserByEmail(ctx context.Context, email string) (*entities.User, error)
 }

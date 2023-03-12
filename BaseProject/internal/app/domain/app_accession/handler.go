@@ -6,7 +6,11 @@ import (
 
 type HttpHandler interface {
 	Login() gin.HandlerFunc
-	LoginByGoogle() gin.HandlerFunc
-	LoginByFacebook() gin.HandlerFunc
 	Register() gin.HandlerFunc
+
+	GoogleSSO() func(*gin.Context)
+	CallbackGoogleSSO() func(*gin.Context)
+
+	FacebookSSO() func(*gin.Context)
+	CallbackFacebookSSO() func(*gin.Context)
 }

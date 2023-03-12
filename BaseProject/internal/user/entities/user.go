@@ -53,8 +53,6 @@ func (u User) ComparePassword(hashedPwd string, plainPwd string) bool {
 type UserType string
 
 const (
-	Seller UserType = "SELLER"
-	Buyer  UserType = "BUYER"
-	Admin  UserType = "ADMIN"
-	Banned UserType = "BANNED"
+	Buyer UserType = "BUYER"
+	Admin UserType = "ADMIN"
 )

@@ -15,10 +15,6 @@ func (u userStorage) GetUserWithIdentify(ctx context.Context, input io.UserIdent
 
 	query := db.Model(&entities.User{}).Where("username = ?", input.Username)
 
-	if input.Phone != "" {
-		query = query.Or("phone = ?", input.Phone)
-	}
-
 	if input.Email != "" {
 		query = query.Or("email = ?", input.Email)
 	}

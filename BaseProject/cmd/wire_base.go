@@ -182,6 +182,7 @@ func NewHandlerCollection(
 	cartItemHandler cartItemsPKG.HttpHandler,
 	orderHandler orderPKG.HttpHandler,
 	orderItemHandler orderItemsPKG.HttpHandler,
+
 ) *HandlerCollection {
 	return &HandlerCollection{
 		userHandler:      userHandler,

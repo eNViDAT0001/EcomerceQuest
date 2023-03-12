@@ -16,7 +16,12 @@ func router(r *gin.Engine) {
 	{
 		appGroup := v1.Group("/app")
 		{
-			appGroup.POST("/login", allHandler.appAccessHandler.Login())
+			loginGroup := appGroup.Group("/login")
+			{
+				appGroup.POST("", allHandler.appAccessHandler.Login())
+				loginGroup.GET("/google", allHandler.appAccessHandler.GoogleSSO())
+				loginGroup.GET("/google/callback", allHandler.appAccessHandler.CallbackGoogleSSO())
+			}
 			appGroup.POST("/register", allHandler.appAccessHandler.Register())
 		}
 		tokenGroup := v1.Group("/token")

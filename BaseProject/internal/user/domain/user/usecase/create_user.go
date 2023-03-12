@@ -12,7 +12,6 @@ func (u userUseCase) CreateUser(ctx context.Context, input *io.CreateUserInput) 
 	user, err := u.userSto.GetUserWithIdentify(ctx, io.UserIdentify{
 		Username: input.Username,
 		Email:    input.Email,
-		Phone:    input.Phone,
 	})
 
 	if err != nil && err != gorm.ErrRecordNotFound {
@@ -25,9 +24,6 @@ func (u userUseCase) CreateUser(ctx context.Context, input *io.CreateUserInput) 
 		}
 		if user.Email == input.Email {
 			return 0, request.NewConflictError("Email", input.Email, "value exist")
-		}
-		if user.Phone == input.Phone {
-			return 0, request.NewConflictError("Phone", input.Phone, "value exist")
 		}
 	}
 
