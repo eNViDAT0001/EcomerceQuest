@@ -29,7 +29,10 @@ func router(r *gin.Engine) {
 		{
 			tokenGroup.POST("/refresh", allHandler.jwtHandler.RefreshToken())
 		}
-
+		mailGroup := v1.Group("/mail")
+		{
+			mailGroup.POST("/send", allHandler.smtpHandler.SendMail())
+		}
 		fileGroup := v1.Group("/files")
 		{
 			fileGroup.POST("", allHandler.mediaHandler.UploadMedia())
