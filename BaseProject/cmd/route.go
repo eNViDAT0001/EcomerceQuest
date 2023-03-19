@@ -26,14 +26,19 @@ func router(r *gin.Engine) {
 			}
 			appGroup.POST("/register", allHandler.appAccessHandler.Register())
 		}
+
 		tokenGroup := v1.Group("/token")
 		{
 			tokenGroup.POST("/refresh", allHandler.jwtHandler.RefreshToken())
 		}
-		//mailGroup := v1.Group("/mail")
-		//{
-		//	mailGroup.POST("/send", allHandler.smtpHandler.SendEmail())
-		//}
+
+		mailGroup := v1.Group("/mail")
+		{
+			mailGroup.POST("/verify", allHandler.smtpHandler.VerifyCode())
+			mailGroup.POST("/reset/user/:user_id", allHandler.smtpHandler.CreateResetPassCode())
+			mailGroup.POST("/report", allHandler.smtpHandler.GetReportEmail())
+			mailGroup.POST("/feedback", allHandler.smtpHandler.GetFeedbackEmail())
+		}
 		fileGroup := v1.Group("/files")
 		{
 			fileGroup.POST("", allHandler.mediaHandler.UploadMedia())
