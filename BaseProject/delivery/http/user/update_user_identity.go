@@ -16,7 +16,7 @@ func (s userHandler) UpdateUserIdentity() func(*gin.Context) {
 		var input io.UpdateUserIdentityReq
 
 		id, _ := strconv.Atoi(cc.Param("user_id"))
-		_, err := s.userUC.ComparePassword(newCtx, uint32(id), input.Password)
+		_, err := s.userUC.ComparePassword(newCtx, uint(id), input.Password)
 
 		err = UpdateUser(cc.Context, newCtx, &s, input)
 		if err != nil {

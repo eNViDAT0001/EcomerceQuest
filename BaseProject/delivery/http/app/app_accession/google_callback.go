@@ -24,7 +24,7 @@ func (a *appAccessionHandler) CallbackGoogleSSO() func(*gin.Context) {
 		newCtx := context.Background()
 		state, _ := cc.GetQuery("state")
 		code, _ := cc.GetQuery("code")
-		googleProfile, err := getUserData(state, code)
+		googleProfile, err := getGoogleUserData(state, code)
 		if err != nil {
 			cc.ResponseError(err)
 			return
@@ -93,7 +93,7 @@ func (a *appAccessionHandler) CallbackGoogleSSO() func(*gin.Context) {
 		cc.Ok(result)
 	}
 }
-func getUserData(state, code string) (io.GoogleProfile, error) {
+func getGoogleUserData(state, code string) (io.GoogleProfile, error) {
 	var result io.GoogleProfile
 
 	if state != oidc.RandomString {

@@ -10,20 +10,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (s userHandler) SetPassword() func(*gin.Context) {
+func (s userHandler) ResetPassword() func(*gin.Context) {
 	return func(c *gin.Context) {
 		cc := request.FromContext(c)
 		newCtx := context.Background()
 
 		id, _ := strconv.Atoi(cc.Param("user_id"))
 
-		var password io.SetNewPasswordReq
-		if err := cc.BindJSON(&password); err != nil {
+		var input io.ResetPasswordReq
+		if err := cc.BindJSON(&input); err != nil {
 			cc.ResponseError(err)
 			return
 		}
 
-		err := s.userUC.SetPassword(newCtx, uint(id), password.Password, password.NewPassword)
+		err := s.userUC.ResetPassword(newCtx, uint(id), input.Email)
 
 		if err != nil {
 			if err == gorm.ErrRecordNotFound {

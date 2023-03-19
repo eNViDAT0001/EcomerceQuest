@@ -7,7 +7,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/entities"
 )
 
-func (u userStorage) UpdatePassword(ctx context.Context, userID uint32, password string) error {
+func (u userStorage) UpdatePassword(ctx context.Context, userID uint, password string) error {
 	tableName := entities.User{}.TableName()
 	db := wrap_gorm.GetDB()
 

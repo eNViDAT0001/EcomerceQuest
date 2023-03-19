@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (u userStorage) ComparePassword(ctx context.Context, userID uint32, password string) (io.UserPassword, error) {
+func (u userStorage) ComparePassword(ctx context.Context, userID uint, password string) (io.UserPassword, error) {
 	var userPass io.UserPassword
 	db := wrap_gorm.GetDB()
 

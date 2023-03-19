@@ -15,8 +15,8 @@ type Storage interface {
 	GetUserList(ctx context.Context, input *paging.ParamsInput) ([]*entities.User, error)
 	CreateUser(ctx context.Context, input *io.CreateUserInput) (userID uint, err error)
 	UpdateUser(ctx context.Context, userID uint32, input *io.UpdateUserInput) error
-	UpdatePassword(ctx context.Context, userID uint32, password string) error
-	ComparePassword(ctx context.Context, userID uint32, password string) (io.UserPassword, error)
+	UpdatePassword(ctx context.Context, userID uint, password string) error
+	ComparePassword(ctx context.Context, userID uint, password string) (io.UserPassword, error)
 	DeleteUserByIDs(ctx context.Context, IDs []uint) error
 	GetUserWithIdentify(ctx context.Context, input io.UserIdentify) (*io.UserPreview, error)
 	CountList(ctx context.Context, input *paging.ParamsInput) (int64, error)

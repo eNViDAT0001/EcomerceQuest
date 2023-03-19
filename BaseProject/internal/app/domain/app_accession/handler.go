@@ -10,7 +10,4 @@ type HttpHandler interface {
 
 	GoogleSSO() func(*gin.Context)
 	CallbackGoogleSSO() func(*gin.Context)
-
-	FacebookSSO() func(*gin.Context)
-	CallbackFacebookSSO() func(*gin.Context)
 }

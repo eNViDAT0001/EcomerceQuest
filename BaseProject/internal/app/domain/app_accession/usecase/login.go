@@ -10,7 +10,7 @@ func (u *appAccessionUseCase) Login(ctx context.Context, username string, passwo
 	if err != nil {
 		return nil, err
 	}
-	_, err = u.userSto.ComparePassword(ctx, uint32(user.ID), password)
+	_, err = u.userSto.ComparePassword(ctx, user.ID, password)
 	if err != nil {
 		return nil, err
 	}

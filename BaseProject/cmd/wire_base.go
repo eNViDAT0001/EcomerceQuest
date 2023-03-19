@@ -6,6 +6,7 @@ import (
 	mediaHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/app/app_file"
 	cartHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/cart/cart"
 	cartItemsHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/cart/cart_items"
+	smtpHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
 
 	orderHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order"
 	orderItemsHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
@@ -80,6 +81,9 @@ import (
 	jwtStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
 	jwtUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
 
+	smtpPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
+	smtpUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
+
 	"github.com/google/wire"
 )
 
@@ -145,6 +149,9 @@ var IteratorCollection = wire.NewSet(
 	jwtUCPKG.NewJwtUseCase,
 	jwtStoPKG.NewJwtStorage,
 
+	smtpHttpHandlerPKG.NewSmtpHandler,
+	smtpUCPKG.NewSmtpUseCase,
+
 	NewHandlerCollection,
 )
 
@@ -164,6 +171,7 @@ type HandlerCollection struct {
 	cartItemHandler  cartItemsPKG.HttpHandler
 	orderHandler     orderPKG.HttpHandler
 	orderItemHandler orderItemsPKG.HttpHandler
+	smtpHandler      smtpPKG.HttpHandler
 }
 
 func NewHandlerCollection(
@@ -182,6 +190,7 @@ func NewHandlerCollection(
 	cartItemHandler cartItemsPKG.HttpHandler,
 	orderHandler orderPKG.HttpHandler,
 	orderItemHandler orderItemsPKG.HttpHandler,
+	smtpHandler smtpPKG.HttpHandler,
 
 ) *HandlerCollection {
 	return &HandlerCollection{
@@ -200,5 +209,6 @@ func NewHandlerCollection(
 		orderHandler:     orderHandler,
 		orderItemHandler: orderItemHandler,
 		favoriteHandler:  favoriteHandler,
+		smtpHandler:      smtpHandler,
 	}
 }

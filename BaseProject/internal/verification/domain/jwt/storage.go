@@ -8,5 +8,7 @@ import (
 
 type Storage interface {
 	GenerateToken(input io.GenerateTokenInput, expiresAt time.Time) (*io.Token, error)
+	GenerateSmtpCodeVerification(code string) (string, error)
 	VerifyToken(tokenString string) (*jwt.Token, error)
+	VerifySmtpToken(tokenString string, signature string) (*jwt.Token, error)
 }

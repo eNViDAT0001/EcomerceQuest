@@ -6,13 +6,11 @@ import (
 )
 
 type jwtUseCase struct {
-	//clientSto clientPKG.Storage
 	userSto  userPKG.Storage
 	tokenSto jwt.Storage
 }
 
 func NewJwtUseCase(
-	//clientSto clientPKG.Storage,
 	userSto userPKG.Storage,
 	tokenSto jwt.Storage,
 

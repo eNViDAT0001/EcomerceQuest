@@ -4,7 +4,7 @@ import (
 	"golang.org/x/oauth2"
 )
 
-const RandomString = "SuperSecretRandomString"
+const RandomString = "SomeRandomStringAlgorithmForMoreSecurity"
 
 type ssoConfig struct {
 	GoogleOauthConfig *oauth2.Config

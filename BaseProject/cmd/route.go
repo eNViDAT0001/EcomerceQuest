@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func router(r *gin.Engine) {
@@ -18,7 +19,7 @@ func router(r *gin.Engine) {
 		{
 			loginGroup := appGroup.Group("/login")
 			{
-				appGroup.POST("", allHandler.appAccessHandler.Login())
+				loginGroup.POST("", allHandler.appAccessHandler.Login())
 				loginGroup.GET("/google", allHandler.appAccessHandler.GoogleSSO())
 				loginGroup.GET("/google/callback", allHandler.appAccessHandler.CallbackGoogleSSO())
 			}
@@ -220,5 +221,11 @@ func router(r *gin.Engine) {
 		}
 
 	}
+
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "pong",
+		})
+	})
 
 }
