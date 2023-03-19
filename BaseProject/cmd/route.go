@@ -1,9 +1,10 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func router(r *gin.Engine) {
@@ -29,10 +30,10 @@ func router(r *gin.Engine) {
 		{
 			tokenGroup.POST("/refresh", allHandler.jwtHandler.RefreshToken())
 		}
-		mailGroup := v1.Group("/mail")
-		{
-			mailGroup.POST("/send", allHandler.smtpHandler.SendMail())
-		}
+		//mailGroup := v1.Group("/mail")
+		//{
+		//	mailGroup.POST("/send", allHandler.smtpHandler.SendEmail())
+		//}
 		fileGroup := v1.Group("/files")
 		{
 			fileGroup.POST("", allHandler.mediaHandler.UploadMedia())

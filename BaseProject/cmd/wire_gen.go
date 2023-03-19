@@ -22,7 +22,6 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/provider"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/user"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/jwt"
-	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
 	storage2 "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address/storage"
 	usecase2 "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address/usecase"
 	usecase5 "github.com/eNViDAT0001/Thesis/Backend/internal/app/domain/app_accession/usecase"
@@ -52,7 +51,6 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/usecase"
 	storage4 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
 	usecase4 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
-	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
 )
 
 // Injectors from wire.go:
@@ -102,8 +100,6 @@ func initHandlerCollection() *HandlerCollection {
 	order_itemStorage := storage14.NewOrderItemStorage()
 	order_itemUseCase := usecase15.NewOrderItemUseCase(order_itemStorage)
 	order_itemHttpHandler := order_items.NewOrderItemHandler(order_itemUseCase)
-	smtpUseCase := usecase16.NewSmtpUseCase()
-	smtpHttpHandler := smtp.NewSmtpHandler(jwtUseCase, useCase, smtpUseCase)
-	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler)
+	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler)
 	return handlerCollection
 }

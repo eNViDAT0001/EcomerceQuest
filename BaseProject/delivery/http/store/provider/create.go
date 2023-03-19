@@ -2,7 +2,6 @@ package provider
 
 import (
 	"context"
-	"errors"
 	"strconv"
 
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/provider/convert"
@@ -22,11 +21,13 @@ func (s providerHandler) CreateProvider() func(*gin.Context) {
 			return
 		}
 
-		userID, _ := strconv.Atoi(cc.Param("user_id"))
-		if uint(userID) != input.UserID {
-			cc.BadRequest(errors.New("user id does not match"))
+		userID, err := strconv.Atoi(cc.Param("user_id"))
+		if err != nil {
+			cc.ResponseError(err)
 			return
 		}
+
+		input.UserID = uint(userID)
 
 		inputSto, err := convert.ProviderCreateReqToProviderForm(&input)
 		if err != nil {
