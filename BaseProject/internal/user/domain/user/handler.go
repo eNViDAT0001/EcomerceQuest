@@ -10,6 +10,7 @@ type HttpHandler interface {
 	UpdateUserIdentity() func(*gin.Context)
 	UpdateUserInfo() func(*gin.Context)
 	SetPassword() func(*gin.Context)
+	ResetPassword() func(*gin.Context)
 	DeleteUserByID() func(*gin.Context)
 	DeleteUserByIDs() func(*gin.Context)
 }

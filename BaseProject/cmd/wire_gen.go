@@ -23,8 +23,8 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/user"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/jwt"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
-	storage2 "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address/storage"
-	usecase2 "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address/usecase"
+	storage3 "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address/storage"
+	usecase3 "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address/usecase"
 	usecase5 "github.com/eNViDAT0001/Thesis/Backend/internal/app/domain/app_accession/usecase"
 	storage11 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart/storage"
 	usecase12 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart/usecase"
@@ -42,16 +42,16 @@ import (
 	usecase7 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/usecase"
 	storage10 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/storage"
 	usecase11 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/usecase"
-	storage3 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/category/storage"
-	usecase3 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/category/usecase"
+	storage4 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/category/storage"
+	usecase4 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/category/usecase"
 	storage8 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/favorite/storage"
 	usecase8 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/favorite/usecase"
 	storage5 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/provider/storage"
 	usecase6 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/provider/usecase"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/storage"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/usecase"
-	storage4 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
-	usecase4 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
+	storage2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
+	usecase2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
 	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
 )
 
@@ -60,15 +60,15 @@ import (
 func initHandlerCollection() *HandlerCollection {
 	userStorage := storage.NewUserStorage()
 	useCase := usecase.NewUserUseCase(userStorage)
-	httpHandler := user.NewUserHandler(useCase)
-	storage15 := storage2.NewAddressStorage()
-	userUseCase := usecase2.NewAddressUseCase(storage15)
+	jwtStorage := storage2.NewJwtStorage()
+	jwtUseCase := usecase2.NewJwtUseCase(userStorage, jwtStorage)
+	httpHandler := user.NewUserHandler(useCase, jwtUseCase)
+	storage15 := storage3.NewAddressStorage()
+	userUseCase := usecase3.NewAddressUseCase(storage15)
 	userHttpHandler := address.NewAddressHandler(userUseCase)
-	categoryStorage := storage3.NewCategoryStorage()
-	categoryUseCase := usecase3.NewCategoryUseCase(categoryStorage)
+	categoryStorage := storage4.NewCategoryStorage()
+	categoryUseCase := usecase4.NewCategoryUseCase(categoryStorage)
 	categoryHttpHandler := category.NewCategoryHandler(categoryUseCase)
-	jwtStorage := storage4.NewJwtStorage()
-	jwtUseCase := usecase4.NewJwtUseCase(userStorage, jwtStorage)
 	app_accessionUseCase := usecase5.NewAppAccessionUseCase(userStorage, jwtStorage)
 	app_accessionHttpHandler := app_accession.NewAppAccessionHandler(jwtUseCase, useCase, app_accessionUseCase)
 	providerStorage := storage5.NewProviderStorage()

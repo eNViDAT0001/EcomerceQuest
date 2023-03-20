@@ -1,12 +1,15 @@
 package storage
 
 import (
+	"context"
 	"github.com/golang-jwt/jwt/v4"
 )
 
-func (s *jwtStorage) GenerateSmtpCodeVerification(code string) (string, error) {
+func (s *jwtStorage) GenerateSmtpCodeVerification(ctx context.Context, code string, email string) (string, error) {
 
-	at := jwt.NewWithClaims(jwt.SigningMethodHS256, nil)
+	claims := jwt.MapClaims{}
+	claims["email"] = email
+	at := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	secret := code
 	token, err := at.SignedString([]byte(secret))
 	if err != nil {

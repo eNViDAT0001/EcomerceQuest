@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (s *smtpHandler) GetReportEmail() func(*gin.Context) {
+func (s *smtpHandler) GetEmail() func(*gin.Context) {
 	return func(c *gin.Context) {
 		cc := request.FromContext(c)
 		//newCtx := context.Background()

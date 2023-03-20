@@ -1,7 +1,10 @@
 package smtp
 
-import "context"
+import (
+	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase/io"
+)
 
 type UseCase interface {
-	SendEmail(ctx context.Context, email string, body string) error
+	SendEmail(ctx context.Context, input io.EmailForm) error
 }

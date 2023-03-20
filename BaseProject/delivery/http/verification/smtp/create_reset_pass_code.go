@@ -1,10 +1,11 @@
 package smtp
 
 import (
+	"fmt"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase/io"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/net/context"
-	"strconv"
 )
 
 func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
@@ -12,21 +13,31 @@ func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 		cc := request.FromContext(c)
 		newCtx := context.Background()
 
-		id, _ := strconv.Atoi(cc.Param("user_id"))
-		email := cc.Param("user_id")
+		email := cc.Query("email")
 
-		token, code, err := s.jwtUC.GenerateSmtpCode(newCtx, uint(id))
+		token, code, err := s.jwtUC.GenerateSmtpCode(newCtx, email)
 		if err != nil {
 			cc.ResponseError(err)
 			return
 		}
 
-		err = s.smtpUC.SendEmail(newCtx, email, code)
+		mail := io.EmailForm{
+			Subject:     "Reset password",
+			Content:     fmt.Sprintf("<h1>%s</h1>", code),
+			To:          []string{email},
+			Cc:          nil,
+			Bcc:         nil,
+			AttachFiles: nil,
+		}
+		err = s.smtpUC.SendEmail(newCtx, mail)
 		if err != nil {
 			cc.ResponseError(err)
 			return
 		}
 
-		cc.Ok(token)
+		result := map[string]interface{}{
+			"token": token,
+		}
+		cc.Ok(result)
 	}
 }

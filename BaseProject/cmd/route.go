@@ -36,8 +36,7 @@ func router(r *gin.Engine) {
 		{
 			mailGroup.POST("/verify", allHandler.smtpHandler.VerifyCode())
 			mailGroup.POST("/reset/user/:user_id", allHandler.smtpHandler.CreateResetPassCode())
-			mailGroup.POST("/report", allHandler.smtpHandler.GetReportEmail())
-			mailGroup.POST("/feedback", allHandler.smtpHandler.GetFeedbackEmail())
+			mailGroup.POST("", allHandler.smtpHandler.GetEmail())
 		}
 		fileGroup := v1.Group("/files")
 		{
@@ -121,6 +120,7 @@ func router(r *gin.Engine) {
 			authGroup.PATCH("/:user_id/info", allHandler.userHandler.UpdateUserInfo())
 			authGroup.PATCH("/:user_id/identity", allHandler.userHandler.UpdateUserIdentity())
 			authGroup.PUT("/:user_id", allHandler.userHandler.SetPassword())
+			authGroup.PUT("/:user_id/reset_pass", allHandler.userHandler.ResetPassword())
 			authAminGroup.DELETE("/:user_id", allHandler.userHandler.DeleteUserByID())
 			authAminGroup.DELETE("", allHandler.userHandler.DeleteUserByIDs())
 			userGroup.GET("", allHandler.userHandler.GetUserList())

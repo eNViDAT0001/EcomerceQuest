@@ -5,5 +5,7 @@ type SetNewPasswordReq struct {
 	NewPassword string `json:"new_password" binding:"required"`
 }
 type ResetPasswordReq struct {
-	Email string `json:"email" binding:"required"`
+	Code        string `json:"code"`
+	Token       string `json:"token"`
+	NewPassword string `json:"new_password"`
 }

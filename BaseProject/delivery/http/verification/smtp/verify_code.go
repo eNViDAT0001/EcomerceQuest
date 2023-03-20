@@ -24,6 +24,6 @@ func (s *smtpHandler) VerifyCode() func(*gin.Context) {
 			return
 		}
 
-		cc.Ok(token)
+		cc.Ok(token.Valid)
 	}
 }

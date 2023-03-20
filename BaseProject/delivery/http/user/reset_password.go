@@ -3,7 +3,6 @@ package user
 import (
 	"context"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/user/io"
-	"gorm.io/gorm"
 	"strconv"
 
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
@@ -15,7 +14,7 @@ func (s userHandler) ResetPassword() func(*gin.Context) {
 		cc := request.FromContext(c)
 		newCtx := context.Background()
 
-		id, _ := strconv.Atoi(cc.Param("user_id"))
+		userID, _ := strconv.Atoi(cc.Param("user_id"))
 
 		var input io.ResetPasswordReq
 		if err := cc.BindJSON(&input); err != nil {
@@ -23,13 +22,19 @@ func (s userHandler) ResetPassword() func(*gin.Context) {
 			return
 		}
 
-		err := s.userUC.ResetPassword(newCtx, uint(id), input.Email)
-
+		token, err := s.jwtUC.VerifySmtpToken(newCtx, uint(userID), input.Token, input.Code)
 		if err != nil {
-			if err == gorm.ErrRecordNotFound {
-				cc.ResponseError(request.NewConflictError("password", "", "password does not match"))
-				return
-			}
+			cc.ResponseError(err)
+			return
+		}
+
+		if !token.Valid {
+			cc.ResponseError(request.NewUnauthorizedError("Code", input.Code, "Code is not valid"))
+			return
+		}
+
+		err = s.userUC.ResetPassword(newCtx, uint(userID), input.NewPassword)
+		if err != nil {
 			cc.ResponseError(err)
 			return
 		}

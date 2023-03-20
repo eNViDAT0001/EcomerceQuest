@@ -10,7 +10,7 @@ import (
 type UseCase interface {
 	GenerateToken(input io.GenerateTokenInput) (*ioUC.JwtToken, error)
 	RefreshToken(ctx context.Context, refreshToken string) (*ioUC.JwtToken, error)
-	GenerateSmtpCode(ctx context.Context, userID uint) (token string, code string, err error)
+	GenerateSmtpCode(ctx context.Context, email string) (token string, code string, err error)
 	VerifyToken(ctx context.Context, accessToken string) (*jwt.Token, error)
-	VerifySmtpToken(ctx context.Context, userID uint, accessToken string, code string) (bool, error)
+	VerifySmtpToken(ctx context.Context, userID uint, accessToken string, code string) (token *jwt.Token, err error)
 }
