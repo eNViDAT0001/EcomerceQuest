@@ -26,13 +26,13 @@ func (u *productUseCase) CreateProduct(ctx context.Context, productDetail ioUC.P
 			return productID, err
 		}
 	}
-	if len(productDetail.Specifications) > 0 {
-		for i, _ := range productDetail.Specifications {
-			productDetail.Specifications[i].Specification.ProductID = productID
-		}
 
-		err = u.CreateSpecificationTree(ctx, productDetail.Specifications)
+	productDetail.Specifications.Specification.ProductID = productID
+	_, err = u.CreateSpecification(ctx, productDetail.Specifications)
+	if err != nil {
+		return productID, err
 	}
+
 	if len(productDetail.Descriptions) > 0 {
 		for i, _ := range productDetail.Descriptions {
 			productDetail.Descriptions[i].ProductID = productID

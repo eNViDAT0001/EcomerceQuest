@@ -4,9 +4,6 @@ type ProductSpecificationUpdateReq struct {
 	ProductID  uint    `json:"product_id"`
 	Properties *string `json:"properties"`
 }
-type ProductSpecificationsCreateTreeReq struct {
-	Specification []SpecificationCreate `json:"specifications"`
-}
 
 type SpecificationCreate struct {
 	Specification ProductSpecificationCreateReq `json:"specification"`

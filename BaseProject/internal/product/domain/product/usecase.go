@@ -29,7 +29,6 @@ type UseCase interface {
 	CreateDescriptions(ctx context.Context, input ioUC.ProductDescriptionsWithFileCreate) (newID uint, err error)
 	CreateProductOptions(ctx context.Context, input []io.ProductOptionCreateForm) error
 	CreateSpecification(ctx context.Context, input ioUC.SpecificationCreateForm) (specID uint, err error)
-	CreateSpecificationTree(ctx context.Context, specs []ioUC.SpecificationCreateForm) error
 
 	DeleteProductByIDs(ctx context.Context, IDs []uint) error
 	DeleteProductByID(ctx context.Context, ID uint) error

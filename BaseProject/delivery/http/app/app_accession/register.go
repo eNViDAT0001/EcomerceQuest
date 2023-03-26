@@ -40,7 +40,7 @@ func (a appAccessionHandler) Register() gin.HandlerFunc {
 			Salt:     inputSto.Salt,
 		}
 
-		token, err := a.jwtUC.GenerateToken(tokenForm)
+		token, err := a.jwtUC.GenerateToken(nil, tokenForm)
 		if err != nil {
 			cc.ResponseError(err)
 			return

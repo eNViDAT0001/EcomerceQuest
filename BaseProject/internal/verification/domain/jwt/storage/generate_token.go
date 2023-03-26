@@ -1,13 +1,14 @@
 package storage
 
 import (
+	"context"
 	"time"
 
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage/io"
 	"github.com/golang-jwt/jwt/v4"
 )
 
-func (s *jwtStorage) GenerateToken(input io.GenerateTokenInput, expiresAt time.Time) (*io.Token, error) {
+func (s *jwtStorage) GenerateToken(ctx context.Context, input io.GenerateTokenInput, expiresAt time.Time) (*io.Token, error) {
 
 	// TODO: Check claims
 	//claims := jwt.MapClaims{}

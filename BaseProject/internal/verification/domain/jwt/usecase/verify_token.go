@@ -8,7 +8,7 @@ import (
 )
 
 func (s *jwtUseCase) VerifyToken(ctx context.Context, accessToken string) (*jwt.Token, error) {
-	token, err := s.tokenSto.VerifyToken(accessToken)
+	token, err := s.tokenSto.VerifyToken(ctx, accessToken)
 	if err != nil && !token.Valid {
 		return nil, request.NewUnauthorizedError("token", accessToken, "Invalid Token")
 	}

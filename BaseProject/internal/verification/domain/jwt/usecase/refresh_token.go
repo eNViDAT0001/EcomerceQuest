@@ -11,7 +11,7 @@ import (
 )
 
 func (s *jwtUseCase) RefreshToken(ctx context.Context, refreshToken string) (*ioUC.JwtToken, error) {
-	token, err := s.tokenSto.VerifyToken(refreshToken)
+	token, err := s.tokenSto.VerifyToken(nil, refreshToken)
 	if err != nil {
 		return nil, request.NewUnauthorizedError("refresh_token", refreshToken, "Invalid Refresh Token")
 	}
@@ -35,8 +35,14 @@ func (s *jwtUseCase) RefreshToken(ctx context.Context, refreshToken string) (*io
 	}
 
 	minutes, _ := ioUC.GetMinute()
+	days, _ := ioUC.GetDate()
 
-	accessToken, err := s.tokenSto.GenerateToken(baseToken, minutes)
+	accessToken, err := s.tokenSto.GenerateToken(ctx, baseToken, minutes)
+	if err != nil {
+		return nil, err
+	}
+
+	newRefreshToken, err := s.tokenSto.GenerateToken(ctx, baseToken, days)
 	if err != nil {
 		return nil, err
 	}
@@ -44,8 +50,8 @@ func (s *jwtUseCase) RefreshToken(ctx context.Context, refreshToken string) (*io
 	output := ioUC.JwtToken{
 		AccessToken:        accessToken.Token,
 		AccessTokenExpiry:  accessToken.TokenExpiry,
-		RefreshToken:       refreshToken,
-		RefreshTokenExpiry: int64(claims["exp"].(float64)),
+		RefreshToken:       newRefreshToken.Token,
+		RefreshTokenExpiry: newRefreshToken.TokenExpiry,
 	}
 
 	return &output, nil

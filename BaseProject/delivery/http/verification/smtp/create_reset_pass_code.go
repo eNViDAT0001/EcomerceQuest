@@ -21,6 +21,11 @@ func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 			return
 		}
 
+		result := map[string]interface{}{
+			"token": token,
+		}
+		cc.Ok(result)
+
 		mail := io.EmailForm{
 			Subject:     "Reset password",
 			Content:     fmt.Sprintf("<h1>%s</h1>", code),
@@ -35,9 +40,5 @@ func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 			return
 		}
 
-		result := map[string]interface{}{
-			"token": token,
-		}
-		cc.Ok(result)
 	}
 }

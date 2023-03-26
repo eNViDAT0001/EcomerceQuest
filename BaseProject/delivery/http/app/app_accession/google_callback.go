@@ -79,7 +79,7 @@ func (a *appAccessionHandler) CallbackGoogleSSO() func(*gin.Context) {
 			Username: username,
 			Salt:     salt,
 		}
-		token, err := a.jwtUC.GenerateToken(tokenForm)
+		token, err := a.jwtUC.GenerateToken(nil, tokenForm)
 		if err != nil {
 			cc.ResponseError(err)
 			return

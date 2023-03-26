@@ -13,7 +13,7 @@ func (s *jwtUseCase) VerifySmtpToken(ctx context.Context, userID uint, accessTok
 	}
 
 	signature := fmt.Sprintf("%s %s", *user.Salt, code)
-	token, err := s.tokenSto.VerifySmtpToken(accessToken, signature)
+	token, err := s.tokenSto.VerifySmtpToken(ctx, accessToken, signature)
 	if err != nil {
 		return nil, err
 	}

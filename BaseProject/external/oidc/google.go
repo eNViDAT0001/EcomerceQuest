@@ -1,17 +1,27 @@
 package oidc
 
 import (
+	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_viper"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
 
+var (
+	vp = wrap_viper.GetViper()
+)
+
 func getGoogleSSoConfig() *oauth2.Config {
+	clientID := vp.GetString("GOOGLE_OAUTH2.CLIENT_ID")
+	clientSecret := vp.GetString("GOOGLE_OAUTH2.CLIENT_SECRET")
+	redirectURL := vp.GetString("GOOGLE_OAUTH2.REDIRECT_URL")
+
+	scopes := []string{"https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"}
 	googleConfig := &oauth2.Config{
-		ClientID:     "775502336982-tpq7oppduoni9f8reu1o9sbp8ckvus6e.apps.googleusercontent.com",
-		ClientSecret: "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",
+		ClientID:     clientID,
+		ClientSecret: clientSecret,
 		Endpoint:     google.Endpoint,
-		RedirectURL:  "http://localhost:8082/api/v1/app/login/google/callback",
-		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"},
+		RedirectURL:  redirectURL,
+		Scopes:       scopes,
 	}
 	return googleConfig
 }

@@ -36,7 +36,7 @@ func router(r *gin.Engine) {
 		{
 			mailGroup.POST("/verify", allHandler.smtpHandler.VerifyCode())
 			mailGroup.POST("/reset/user/:user_id", allHandler.smtpHandler.CreateResetPassCode())
-			mailGroup.POST("", allHandler.smtpHandler.GetEmail())
+			mailGroup.POST("/feedback", allHandler.smtpHandler.CreateEmailFeedback())
 		}
 		fileGroup := v1.Group("/files")
 		{
@@ -150,7 +150,6 @@ func router(r *gin.Engine) {
 			authGroup.POST("/:product_id/option", allHandler.productHandler.CreateProductOptions())
 			authGroup.POST("/:product_id/media", allHandler.productHandler.CreateProductMedia())
 			authGroup.POST("/:product_id/specification", allHandler.productHandler.CreateSpecification())
-			authGroup.POST("/:product_id/specification/tree", allHandler.productHandler.CreateSpecificationTree())
 
 			authGroup.DELETE("/:product_id", allHandler.productHandler.DeleteProductByID())
 			authProviderGroup.DELETE("/provider/:provider_id", allHandler.productHandler.DeleteProductByIDs())

@@ -15,15 +15,12 @@ func GetMediaServer() *cloudinary.Cloudinary {
 		return mediaServer
 	}
 
-	//mediaServer = newCloudinaryServer(
-	//	vp.GetString("CLOUDINARY_NAME"),
-	//	vp.GetString("CLOUDINARY_API_KEY"),
-	//	vp.GetString("CLOUDINARY_API_SECRET"))
 	mediaServer = newCloudinaryServer(
-		"damzcas3k",
-		"332611833886276",
-		"CApeUOYt-JIgUSj9LvSAs6rO610",
-		true)
+		vp.GetString("CLOUDINARY.NAME"),
+		vp.GetString("CLOUDINARY.API_KEY"),
+		vp.GetString("CLOUDINARY.API_SECRET"),
+		vp.GetBool("CLOUDINARY.SECURE"))
+
 	return mediaServer
 }
 func newCloudinaryServer(cloud, key, secret string, secure bool) *cloudinary.Cloudinary {

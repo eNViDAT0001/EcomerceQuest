@@ -8,7 +8,7 @@ import (
 type ProductDetailCreateForm struct {
 	Product        io.ProductCreateForm
 	Media          []CreateProductMediaForm
-	Specifications []SpecificationCreateForm
+	Specifications SpecificationCreateForm
 	Descriptions   []io.ProductDescriptionsCreateForm
 }
 

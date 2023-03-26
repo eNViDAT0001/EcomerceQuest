@@ -9,7 +9,9 @@ import (
 	orderHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order"
 	orderItemsHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
 	smtpHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
+
 	smtpPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
+	smtpStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
 	smtpUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
 
 	commentHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/comment"
@@ -149,6 +151,7 @@ var IteratorCollection = wire.NewSet(
 
 	smtpHttpHandlerPKG.NewSmtpHandler,
 	smtpUCPKG.NewSmtpUseCase,
+	smtpStoPKG.NewSmtpStorage,
 
 	NewHandlerCollection,
 )

@@ -14,11 +14,12 @@ type ProductCreateReq struct {
 	UserID     uint
 	ProviderID uint
 
-	CategoryID     uint                                 `json:"category_id"`
-	Name           string                               `json:"name"`
-	Discount       int                                  `json:"discount"`
-	Price          int                                  `json:"price"`
-	Media          []ProductMediaCreateReq              `json:"media"`
-	Specifications []ProductSpecificationsCreateTreeReq `json:"specifications"`
-	Descriptions   []ProductDescriptionsCreateReq       `json:"descriptions"`
+	CategoryID    uint                           `json:"category_id"`
+	Name          string                         `json:"name"`
+	Discount      int                            `json:"discount"`
+	Price         int                            `json:"price"`
+	Media         []ProductMediaCreateReq        `json:"media"`
+	Specification ProductSpecificationCreateReq  `json:"specification"`
+	Options       []ProductOptionReq             `json:"options"`
+	Descriptions  []ProductDescriptionsCreateReq `json:"descriptions"`
 }

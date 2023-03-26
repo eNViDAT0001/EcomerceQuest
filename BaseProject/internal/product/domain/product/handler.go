@@ -26,7 +26,6 @@ type HttpHandler interface {
 	CreateDescriptions() func(ctx *gin.Context)
 	CreateProductOptions() func(ctx *gin.Context)
 	CreateSpecification() func(ctx *gin.Context)
-	CreateSpecificationTree() func(ctx *gin.Context)
 
 	DeleteProductByIDs() func(ctx *gin.Context)
 	DeleteProductByID() func(ctx *gin.Context)

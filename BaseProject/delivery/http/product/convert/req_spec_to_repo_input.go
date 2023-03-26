@@ -15,28 +15,7 @@ func UpdateSpecificationReqToUpdateSpecificationForm(input *ioHttpHandler.Produc
 	}
 	return result, nil
 }
-func CreateSpecificationArrayReqToCreateSpecificationForm(input *ioHttpHandler.ProductSpecificationsCreateTreeReq) ([]ioUC.SpecificationCreateForm, error) {
-	var result []ioUC.SpecificationCreateForm
-	for _, v := range input.Specification {
-		var spec ioSto.ProductSpecificationCreateForm
-		var options []ioSto.ProductOptionCreateForm
 
-		err := copier.Copy(&spec, &v.Specification)
-		if err != nil {
-			return result, err
-		}
-		err = copier.Copy(&options, &v.Options)
-		if err != nil {
-			return result, err
-		}
-
-		result = append(result, ioUC.SpecificationCreateForm{
-			Specification: spec,
-			Options:       options,
-		})
-	}
-	return result, nil
-}
 func CreateSpecificationReqToCreateSpecificationForm(input *ioHttpHandler.SpecificationCreate) (ioUC.SpecificationCreateForm, error) {
 	var result ioUC.SpecificationCreateForm
 	var spec ioSto.ProductSpecificationCreateForm

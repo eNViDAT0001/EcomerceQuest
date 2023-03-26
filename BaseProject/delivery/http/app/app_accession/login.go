@@ -35,7 +35,7 @@ func (a appAccessionHandler) Login() gin.HandlerFunc {
 			Username: *user.Username,
 			Salt:     *user.Salt,
 		}
-		token, err := a.jwtUC.GenerateToken(tokenForm)
+		token, err := a.jwtUC.GenerateToken(nil, tokenForm)
 		if err != nil {
 			cc.ResponseError(err)
 			return

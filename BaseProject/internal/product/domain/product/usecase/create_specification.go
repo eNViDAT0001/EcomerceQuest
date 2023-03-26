@@ -10,13 +10,6 @@ func (u *productUseCase) CreateSpecification(ctx context.Context, input ioUC.Spe
 	if len(input.Options) < 1 {
 		return 0, gorm.ErrEmptySlice
 	}
-	spec, err := u.productSto.GetRoofSpecificationByProductID(ctx, input.Specification.ProductID, input.Specification.SpecificationID)
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return 0, err
-	}
-	if err != gorm.ErrRecordNotFound {
-		return spec.ID, gorm.ErrRegistered
-	}
 
 	specID, err = u.productSto.CreateSpecification(ctx, input.Specification)
 	if err != nil {
@@ -25,6 +18,7 @@ func (u *productUseCase) CreateSpecification(ctx context.Context, input ioUC.Spe
 
 	for i := 0; i < len(input.Options); i++ {
 		input.Options[i].SpecificationID = specID
+		input.Options[i].ProductID = input.Specification.ProductID
 	}
 	err = u.productSto.CreateProductOptions(ctx, input.Options)
 	if err != nil {
