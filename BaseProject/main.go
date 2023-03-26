@@ -11,7 +11,7 @@ import (
 var viper *wrap_viper.WrapViper
 
 func init() {
-	os.Setenv("STATE", "state.(string)")
+	os.Setenv("STATE", "Dev")
 
 	viper = wrap_viper.GetViper()
 	state := viper.Get("STATE")
