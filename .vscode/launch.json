@@ -9,14 +9,14 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "BaseProject/cmd",
+            "program": "BaseProject",
         },
         {
             "name": "Debug BaseProject",
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "BaseProject/cmd",
+            "program": "BaseProject",
         }
     ]
 }
