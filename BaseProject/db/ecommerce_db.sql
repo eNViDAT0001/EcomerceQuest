@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Jan 30, 2023 at 04:30 PM
+-- Generation Time: Mar 27, 2023 at 12:24 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.19
 
@@ -221,14 +221,6 @@ CREATE TABLE `CartItem` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `CartItem`
---
-
-INSERT INTO `CartItem` (`id`, `cart_id`, `user_id`, `product_id`, `product_option_id`, `quantity`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(20, 5, 1, 12, 12, 10, '2023-01-02 08:01:37', '2023-01-02 08:01:37', '2023-01-02 08:03:06'),
-(23, 7, 1, 12, 12, 1, '2023-01-02 08:05:18', '2023-01-02 08:15:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -1048,6 +1040,27 @@ INSERT INTO `Districts` (`code`, `name`, `name_en`, `full_name`, `full_name_en`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Email`
+--
+
+CREATE TABLE `Email` (
+  `id` bigint NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `descriptions` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `Email`
+--
+
+INSERT INTO `Email` (`id`, `email`, `descriptions`, `created_at`, `updated_at`) VALUES
+(1, 'eNViDXT', 'I lớp du chịch chịch', '2023-03-22 01:28:21', '2023-03-22 01:28:21');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Favorite`
 --
 
@@ -1091,20 +1104,6 @@ CREATE TABLE `Order` (
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `Order`
---
-
-INSERT INTO `Order` (`id`, `user_id`, `provider_id`, `name`, `gender`, `phone`, `province`, `district`, `ward`, `street`, `quantity`, `total`, `discount`, `status`, `status_description`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(21, 1, 2, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 20, 300000, 20, 'WAITING', 'Provider Will call you soon', '2023-01-04 17:12:06', '2023-01-04 17:12:06', NULL),
-(22, 1, 2, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 20, 300000, 20, 'WAITING', 'Provider Will call you soon', '2023-01-04 17:13:35', '2023-01-04 17:13:35', NULL),
-(23, 1, 2, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 20, 300000, 20, 'WAITING', 'Provider Will call you soon', '2023-01-04 17:24:23', '2023-01-04 17:24:23', NULL),
-(24, 1, 2, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 20, 300000, 20, 'WAITING', 'Provider Will call you soon', '2023-01-04 17:24:26', '2023-01-04 17:24:26', NULL),
-(25, 1, 2, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 20, 300000, 20, 'WAITING', 'Provider Will call you soon', '2023-01-04 17:26:41', '2023-01-04 17:26:41', NULL),
-(26, 1, 2, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 20, 300000, 20, 'WAITING', 'Provider Will call you soon', '2023-01-04 17:35:59', '2023-01-04 17:35:59', NULL),
-(33, 1, 2, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 40, 28500, 20, 'WAITING', 'Provider Will call you soon', '2023-01-05 13:05:21', '2023-01-05 13:05:21', NULL),
-(34, 1, 2, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 40, 28500, 20, 'WAITING', 'Provider Will call you soon', '2023-01-05 13:06:04', '2023-01-05 13:06:04', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -1127,23 +1126,6 @@ CREATE TABLE `OrderItem` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `OrderItem`
---
-
-INSERT INTO `OrderItem` (`id`, `order_id`, `product_id`, `product_option_id`, `provider_id`, `name`, `price`, `option`, `quantity`, `discount`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(8, 22, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-04 17:13:36', '2023-01-04 17:13:36', NULL),
-(9, 23, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-04 17:24:23', '2023-01-04 17:24:23', NULL),
-(10, 24, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-04 17:24:26', '2023-01-04 17:24:26', NULL),
-(11, 25, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-04 17:26:42', '2023-01-04 17:26:42', NULL),
-(12, 25, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-04 17:26:42', '2023-01-04 17:26:42', NULL),
-(13, 26, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-04 17:35:59', '2023-01-04 17:35:59', NULL),
-(14, 26, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-04 17:35:59', '2023-01-04 17:35:59', NULL),
-(29, 33, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-05 13:05:21', '2023-01-05 13:05:21', NULL),
-(30, 33, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-05 13:05:21', '2023-01-05 13:05:21', NULL),
-(31, 34, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-05 13:06:05', '2023-01-05 13:06:05', NULL),
-(32, 34, 12, 12, 2, 'xxxProductxxx', 15000, 'Ngon nghẻ', 20, 5, 'This is Image', '2023-01-05 13:06:05', '2023-01-05 13:06:05', NULL);
 
 -- --------------------------------------------------------
 
@@ -1179,7 +1161,21 @@ INSERT INTO `Product` (`id`, `provider_id`, `category_id`, `user_id`, `name`, `p
 (15, 2, 1, 1, '1', 1, 1, '2023-01-06 12:06:17', '2023-01-06 12:06:17', NULL),
 (16, 2, 1, 1, '1', 1, 1, '2023-01-06 12:06:55', '2023-01-06 12:06:55', NULL),
 (20, 2, 1, 1, 'abc', 20000, 20, '2023-01-10 00:25:39', '2023-01-10 00:25:39', NULL),
-(21, 2, 1, 1, 'abc', 20000, 20, '2023-01-10 01:27:32', '2023-01-10 01:27:32', NULL);
+(21, 2, 1, 1, 'abc', 20000, 20, '2023-01-10 01:27:32', '2023-01-10 01:27:32', NULL),
+(22, 2, 1, 1, 'abc', 20000, 20, '2023-02-03 05:47:00', '2023-02-03 05:47:00', NULL),
+(23, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 16:24:12', '2023-03-26 16:24:12', NULL),
+(24, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 16:45:15', '2023-03-26 16:45:15', NULL),
+(25, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 16:47:30', '2023-03-26 16:47:30', NULL),
+(26, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 16:56:01', '2023-03-26 16:56:01', NULL),
+(27, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 16:56:11', '2023-03-26 16:56:11', NULL),
+(28, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 16:56:54', '2023-03-26 16:56:54', NULL),
+(29, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 17:01:42', '2023-03-26 17:01:42', NULL),
+(30, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 17:02:10', '2023-03-26 17:02:10', NULL),
+(31, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 17:07:05', '2023-03-26 17:07:05', NULL),
+(32, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 17:07:15', '2023-03-26 17:07:15', NULL),
+(33, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 17:09:04', '2023-03-26 17:09:04', NULL),
+(34, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 17:12:04', '2023-03-26 17:12:04', NULL),
+(35, 2, 1, 1, 'abc', 20000, 20, '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -1210,7 +1206,10 @@ INSERT INTO `ProductDescriptions` (`id`, `product_id`, `name`, `public_id`, `des
 (5, 11, 'test', 'ProductDescriptions/czzbfti91suaoojhourh', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1672393856/ProductDescriptions/czzbfti91suaoojhourh', '2022-12-30 09:50:55', '2022-12-30 09:50:55', NULL),
 (6, 12, 'test', 'ProductDescriptions/nhor9db5slwlaanj4j7i', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1672393868/ProductDescriptions/nhor9db5slwlaanj4j7i', '2022-12-30 09:51:07', '2022-12-30 09:51:07', NULL),
 (8, 20, 'abc', 'xyz', '', '2023-01-10 00:25:40', '2023-01-10 00:25:40', NULL),
-(9, 21, 'abc', 'xyz', '', '2023-01-10 01:27:32', '2023-01-10 01:27:32', NULL);
+(9, 21, 'abc', 'xyz', '', '2023-01-10 01:27:32', '2023-01-10 01:27:32', NULL),
+(10, 22, 'abc', 'xyz', '', '2023-02-03 05:47:00', '2023-02-03 05:47:00', NULL),
+(11, 23, 'abc', 'xyz', '', '2023-03-26 16:24:12', '2023-03-26 16:24:12', NULL),
+(12, 35, 'abc', 'xyz', '', '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -1246,7 +1245,21 @@ INSERT INTO `ProductMedia` (`id`, `product_id`, `public_id`, `media_path`, `medi
 (10, 15, 'Product/ks94koekpxlqnxvt1p6v', 'http://res.cloudinary.com/damzcas3k/image/upload/v1673006781/Product/ks94koekpxlqnxvt1p6v.png', 'IMAGE', '2023-01-06 12:06:21', '2023-01-06 12:06:21', NULL),
 (11, 16, 'Product/geiekkzljbbtlptqqjmp', 'http://res.cloudinary.com/damzcas3k/image/upload/v1673006819/Product/geiekkzljbbtlptqqjmp.png', 'IMAGE', '2023-01-06 12:06:59', '2023-01-06 12:06:59', NULL),
 (12, 20, 'xyz', 'mnp', 'IMAGE', '2023-01-10 00:25:39', '2023-01-10 00:25:39', NULL),
-(13, 21, 'xyz', 'mnp', 'IMAGE', '2023-01-10 01:27:32', '2023-01-10 01:27:32', NULL);
+(13, 21, 'xyz', 'mnp', 'IMAGE', '2023-01-10 01:27:32', '2023-01-10 01:27:32', NULL),
+(14, 22, 'xyz', 'mnp', 'IMAGE', '2023-02-03 05:47:00', '2023-02-03 05:47:00', NULL),
+(15, 23, 'xyz', 'mnp', 'IMAGE', '2023-03-26 16:24:12', '2023-03-26 16:24:12', NULL),
+(16, 24, 'xyz', 'mnp', 'IMAGE', '2023-03-26 16:45:15', '2023-03-26 16:45:15', NULL),
+(17, 25, 'xyz', 'mnp', 'IMAGE', '2023-03-26 16:47:30', '2023-03-26 16:47:30', NULL),
+(18, 26, 'xyz', 'mnp', 'IMAGE', '2023-03-26 16:56:01', '2023-03-26 16:56:01', NULL),
+(19, 27, 'xyz', 'mnp', 'IMAGE', '2023-03-26 16:56:11', '2023-03-26 16:56:11', NULL),
+(20, 28, 'xyz', 'mnp', 'IMAGE', '2023-03-26 16:56:54', '2023-03-26 16:56:54', NULL),
+(21, 29, 'xyz', 'mnp', 'IMAGE', '2023-03-26 17:01:42', '2023-03-26 17:01:42', NULL),
+(22, 30, 'xyz', 'mnp', 'IMAGE', '2023-03-26 17:02:11', '2023-03-26 17:02:11', NULL),
+(23, 31, 'xyz', 'mnp', 'IMAGE', '2023-03-26 17:07:05', '2023-03-26 17:07:05', NULL),
+(24, 32, 'xyz', 'mnp', 'IMAGE', '2023-03-26 17:07:15', '2023-03-26 17:07:15', NULL),
+(25, 33, 'xyz', 'mnp', 'IMAGE', '2023-03-26 17:09:05', '2023-03-26 17:09:05', NULL),
+(26, 34, 'xyz', 'mnp', 'IMAGE', '2023-03-26 17:12:04', '2023-03-26 17:12:04', NULL),
+(27, 35, 'xyz', 'mnp', 'IMAGE', '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -1271,15 +1284,12 @@ CREATE TABLE `ProductOption` (
 --
 
 INSERT INTO `ProductOption` (`id`, `product_id`, `specification_id`, `name`, `price`, `quantity`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(12, 12, 6, 'Đỏ, X', 20000, 740, '2023-01-01 10:16:23', '2023-01-01 10:16:23', NULL),
-(13, 12, 6, 'Đỏ, XL', 30000, 100, '2023-01-01 10:16:23', '2023-01-01 10:16:23', NULL),
-(14, 12, 6, 'Đỏ, XXL', 40000, 100, '2023-01-01 10:16:23', '2023-01-01 10:16:23', NULL),
-(15, 12, 6, 'Đỏ, XXXL', 50000, 100, '2023-01-01 10:16:23', '2023-01-01 10:16:23', NULL),
-(16, 12, 6, 'Đen, X', 20000, 100, '2023-01-01 10:16:23', '2023-01-01 10:16:23', NULL),
-(17, 12, 6, 'Đen, XL', 30000, 100, '2023-01-01 10:16:23', '2023-01-01 10:16:23', NULL),
-(18, 12, 6, 'Đen, XXL', 40000, 100, '2023-01-01 10:16:23', '2023-01-01 10:16:23', NULL),
-(22, 1, 9, 'Him', 20000, 100, '2023-01-10 00:12:22', '2023-01-10 00:12:22', NULL),
-(23, 1, 10, 'Him', 20000, 100, '2023-01-10 00:12:22', '2023-01-10 00:12:22', NULL);
+(30, 35, 21, 'Him', 20000, 100, '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
+(31, 35, 21, 'Who', 20000, 100, '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
+(32, 35, 21, 'Whom', 20000, 100, '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
+(90, 12, 41, 'Him', 20000, 100, '2023-03-26 17:43:05', '2023-03-26 17:43:05', NULL),
+(91, 12, 41, 'Who', 20000, 100, '2023-03-26 17:43:05', '2023-03-26 17:43:05', NULL),
+(92, 12, 41, 'Whom', 20000, 100, '2023-03-26 17:43:05', '2023-03-26 17:43:05', NULL);
 
 -- --------------------------------------------------------
 
@@ -1289,7 +1299,6 @@ INSERT INTO `ProductOption` (`id`, `product_id`, `specification_id`, `name`, `pr
 
 CREATE TABLE `ProductSpecification` (
   `id` bigint UNSIGNED NOT NULL,
-  `specification_id` bigint UNSIGNED DEFAULT NULL,
   `product_id` bigint UNSIGNED NOT NULL,
   `properties` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1301,11 +1310,11 @@ CREATE TABLE `ProductSpecification` (
 -- Dumping data for table `ProductSpecification`
 --
 
-INSERT INTO `ProductSpecification` (`id`, `specification_id`, `product_id`, `properties`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(6, NULL, 12, 'Màu, Size', '2023-01-01 10:16:23', '2023-01-01 10:16:23', NULL),
-(9, NULL, 1, 'Hường xuân', '2023-01-10 00:12:21', '2023-01-10 00:12:21', NULL),
-(10, 9, 1, 'Hạ mùa', '2023-01-10 00:12:22', '2023-01-10 00:12:22', NULL),
-(11, NULL, 21, '', '2023-01-10 01:27:32', '2023-01-10 01:27:32', NULL);
+INSERT INTO `ProductSpecification` (`id`, `product_id`, `properties`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(18, 10, 'Hường xuân', '2023-03-26 17:07:15', '2023-03-26 17:07:15', NULL),
+(20, 34, 'Hường xuân', '2023-03-26 17:12:04', '2023-03-26 17:12:04', NULL),
+(21, 35, 'Hường xuân', '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
+(41, 12, 'Hường xuân', '2023-03-26 17:43:05', '2023-03-26 17:43:05', NULL);
 
 -- --------------------------------------------------------
 
@@ -1335,7 +1344,9 @@ INSERT INTO `Provider` (`id`, `user_id`, `name`, `image_path`, `created_at`, `up
 (8, 1, 'Chi nhánh 2', 'http://res.cloudinary.com/damzcas3k/image/upload/v1672393692/Product/i6stmcr9gnqvsvhbkjwt.jpg', '2022-12-30 09:48:15', '2022-12-30 09:48:15', NULL),
 (9, 1, 'Chi nhánh thần bài 3', 'https://toigingiuvedep.vn/wp-content/uploads/2022/02/anh-than-bai.jpg', '2022-12-30 14:15:20', '2022-12-30 14:15:20', NULL),
 (10, 1, 'admin', 'https://res.cloudinary.com/damzcas3k/image/upload/v1671291124/Product/cyydihkdpdhdv7ktlq5e.png', '2023-01-30 13:20:17', '2023-01-30 13:20:17', NULL),
-(11, 1, 'admin', 'https://res.cloudinary.com/damzcas3k/image/upload/v1671291124/Product/cyydihkdpdhdv7ktlq5e.png', '2023-01-30 13:35:49', '2023-01-30 13:35:49', NULL);
+(11, 1, 'admin', 'https://res.cloudinary.com/damzcas3k/image/upload/v1671291124/Product/cyydihkdpdhdv7ktlq5e.png', '2023-01-30 13:35:49', '2023-01-30 13:35:49', NULL),
+(12, 1, 'admin', 'https://res.cloudinary.com/damzcas3k/image/upload/v1671291124/Product/cyydihkdpdhdv7ktlq5e.png', '2023-03-19 15:27:35', '2023-03-19 15:27:35', NULL),
+(13, 1, 'Addd', 'https://res.cloudinary.com/damzcas3k/image/upload/v1671291124/Product/cyydihkdpdhdv7ktlq5e.png', '2023-03-21 15:49:15', '2023-03-21 15:49:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -1453,13 +1464,15 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`id`, `username`, `password`, `salt`, `name`, `birthday`, `gender`, `email`, `phone`, `coin`, `type`, `avatar`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'eNViDAT', '$2a$04$AD9TXb8nqob/fMI..Mg1FO/eeZ/KAyhx25jc/x4LRqyb42KSTADsG', '2022-12-01 17:53:50.2323002 +0700 +07 m=+93.342681801', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'ngvidat@gmail.com', '0775702201', 0, 'ADMIN', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-01 10:53:50', '2022-12-01 10:53:50', NULL),
+(1, 'eNViDAT', '$2a$04$JBFLSmt071z2gLvDi3Sja.RLCojBVMUi87ABCydp9DWIosuzNB6pS', '2022-12-01 17:53:50.2323002 +0700 +07 m=+93.342681801', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'ngvidat@gmail.com', '0775702201', 0, 'ADMIN', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-01 10:53:50', '2022-12-01 10:53:50', NULL),
 (22, 'khanhsd0901', '$2a$04$2WU19Up7bFqLX7qZll.J7OHUFO5Q7LQ1Z.8rilPam/mRY0f4RUDi6', '2022-12-10 12:13:49.124386 +0700 +07 m=+189.306835601', 'Le Khan1h', '2001-01-01', 1, 'khanhsd091101@gmail.com', '09459581952', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 05:13:49', '2022-12-10 05:13:49', NULL),
 (23, 'khanh', '$2a$04$GwL630qoYRHNeJAxKw6BuedX36jXY.kPj.z7P2aPvujpPzzuLavBy', '2022-12-10 12:16:37.0707576 +0700 +07 m=+357.253207201', 'Le Khan2h', '2001-01-01', 1, 'khanhsd022901@gmail.com', '09459589522', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 05:16:37', '2022-12-10 05:16:37', NULL),
 (24, '11122222', '$2a$04$R4ksrJDAeuCjGJImmCdj..Gn0zdcT2KT36fjpUs2MNtW7wfY0yYvK', '2022-12-10 12:34:21.2439553 +0700 +07 m=+1421.426404901', 'Le Khan1h', '2001-01-01', 1, 'khanhsd0291101@gmail.com', '094592581952', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 05:34:21', '2022-12-10 05:34:21', '2022-12-19 03:54:27'),
 (25, 'test111', '$2a$04$B4Mf8LuI1oRnKhTrgz5AOuW3C1rIwORq8oj83VUMSBUOob8CxgcB.', '2022-12-10 13:32:18.6492071 +0700 +07 m=+4898.831656701', 'ssad', '2001-01-01', 1, 'sdsdawda', '1112', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 06:32:19', '2022-12-10 06:32:19', '2022-12-19 03:54:14'),
 (26, 'eNViDsT', '$2a$04$61bOtopdvZsVJInIkhYyUeny84.OuWOwFDzvYhz/QGZl.xYZXuzQi', '2022-12-21 09:33:58.6435133 +0700 +07 m=+42.628213001', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gaisl.com', '077502222301', 0, 'ADMIN', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-21 02:33:59', '2022-12-21 02:33:59', NULL),
-(27, 'eNViDXT', '$2a$04$94zB9qSUcr5.zZdE8M8jAueWtLAKJ3DOPxgmfs005ihVW/sfpK94O', '2022-12-21 09:34:32.6491548 +0700 +07 m=+76.633854501', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gsl.com', '0775001', 0, 'ADMIN', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-21 02:34:33', '2022-12-21 02:34:33', NULL);
+(27, 'eNViDXT', '$2a$04$94zB9qSUcr5.zZdE8M8jAueWtLAKJ3DOPxgmfs005ihVW/sfpK94O', '2022-12-21 09:34:32.6491548 +0700 +07 m=+76.633854501', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gsl.com', '0775001', 0, 'ADMIN', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-21 02:34:33', '2022-12-21 02:34:33', NULL),
+(29, 'eNViDAXT', '$2a$04$YpqZwVNxenNxF0NMw5mq/.ww450ThAjL7E7XTz06MPGndzw0/JBc.', '2023-02-12 20:16:10.5689094 +0700 +07 m=+19.819286801', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gaiasl.com', '077502226301', 0, 'ADMIN', NULL, '2023-02-12 13:16:11', '2023-02-12 13:16:11', NULL),
+(30, 'eNViDsT2', '$2a$04$msFlZO5jyQfAfx.2vLkzg.PIl6CH/jK9p8v9vfyq3WHdtvRlcIVUO', '2023-02-16 21:45:29.4101073 +0700 +07 m=+21.469918501', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gaisl2.com', '077502222302', 0, 'ADMIN', NULL, '2023-02-16 14:45:29', '2023-02-16 14:45:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -12194,6 +12207,12 @@ ALTER TABLE `Districts`
   ADD KEY `districts_province_code_fkey` (`province_code`);
 
 --
+-- Indexes for table `Email`
+--
+ALTER TABLE `Email`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `Favorite`
 --
 ALTER TABLE `Favorite`
@@ -12255,8 +12274,8 @@ ALTER TABLE `ProductOption`
 --
 ALTER TABLE `ProductSpecification`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `product_id` (`product_id`),
-  ADD KEY `specification_id` (`specification_id`);
+  ADD UNIQUE KEY `product_id_2` (`product_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `Provider`
@@ -12337,6 +12356,12 @@ ALTER TABLE `CommentMedia`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `Email`
+--
+ALTER TABLE `Email`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `Favorite`
 --
 ALTER TABLE `Favorite`
@@ -12358,43 +12383,43 @@ ALTER TABLE `OrderItem`
 -- AUTO_INCREMENT for table `Product`
 --
 ALTER TABLE `Product`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `ProductDescriptions`
 --
 ALTER TABLE `ProductDescriptions`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `ProductMedia`
 --
 ALTER TABLE `ProductMedia`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `ProductOption`
 --
 ALTER TABLE `ProductOption`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `ProductSpecification`
 --
 ALTER TABLE `ProductSpecification`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `Provider`
 --
 ALTER TABLE `Provider`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
@@ -12511,8 +12536,7 @@ ALTER TABLE `ProductOption`
 -- Constraints for table `ProductSpecification`
 --
 ALTER TABLE `ProductSpecification`
-  ADD CONSTRAINT `ProductSpecification_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  ADD CONSTRAINT `ProductSpecification_ibfk_2` FOREIGN KEY (`specification_id`) REFERENCES `ProductSpecification` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ProductSpecification_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Provider`
