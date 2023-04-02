@@ -8,7 +8,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/gin-gonic/gin"
 )
-
+var invalidTokens = make(map[string]bool)
 func (s userHandler) ResetPassword() func(*gin.Context) {
 	return func(c *gin.Context) {
 		cc := request.FromContext(c)
@@ -32,6 +32,11 @@ func (s userHandler) ResetPassword() func(*gin.Context) {
 			cc.ResponseError(request.NewUnauthorizedError("Code", input.Code, "Code is not valid"))
 			return
 		}
+
+		if _, ok := invalidTokens[input.Token]; ok {
+			cc.ResponseError(request.NewUnauthorizedError("Code", input.Code, "Code is not valid"))
+		}
+		invalidTokens[input.Token] = true
 
 		err = s.userUC.ResetPassword(newCtx, uint(userID), input.NewPassword)
 		if err != nil {
