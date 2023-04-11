@@ -61,6 +61,56 @@
 							"response": []
 						},
 						{
+							"name": "Google Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {",
+											"    const resJson = pm.response.json();",
+											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+											"    console.log(pm.variables.get(\"access_token\"));",
+											"    console.log(pm.variables.get(\"refresh_token\"));",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"eNViDXT\",\n    \"password\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}{{v1}}/app/login/google",
+									"host": [
+										"{{host}}{{v1}}"
+									],
+									"path": [
+										"app",
+										"login",
+										"google"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Register",
 							"event": [
 								{
@@ -186,7 +236,7 @@
 										{
 											"key": "files",
 											"type": "file",
-											"src": "/C:/Users/Admin/Downloads/model-png-1965.png"
+											"src": "/C:/Users/Admin/OneDrive - Trường ĐH CNTT - University of Information Technology/Máy tính/avatar.jpg"
 										}
 									]
 								},
@@ -280,6 +330,610 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "SMTP",
+					"item": [
+						{
+							"name": "Verify Code",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {",
+											"    const resJson = pm.response.json();",
+											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+											"    console.log(pm.variables.get(\"access_token\"));",
+											"    console.log(pm.variables.get(\"refresh_token\"));",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"code\": \"eNViDXT\",\n    \"token\": 123456\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{smtpV1Path}}/verify",
+									"host": [
+										"{{smtpV1Path}}"
+									],
+									"path": [
+										"verify"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {",
+											"    const resJson = pm.response.json();",
+											"    postman.setEnvironmentVariable(\"token\", resJson.data.Token.token);",
+											"    console.log(pm.variables.get(\"token\"));",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{smtpV1Path}}/reset/user/:user_id?email=ngvidat@gmail.com",
+									"host": [
+										"{{smtpV1Path}}"
+									],
+									"path": [
+										"reset",
+										"user",
+										":user_id"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "ngvidat@gmail.com"
+										}
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feedback",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {",
+											"    const resJson = pm.response.json();",
+											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+											"    console.log(pm.variables.get(\"access_token\"));",
+											"    console.log(pm.variables.get(\"refresh_token\"));",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"eNViDXT\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{smtpV1Path}}/report",
+									"host": [
+										"{{smtpV1Path}}"
+									],
+									"path": [
+										"report"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Notification",
+					"item": [
+						{
+							"name": "Create Notify Hook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {",
+											"    const resJson = pm.response.json();",
+											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+											"    console.log(pm.variables.get(\"access_token\"));",
+											"    console.log(pm.variables.get(\"refresh_token\"));",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"eNViDXT\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{smtpV1Path}}/report",
+									"host": [
+										"{{smtpV1Path}}"
+									],
+									"path": [
+										"report"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Chat",
+					"item": [
+						{
+							"name": "Home Chat",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{chatsV1Path}}/users/:user_id",
+									"host": [
+										"{{chatsV1Path}}"
+									],
+									"path": [
+										"users",
+										":user_id"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Channel List",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{chatsV1Path}}/users/:user_id/channels",
+									"host": [
+										"{{chatsV1Path}}"
+									],
+									"path": [
+										"users",
+										":user_id",
+										"channels"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Channel info",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{chatsV1Path}}/channels/:channel_id",
+									"host": [
+										"{{chatsV1Path}}"
+									],
+									"path": [
+										"channels",
+										":channel_id"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "channel_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Channel's messages",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{chatsV1Path}}/channels/:channel_id/messages",
+									"host": [
+										"{{chatsV1Path}}"
+									],
+									"path": [
+										"channels",
+										":channel_id",
+										"messages"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "channel_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Chat Hook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {",
+											"    const resJson = pm.response.json();",
+											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+											"    console.log(pm.variables.get(\"access_token\"));",
+											"    console.log(pm.variables.get(\"refresh_token\"));",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"eNViDXT\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{chatsV1Path}}/users/:user_id",
+									"host": [
+										"{{chatsV1Path}}"
+									],
+									"path": [
+										"users",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {",
+											"    const resJson = pm.response.json();",
+											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+											"    console.log(pm.variables.get(\"access_token\"));",
+											"    console.log(pm.variables.get(\"refresh_token\"));",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"eNViDXT\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{chatsV1Path}}/users/:user_id",
+									"host": [
+										"{{chatsV1Path}}"
+									],
+									"path": [
+										"users",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 401\", () => {",
+							"",
+							"    if (pm.response.status == 401) {",
+							"        const loginReq = {",
+							"        url: postman.variables.get(\"host\") + postman.variables.get(\"v1\") + '/app/login',",
+							"        method: 'POST',",
+							"        header: {",
+							"            'Content-Type': 'application/json',",
+							"            'Connection':  'keep-alive',",
+							"        },",
+							"        body: {",
+							"            mode: 'raw',",
+							"            rqw: JSON.stringify({",
+							"                username: \"eNViDAT\",",
+							"                password: \"admin\"",
+							"            })",
+							"            }",
+							"        }",
+							"        pm.sendRequest(loginReq, (err, res) => {",
+							"            const resJson = response.json();",
+							"            postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+							"            postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+							"            console.log(pm.variables.get(\"access_token\"));",
+							"            console.log(pm.variables.get(\"refresh_token\"));",
+							"            pm.expect(pm.response.code).to.eql(200);",
+							"        });",
+							"    }",
+							"});"
+						]
+					}
 				}
 			]
 		},
@@ -713,6 +1367,70 @@
 							],
 							"path": [
 								":user_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"327201\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ndmlkYXRAZ21haWwuY29tIn0.5782tbYo3A7IbH_hOx9ugEc10Pn-m_r912UQE1qRk28\",\r\n    \"new_password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userV1Path}}/:user_id/reset_pass",
+							"host": [
+								"{{userV1Path}}"
+							],
+							"path": [
+								":user_id",
+								"reset_pass"
 							],
 							"query": [
 								{
@@ -3410,6 +4128,58 @@
 			]
 		},
 		{
+			"name": "Checkout",
+			"item": [
+				{
+					"name": "Paypal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    const resJson = pm.response.json();",
+									"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+									"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+									"    console.log(pm.variables.get(\"access_token\"));",
+									"    console.log(pm.variables.get(\"refresh_token\"));",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"eNViDXT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{smtpV1Path}}/report",
+							"host": [
+								"{{smtpV1Path}}"
+							],
+							"path": [
+								"report"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Order",
 			"item": [
 				{
@@ -3891,7 +4661,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": 1,\r\n    \"name\": \"Ngừi Địp\",\r\n    \"gender\": true,\r\n    \"phone\": \"1234567890\",\r\n    \"province\": \"Bình Chánh\",\r\n    \"district\": \"Ninh Thuận\",\r\n    \"ward\": \"Quảng Bình\",\r\n    \"street\": \"Trường chinh\",\r\n    \"quantity\": 20,\r\n    \"total\": 300000,\r\n    \"discount\": 20,\r\n    \"status_description\":\"Provider Will call you soon\",\r\n    \"cart_items_ids\":[1, 2, 3]\r\n}"
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"name\": \"Ngừi Địp\",\r\n    \"gender\": true,\r\n    \"phone\": \"1234567890\",\r\n    \"province\": \"Bình Chánh\",\r\n    \"district\": \"Ninh Thuận\",\r\n    \"ward\": \"Quảng Bình\",\r\n    \"street\": \"Trường chinh\",\r\n    \"quantity\": 20,\r\n    \"total\": 300000,\r\n    \"discount\": 20,\r\n    \"status_description\":\"Provider Will call you soon\",\r\n    \"items\":[\r\n        {\r\n            \"category_id\": 3,\r\n            \"product_id\": 1,\r\n            \"product_option_id\": 30,\r\n            \"provider_id\": 2,\r\n            \"name\": \"Dummy Name\",\r\n            \"price\": 1,\r\n            \"option\": \"Spec: Option\",\r\n            \"quantity\": 1,\r\n            \"discount\": 1,\r\n            \"image\": \"ádf\"\r\n        }\r\n    ],\r\n    \"cart_items_ids\": [1, 2]\r\n}"
 						},
 						"url": {
 							"raw": "{{orderV1Path}}",
@@ -5165,71 +5935,6 @@
 					"response": []
 				},
 				{
-					"name": "Product Specifications tree",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"specifications\": [\r\n        {\r\n            \"specification\": {\r\n                \"properties\": \"Hường xuân\"\r\n            },\r\n            \"options\": [\r\n                {\r\n                    \"name\": \"Him\",\r\n                    \"price\": 20000,\r\n                    \"quantity\": 100\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"specification\": {\r\n                \"properties\": \"Hạ mùa\"\r\n            },\r\n            \"options\": [\r\n                {\r\n                    \"name\": \"Him\",\r\n                    \"price\": 20000,\r\n                    \"quantity\": 100\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{productV1Path}}/:product_id/specification/tree",
-							"host": [
-								"{{productV1Path}}"
-							],
-							"path": [
-								":product_id",
-								"specification",
-								"tree"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "product_id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Product Media",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
@@ -5323,12 +6028,12 @@
 							"formdata": [
 								{
 									"key": "product_id",
-									"value": "",
+									"value": "7",
 									"type": "text"
 								},
 								{
 									"key": "name",
-									"value": "",
+									"value": "ád",
 									"type": "text"
 								},
 								{
@@ -5362,7 +6067,7 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": null
+									"value": "7"
 								}
 							]
 						}
@@ -5599,14 +6304,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{productV1Path}}/:product_id/descriptions/:descriptions",
+							"raw": "{{productV1Path}}/:product_id/descriptions/:description_id",
 							"host": [
 								"{{productV1Path}}"
 							],
 							"path": [
 								":product_id",
 								"descriptions",
-								":descriptions"
+								":description_id"
 							],
 							"query": [
 								{
@@ -5626,7 +6331,7 @@
 									"value": null
 								},
 								{
-									"key": "descriptions",
+									"key": "description_id",
 									"value": null
 								}
 							]
@@ -5734,6 +6439,52 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Relogin\", () => {",
+					"    if (pm.response.status == 401) {",
+					"        const loginReq = {",
+					"        url: postman.environment.get(\"host\") + postman.environment.get(\"v1\") + '/app/login',",
+					"        method: 'POST',",
+					"        header: {",
+					"            'Content-Type': 'application/json',",
+					"            'Connection':  'keep-alive',",
+					"        },",
+					"        body: {",
+					"            mode: 'raw',",
+					"            rqw: JSON.stringify({",
+					"                username: \"eNViDAT\",",
+					"                password: \"admin\"",
+					"            })",
+					"            }",
+					"        }",
+					"        pm.sendRequest(loginReq, (err, res) => {",
+					"            const resJson = res.json();",
+					"            postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+					"            postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+					"            console.log(pm.variables.get(\"access_token\"));",
+					"            console.log(pm.variables.get(\"refresh_token\"));",
+					"            pm.expect(pm.response.code).to.eql(200);",
+					"        });",
+					"    }",
+					"});"
+				]
+			}
 		}
 	]
 }
