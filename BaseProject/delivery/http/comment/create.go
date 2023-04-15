@@ -32,7 +32,7 @@ func (s commentHandler) CreateComment() func(ctx *gin.Context) {
 			return
 		}
 
-		commentID, err := s.commentUC.CreateComment(newCtx, inputSto, input.Files)
+		commentID, err := s.commentUC.CreateComment(newCtx, inputSto, input.Media)
 		if err != nil {
 			cc.ResponseError(err)
 			return

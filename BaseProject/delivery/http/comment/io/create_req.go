@@ -1,6 +1,6 @@
 package io
 
-import "mime/multipart"
+import "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage/io"
 
 type CreateCommentReq struct {
 	ID        uint
@@ -9,5 +9,5 @@ type CreateCommentReq struct {
 
 	Description string                  `form:"description"`
 	Rating      int                     `form:"rating"`
-	Files       []*multipart.FileHeader `form:"files"`
+	Media       []io.CreateCommentMedia `form:"media"`
 }

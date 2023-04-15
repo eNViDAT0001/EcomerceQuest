@@ -9,7 +9,7 @@ type CreateComment struct {
 }
 type CreateCommentMedia struct {
 	CommentID uint
-	PublicID  string
-	MediaPath string
-	MediaType string
+	PublicID  string `json:"public_id"`
+	MediaPath string `json:"media_path"`
+	MediaType string `json:"media_type"`
 }
