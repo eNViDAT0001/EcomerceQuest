@@ -10,6 +10,7 @@ type Storage interface {
 	ListCategories(ctx context.Context) ([]entities.Category, error)
 	CreateCategory(ctx context.Context, input *ioSto.CategoryForm) error
 	UpdateCategory(ctx context.Context, categoryID uint, input *ioSto.CategoryForm) error
+	GetCategoryDetailByID(ctx context.Context, categoryID uint) (entities.Category, error)
 	GetCategoryChildrenTreeWithCategoryID(ctx context.Context, categoryID uint) ([]entities.Category, error)
 	GetCategoryParentsTreeWithCategoryID(ctx context.Context, categoryID uint) ([]entities.Category, error)
 	GetCategoryRoofTree(ctx context.Context) ([]entities.Category, error)

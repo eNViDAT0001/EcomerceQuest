@@ -22,8 +22,14 @@ func (u *categoryUseCase) GetCategoryChildrenTreeWithCategoryID(ctx context.Cont
 	if err != nil {
 		return result, err
 	}
-
+	baseCategory, err := u.categorySto.GetCategoryDetailByID(ctx, categoryID)
+	if err != nil {
+		return result, err
+	}
 	result.ID = categoryID
+	result.Name = baseCategory.Name
+	result.ImagePath = baseCategory.ImagePath
+
 	for _, v := range categoriesTree {
 		storage.GetCategoryChildrenTree(&result, v)
 	}

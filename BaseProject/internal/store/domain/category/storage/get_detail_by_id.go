@@ -7,10 +7,10 @@ import (
 )
 
 func (c categoryStorage) GetCategoryDetailByID(ctx context.Context, categoryID uint) (entities.Category, error) {
-	var result entities.Category
+	result := entities.Category{}
 	db := wrap_gorm.GetDB()
 
-	err := db.Model(entities.Category{}).Where("id = ?", categoryID).First(result).Error
+	err := db.Model(entities.Category{}).Where("id = ?", categoryID).First(&result).Error
 
 	if err != nil {
 		return result, err
