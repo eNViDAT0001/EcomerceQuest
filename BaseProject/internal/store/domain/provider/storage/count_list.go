@@ -8,14 +8,13 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
 )
 
-func (s providerStorage) ListProvider(ctx context.Context, filter paging.ParamsInput) ([]entities.Provider, error) {
-	result := make([]entities.Provider, 0)
+func (s providerStorage) CountListProvider(ctx context.Context, filter paging.ParamsInput) (total int64, err error) {
 	db := wrap_gorm.GetDB()
 	query := db.Model(entities.Provider{})
-	paging_query.SetPagingQuery(&filter, entities.Provider{}.TableName(), query)
-	err := query.Find(&result).Error
+	paging_query.SetCountListPagingQuery(&filter, entities.Provider{}.TableName(), query)
+	err = query.Count(&total).Error
 	if err != nil {
-		return result, err
+		return 0, err
 	}
-	return result, nil
+	return total, nil
 }

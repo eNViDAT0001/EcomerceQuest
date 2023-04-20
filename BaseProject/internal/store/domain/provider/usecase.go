@@ -13,5 +13,5 @@ type UseCase interface {
 	UpdateProvider(ctx context.Context, providerID uint, input io.ProviderUpdateForm) error
 	DeleteProviderByIDs(ctx context.Context, providerID []uint) error
 	ListProviderByUserID(ctx context.Context, userID uint, filter paging.ParamsInput) (providers []entities.Provider, total int64, err error)
-	ListProvider(ctx context.Context) ([]entities.Provider, error)
+	ListProvider(ctx context.Context, filter paging.ParamsInput) (providers []entities.Provider, total int64, err error)
 }
