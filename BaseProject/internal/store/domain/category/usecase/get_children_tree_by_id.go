@@ -11,6 +11,18 @@ import (
 
 func (u *categoryUseCase) GetCategoryChildrenTreeWithCategoryID(ctx context.Context, categoryID uint) (ioSto.CategoryChildrenTree, error) {
 	var result ioSto.CategoryChildrenTree
+
+	baseCategory, err := u.categorySto.GetCategoryDetailByID(ctx, categoryID)
+	if err != nil {
+		return result, err
+	}
+	result.ID = categoryID
+	result.Name = baseCategory.Name
+	result.ImagePath = baseCategory.ImagePath
+	if baseCategory.CategoryParentID != nil {
+		result.CategoryParentID = *baseCategory.CategoryParentID
+	}
+
 	categories, err := u.categorySto.GetCategoryChildrenTreeWithCategoryID(ctx, categoryID)
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return result, err
@@ -21,16 +33,6 @@ func (u *categoryUseCase) GetCategoryChildrenTreeWithCategoryID(ctx context.Cont
 	categoriesTree, err := convert.ArrayCategoryEntityToCategoryChildrenTree(categories)
 	if err != nil {
 		return result, err
-	}
-	baseCategory, err := u.categorySto.GetCategoryDetailByID(ctx, categoryID)
-	if err != nil {
-		return result, err
-	}
-	result.ID = categoryID
-	result.Name = baseCategory.Name
-	result.ImagePath = baseCategory.ImagePath
-	if baseCategory.CategoryParentID != nil {
-		result.CategoryParentID = *baseCategory.CategoryParentID
 	}
 
 	for _, v := range categoriesTree {
