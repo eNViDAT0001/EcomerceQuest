@@ -29,6 +29,9 @@ func (u *categoryUseCase) GetCategoryChildrenTreeWithCategoryID(ctx context.Cont
 	result.ID = categoryID
 	result.Name = baseCategory.Name
 	result.ImagePath = baseCategory.ImagePath
+	if baseCategory.CategoryParentID != nil {
+		result.CategoryParentID = *baseCategory.CategoryParentID
+	}
 
 	for _, v := range categoriesTree {
 		storage.GetCategoryChildrenTree(&result, v)
