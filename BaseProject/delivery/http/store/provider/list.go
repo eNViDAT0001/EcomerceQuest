@@ -5,7 +5,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_params"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -31,7 +31,7 @@ func (s providerHandler) ListProvider() func(*gin.Context) {
 			WithSorts(sort).
 			Build()
 
-		inValidField, val := paging_params.ValidateFilter(paginator.Filter, entities.Comment{})
+		inValidField, val := paging_params.ValidateFilter(paginator.Filter, entities.Provider{})
 		if len(inValidField) > 0 {
 			cc.ResponseError(request.NewBadRequestError(inValidField, val, "invalid key and value"))
 			return
