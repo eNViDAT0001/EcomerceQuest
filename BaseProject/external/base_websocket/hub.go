@@ -1,4 +1,4 @@
-package wrap_websocket
+package base_websocket
 
 type Hub struct {
 	// Registered clients.

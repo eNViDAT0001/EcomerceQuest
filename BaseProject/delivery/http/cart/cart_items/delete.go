@@ -2,7 +2,6 @@ package cart_items
 
 import (
 	"context"
-	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/cart/cart_items/io"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -13,12 +12,6 @@ func (s *cartItemHandler) DeleteCartItem() func(ctx *gin.Context) {
 	return func(c *gin.Context) {
 		cc := request.FromContext(c)
 		newCtx := context.Background()
-
-		var input io.CartItemUpdateReq
-		if err := cc.BindJSON(&input); err != nil {
-			cc.BadRequest(err)
-			return
-		}
 
 		cartID, _ := strconv.Atoi(cc.Param("cart_id"))
 		itemID, _ := strconv.Atoi(cc.Param("cart_item_id"))

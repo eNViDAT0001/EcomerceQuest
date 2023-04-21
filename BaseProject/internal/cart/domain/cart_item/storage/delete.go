@@ -21,5 +21,6 @@ func (c cartItemStorage) DeleteCartItem(ctx context.Context, cartID uint, itemID
 	if query.RowsAffected < 1 {
 		return gorm.ErrRecordNotFound
 	}
+
 	return nil
 }

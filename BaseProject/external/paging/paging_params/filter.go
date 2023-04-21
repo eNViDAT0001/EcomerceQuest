@@ -5,6 +5,18 @@ type filterList struct {
 	Search *map[string]string
 	Sort   *map[string]string
 }
+type filterExtension struct {
+	Table string
+	Name  string
+}
+type Filter interface {
+	FilterExtesion
+	FilterList
+}
+
+type FilterExtesion interface {
+	GetTable() []filterExtension
+}
 type FilterList interface {
 	GetFields() *map[string]string
 	GetSearch() *map[string]string

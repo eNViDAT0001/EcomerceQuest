@@ -1,4 +1,4 @@
-package wrap_websocket
+package base_websocket
 
 import (
 	"bytes"

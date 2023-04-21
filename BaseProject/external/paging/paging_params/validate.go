@@ -29,7 +29,6 @@ func ValidateFilter(fields FilterList, filter EntityFilter) (inValidKey string, 
 	return "", ""
 }
 
-// TODO: Remove this function in some day
 func validateFilter(filter *map[string]string, fields ...string) (inValidKey string, value string) {
 	if filter == nil {
 		return "", ""
