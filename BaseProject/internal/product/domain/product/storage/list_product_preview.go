@@ -30,7 +30,7 @@ func (s productStorage) ListProductsPreview(ctx context.Context, input io.ListPr
 		Where("Product.deleted_at IS NULL").
 		Group("Product.id")
 
-	err := DoDummyRatingFilter(input, query)
+	err := DoDummyRatingFilter(input, query) // This is the DummyLine
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (s productStorage) ListProductsPreview(ctx context.Context, input io.ListPr
 	if err != nil {
 		return nil, err
 	}
-	RemoveDummyFilter(input)
+	RemoveDummyFilter(input) // This is the DummyLine
 	return result, nil
 }
 

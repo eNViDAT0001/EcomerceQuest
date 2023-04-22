@@ -12,7 +12,7 @@ type Provider struct {
 }
 
 func (Provider) WithFields() []string {
-	return []string{"name"}
+	return []string{"name", "id"}
 }
 func (Provider) SearchFields() []string {
 	return []string{"name"}
