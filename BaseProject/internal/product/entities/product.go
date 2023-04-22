@@ -15,7 +15,7 @@ type Product struct {
 }
 
 func (Product) WithFields() []string {
-	return []string{"name", "discount", "provider_id", "user_id", "category_id"}
+	return []string{"name", "discount", "provider_id", "user_id", "category_id", "rating"}
 }
 func (Product) SearchFields() []string {
 	return []string{"name", "price", "id"}

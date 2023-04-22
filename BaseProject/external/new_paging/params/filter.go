@@ -1,9 +1,26 @@
-package paging_params
+package params
+
+type FilterType int
+
+const (
+	FilterTypeField FilterType = iota
+	FilterTypeSearch
+	FilterTypeSort
+)
 
 type filterList struct {
+	Query  []Query
 	Fields *map[string]string
 	Search *map[string]string
 	Sort   *map[string]string
+}
+
+type Query struct {
+	Type      FilterType
+	Table     string
+	Field     string
+	Operator  string
+	Connector string
 }
 type FilterList interface {
 	GetFields() *map[string]string

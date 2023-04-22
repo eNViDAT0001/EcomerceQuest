@@ -17,6 +17,14 @@ func (s productStorage) ListCountProductsPreview(ctx context.Context, input io.L
 		Where("Product.deleted_at IS NULL").
 		Group("Product.id")
 
+	err = DoDummyRatingFilter(input, query)
+	if err != nil {
+		return 0, err
+	}
+
+	if err != nil {
+		return 0, err
+	}
 	paging_query.SetCountListPagingQuery(&input.Paging, entities.Product{}.TableName(), query)
 
 	if len(input.ProductIDs) > 0 {
@@ -30,5 +38,6 @@ func (s productStorage) ListCountProductsPreview(ctx context.Context, input io.L
 	if err != nil {
 		return 0, err
 	}
+	RemoveDummyFilter(input)
 	return total, nil
 }
