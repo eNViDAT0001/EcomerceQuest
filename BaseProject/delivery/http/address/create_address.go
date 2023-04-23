@@ -2,6 +2,7 @@ package address
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/address/io"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
@@ -18,6 +19,8 @@ func (s addressHandler) CreateAddress() func(*gin.Context) {
 			cc.BadRequest(err)
 			return
 		}
+		userID, _ := strconv.Atoi(cc.Param("user_id"))
+		input.UserID = strconv.Itoa(userID)
 
 		err := s.addressUC.CreateAddress(newCtx, &input)
 		if err != nil {
