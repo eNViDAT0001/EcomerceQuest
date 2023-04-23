@@ -13,7 +13,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (err error) {
+func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error) {
 	db := wrap_gorm.GetDB()
 
 	providersItems := map[uint][]io2.CreateOrderItemForm{}
@@ -62,13 +62,13 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 		Delete(&entities3.CartItem{}).Error
 	if err != nil {
 		query.Rollback()
-		return err
+		return nil, err
 	}
 
 	err = query.Table(entities.Order{}.TableName()).Create(&orders).Error
 	if err != nil {
 		query.Rollback()
-		return err
+		return nil, err
 	}
 
 	quantityStore := fake_redis.GetQuantityStore()
@@ -93,7 +93,7 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 			Where("id = ?", invalidKey).First(&option).Error
 		if err != nil {
 			query.Rollback()
-			return err
+			return nil, err
 		}
 
 		quantityStore.Add(invalidKey, option.Quantity)
@@ -102,7 +102,7 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 
 	if !ok {
 		query.Rollback()
-		return fmt.Errorf("product is not have enough quantity")
+		return nil, fmt.Errorf("product is not have enough quantity")
 	}
 
 	for _, v := range items {
@@ -113,7 +113,7 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 		if err != nil {
 			query.Rollback()
 			quantityStore.Restore(store)
-			return err
+			return nil, err
 		}
 	}
 
@@ -121,9 +121,10 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 	if err != nil {
 		query.Rollback()
 		quantityStore.Restore(store)
-		return err
+		return nil, err
 	}
 
 	query.Commit()
-	return nil
+
+	return orders, nil
 }

@@ -1,6 +1,9 @@
 package io
 
 type EmailReq struct {
-	Email        string `json:"email" binding:"required"`
+	Name  string `json:"name" `
+	Email string `json:"email" binding:"required"`
+
+	Subject      string `json:"subject"`
 	Descriptions string `json:"descriptions" binding:"required"`
 }

@@ -1,5 +1,7 @@
 package io
 
+import "time"
+
 type CreateOrderForm struct {
 	ID                uint
 	UserID            uint
@@ -15,4 +17,5 @@ type CreateOrderForm struct {
 	Total             int
 	Discount          int
 	StatusDescription string
+	CreatedAt         time.Time
 }

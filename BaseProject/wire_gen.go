@@ -33,9 +33,9 @@ import (
 	storage7 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/storage"
 	usecase9 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/usecase"
 	storage13 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage"
-	usecase14 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
-	storage14 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
-	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
+	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
+	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
+	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
 	storage9 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
 	usecase10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/usecase"
 	storage6 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage"
@@ -52,8 +52,8 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/usecase"
 	storage2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
 	usecase2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
-	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
-	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
+	storage14 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
+	usecase14 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
 )
 
 // Injectors from wire.go:
@@ -98,13 +98,13 @@ func initHandlerCollection() *HandlerCollection {
 	cart_itemUseCase := usecase13.NewCartItemUseCase(cart_itemStorage)
 	cart_itemHttpHandler := cart_items.NewCartItemHandler(cart_itemUseCase)
 	orderStorage := storage13.NewOrderStorage()
-	orderUseCase := usecase14.NewOrderUseCase(orderStorage)
+	smtpStorage := storage14.NewSmtpStorage()
+	smtpUseCase := usecase14.NewSmtpUseCase(smtpStorage)
+	orderUseCase := usecase15.NewOrderUseCase(orderStorage, userStorage, smtpUseCase)
 	orderHttpHandler := order.NewOrderHandler(orderUseCase)
-	order_itemStorage := storage14.NewOrderItemStorage()
-	order_itemUseCase := usecase15.NewOrderItemUseCase(order_itemStorage)
+	order_itemStorage := storage15.NewOrderItemStorage()
+	order_itemUseCase := usecase16.NewOrderItemUseCase(order_itemStorage)
 	order_itemHttpHandler := order_items.NewOrderItemHandler(order_itemUseCase)
-	smtpStorage := storage15.NewSmtpStorage()
-	smtpUseCase := usecase16.NewSmtpUseCase(smtpStorage)
 	smtpHttpHandler := smtp.NewSmtpHandler(jwtUseCase, useCase, smtpUseCase)
 	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler)
 	return handlerCollection

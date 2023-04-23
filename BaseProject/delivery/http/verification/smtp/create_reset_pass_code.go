@@ -27,12 +27,9 @@ func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 		cc.Ok(result)
 
 		mail := io.EmailForm{
-			Subject:     "Reset password",
-			Content:     fmt.Sprintf("<h1>%s</h1>", code),
-			To:          []string{email},
-			Cc:          nil,
-			Bcc:         nil,
-			AttachFiles: nil,
+			Subject: "Reset password",
+			Content: fmt.Sprintf("<h1>%s</h1>", code),
+			To:      []string{email},
 		}
 		err = s.smtpUC.SendEmail(newCtx, mail)
 		if err != nil {

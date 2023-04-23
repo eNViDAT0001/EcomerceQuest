@@ -1,6 +1,7 @@
 package base_websocket
 
 import (
+	"errors"
 	"flag"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -11,14 +12,21 @@ type SocketServices struct {
 	services map[string]Hub
 }
 
-func (s *SocketServices) AddService(name string, hub Hub) {
+func (s *SocketServices) AddService(name string, hub Hub) error {
+	_, ok := s.services[name]
+	if ok {
+		return errors.New("Service already exists")
+	}
 	s.services[name] = hub
+	return nil
 }
 func (s *SocketServices) RemoveService(name string) {
-	//TODO: Remove
+	delete(s.services, name)
 }
 func (s *SocketServices) Start() {
-
+	for _, hub := range s.services {
+		go hub.run()
+	}
 }
 
 var addr = flag.String("addr", ":8080", "http service address")

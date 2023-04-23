@@ -1,4 +1,4 @@
-package async
+package event_queue
 
 import (
 	"context"

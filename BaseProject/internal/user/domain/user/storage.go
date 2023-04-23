@@ -10,6 +10,7 @@ import (
 
 type Storage interface {
 	GetUserDetailByID(ctx context.Context, ID uint) (*entities.User, error)
+	GetListByProviderID(ctx context.Context, IDs []uint) ([]entities.User, error)
 	GetUserByUsername(ctx context.Context, username string) (*entities.User, error)
 	GetUserByEmail(ctx context.Context, email string) (*entities.User, error)
 	GetUserList(ctx context.Context, input *paging.ParamsInput) ([]*entities.User, error)
