@@ -6,6 +6,8 @@ import (
 	mediaHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/app/app_file"
 	cartHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/cart/cart"
 	cartItemsHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/cart/cart_items"
+	chatHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/chat"
+	notificationHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/notification"
 	orderHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order"
 	orderItemsHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
 	smtpHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
@@ -13,6 +15,14 @@ import (
 	smtpPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
 	smtpStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
 	smtpUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
+
+	chatPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/chat"
+	chatStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/chat/storage"
+	chatUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/chat/usecase"
+
+	notificationPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/notification"
+	notificationStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/notification/storage"
+	notificationUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/notification/usecase"
 
 	commentHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/comment"
 	productHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/product"
@@ -153,26 +163,36 @@ var IteratorCollection = wire.NewSet(
 	smtpUCPKG.NewSmtpUseCase,
 	smtpStoPKG.NewSmtpStorage,
 
+	chatHttpHandlerPKG.NewChatHandler,
+	chatUCPKG.NewChatUseCase,
+	chatStoPKG.NewChatStorage,
+
+	notificationHttpHandlerPKG.NewNotificationHandler,
+	notificationUCPKG.NewNotificationUseCase,
+	notificationStoPKG.NewNotificationStorage,
+
 	NewHandlerCollection,
 )
 
 type HandlerCollection struct {
-	userHandler      userPKG.HttpHandler
-	addressHandler   addressPKG.HttpHandler
-	categoryHandler  categoryPKG.HttpHandler
-	appAccessHandler appAccessionPKG.HttpHandler
-	jwtHandler       jwtPKG.HttpHandler
-	providerHandler  providerPKG.HttpHandler
-	favoriteHandler  favoritePKG.HttpHandler
-	bannerHandler    bannerPKG.HttpHandler
-	productHandler   productPKG.HttpHandler
-	commentHandler   commentPKG.HttpHandler
-	mediaHandler     mediaPKG.HttpHandler
-	cartHandler      cartPKG.HttpHandler
-	cartItemHandler  cartItemsPKG.HttpHandler
-	orderHandler     orderPKG.HttpHandler
-	orderItemHandler orderItemsPKG.HttpHandler
-	smtpHandler      smtpPKG.HttpHandler
+	userHandler         userPKG.HttpHandler
+	addressHandler      addressPKG.HttpHandler
+	categoryHandler     categoryPKG.HttpHandler
+	appAccessHandler    appAccessionPKG.HttpHandler
+	jwtHandler          jwtPKG.HttpHandler
+	providerHandler     providerPKG.HttpHandler
+	favoriteHandler     favoritePKG.HttpHandler
+	bannerHandler       bannerPKG.HttpHandler
+	productHandler      productPKG.HttpHandler
+	commentHandler      commentPKG.HttpHandler
+	mediaHandler        mediaPKG.HttpHandler
+	cartHandler         cartPKG.HttpHandler
+	cartItemHandler     cartItemsPKG.HttpHandler
+	orderHandler        orderPKG.HttpHandler
+	orderItemHandler    orderItemsPKG.HttpHandler
+	smtpHandler         smtpPKG.HttpHandler
+	chatHandler         chatPKG.HttpHandler
+	notificationHandler notificationPKG.HttpHandler
 }
 
 func NewHandlerCollection(
@@ -192,24 +212,28 @@ func NewHandlerCollection(
 	orderHandler orderPKG.HttpHandler,
 	orderItemHandler orderItemsPKG.HttpHandler,
 	smtpHandler smtpPKG.HttpHandler,
+	chatHandler chatPKG.HttpHandler,
+	notificationHandler notificationPKG.HttpHandler,
 
 ) *HandlerCollection {
 	return &HandlerCollection{
-		userHandler:      userHandler,
-		appAccessHandler: appAccessHandler,
-		categoryHandler:  categoryHandler,
-		jwtHandler:       jwtHandler,
-		addressHandler:   addressHandler,
-		providerHandler:  providerHandler,
-		productHandler:   productHandler,
-		commentHandler:   commentHandler,
-		mediaHandler:     mediaHandler,
-		bannerHandler:    bannerHandler,
-		cartHandler:      cartHandler,
-		cartItemHandler:  cartItemHandler,
-		orderHandler:     orderHandler,
-		orderItemHandler: orderItemHandler,
-		favoriteHandler:  favoriteHandler,
-		smtpHandler:      smtpHandler,
+		userHandler:         userHandler,
+		appAccessHandler:    appAccessHandler,
+		categoryHandler:     categoryHandler,
+		jwtHandler:          jwtHandler,
+		addressHandler:      addressHandler,
+		providerHandler:     providerHandler,
+		productHandler:      productHandler,
+		commentHandler:      commentHandler,
+		mediaHandler:        mediaHandler,
+		bannerHandler:       bannerHandler,
+		cartHandler:         cartHandler,
+		cartItemHandler:     cartItemHandler,
+		orderHandler:        orderHandler,
+		orderItemHandler:    orderItemHandler,
+		favoriteHandler:     favoriteHandler,
+		smtpHandler:         smtpHandler,
+		chatHandler:         chatHandler,
+		notificationHandler: notificationHandler,
 	}
 }

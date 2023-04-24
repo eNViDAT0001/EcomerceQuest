@@ -1,15 +1,20 @@
 package websocket
 
 import (
-	address "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/socket"
+	chatClient "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/socket/client/chat"
+	notifyClient "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/socket/client/notify"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/socket/hub/chat"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/socket/hub/notify"
 )
 
-type SocketHttpHandler interface {
-}
 type webSocketHandler struct {
-	addressUC address.UseCase
+	chatHub      *chat.ChatHub
+	chatClient   *chatClient.ChatClient
+	notifyHub    *notify.NotifyHub
+	notifyClient *notifyClient.NotifyClient
 }
 
-func NewWebSocketHandler(addressUC address.UseCase) SocketHttpHandler {
-	return &webSocketHandler{}
+func NewWebSocketHandler(chatHub *chat.ChatHub, chatClient *chatClient.ChatClient, notifyHub *notify.NotifyHub, notifyClient *notifyClient.NotifyClient) socket.WebSocketHttpHandler {
+	return &webSocketHandler{chatHub: chatHub, chatClient: chatClient, notifyHub: notifyHub, notifyClient: notifyClient}
 }
