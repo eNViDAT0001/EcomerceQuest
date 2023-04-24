@@ -49,7 +49,7 @@ type job struct {
 	stopChan   chan bool
 }
 
-func NewJob(handler JobHandler) *job {
+func NewJob(handler JobHandler) Job {
 	j := job{
 		config: jobConfig{
 			MaxTimeout: defaultMaxTimeout,
@@ -62,7 +62,7 @@ func NewJob(handler JobHandler) *job {
 	}
 	return &j
 }
-func (j *job) Excute(ctx context.Context) error {
+func (j *job) Execute(ctx context.Context) error {
 	j.state = StateRunning
 	var err error
 	err = j.handler(ctx)
@@ -76,7 +76,7 @@ func (j *job) Excute(ctx context.Context) error {
 func (j *job) Retry(ctx context.Context) error {
 	j.retryIndex += 1
 	time.Sleep(j.config.Retries[j.retryIndex])
-	err := j.Excute(ctx)
+	err := j.Execute(ctx)
 
 	if err == nil {
 		j.state = StateCompleted

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/eNViDAT0001/Thesis/Backend/external/event_queue"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_viper"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -26,8 +27,10 @@ func init() {
 }
 
 func main() {
-	r := gin.Default()
+	jobs := event_queue.GetBackGroundJobs()
+	go jobs.Run()
 
+	r := gin.Default()
 	config := cors.DefaultConfig()
 	config.AllowAllOrigins = true
 	r.Use(cors.New(config))

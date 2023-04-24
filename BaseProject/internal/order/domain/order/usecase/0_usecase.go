@@ -3,6 +3,7 @@ package usecase
 import (
 	"context"
 	"fmt"
+	"github.com/eNViDAT0001/Thesis/Backend/external/event_queue"
 	"github.com/eNViDAT0001/Thesis/Backend/external/html_template"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
@@ -106,6 +107,7 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 		return err
 	}
 
+	jobs := make([]event_queue.Job, 0)
 	for _, user := range users {
 		createdOrder := io.CreateOrderForm{}
 		for _, v := range createdOrders {
@@ -140,11 +142,9 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 			Bcc:         nil,
 			AttachFiles: nil,
 		}
-		err = u.smtpUC.SendEmail(ctx, email)
-		if err != nil {
-			return err
-		}
-
+		jobs = append(jobs, event_queue.NewJob(func(ctx context.Context) error {
+			return u.smtpUC.SendEmail(ctx, email)
+		}))
 		email = io3.EmailForm{
 			Subject:     "Thanks for your purchase",
 			Content:     html_template.GetClientOrderTemplate(orderBody),
@@ -153,12 +153,11 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 			Bcc:         nil,
 			AttachFiles: nil,
 		}
-		err = u.smtpUC.SendEmail(ctx, email)
-		if err != nil {
-			return err
-		}
-
+		jobs = append(jobs, event_queue.NewJob(func(ctx context.Context) error {
+			return u.smtpUC.SendEmail(ctx, email)
+		}))
 	}
+	event_queue.GetBackGroundJobs().Group <- event_queue.NewGroup(true, jobs...)
 
 	return err
 }

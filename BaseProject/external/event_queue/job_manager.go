@@ -29,6 +29,12 @@ func (g *group) Run(ctx context.Context) error {
 
 	var err error
 	for i, _ := range g.jobs {
+		if g.isConcurrent {
+			go func(aj Job) {
+				errChan <- g.runJob(ctx, aj)
+			}(g.jobs[i])
+			continue
+		}
 		j := g.jobs[i]
 		errChan <- g.runJob(ctx, j)
 	}
