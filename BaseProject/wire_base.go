@@ -11,18 +11,20 @@ import (
 	orderHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order"
 	orderItemsHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
 	smtpHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
-
 	smtpPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
 	smtpStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
 	smtpUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
+	"github.com/eNViDAT0001/Thesis/Backend/socket"
+	chatSocketHub "github.com/eNViDAT0001/Thesis/Backend/socket/hub/chat"
+	notifySocketHub "github.com/eNViDAT0001/Thesis/Backend/socket/hub/notify"
 
-	chatPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/chat"
-	chatStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/chat/storage"
-	chatUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/chat/usecase"
+	chatPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/chat"
+	chatStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/chat/storage"
+	chatUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/chat/usecase"
 
-	notificationPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/notification"
-	notificationStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/notification/storage"
-	notificationUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/notification/usecase"
+	notificationPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification"
+	notificationStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
+	notificationUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/usecase"
 
 	commentHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/comment"
 	productHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/product"
@@ -94,6 +96,7 @@ import (
 	jwtStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
 	jwtUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
 
+	webSocketPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/websocket"
 	"github.com/google/wire"
 )
 
@@ -171,6 +174,10 @@ var IteratorCollection = wire.NewSet(
 	notificationUCPKG.NewNotificationUseCase,
 	notificationStoPKG.NewNotificationStorage,
 
+	chatSocketHub.NewChatHub,
+	notifySocketHub.NewNotifyHub,
+	webSocketPKG.NewWebSocketHandler,
+
 	NewHandlerCollection,
 )
 
@@ -193,6 +200,7 @@ type HandlerCollection struct {
 	smtpHandler         smtpPKG.HttpHandler
 	chatHandler         chatPKG.HttpHandler
 	notificationHandler notificationPKG.HttpHandler
+	websocket           socket.WebSocketHandler
 }
 
 func NewHandlerCollection(
@@ -214,6 +222,7 @@ func NewHandlerCollection(
 	smtpHandler smtpPKG.HttpHandler,
 	chatHandler chatPKG.HttpHandler,
 	notificationHandler notificationPKG.HttpHandler,
+	websocket socket.WebSocketHandler,
 
 ) *HandlerCollection {
 	return &HandlerCollection{
@@ -235,5 +244,6 @@ func NewHandlerCollection(
 		smtpHandler:         smtpHandler,
 		chatHandler:         chatHandler,
 		notificationHandler: notificationHandler,
+		websocket:           websocket,
 	}
 }

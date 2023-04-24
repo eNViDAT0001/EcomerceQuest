@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/chat"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/chat"
 )
 
 type chatStorage struct {

@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	notification2 "github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/notification"
+	notification2 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification"
 )
 
 type notificationUseCase struct {

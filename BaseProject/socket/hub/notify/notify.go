@@ -1,7 +1,7 @@
 package notify
 
 import (
-	"github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/socket/client/notify"
+	"github.com/eNViDAT0001/Thesis/Backend/socket/client/notify"
 )
 
 type NotifyMessage struct {

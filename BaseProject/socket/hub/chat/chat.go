@@ -1,7 +1,7 @@
 package chat
 
 import (
-	"github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/socket/client/chat"
+	"github.com/eNViDAT0001/Thesis/Backend/socket/client/chat"
 )
 
 type ChatMessage struct {

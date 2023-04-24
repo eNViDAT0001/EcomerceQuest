@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/eNViDAT0001/Thesis/Backend/internal/real_time/domain/notification"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification"
 )
 
 type notificationStorage struct {
