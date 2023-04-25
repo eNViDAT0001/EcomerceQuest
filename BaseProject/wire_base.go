@@ -15,8 +15,8 @@ import (
 	smtpStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
 	smtpUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
 	"github.com/eNViDAT0001/Thesis/Backend/socket"
-	chatSocketHub "github.com/eNViDAT0001/Thesis/Backend/socket/hub/chat"
-	notifySocketHub "github.com/eNViDAT0001/Thesis/Backend/socket/hub/notify"
+	chatSocketHub "github.com/eNViDAT0001/Thesis/Backend/socket/chat"
+	notifySocketHub "github.com/eNViDAT0001/Thesis/Backend/socket/notify"
 
 	chatPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/chat"
 	chatStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/chat/storage"

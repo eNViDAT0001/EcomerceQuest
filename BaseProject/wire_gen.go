@@ -61,8 +61,8 @@ import (
 	usecase2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
 	storage14 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
 	usecase14 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
-	chat3 "github.com/eNViDAT0001/Thesis/Backend/socket/hub/chat"
-	"github.com/eNViDAT0001/Thesis/Backend/socket/hub/notify"
+	chat3 "github.com/eNViDAT0001/Thesis/Backend/socket/chat"
+	"github.com/eNViDAT0001/Thesis/Backend/socket/notify"
 )
 
 // Injectors from wire.go:
