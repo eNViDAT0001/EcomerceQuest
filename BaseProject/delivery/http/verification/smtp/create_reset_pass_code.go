@@ -36,7 +36,7 @@ func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 		job := event_background.NewJob(func(ctx context.Context) error {
 			return s.smtpUC.SendEmail(ctx, mail)
 		})
-		event_background.GetBackGroundJobs().Group <- event_background.NewJobs(true, job)
+		event_background.GetBackGroundJobs().Group <- event_background.NewGroup(true, job)
 
 	}
 }

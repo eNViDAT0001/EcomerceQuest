@@ -12,7 +12,7 @@ type group struct {
 	wg           *sync.WaitGroup
 }
 
-func NewJobs(isConcurrent bool, jobs ...Job) *group {
+func NewGroup(isConcurrent bool, jobs ...Job) *group {
 	g := &group{
 		isConcurrent: isConcurrent,
 		jobs:         jobs,
@@ -31,22 +31,23 @@ func (g *group) Run(ctx context.Context) error {
 	for i, _ := range g.jobs {
 		if g.isConcurrent {
 			go func(aj Job) {
+				defer g.wg.Done()
 				errChan <- g.runJob(ctx, aj)
 			}(g.jobs[i])
 			continue
 		}
 		j := g.jobs[i]
 		errChan <- g.runJob(ctx, j)
+		g.wg.Done()
 	}
 
 	g.wg.Wait()
 	return err
 }
-
 func (g *group) runJob(ctx context.Context, j Job) error {
 	if err := j.Execute(ctx); err != nil {
 		for {
-			log.Println(err)
+			log.Println("Dummy Background Bug: ", err)
 			if j.State() == StateRetryFailed {
 				return err
 			}

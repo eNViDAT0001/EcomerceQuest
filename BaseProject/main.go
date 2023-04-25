@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/eNViDAT0001/Thesis/Backend/external/event_background"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_viper"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -27,9 +26,6 @@ func init() {
 }
 
 func main() {
-	jobs := event_background.GetBackGroundJobs()
-	go jobs.Run()
-
 	r := gin.Default()
 	config := cors.DefaultConfig()
 	config.AllowAllOrigins = true

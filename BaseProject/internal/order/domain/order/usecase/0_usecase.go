@@ -157,7 +157,7 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 			return u.smtpUC.SendEmail(ctx, email)
 		}))
 	}
-	event_background.GetBackGroundJobs().Group <- event_background.NewJobs(true, jobs...)
+	event_background.GetBackGroundJobs().Group <- event_background.NewGroup(true, jobs...)
 
 	return err
 }

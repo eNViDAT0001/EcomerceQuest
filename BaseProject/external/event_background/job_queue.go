@@ -13,6 +13,7 @@ func GetBackGroundJobs() *backGroundJobs {
 		bgJobs = &backGroundJobs{
 			Group: make(chan *group),
 		}
+		go bgJobs.Run()
 	}
 	return bgJobs
 }

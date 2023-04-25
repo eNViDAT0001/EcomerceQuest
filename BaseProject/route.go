@@ -105,8 +105,8 @@ func router(r *gin.Engine) {
 		userGroup := v1.Group("/users")
 		{
 			// Chỉ cần có token là dùng được
-			userGroup.Use(allHandler.jwtHandler.VerifyToken())
-
+			userTokenGroup := userGroup.Group("")
+			userTokenGroup.Use(allHandler.jwtHandler.VerifyUserToken())
 			// Phân quyền theo User ID
 			authGroup := userGroup.Group("")
 			authGroup.Use(allHandler.jwtHandler.VerifyUserToken())
@@ -120,10 +120,10 @@ func router(r *gin.Engine) {
 			authGroup.PATCH("/:user_id/info", allHandler.userHandler.UpdateUserInfo())
 			authGroup.PATCH("/:user_id/identity", allHandler.userHandler.UpdateUserIdentity())
 			authGroup.PUT("/:user_id", allHandler.userHandler.SetPassword())
-			authGroup.PUT("/:user_id/reset_pass", allHandler.userHandler.ResetPassword())
+			userGroup.PUT("/reset_pass/:email", allHandler.userHandler.ResetPassword())
 			authAminGroup.DELETE("/:user_id", allHandler.userHandler.DeleteUserByID())
 			authAminGroup.DELETE("", allHandler.userHandler.DeleteUserByIDs())
-			userGroup.GET("", allHandler.userHandler.GetUserList())
+			userTokenGroup.GET("", allHandler.userHandler.GetUserList())
 			authAminGroup.POST("", allHandler.userHandler.CreateUser())
 		}
 		productGroup := v1.Group("/products")

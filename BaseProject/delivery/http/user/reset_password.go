@@ -3,18 +3,24 @@ package user
 import (
 	"context"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/user/io"
-	"strconv"
 
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/gin-gonic/gin"
 )
+
 var invalidTokens = make(map[string]bool)
+
 func (s userHandler) ResetPassword() func(*gin.Context) {
 	return func(c *gin.Context) {
 		cc := request.FromContext(c)
 		newCtx := context.Background()
 
-		userID, _ := strconv.Atoi(cc.Param("user_id"))
+		userEmail := cc.Param("email")
+		user, err := s.userUC.GetUserByEmail(newCtx, userEmail)
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
 
 		var input io.ResetPasswordReq
 		if err := cc.BindJSON(&input); err != nil {
@@ -22,7 +28,7 @@ func (s userHandler) ResetPassword() func(*gin.Context) {
 			return
 		}
 
-		token, err := s.jwtUC.VerifySmtpToken(newCtx, uint(userID), input.Token, input.Code)
+		token, err := s.jwtUC.VerifySmtpToken(newCtx, user.ID, input.Token, input.Code)
 		if err != nil {
 			cc.ResponseError(err)
 			return
@@ -38,7 +44,7 @@ func (s userHandler) ResetPassword() func(*gin.Context) {
 		}
 		invalidTokens[input.Token] = true
 
-		err = s.userUC.ResetPassword(newCtx, uint(userID), input.NewPassword)
+		err = s.userUC.ResetPassword(newCtx, user.ID, input.NewPassword)
 		if err != nil {
 			cc.ResponseError(err)
 			return
