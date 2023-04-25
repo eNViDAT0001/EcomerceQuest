@@ -2,7 +2,7 @@ package smtp
 
 import (
 	"fmt"
-	"github.com/eNViDAT0001/Thesis/Backend/external/event_queue"
+	"github.com/eNViDAT0001/Thesis/Backend/external/event_background"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase/io"
 	"github.com/gin-gonic/gin"
@@ -33,10 +33,10 @@ func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 			To:      []string{email},
 		}
 
-		job := event_queue.NewJob(func(ctx context.Context) error {
+		job := event_background.NewJob(func(ctx context.Context) error {
 			return s.smtpUC.SendEmail(ctx, mail)
 		})
-		event_queue.GetBackGroundJobs().Group <- event_queue.NewGroup(true, job)
+		event_background.GetBackGroundJobs().Group <- event_background.NewJobs(true, job)
 
 	}
 }

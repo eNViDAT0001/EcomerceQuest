@@ -1,4 +1,4 @@
-package event_queue
+package event_background
 
 import (
 	"context"
@@ -12,7 +12,7 @@ type group struct {
 	wg           *sync.WaitGroup
 }
 
-func NewGroup(isConcurrent bool, jobs ...Job) *group {
+func NewJobs(isConcurrent bool, jobs ...Job) *group {
 	g := &group{
 		isConcurrent: isConcurrent,
 		jobs:         jobs,
@@ -42,6 +42,7 @@ func (g *group) Run(ctx context.Context) error {
 	g.wg.Wait()
 	return err
 }
+
 func (g *group) runJob(ctx context.Context, j Job) error {
 	if err := j.Execute(ctx); err != nil {
 		for {

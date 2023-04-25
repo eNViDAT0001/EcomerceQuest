@@ -1,4 +1,4 @@
-package event_queue
+package event_background
 
 import "context"
 
