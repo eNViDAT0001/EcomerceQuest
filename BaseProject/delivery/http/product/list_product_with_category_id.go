@@ -29,17 +29,19 @@ func (s *productHandler) ListProductWithCategoryID() func(ctx *gin.Context) {
 			return
 		}
 
-		categories, err := s.categoryUC.GetCategoryChildrenByCategoryID(newCtx, uint(categoryID))
-		if err != nil {
-			cc.NoContent(err)
-			return
+		categoryIDs := make([]uint, 0)
+		if categoryID != 0 {
+			categories, err := s.categoryUC.GetCategoryChildrenByCategoryID(newCtx, uint(categoryID))
+			if err != nil {
+				cc.NoContent(err)
+				return
+			}
+			for _, category := range categories {
+				categoryIDs = append(categoryIDs, category.ID)
+			}
+			categoryIDs = append(categoryIDs, uint(categoryID))
 		}
 
-		categoryIDs := make([]uint, 0)
-		for _, category := range categories {
-			categoryIDs = append(categoryIDs, category.ID)
-		}
-		categoryIDs = append(categoryIDs, uint(categoryID))
 		inputRepo := io.ListProductInput{
 			CategoryIDs: categoryIDs,
 			Paging:      paginator,
