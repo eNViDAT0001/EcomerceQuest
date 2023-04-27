@@ -7,7 +7,7 @@ type Message struct {
 	UserID   uint        `gorm:"column:user_id" json:"user_id"`
 	Content  string      `gorm:"column:content" json:"content"`
 	ToUserID string      `gorm:"column:to_user_id" json:"to_user_id"`
-	Seen     bool        `gorm:"column:seen" json:"seen"`
+	Seen     *bool       `gorm:"column:seen" json:"seen"`
 	Type     MessageType `gorm:"column:type" json:"type"`
 }
 

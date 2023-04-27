@@ -36,6 +36,7 @@ func (u *productUseCase) CreateProduct(ctx context.Context, productDetail ioUC.P
 	if len(productDetail.Descriptions) > 0 {
 		for i, _ := range productDetail.Descriptions {
 			productDetail.Descriptions[i].ProductID = productID
+
 		}
 
 		err = u.productSto.CreateBulkProductDescriptions(ctx, productDetail.Descriptions)

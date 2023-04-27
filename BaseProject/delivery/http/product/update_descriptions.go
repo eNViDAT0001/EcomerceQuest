@@ -15,7 +15,7 @@ func (s *productHandler) UpdateDescriptions() func(ctx *gin.Context) {
 		cc := request.FromContext(c)
 		newCtx := context.Background()
 
-		descriptionsID, err := strconv.Atoi(cc.Param("descriptions_id"))
+		descriptionsID, err := strconv.Atoi(cc.Param("description_id"))
 		if err != nil {
 			cc.BadRequest(err)
 			return

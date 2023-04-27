@@ -157,7 +157,7 @@ func router(r *gin.Engine) {
 			authGroup.PATCH("/:product_id/option", allHandler.productHandler.UpdateProductOptions())
 			authGroup.PATCH("/:product_id/", allHandler.productHandler.UpdateProduct())
 			authGroup.PATCH("/:product_id/specification/:specification_id", allHandler.productHandler.UpdateProductSpecification())
-			authGroup.PATCH("/:product_id/descriptions/:descriptions", allHandler.productHandler.UpdateDescriptions())
+			authGroup.PATCH("/:product_id/descriptions/:description_id", allHandler.productHandler.UpdateDescriptions())
 
 		}
 		bannerGroup := v1.Group("/banners")

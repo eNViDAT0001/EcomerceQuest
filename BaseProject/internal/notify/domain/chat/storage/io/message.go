@@ -4,11 +4,19 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/entities"
 )
 
-type Message struct {
+type MessageInput struct {
 	ID       uint
 	UserID   uint
 	Content  string
 	ToUserID string
-	Seen     bool
+	Seen     *bool
+	Type     entities.MessageType
+}
+
+type MessageUpdateInput struct {
+	UserID   uint
+	Content  string
+	ToUserID string
+	Seen     *bool
 	Type     entities.MessageType
 }

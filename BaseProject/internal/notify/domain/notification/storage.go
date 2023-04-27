@@ -1,8 +1,15 @@
 package notification
 
+import (
+	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage/io"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/entities"
+)
+
 type Storage interface {
-	//Create(ctx context.Context, input io.NotificationCreate) error
-	//Update(ctx context.Context, id uint, input io.NotificationCreate) error
-	//Delete(ctx context.Context, input io.NotificationCreate) error
-	//List(ctx context.Context, input io.ListNotifyInput) ([]entities.Notification, error)
+	CreateNotification(ctx context.Context, input io.NotificationInput) error
+	UpdateNotification(ctx context.Context, input []io.NotificationInput) error
+	DeleteByNotificationID(ctx context.Context, id []uint) error
+	ListNotification(ctx context.Context, input io.ListNotifyInput) ([]entities.Notification, error)
+	CountListNotification(ctx context.Context, input io.ListNotifyInput) (int64, error)
 }
