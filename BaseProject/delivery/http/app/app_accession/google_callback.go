@@ -85,12 +85,22 @@ func (a *appAccessionHandler) CallbackGoogleSSO() func(*gin.Context) {
 			return
 		}
 
-		result := map[string]interface{}{
+		result, err := json.Marshal(map[string]interface{}{
 			"UserID": user.ID,
 			"Token":  token,
+		})
+		if err != nil {
+			cc.ResponseError(err)
+			return
 		}
+		fmt.Sprint(result)
 
-		cc.Ok(result)
+		cc.Redirect(http.StatusFound, "http://localhost:3000/login")
+		_, err = cc.Writer.Write(result)
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
 	}
 }
 func getGoogleUserData(state, code string) (io.GoogleProfile, error) {
