@@ -87,6 +87,37 @@ func (u *orderUseCase) ListPreviewByProviderID(ctx context.Context, providerID u
 	return orders, total, err
 }
 
+func (u *orderUseCase) ListPreview(ctx context.Context, input paging.ParamsInput) (orders []io.OrderPreview, total int64, err error) {
+	total, err = u.orderSto.CountPreview(ctx, input)
+	if err != nil {
+		return nil, 0, err
+	}
+	if total == 0 {
+		return nil, 0, gorm.ErrRecordNotFound
+	}
+	orders, err = u.orderSto.ListPreview(ctx, input)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return orders, total, err
+}
+func (u *orderUseCase) List(ctx context.Context, input paging.ParamsInput) (orders []entities.Order, total int64, err error) {
+	total, err = u.orderSto.CountList(ctx, input)
+	if err != nil {
+		return nil, 0, err
+	}
+	if total == 0 {
+		return nil, 0, gorm.ErrRecordNotFound
+	}
+	orders, err = u.orderSto.List(ctx, input)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return orders, total, err
+}
+
 func (u *orderUseCase) GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error) {
 	return u.orderSto.GetByOrderID(ctx, orderID)
 }

@@ -189,6 +189,9 @@ func router(r *gin.Engine) {
 		}
 		orderGroup := v1.Group("/orders")
 		{
+			orderAdminGroup := orderGroup.Group("")
+			orderAdminGroup.Use(allHandler.jwtHandler.VerifyAdminToken())
+
 			orderGroup.POST("", allHandler.orderHandler.CreateOrder())
 			orderGroup.PATCH("/:order_id", allHandler.orderHandler.UpdateOrderStatus())
 			orderGroup.PATCH("/:order_id/user/:user_id/cancel", allHandler.orderHandler.CancelOrder())
@@ -197,6 +200,8 @@ func router(r *gin.Engine) {
 			orderGroup.GET("/:order_id/items", allHandler.orderItemHandler.ListByOrderID())
 			orderGroup.GET("/user/:user_id", allHandler.orderHandler.ListByUserID())
 			orderGroup.GET("/user/:user_id/preview", allHandler.orderHandler.ListPreviewByUserID())
+			orderAdminGroup.GET("/admin/:user_id", allHandler.orderHandler.List())
+			orderAdminGroup.GET("/admin/:user_id/preview", allHandler.orderHandler.ListPreview())
 			orderGroup.GET("/provider/:provider_id", allHandler.orderHandler.ListByProviderID())
 			orderGroup.GET("/provider/:provider_id/preview", allHandler.orderHandler.ListPreviewByProviderID())
 		}

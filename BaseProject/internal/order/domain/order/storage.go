@@ -20,6 +20,11 @@ type Storage interface {
 	ListPreviewByProviderID(ctx context.Context, providerID uint, input paging.ParamsInput) ([]io.OrderPreview, error)
 	CountPreviewByProviderID(ctx context.Context, providerID uint, input paging.ParamsInput) (total int64, err error)
 
+	CountList(ctx context.Context, input paging.ParamsInput) (total int64, err error)
+	List(ctx context.Context, input paging.ParamsInput) ([]entities.Order, error)
+	CountPreview(ctx context.Context, input paging.ParamsInput) (total int64, err error)
+	ListPreview(ctx context.Context, input paging.ParamsInput) ([]io.OrderPreview, error)
+
 	GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error)
 
 	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error)

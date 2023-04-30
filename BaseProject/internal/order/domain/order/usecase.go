@@ -15,6 +15,9 @@ type UseCase interface {
 	ListByProviderID(ctx context.Context, providerID uint, input paging.ParamsInput) (orders []entities.Order, total int64, err error)
 	ListPreviewByProviderID(ctx context.Context, providerID uint, input paging.ParamsInput) (orders []io.OrderPreview, total int64, err error)
 
+	ListPreview(ctx context.Context, input paging.ParamsInput) (orders []io.OrderPreview, total int64, err error)
+	List(ctx context.Context, input paging.ParamsInput) (orders []entities.Order, total int64, err error)
+
 	GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error)
 
 	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (err error)
