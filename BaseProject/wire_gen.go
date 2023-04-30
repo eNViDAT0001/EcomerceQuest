@@ -43,15 +43,15 @@ import (
 	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
 	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
 	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
-	storage9 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
+	storage10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
 	usecase10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/usecase"
 	storage6 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage"
 	usecase7 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/usecase"
-	storage10 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/storage"
+	storage8 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/storage"
 	usecase11 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/usecase"
 	storage4 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/category/storage"
 	usecase4 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/category/usecase"
-	storage8 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/favorite/storage"
+	storage9 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/favorite/storage"
 	usecase8 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/favorite/usecase"
 	storage5 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/provider/storage"
 	usecase6 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/provider/usecase"
@@ -85,19 +85,19 @@ func initHandlerCollection() *HandlerCollection {
 	providerUseCase := usecase6.NewProviderUseCase(providerStorage)
 	productStorage := storage6.NewProductStorage()
 	mediaStorage := storage7.NewMediaStorage()
-	productUseCase := usecase7.NewProductUseCase(productStorage, mediaStorage)
+	bannerStorage := storage8.NewBannerStorage()
+	productUseCase := usecase7.NewProductUseCase(productStorage, mediaStorage, bannerStorage)
 	jwtHttpHandler := jwt.NewJwtHandler(jwtUseCase, useCase, providerUseCase, productUseCase)
 	providerHttpHandler := provider.NewProviderHandler(providerUseCase)
-	favoriteStorage := storage8.NewFavoriteStorage()
+	favoriteStorage := storage9.NewFavoriteStorage()
 	favoriteUseCase := usecase8.NewFavoriteUseCase(favoriteStorage)
 	favoriteHttpHandler := banner.NewFavoriteHandler(favoriteUseCase)
 	mediaUseCase := usecase9.NewMediaUseCase(mediaStorage)
 	productHttpHandler := product.NewProductHandler(productUseCase, mediaUseCase, categoryUseCase)
-	commentStorage := storage9.NewCommentStorage()
+	commentStorage := storage10.NewCommentStorage()
 	commentUseCase := usecase10.NewCommentUseCase(commentStorage, mediaStorage)
 	commentHttpHandler := comment.NewCommentHandler(commentUseCase)
 	mediaHttpHandler := app_file.NewMediaHandler(mediaUseCase)
-	bannerStorage := storage10.NewBannerStorage()
 	bannerUseCase := usecase11.NewBannerUseCase(bannerStorage, productStorage)
 	bannerHttpHandler := banner2.NewBannerHandler(bannerUseCase)
 	cartStorage := storage11.NewCartStorage()
