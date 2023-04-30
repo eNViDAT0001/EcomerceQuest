@@ -2,16 +2,23 @@ package storage
 
 import (
 	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
+	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_query"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/entities"
 )
 
-func (s smtpStorage) ListEmail(ctx context.Context, email io.CreateEmail) (id uint, err error) {
+func (s smtpStorage) ListEmail(ctx context.Context, filter paging.ParamsInput) ([]entities.Email, error) {
+	result := make([]entities.Email, 0)
 	db := wrap_gorm.GetDB()
-	err = db.Table(entities.Email{}.TableName()).Create(&email).Error
+
+	query := db.Table(entities.Email{}.TableName())
+	paging_query.SetPagingQuery(&filter, entities.Email{}.TableName(), query)
+
+	err := query.Find(&result).Error
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
-	return email.ID, nil
+
+	return result, nil
 }

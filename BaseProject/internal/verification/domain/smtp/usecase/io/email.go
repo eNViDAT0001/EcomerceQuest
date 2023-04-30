@@ -1,10 +1,10 @@
 package io
 
 type EmailForm struct {
-	Subject     string
-	Content     string
-	To          []string
-	Cc          []string
-	Bcc         []string
-	AttachFiles []string
+	Subject     string   `json:"subject"`
+	Content     string   `json:"content"`
+	To          []string `json:"to"`
+	Cc          []string `json:"cc"`
+	Bcc         []string `json:"bcc"`
+	AttachFiles []string `json:"attach_files"`
 }

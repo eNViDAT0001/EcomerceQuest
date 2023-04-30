@@ -34,9 +34,14 @@ func router(r *gin.Engine) {
 
 		mailGroup := v1.Group("/mail")
 		{
+			authAminGroup := mailGroup.Group("")
+
 			mailGroup.POST("/verify", allHandler.smtpHandler.VerifyCode())
 			mailGroup.POST("/reset", allHandler.smtpHandler.CreateResetPassCode())
 			mailGroup.POST("/feedback", allHandler.smtpHandler.CreateEmailFeedback())
+
+			authAminGroup.GET("/feedback", allHandler.smtpHandler.List())
+			authAminGroup.POST("", allHandler.smtpHandler.SendEmail())
 		}
 		fileGroup := v1.Group("/files")
 		{

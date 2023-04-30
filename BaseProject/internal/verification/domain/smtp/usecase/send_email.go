@@ -19,7 +19,7 @@ func (s *smtpUseCase) SendEmail(ctx context.Context, input io.EmailForm) error {
 
 	e := email.NewEmail()
 	e.From = fmt.Sprintf("%s <%s>", sender.Name, sender.FromEmailAddress)
-	e.Subject = input.Subject
+	e.Subject = "[No Reply] " + input.Subject
 	e.HTML = []byte(input.Content)
 	e.To = input.To
 	e.Cc = input.Cc

@@ -75,11 +75,15 @@ func connectDB() error {
 
 	db, err = gorm.Open(mysql.Open(dbUrl), &gorm.Config{Logger: newLogger})
 	if err != nil {
+		db = nil
+		config = nil
 		panic(err)
 	}
 
 	sql, err := db.DB()
 	if err != nil {
+		db = nil
+		config = nil
 		panic(err)
 	}
 
