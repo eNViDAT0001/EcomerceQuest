@@ -23,3 +23,13 @@ type ProductCreateReq struct {
 	Options       []ProductOptionReq             `json:"options"`
 	Descriptions  []ProductDescriptionsCreateReq `json:"descriptions"`
 }
+
+type ProductFullUpdateReq struct {
+	CategoryID   uint                           `json:"category_id"`
+	Name         string                         `json:"name"`
+	Price        *int                           `json:"price"`
+	Discount     *int                           `json:"discount"`
+	Options      []OptionsUpdateReq             `json:"options"`
+	Media        []ProductMediaUpdateReq        `json:"media"`
+	Descriptions []ProductDescriptionsUpdateReq `json:"descriptions"`
+}

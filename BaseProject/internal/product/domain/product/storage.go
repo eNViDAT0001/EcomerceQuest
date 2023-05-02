@@ -22,8 +22,9 @@ type Storage interface {
 	GetProductDescriptionsByProductID(ctx context.Context, productID uint) ([]entities.ProductDescriptions, error)
 	GetProductDetailByID(ctx context.Context, productID uint) (entities.Product, error)
 
+	UpdateFullProduct(ctx context.Context, productID uint, product io.ProductFullUpdateForm) error
 	UpdateProduct(ctx context.Context, productID uint, product io.ProductUpdateForm) error
-	UpdateProductDescriptions(ctx context.Context, descriptionsID uint, descriptions io.ProductDescriptionsUpdateForm) error
+	UpdateProductDescriptions(ctx context.Context, descriptionsID uint, descriptions io.ProductDescriptionsUpdateInput) error
 	CreateBulkProductDescriptions(ctx context.Context, descriptions []io.ProductDescriptionsCreateForm) error
 	UpdateProductOptions(ctx context.Context, optionsID uint, options io.ProductOptionUpdateInput) error
 	UpdateProductSpecification(ctx context.Context, specID uint, specifications io.ProductSpecificationUpdateForm) error

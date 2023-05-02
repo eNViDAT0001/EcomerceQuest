@@ -3,12 +3,11 @@ package user
 import (
 	"context"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/user/io"
+	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
 
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/gin-gonic/gin"
 )
-
-var invalidTokens = make(map[string]bool)
 
 func (s userHandler) ResetPassword() func(*gin.Context) {
 	return func(c *gin.Context) {
@@ -39,10 +38,11 @@ func (s userHandler) ResetPassword() func(*gin.Context) {
 			return
 		}
 
-		if _, ok := invalidTokens[input.Token]; ok {
+		err = smtp.UseToken(input.Token)
+		if err != nil {
 			cc.ResponseError(request.NewUnauthorizedError("Code", input.Code, "Code is not valid"))
+			return
 		}
-		invalidTokens[input.Token] = true
 
 		err = s.userUC.ResetPassword(newCtx, user.ID, input.NewPassword)
 		if err != nil {

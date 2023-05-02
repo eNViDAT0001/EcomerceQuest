@@ -13,6 +13,14 @@ type ProductOptionsUpdate struct {
 	Price     *int    `json:"price"`
 	Quantity  *int    `json:"quantity"`
 }
+type OptionsUpdateReq struct {
+	ProductID uint
+
+	ID       uint    `json:"id"`
+	Name     *string `json:"name"`
+	Price    *int    `json:"price"`
+	Quantity *int    `json:"quantity"`
+}
 
 type ProductOptionReq struct {
 	ProductID       uint   `json:"productID"`

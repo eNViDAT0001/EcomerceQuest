@@ -19,6 +19,7 @@ type UseCase interface {
 	GetProductDescriptionsByProductID(ctx context.Context, productID uint) ([]entities.ProductDescriptions, error)
 	GetProductInfoByID(ctx context.Context, productID uint) (entities.Product, error)
 
+	UpdateFullProduct(ctx context.Context, productID uint, product io.ProductFullUpdateForm) error
 	UpdateProduct(ctx context.Context, productID uint, product io.ProductUpdateForm) error
 	UpdateProductOptions(ctx context.Context, options []io.ProductOptionUpdateForm) error
 	UpdateProductSpecification(ctx context.Context, specID uint, specifications io.ProductSpecificationUpdateForm) error

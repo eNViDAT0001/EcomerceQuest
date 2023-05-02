@@ -6,3 +6,7 @@ type CreateProductMedia struct {
 	MediaPath string
 	MediaType string
 }
+type UpdateProductMedia struct {
+	ID        uint   `json:"id"`
+	MediaPath string `json:"media_path"`
+}

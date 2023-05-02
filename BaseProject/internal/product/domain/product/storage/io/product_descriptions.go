@@ -8,7 +8,11 @@ type ProductDescriptionsCreateForm struct {
 	DescriptionsPath string
 }
 type ProductDescriptionsUpdateForm struct {
-	Name             string
-	PublicID         string
-	DescriptionsPath string
+	ID          uint                           `json:"id"`
+	Description ProductDescriptionsUpdateInput `json:"description"`
+}
+type ProductDescriptionsUpdateInput struct {
+	Name             string `json:"name"`
+	PublicID         string `json:"public_id"`
+	DescriptionsPath string `json:"descriptions_path"`
 }

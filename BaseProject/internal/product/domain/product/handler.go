@@ -17,6 +17,7 @@ type HttpHandler interface {
 	GetProductDescriptionsByProductID() func(ctx *gin.Context)
 	GetProductInfoByID() func(ctx *gin.Context)
 
+	UpdateFullProduct() func(ctx *gin.Context)
 	UpdateProduct() func(ctx *gin.Context)
 	UpdateProductOptions() func(ctx *gin.Context)
 	UpdateProductSpecification() func(ctx *gin.Context)

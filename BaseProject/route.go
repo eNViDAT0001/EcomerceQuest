@@ -9,13 +9,18 @@ import (
 func router(r *gin.Engine) {
 	r.Use(requestid.New(requestid.WithCustomHeaderStrKey("da-Best-thesis")))
 	allHandler := initHandlerCollection()
-
+	//wsHandler := websocket.NewManager(context.Background())
 	// Validate Token: allHandler.jwtHandler.VerifyToken()
 	// Validate User's Token: allHandler.jwtHandler.VerifyUserToken()
 	// Validate Admin's Token: allHandler.jwtHandler.VerifyAdminToken()
 	v1 := r.Group("/api/v1")
 	{
-
+		//socketGroup := v1.Group("/socket")
+		//{
+		//	socketGroup.Use(allHandler.jwtHandler.VerifyUserToken())
+		//	socketGroup.GET("notify/user/:user_id", wsHandler.ConnectNotifyWS())
+		//	socketGroup.GET("chat/user/:user_id", wsHandler.ConnectChatWS())
+		//}
 		appGroup := v1.Group("/app")
 		{
 			loginGroup := appGroup.Group("/login")
@@ -161,7 +166,7 @@ func router(r *gin.Engine) {
 			authProviderGroup.DELETE("/provider/:provider_id", allHandler.productHandler.DeleteProductByIDs())
 
 			authGroup.PATCH("/:product_id/option", allHandler.productHandler.UpdateProductOptions())
-			authGroup.PATCH("/:product_id/", allHandler.productHandler.UpdateProduct())
+			authGroup.PATCH("/:product_id/", allHandler.productHandler.UpdateFullProduct())
 			authGroup.PATCH("/:product_id/specification/:specification_id", allHandler.productHandler.UpdateProductSpecification())
 			authGroup.PATCH("/:product_id/descriptions/:description_id", allHandler.productHandler.UpdateDescriptions())
 

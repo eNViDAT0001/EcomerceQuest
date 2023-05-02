@@ -11,3 +11,8 @@ type ProductMediaCreateReq struct {
 	MediaPath string `json:"media_path"`
 	MediaType string `json:"media_type"`
 }
+type ProductMediaUpdateReq struct {
+	ID        uint   `json:"id"`
+	MediaPath string `json:"media_path"`
+	MediaType string `json:"media_type"`
+}

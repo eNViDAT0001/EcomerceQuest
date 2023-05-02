@@ -12,8 +12,8 @@ type chatUseCase struct {
 	chatSto chat.Storage
 }
 
-func (u *chatUseCase) SeenMessages(ctx context.Context, id uint) error {
-	return u.chatSto.SeenMessages(ctx, id)
+func (u *chatUseCase) SeenMessages(ctx context.Context, id uint, userID uint, toID uint) error {
+	return u.chatSto.SeenMessages(ctx, id, userID, toID)
 }
 
 func (u *chatUseCase) Create(ctx context.Context, input io2.MessageInput) error {

@@ -7,7 +7,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 )
 
-func (s productStorage) UpdateProductDescriptions(ctx context.Context, descriptionsID uint, descriptions io.ProductDescriptionsUpdateForm) error {
+func (s productStorage) UpdateProductDescriptions(ctx context.Context, descriptionsID uint, descriptions io.ProductDescriptionsUpdateInput) error {
 	db := wrap_gorm.GetDB()
 	err := db.Table(entities.ProductDescriptions{}.TableName()).
 		Where("id = ?", descriptionsID).

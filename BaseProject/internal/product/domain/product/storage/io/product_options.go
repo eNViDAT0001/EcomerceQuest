@@ -4,15 +4,13 @@ type ProductIdentifyForm struct {
 	ProductID uint
 }
 type ProductOptionUpdateForm struct {
-	ID       uint
-	Name     *string
-	Price    *int
-	Quantity *int
+	ID     uint                     `json:"id"`
+	Option ProductOptionUpdateInput `json:"option"`
 }
 type ProductOptionUpdateInput struct {
-	Name     *string
-	Price    *int
-	Quantity *int
+	Name     string `json:"name"`
+	Price    int    `json:"price"`
+	Quantity *int   `json:"quantity"`
 }
 type ProductOptionCreateForm struct {
 	ID              uint

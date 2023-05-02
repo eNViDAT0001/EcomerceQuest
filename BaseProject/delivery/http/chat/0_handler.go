@@ -29,7 +29,17 @@ func (s *chatHandler) SeenMessages() func(ctx *gin.Context) {
 			cc.BadRequest(err)
 			return
 		}
-		err = s.chatUC.SeenMessages(newCtx, uint(id))
+		userID, err := strconv.Atoi(cc.Param("user_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		toID, err := strconv.Atoi(cc.Param("to_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		err = s.chatUC.SeenMessages(newCtx, uint(id), uint(userID), uint(toID))
 		if err != nil {
 			cc.ResponseError(err)
 			return

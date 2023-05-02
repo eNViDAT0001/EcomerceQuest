@@ -25,10 +25,13 @@ func (c chatStorage) Update(ctx context.Context, id uint, input io2.MessageUpdat
 	return err
 }
 
-func (c chatStorage) SeenMessages(ctx context.Context, id uint) error {
+func (c chatStorage) SeenMessages(ctx context.Context, id uint, userID uint, toID uint) error {
 	db := wrap_gorm.GetDB()
 	err := db.Model(&entities.Message{}).
 		Where("id <= ?", id).
+		Where("user_id = ?", userID).
+		Where("to_user_id = ?", userID).
+		Where("seen = ?", false).
 		Update("seen", true).Error
 	return err
 }

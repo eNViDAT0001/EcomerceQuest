@@ -23,6 +23,16 @@ type orderUseCase struct {
 	smtpUC   smtp.UseCase
 }
 
+func (u *orderUseCase) GetOrderReportByProviderID(ctx context.Context, providerID uint) (report io.OrderReport, err error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (u *orderUseCase) GetOrderReportByUserID(ctx context.Context, userID uint) (report io.OrderReport, err error) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (u *orderUseCase) ListByUserID(ctx context.Context, userID uint, input paging.ParamsInput) (orders []entities.Order, total int64, err error) {
 	total, err = u.orderSto.CountListByUserID(ctx, userID, input)
 	if err != nil {

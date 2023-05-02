@@ -25,4 +25,7 @@ type UseCase interface {
 	UpdateOrderStatus(ctx context.Context, orderID uint, status entities.OrderStatus) error
 	CancelOrder(ctx context.Context, orderID uint) error
 	DeleteOrder(ctx context.Context, orderID uint) error
+
+	GetOrderReportByProviderID(ctx context.Context, providerID uint) (report io.OrderReport, err error)
+	GetOrderReportByUserID(ctx context.Context, userID uint) (report io.OrderReport, err error)
 }

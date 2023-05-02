@@ -10,7 +10,7 @@ import (
 
 func (u *productUseCase) UpdateProductDescriptions(ctx context.Context, descriptionsID uint, descriptions ioUC.ProductDescriptionsUpdate) error {
 
-	var inputSto ioSto.ProductDescriptionsUpdateForm
+	var inputSto ioSto.ProductDescriptionsUpdateInput
 	if descriptions.File != nil {
 		files := []*multipart.FileHeader{descriptions.File}
 		uploadedFiles, err := u.mediaSto.UploadMedia(ctx, files, wrap_cloudinary.ProductDescriptions)

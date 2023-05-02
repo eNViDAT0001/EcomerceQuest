@@ -1,6 +1,7 @@
 package smtp
 
 import (
+	"errors"
 	"fmt"
 	"github.com/eNViDAT0001/Thesis/Backend/external/event_background"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
@@ -9,6 +10,15 @@ import (
 	"golang.org/x/net/context"
 )
 
+var tokens = make(map[string]string)
+
+func UseToken(token string) error {
+	if _, ok := tokens[token]; ok {
+		return errors.New("token not found")
+	}
+	delete(tokens, token)
+	return nil
+}
 func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 	return func(c *gin.Context) {
 		cc := request.FromContext(c)
@@ -27,6 +37,7 @@ func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 		}
 		cc.Ok(result)
 
+		tokens[token] = code
 		mail := io.EmailForm{
 			Subject: "Reset password",
 			Content: fmt.Sprintf("<h1>%s</h1>", code),
@@ -37,6 +48,5 @@ func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 			return s.smtpUC.SendEmail(ctx, mail)
 		})
 		event_background.GetBackGroundJobs().Group <- event_background.NewGroup(true, job)
-
 	}
 }

@@ -20,6 +20,7 @@ type Order struct {
 	Discount           int         `gorm:"column:discount" json:"discount"`
 	Status             OrderStatus `gorm:"column:status" json:"status"`
 	StatusDescriptions string      `gorm:"column:status_descriptions" json:"status_descriptions"`
+	DeliveredImage     *string     `gorm:"column:delivered_image" json:"delivered_image"`
 }
 
 func (Order) WithFields() []string {
