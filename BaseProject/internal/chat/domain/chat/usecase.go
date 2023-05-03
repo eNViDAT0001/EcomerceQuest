@@ -2,6 +2,7 @@ package chat
 
 import (
 	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/entities"
 )
@@ -12,4 +13,5 @@ type UseCase interface {
 	Delete(ctx context.Context, id uint, userID uint) error
 	SeenMessages(ctx context.Context, id uint, userID uint, toID uint) error
 	List(ctx context.Context, input io.ListMessageInput) (messages []entities.Message, total int64, err error)
+	ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) (messages []io.MessageChannel, total int64, err error)
 }

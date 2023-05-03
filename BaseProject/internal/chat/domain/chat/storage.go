@@ -2,6 +2,7 @@ package chat
 
 import (
 	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/entities"
 )
@@ -13,4 +14,6 @@ type Storage interface {
 	Delete(ctx context.Context, id uint, userID uint) error
 	List(ctx context.Context, input io.ListMessageInput) ([]entities.Message, error)
 	CountList(ctx context.Context, input io.ListMessageInput) (int64, error)
+	ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) ([]io.MessageChannel, error)
+	CountListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) (int64, error)
 }

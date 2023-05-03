@@ -63,7 +63,11 @@ func SetPagingQuery(input *paging.ParamsInput, tableName string, query *gorm.DB)
 
 	query = query.Limit(input.PerPage())
 	if input.Type == paging.CursorPaging {
-		query = query.Where(fmt.Sprintf("%s.id > ?", tableName), input.Current())
+		if input.MarkerDefinition != nil {
+			query = query.Where(fmt.Sprintf("%s.%s > ?", tableName, *input.MarkerDefinition), input.Current())
+		} else {
+			query = query.Where(fmt.Sprintf("%s.id > ?", tableName), input.Current())
+		}
 	} else {
 		offset := paging.Offset(input.Current(), input.PerPage())
 		query = query.Offset(offset)

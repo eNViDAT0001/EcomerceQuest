@@ -16,9 +16,17 @@ func router(r *gin.Engine) {
 	// Validate Admin's Token: allHandler.jwtHandler.VerifyAdminToken()
 	v1 := r.Group("/api/v1")
 	{
-		chatGroup := v1.Group("/chat")
+		chatGroup := v1.Group("/chats")
 		{
-			chatGroup.GET("/user/:user_id", allHandler.chatHandler.ListMessages())
+			chatGroup.GET("/channels/users/:user_id", allHandler.chatHandler.ListChannel())
+			chatGroup.GET("/channels", allHandler.chatHandler.ListMessages())
+			chatGroup.PATCH("/:message_id/user/:user_id/to/:to_id", allHandler.chatHandler.SeenMessages())
+			chatGroup.POST("", allHandler.chatHandler.CreateMessage())
+		}
+		notifyGroup := v1.Group("/notifications")
+		{
+			notifyGroup.GET("/users/:user_id", allHandler.notificationHandler.ListNotifications())
+			notifyGroup.PATCH("/:notify_id/user/:user_id", allHandler.notificationHandler.SeenNotification())
 		}
 		socketGroup := v1.Group("/ws")
 		{

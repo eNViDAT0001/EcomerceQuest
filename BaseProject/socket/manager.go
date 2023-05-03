@@ -30,7 +30,7 @@ var (
 
 // Manager is used to hold references to all Clients Registered, and Broadcasting etc
 type Manager struct {
-	Clients map[interface{}]io.Client
+	Clients map[string]io.Client
 	// Using a syncMutex here to be able to lcok state before editing clients
 	// Could also use Channels to block
 	sync.RWMutex
@@ -50,7 +50,7 @@ func GetManager() *Manager {
 // NewManager is used to initalize all the values inside the manager
 func NewManager(ctx context.Context) *Manager {
 	m := &Manager{
-		Clients:  make(map[interface{}]io.Client),
+		Clients:  make(map[string]io.Client),
 		Handlers: make(map[string]io.EventHandler),
 	}
 	m.setupEventHandlers()
@@ -115,9 +115,9 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 			return
 		}
 		log.Println("New Client connect")
-
+		userID := cc.Param("user_id")
 		socketManager := GetManager()
-		client := NewSocketClient(conn, socketManager)
+		client := NewSocketClient(conn, socketManager, userID)
 		socketManager.AddClient(client)
 
 		go client.ReadMessage()

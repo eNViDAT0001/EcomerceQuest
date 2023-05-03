@@ -8,7 +8,7 @@ type MessageCreateReq struct {
 	ID       uint
 	UserID   uint                 `json:"user_id"`
 	Content  string               `json:"content"`
-	ToUserID string               `json:"to_user_id"`
+	ToUserID uint                 `json:"to_user_id"`
 	Seen     *bool                `json:"seen"`
 	Type     entities.MessageType `json:"type"`
 }
@@ -16,7 +16,7 @@ type MessageCreateReq struct {
 type MessageUpdateReq struct {
 	UserID   uint                 `json:"user_id"`
 	Content  string               `json:"content"`
-	ToUserID string               `json:"to_user_id"`
+	ToUserID uint                 `json:"to_user_id"`
 	Seen     *bool                `json:"seen"`
 	Type     entities.MessageType `json:"type"`
 }

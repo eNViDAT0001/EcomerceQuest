@@ -2,25 +2,32 @@ package usecase
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/eNViDAT0001/Thesis/Backend/external/event_background"
 	"github.com/eNViDAT0001/Thesis/Backend/external/html_template"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification"
+	notifyIO "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage/io"
-	io2 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage/io"
+	orderItemsIO "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
-	io3 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase/io"
+	smtpIO "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase/io"
+	"github.com/eNViDAT0001/Thesis/Backend/socket"
+	socketIO "github.com/eNViDAT0001/Thesis/Backend/socket/io"
 	"gorm.io/gorm"
+	"strconv"
 )
 
 type orderUseCase struct {
 	orderSto order.Storage
 	userSto  user.Storage
 	smtpUC   smtp.UseCase
+	notify   notification.UseCase
 }
 
 func (u *orderUseCase) GetOrderReportByProviderID(ctx context.Context, providerID uint) (report io.OrderReport, err error) {
@@ -132,7 +139,7 @@ func (u *orderUseCase) GetByOrderID(ctx context.Context, orderID uint) (entities
 	return u.orderSto.GetByOrderID(ctx, orderID)
 }
 
-func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (err error) {
+func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []orderItemsIO.CreateOrderItemForm, cartItemsIDs []uint) (err error) {
 	createdOrders, err := u.orderSto.CreateOrder(ctx, order, items, cartItemsIDs)
 	providerIDs := make([]uint, 0)
 	for _, createdOrder := range createdOrders {
@@ -175,7 +182,8 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 			Status:             "",
 			StatusDescriptions: "",
 		}
-		email := io3.EmailForm{
+		///
+		email := smtpIO.EmailForm{
 			Subject:     fmt.Sprintf("New order from %s", createdOrder.Name),
 			Content:     html_template.GetOrderTemplate(orderBody),
 			To:          []string{*user.Email},
@@ -183,10 +191,38 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 			Bcc:         nil,
 			AttachFiles: nil,
 		}
+		var unSeen = false
+		newNotification, err := u.notify.CreateNotification(ctx, notifyIO.NotificationInput{
+			ID:      0,
+			UserID:  user.ID,
+			Content: "You have a new order from user: " + *user.Name,
+			Seen:    &unSeen,
+			URL:     "api/v1/orders/" + strconv.Itoa(int(orderBody.ID)),
+		})
+		if err != nil {
+			return err
+		}
+
+		data, err := json.Marshal(newNotification)
+		if err != nil {
+			return fmt.Errorf("failed to marshal broadcast message: %v", err)
+		}
+
+		socketManager := socket.GetManager()
+		socketManager.Lock()
+		if _, ok := socketManager.Clients[strconv.Itoa(int(user.ID))]; ok {
+			socketManager.Clients[strconv.Itoa(int(user.ID))].AddEvent(socketIO.Event{
+				Type:    socketIO.NotificationNew,
+				Payload: data,
+			})
+		}
+		socketManager.Unlock()
+
 		jobs = append(jobs, event_background.NewJob(func(ctx context.Context) error {
 			return u.smtpUC.SendEmail(ctx, email)
 		}))
-		email = io3.EmailForm{
+		///
+		email = smtpIO.EmailForm{
 			Subject:     "Thanks for your purchase",
 			Content:     html_template.GetClientOrderTemplate(orderBody),
 			To:          []string{*buyer.Email},
@@ -194,6 +230,31 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 			Bcc:         nil,
 			AttachFiles: nil,
 		}
+		newNotification, err = u.notify.CreateNotification(ctx, notifyIO.NotificationInput{
+			ID:      0,
+			UserID:  buyer.ID,
+			Content: "Create order successfully",
+			Seen:    &unSeen,
+			URL:     "api/v1/orders/" + strconv.Itoa(int(orderBody.ID)),
+		})
+		if err != nil {
+			return err
+		}
+
+		data, err = json.Marshal(newNotification)
+		if err != nil {
+			return fmt.Errorf("failed to marshal broadcast message: %v", err)
+		}
+
+		socketManager = socket.GetManager()
+		socketManager.Lock()
+		if _, ok := socketManager.Clients[strconv.Itoa(int(buyer.ID))]; ok {
+			socketManager.Clients[strconv.Itoa(int(buyer.ID))].AddEvent(socketIO.Event{
+				Type:    socketIO.NotificationNew,
+				Payload: data,
+			})
+		}
+		socketManager.Unlock()
 		jobs = append(jobs, event_background.NewJob(func(ctx context.Context) error {
 			return u.smtpUC.SendEmail(ctx, email)
 		}))
@@ -215,6 +276,6 @@ func (u *orderUseCase) DeleteOrder(ctx context.Context, orderID uint) error {
 	return u.orderSto.DeleteOrder(ctx, orderID)
 }
 
-func NewOrderUseCase(orderSto order.Storage, userSto user.Storage, smtpUC smtp.UseCase) order.UseCase {
-	return &orderUseCase{orderSto: orderSto, userSto: userSto, smtpUC: smtpUC}
+func NewOrderUseCase(orderSto order.Storage, userSto user.Storage, smtpUC smtp.UseCase, notify notification.UseCase) order.UseCase {
+	return &orderUseCase{orderSto: orderSto, userSto: userSto, smtpUC: smtpUC, notify: notify}
 }

@@ -11,7 +11,7 @@ type Notification struct {
 }
 
 func (Notification) WithFields() []string {
-	return []string{"created_at", "description"}
+	return []string{"created_at", "description", "seen"}
 }
 func (Notification) SearchFields() []string {
 	return []string{"UserID", "To", "Content"}

@@ -86,5 +86,9 @@ func Offset(pageNum int, pageSize int) int {
 	if pageNum == 1 {
 		return 0
 	}
-	return (pageNum - 1) * pageSize
+	offset := (pageNum - 1) * pageSize
+	if offset < 0 {
+		offset = 0
+	}
+	return offset
 }

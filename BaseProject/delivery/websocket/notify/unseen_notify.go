@@ -42,7 +42,7 @@ func (s socketNotificationHandler) UnseenNotification() io.EventHandler {
 		}
 		inputUC := notifySto.ListNotifyInput{
 			UserID: connectPayload.UserID,
-			Paging: paging.ParamsInput{
+			Paging: &paging.ParamsInput{
 				Marker: connectPayload.Marker,
 				Limit:  connectPayload.Limit,
 				Total:  connectPayload.Total,

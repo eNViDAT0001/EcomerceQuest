@@ -6,7 +6,7 @@ import (
 )
 
 type Client interface {
-	GetID() interface{}
+	GetID() string
 	AddEvent(event Event)
 	WriteMessage()
 	ReadMessage()

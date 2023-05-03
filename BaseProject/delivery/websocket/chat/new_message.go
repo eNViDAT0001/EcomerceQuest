@@ -6,6 +6,7 @@ import (
 	"fmt"
 	chatSto "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/socket/io"
+	"strconv"
 )
 
 func (s *socketChatHandler) NewMessage() io.EventHandler {
@@ -27,6 +28,6 @@ func (s *socketChatHandler) NewMessage() io.EventHandler {
 		outGoingEvent.Payload = data
 		outGoingEvent.Type = io.ChatNewMessage
 
-		return outGoingEvent, connectPayload.ToUserID, nil
+		return outGoingEvent, strconv.Itoa(int(connectPayload.ToUserID)), nil
 	}
 }

@@ -32,16 +32,16 @@ import (
 	usecase12 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart/usecase"
 	storage12 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart_item/storage"
 	usecase13 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart_item/usecase"
-	storage16 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
-	usecase17 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/usecase"
+	storage17 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
+	usecase18 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/usecase"
 	storage7 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/storage"
 	usecase9 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/usecase"
-	storage17 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
-	usecase18 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/usecase"
+	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
+	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/usecase"
 	storage13 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage"
-	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
-	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
-	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
+	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
+	storage16 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
+	usecase17 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
 	storage10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
 	usecase10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/usecase"
 	storage6 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage"
@@ -106,17 +106,17 @@ func initHandlerCollection() *HandlerCollection {
 	orderStorage := storage13.NewOrderStorage()
 	smtpStorage := storage14.NewSmtpStorage()
 	smtpUseCase := usecase14.NewSmtpUseCase(smtpStorage)
-	orderUseCase := usecase15.NewOrderUseCase(orderStorage, userStorage, smtpUseCase)
+	notificationStorage := storage15.NewNotificationStorage()
+	notificationUseCase := usecase15.NewNotificationUseCase(notificationStorage)
+	orderUseCase := usecase16.NewOrderUseCase(orderStorage, userStorage, smtpUseCase, notificationUseCase)
 	orderHttpHandler := order.NewOrderHandler(orderUseCase)
-	order_itemStorage := storage15.NewOrderItemStorage()
-	order_itemUseCase := usecase16.NewOrderItemUseCase(order_itemStorage)
+	order_itemStorage := storage16.NewOrderItemStorage()
+	order_itemUseCase := usecase17.NewOrderItemUseCase(order_itemStorage)
 	order_itemHttpHandler := order_items.NewOrderItemHandler(order_itemUseCase)
 	smtpHttpHandler := smtp.NewSmtpHandler(jwtUseCase, useCase, smtpUseCase)
-	chatStorage := storage16.NewChatStorage()
-	chatUseCase := usecase17.NewChatUseCase(chatStorage)
+	chatStorage := storage17.NewChatStorage()
+	chatUseCase := usecase18.NewChatUseCase(chatStorage)
 	chatHttpHandler := chat.NewChatHandler(chatUseCase)
-	notificationStorage := storage17.NewNotificationStorage()
-	notificationUseCase := usecase18.NewNotificationUseCase(notificationStorage)
 	notificationHttpHandler := chat2.NewNotificationHandler(notificationUseCase)
 	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler)
 	return handlerCollection

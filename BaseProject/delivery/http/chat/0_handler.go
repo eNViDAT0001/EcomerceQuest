@@ -7,7 +7,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_params"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
-	chat2 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/entities"
 	"github.com/gin-gonic/gin"
@@ -16,7 +16,7 @@ import (
 )
 
 type chatHandler struct {
-	chatUC chat2.UseCase
+	chatUC chat.UseCase
 }
 
 func (s *chatHandler) SeenMessages() func(ctx *gin.Context) {
@@ -24,7 +24,7 @@ func (s *chatHandler) SeenMessages() func(ctx *gin.Context) {
 		cc := request.FromContext(c)
 		newCtx := context.Background()
 
-		id, err := strconv.Atoi(cc.Param("id"))
+		id, err := strconv.Atoi(cc.Param("message_id"))
 		if err != nil {
 			cc.BadRequest(err)
 			return
@@ -55,7 +55,7 @@ func (s *chatHandler) CreateMessage() func(ctx *gin.Context) {
 		newCtx := context.Background()
 
 		var input ioHandler.MessageCreateReq
-		if err := cc.BindJSON(&input); err != nil {
+		if err := cc.ShouldBind(&input); err != nil {
 			cc.BadRequest(err)
 			return
 		}
@@ -134,14 +134,8 @@ func (s *chatHandler) ListMessages() func(ctx *gin.Context) {
 			return
 		}
 
-		_, err := strconv.Atoi(cc.Param("user_id"))
-		if err != nil {
-			cc.ResponseError(err)
-			return
-		}
-
 		inputRepo := io.ListMessageInput{
-			Paging: paging.ParamsInput{},
+			Paging: paginator,
 		}
 
 		result, total, err := s.chatUC.List(newCtx, inputRepo)
@@ -161,7 +155,56 @@ func (s *chatHandler) ListMessages() func(ctx *gin.Context) {
 		cc.OkPaging(paginator, result)
 	}
 }
+func (s *chatHandler) ListChannel() func(ctx *gin.Context) {
+	return func(c *gin.Context) {
+		cc := request.FromContext(c)
+		newCtx := context.Background()
 
-func NewChatHandler(chatUC chat2.UseCase) chat2.HttpHandler {
+		paginator := paging.ParamsInput{}
+		if err := cc.BindQuery(&paginator); err != nil {
+			cc.BadRequest(err)
+			return
+		}
+
+		search := cc.QueryArray("search[]")
+		fields := cc.QueryArray("fields[]")
+		sort := cc.QueryArray("sorts[]")
+
+		paginator.Filter = paging_params.NewFilterBuilder().
+			WithSearch(search).
+			WithFields(fields).
+			WithSorts(sort).
+			Build()
+
+		inValidField, val := paging_params.ValidateFilter(paginator.Filter, entities.Message{})
+		if len(inValidField) > 0 {
+			cc.ResponseError(request.NewBadRequestError(inValidField, val, "invalid key and value"))
+			return
+		}
+
+		userID, err := strconv.Atoi(cc.Param("user_id"))
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		result, total, err := s.chatUC.ListChannel(newCtx, uint(userID), paginator)
+		if err != nil {
+			if err == gorm.ErrRecordNotFound {
+				cc.NoContent(err)
+				return
+			}
+			cc.ResponseError(err)
+			return
+		}
+
+		paginator.Total = int(total)
+		if paginator.Type == paging.CursorPaging && len(result) > 0 {
+			paginator.Marker = int(result[len(result)-1].ChannelID)
+		}
+		cc.OkPaging(paginator, result)
+	}
+}
+func NewChatHandler(chatUC chat.UseCase) chat.HttpHandler {
 	return &chatHandler{chatUC: chatUC}
 }

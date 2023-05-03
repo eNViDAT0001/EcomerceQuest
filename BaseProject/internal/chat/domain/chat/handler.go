@@ -10,6 +10,7 @@ type HttpHandler interface {
 	UpdateMessages() func(ctx *gin.Context)
 	SeenMessages() func(ctx *gin.Context)
 	ListMessages() func(ctx *gin.Context)
+	ListChannel() func(ctx *gin.Context)
 }
 
 type WebSocketHandler interface {

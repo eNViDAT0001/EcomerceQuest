@@ -18,8 +18,29 @@ type notificationHandler struct {
 }
 
 func (s *notificationHandler) SeenNotification() func(ctx *gin.Context) {
-	//TODO implement me
-	panic("implement me")
+	return func(c *gin.Context) {
+		cc := request.FromContext(c)
+		newCtx := context.Background()
+
+		id, err := strconv.Atoi(cc.Param("notify_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		userID, err := strconv.Atoi(cc.Param("user_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+
+		err = s.notifyUC.SeenNotification(newCtx, uint(id), uint(userID))
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		cc.Ok("Update Message Success")
+	}
 }
 
 func (s *notificationHandler) ListNotifications() func(ctx *gin.Context) {
@@ -56,7 +77,7 @@ func (s *notificationHandler) ListNotifications() func(ctx *gin.Context) {
 		}
 		inputRepo := io.ListNotifyInput{
 			UserID: uint(userID),
-			Paging: paging.ParamsInput{},
+			Paging: &paginator,
 		}
 
 		result, total, err := s.notifyUC.ListNotification(newCtx, inputRepo)

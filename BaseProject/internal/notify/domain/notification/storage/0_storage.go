@@ -14,7 +14,7 @@ type notificationStorage struct {
 
 func (n notificationStorage) CreateNotification(ctx context.Context, input io.NotificationInput) (io.NotificationInput, error) {
 	db := wrap_gorm.GetDB()
-	err := db.Model(&entities.Notification{}).Create(&input).Error
+	err := db.Table(entities.Notification{}.TableName()).Create(&input).Error
 	return input, err
 }
 
@@ -39,7 +39,7 @@ func (n notificationStorage) ListNotification(ctx context.Context, input io.List
 
 	query := db.Model(entities.Notification{}).Where("user_id = ?", input.UserID)
 
-	paging_query.SetPagingQuery(&input.Paging, entities.Notification{}.TableName(), query)
+	paging_query.SetPagingQuery(input.Paging, entities.Notification{}.TableName(), query)
 
 	err := query.Scan(&result).Error
 	if err != nil {
@@ -53,7 +53,7 @@ func (n notificationStorage) CountListNotification(ctx context.Context, input io
 	db := wrap_gorm.GetDB()
 
 	query := db.Model(entities.Notification{}).Where("user_id = ?", input.UserID)
-	paging_query.SetCountListPagingQuery(&input.Paging, entities.Notification{}.TableName(), query)
+	paging_query.SetCountListPagingQuery(input.Paging, entities.Notification{}.TableName(), query)
 
 	err := query.Count(&count).Error
 	if err != nil {

@@ -8,6 +8,8 @@ type ParamsInput struct {
 	Total  int        `form:"total"`
 	Type   PagingType `form:"type"`
 	Filter paging_params.FilterList
+
+	MarkerDefinition *string `form:"marker_definition"`
 }
 
 func (s ParamsInput) PagingType() PagingType {

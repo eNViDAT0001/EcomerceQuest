@@ -10,7 +10,6 @@ import (
 
 type socketClient struct {
 	ID string
-
 	// the websocket connection
 	connection *websocket.Conn
 
@@ -24,7 +23,7 @@ type socketClient struct {
 func (s *socketClient) AddEvent(event io.Event) {
 	s.egress <- event
 }
-func (s *socketClient) GetID() interface{} {
+func (s *socketClient) GetID() string {
 	return s.ID
 }
 
@@ -119,8 +118,9 @@ func (s *socketClient) Pong(pongMsg string) error {
 	return s.connection.SetReadDeadline(time.Now().Add(io.PongWait))
 }
 
-func NewSocketClient(conn *websocket.Conn, manager *Manager) io.Client {
+func NewSocketClient(conn *websocket.Conn, manager *Manager, id string) io.Client {
 	return &socketClient{
+		ID:         id,
 		connection: conn,
 		manager:    manager,
 		egress:     make(chan io.Event),
