@@ -1,13 +1,11 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
 
 <head>
   <title> Notificatin [CES] </title>
-  <!--[if !mso]><!-- -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!--<![endif]-->
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
   <style type="text/css">
     #outlook a {
       padding: 0;
@@ -180,22 +178,22 @@
                           <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#34393E;" width="100%">
                             <tr>
                               <td align="left" class="receipt-table" style="font-size:0px;padding:30px;word-break:break-word;">
-                                <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;">
+                                <table border="0" cellpadding="0" cellspacing="0" style="color:#000000;font-family:Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;" width="100%">
                                   <tr>
-                                    <th colspan="3" style="font-size: 20px; line-height: 30px; font-weight: 500; color: #fff; padding: 0px 0px 10px 0px; text-align: center; border-bottom: 1px solid #555;" align="center">Order summary </th>
+                                    <th align="center" colspan="3" style="font-size: 20px; line-height: 30px; font-weight: 500; color: #fff; padding: 0px 0px 10px 0px; text-align: center; border-bottom: 1px solid #555;">Order summary </th>
                                   </tr>
 
                                   <tr>
-                                    <td style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;" colspan="2" align="left">Total</td>
-                                    <td style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;" align="right">` + strconv.Itoa(order.Total) + `$</td>
+                                    <td align="left" colspan="2" style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;">Total</td>
+                                    <td align="right" style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;">` + strconv.Itoa(order.Total) + `$</td>
                                   </tr>
                                   <tr>
-                                    <td style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;" colspan="2" align="left">Discount</td>
-                                    <td style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;" align="right">` + strconv.Itoa(order.Discount) + `%</td>
+                                    <td align="left" colspan="2" style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;">Discount</td>
+                                    <td align="right" style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;">` + strconv.Itoa(order.Discount) + `%</td>
                                   </tr>
                                   <tr>
-                                    <td style="word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; padding: 10px 0px 0px 0px; text-align: left;" colspan="2" align="left">Summary</td>
-                                    <td style="word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; text-align: right; padding: 10px 0px 0px 0px;" align="right">` + strconv.Itoa(order.Total-(order.Total*order.Discount)/100.0) + `$</td>
+                                    <td align="left" colspan="2" style="word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; padding: 10px 0px 0px 0px; text-align: left;">Summary</td>
+                                    <td align="right" style="word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; text-align: right; padding: 10px 0px 0px 0px;">` + strconv.Itoa(order.Total-(order.Total*order.Discount)/100.0) + `$</td>
                                   </tr>
                                 </table>
                               </td>

@@ -2,7 +2,7 @@ package convert
 
 import (
 	ioHttpHandler "github.com/eNViDAT0001/Thesis/Backend/delivery/http/chat/io"
-	ioSto "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/chat/storage/io"
+	ioSto "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage/io"
 	"github.com/jinzhu/copier"
 )
 

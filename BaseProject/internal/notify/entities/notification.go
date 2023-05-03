@@ -7,6 +7,7 @@ type Notification struct {
 	UserID  uint   `gorm:"column:user_id" json:"user_id"`
 	Content string `gorm:"column:content" json:"content"`
 	Seen    *bool  `gorm:"column:seen" json:"seen"`
+	URl     string `gorm:"column:url" json:"url"`
 }
 
 func (Notification) WithFields() []string {

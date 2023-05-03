@@ -17,6 +17,11 @@ type notificationHandler struct {
 	notifyUC notification.UseCase
 }
 
+func (s *notificationHandler) SeenNotification() func(ctx *gin.Context) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (s *notificationHandler) ListNotifications() func(ctx *gin.Context) {
 	return func(c *gin.Context) {
 		cc := request.FromContext(c)

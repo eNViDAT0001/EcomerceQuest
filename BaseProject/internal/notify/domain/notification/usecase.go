@@ -7,8 +7,8 @@ import (
 )
 
 type UseCase interface {
-	CreateNotification(ctx context.Context, input io.NotificationInput) error
-	UpdateNotification(ctx context.Context, input []io.NotificationInput) error
+	CreateNotification(ctx context.Context, input io.NotificationInput) (io.NotificationInput, error)
+	SeenNotification(ctx context.Context, id uint, userID uint) error
 	DeleteByNotificationID(ctx context.Context, id []uint) error
 	ListNotification(ctx context.Context, input io.ListNotifyInput) ([]entities.Notification, int64, error)
 }

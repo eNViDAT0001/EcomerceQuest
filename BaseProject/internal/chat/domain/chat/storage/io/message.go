@@ -4,8 +4,8 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/entities"
 )
 
-type MessageCreateReq struct {
-	ID       uint
+type MessageInput struct {
+	ID       uint                 `json:"id"`
 	UserID   uint                 `json:"user_id"`
 	Content  string               `json:"content"`
 	ToUserID string               `json:"to_user_id"`
@@ -13,10 +13,10 @@ type MessageCreateReq struct {
 	Type     entities.MessageType `json:"type"`
 }
 
-type MessageUpdateReq struct {
-	UserID   uint                 `json:"user_id"`
-	Content  string               `json:"content"`
-	ToUserID string               `json:"to_user_id"`
-	Seen     *bool                `json:"seen"`
-	Type     entities.MessageType `json:"type"`
+type MessageUpdateInput struct {
+	UserID   uint
+	Content  string
+	ToUserID string
+	Seen     *bool
+	Type     entities.MessageType
 }

@@ -7,16 +7,16 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_params"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/chat"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/chat/storage/io"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/entities"
+	chat2 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage/io"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/entities"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"strconv"
 )
 
 type chatHandler struct {
-	chatUC chat.UseCase
+	chatUC chat2.UseCase
 }
 
 func (s *chatHandler) SeenMessages() func(ctx *gin.Context) {
@@ -65,13 +65,13 @@ func (s *chatHandler) CreateMessage() func(ctx *gin.Context) {
 			cc.ResponseError(err)
 			return
 		}
-		err = s.chatUC.Create(newCtx, inputRepo)
+		message, err := s.chatUC.Create(newCtx, inputRepo)
 		if err != nil {
 			cc.ResponseError(err)
 			return
 		}
 
-		cc.Ok("Create Message Success")
+		cc.Ok(message)
 	}
 }
 
@@ -134,13 +134,13 @@ func (s *chatHandler) ListMessages() func(ctx *gin.Context) {
 			return
 		}
 
-		userID, err := strconv.Atoi(cc.Param("user_id"))
+		_, err := strconv.Atoi(cc.Param("user_id"))
 		if err != nil {
 			cc.ResponseError(err)
 			return
 		}
+
 		inputRepo := io.ListMessageInput{
-			UserID: uint(userID),
 			Paging: paging.ParamsInput{},
 		}
 
@@ -162,6 +162,6 @@ func (s *chatHandler) ListMessages() func(ctx *gin.Context) {
 	}
 }
 
-func NewChatHandler(chatUC chat.UseCase) chat.HttpHandler {
+func NewChatHandler(chatUC chat2.UseCase) chat2.HttpHandler {
 	return &chatHandler{chatUC: chatUC}
 }

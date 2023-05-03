@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/eNViDAT0001/Thesis/Backend/socket"
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -9,18 +10,21 @@ import (
 func router(r *gin.Engine) {
 	r.Use(requestid.New(requestid.WithCustomHeaderStrKey("da-Best-thesis")))
 	allHandler := initHandlerCollection()
-	//wsHandler := websocket.NewManager(context.Background())
+	socketManager := socket.GetManager()
 	// Validate Token: allHandler.jwtHandler.VerifyToken()
 	// Validate User's Token: allHandler.jwtHandler.VerifyUserToken()
 	// Validate Admin's Token: allHandler.jwtHandler.VerifyAdminToken()
 	v1 := r.Group("/api/v1")
 	{
-		//socketGroup := v1.Group("/socket")
-		//{
-		//	socketGroup.Use(allHandler.jwtHandler.VerifyUserToken())
-		//	socketGroup.GET("notify/user/:user_id", wsHandler.ConnectNotifyWS())
-		//	socketGroup.GET("chat/user/:user_id", wsHandler.ConnectChatWS())
-		//}
+		chatGroup := v1.Group("/chat")
+		{
+			chatGroup.GET("/user/:user_id", allHandler.chatHandler.ListMessages())
+		}
+		socketGroup := v1.Group("/ws")
+		{
+			socketGroup.Use(allHandler.jwtHandler.VerifyUserToken())
+			socketGroup.GET("/user/:user_id", socketManager.ConnectChatWS())
+		}
 		appGroup := v1.Group("/app")
 		{
 			loginGroup := appGroup.Group("/login")
