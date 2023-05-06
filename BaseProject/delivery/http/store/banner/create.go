@@ -15,7 +15,7 @@ func (s bannerHandler) CreateBanner() func(*gin.Context) {
 		newCtx := context.Background()
 
 		var input io.BannerCreateReq
-		if err := cc.BindJSON(&input); err != nil {
+		if err := cc.ShouldBind(&input); err != nil {
 			cc.BadRequest(err)
 			return
 		}

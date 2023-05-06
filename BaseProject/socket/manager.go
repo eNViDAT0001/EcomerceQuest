@@ -2,6 +2,7 @@ package socket
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/eNViDAT0001/Thesis/Backend/socket/io"
@@ -124,4 +125,22 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 		go client.ReadMessage()
 		go client.WriteMessage()
 	}
+}
+
+func (m *Manager) EmitNotify(event string, data interface{}, targetID string) error {
+	payload, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+
+	m.Lock()
+	if _, ok := m.Clients[targetID]; ok {
+		m.Clients[targetID].AddEvent(io.Event{
+			Type:    event,
+			Payload: payload,
+		})
+	}
+	m.Unlock()
+
+	return nil
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/socket"
+	io2 "github.com/eNViDAT0001/Thesis/Backend/socket/io"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"strconv"
@@ -66,6 +68,13 @@ func (s *chatHandler) CreateMessage() func(ctx *gin.Context) {
 			return
 		}
 		message, err := s.chatUC.Create(newCtx, inputRepo)
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		err = socket.GetManager().
+			EmitNotify(io2.ChatNewMessage, message, strconv.Itoa(int(message.ToUserID)))
 		if err != nil {
 			cc.ResponseError(err)
 			return

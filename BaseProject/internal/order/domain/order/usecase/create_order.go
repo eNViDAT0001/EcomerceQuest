@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"github.com/eNViDAT0001/Thesis/Backend/external/event_background"
 	"github.com/eNViDAT0001/Thesis/Backend/external/html_template"
@@ -13,7 +12,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
 	smtpIO "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase/io"
 	"github.com/eNViDAT0001/Thesis/Backend/socket"
-	socketIO "github.com/eNViDAT0001/Thesis/Backend/socket/io"
+	io2 "github.com/eNViDAT0001/Thesis/Backend/socket/io"
 	"strconv"
 )
 
@@ -122,19 +121,10 @@ func AddNotificationEvent(ctx context.Context, notification notifyIO.Notificatio
 	if err != nil {
 		return err
 	}
-	data, err := json.Marshal(newNotification)
+	err = socket.GetManager().EmitNotify(io2.NotificationNew, newNotification, strconv.Itoa(int(newNotification.UserID)))
 	if err != nil {
-		return fmt.Errorf("failed to marshal broadcast message: %v", err)
+		return err
 	}
 
-	socketManager := socket.GetManager()
-	socketManager.Lock()
-	if _, ok := socketManager.Clients[strconv.Itoa(int(newNotification.UserID))]; ok {
-		socketManager.Clients[strconv.Itoa(int(newNotification.UserID))].AddEvent(socketIO.Event{
-			Type:    socketIO.NotificationNew,
-			Payload: data,
-		})
-	}
-	socketManager.Unlock()
 	return nil
 }
