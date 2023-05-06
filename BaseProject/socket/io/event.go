@@ -21,8 +21,6 @@ const (
 	ChatUnseenMessage   = "UnseenMessage"
 	ChatSeenMessage     = "ChatSeenMessage"
 	ChatNewMessage      = "ChatNewMessage"
-	ChatSendMessage     = "ChatSendMessage"
 	NotifyUnseenMessage = "NotifyUnseenMessage"
 	NotificationNew     = "NotificationNew"
-	NotificationSeen    = "NotificationSeen"
 )

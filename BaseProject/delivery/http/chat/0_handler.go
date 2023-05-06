@@ -143,8 +143,21 @@ func (s *chatHandler) ListMessages() func(ctx *gin.Context) {
 			return
 		}
 
+		userA, err := strconv.Atoi(cc.Param("user_id_a"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		userB, err := strconv.Atoi(cc.Param("user_id_b"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+
 		inputRepo := io.ListMessageInput{
-			Paging: paginator,
+			UserIDA: userA,
+			UserIDB: userB,
+			Paging:  paginator,
 		}
 
 		result, total, err := s.chatUC.List(newCtx, inputRepo)

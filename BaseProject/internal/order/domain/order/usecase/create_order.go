@@ -76,7 +76,7 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 				UserID:  user.ID,
 				Content: "You have a new order from user: " + *user.Name,
 				Seen:    &unSeen,
-				URL:     "api/v1/orders/" + strconv.Itoa(int(orderBody.ID)),
+				URL:     "/brand-detail/order/" + strconv.Itoa(int(orderBody.ID)),
 			}
 
 			err = AddNotificationEvent(ctx, newNotification, u.notify.CreateNotification)
@@ -101,7 +101,7 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 				UserID:  buyer.ID,
 				Content: "Create order successfully",
 				Seen:    &unSeen,
-				URL:     "api/v1/orders/" + strconv.Itoa(int(orderBody.ID)),
+				URL:     "/user/order/" + strconv.Itoa(int(orderBody.ID)),
 			}
 			err = AddNotificationEvent(ctx, newNotification, u.notify.CreateNotification)
 			if err != nil {

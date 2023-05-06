@@ -18,7 +18,7 @@ func (Message) SearchFields() []string {
 	return []string{"description"}
 }
 func (Message) SortFields() []string {
-	return []string{"created_at"}
+	return []string{"id", "created_at"}
 }
 
 func (Message) TableName() string {

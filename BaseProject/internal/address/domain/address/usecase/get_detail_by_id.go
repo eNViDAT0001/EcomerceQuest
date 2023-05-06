@@ -2,9 +2,9 @@ package usecase
 
 import (
 	"context"
-	ioSto "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address/storage/io"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/address/entities"
 )
 
-func (a addressUseCase) GetAddressDetailByID(ctx context.Context, addressID uint) (ioSto.AddressDetail, error) {
+func (a addressUseCase) GetAddressDetailByID(ctx context.Context, addressID uint) (entities.Address, error) {
 	return a.addressSto.GetAddressDetailByID(ctx, addressID)
 }

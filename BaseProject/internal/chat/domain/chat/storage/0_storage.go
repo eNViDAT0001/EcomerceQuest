@@ -115,7 +115,7 @@ func (s chatStorage) List(ctx context.Context, input io.ListMessageInput) ([]ent
 	result := make([]entities.Message, 0)
 	db := wrap_gorm.GetDB()
 
-	query := db.Model(entities.Message{})
+	query := db.Model(entities.Message{}).Where("(user_id = ? AND to_user_id = ?) OR (user_id = ? AND to_user_id = ?)", input.UserIDA, input.UserIDB, input.UserIDB, input.UserIDA)
 
 	paging_query.SetPagingQuery(&input.Paging, entities.Message{}.TableName(), query)
 
@@ -130,7 +130,7 @@ func (s chatStorage) CountList(ctx context.Context, input io.ListMessageInput) (
 	var count int64
 	db := wrap_gorm.GetDB()
 
-	query := db.Model(entities.Message{})
+	query := db.Model(entities.Message{}).Where("(user_id = ? AND to_user_id = ?) OR (user_id = ? AND to_user_id = ?)", input.UserIDA, input.UserIDB, input.UserIDB, input.UserIDA)
 
 	paging_query.SetCountListPagingQuery(&input.Paging, entities.Message{}.TableName(), query)
 

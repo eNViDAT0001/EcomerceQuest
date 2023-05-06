@@ -25,7 +25,7 @@ GOOGLE_OAUTH2:
   CLIENT_SECRET: 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
   REDIRECT_URL: http://localhost:8082/api/v1/app/login/google/callback
 
-
+MAIL_SHOP: dummyshophaha@gmail.com
 # 24h
 ACCESS_TOKEN_EXPIRE_IN_MINUTE: 1000
 # 7 days

@@ -1,11 +1,14 @@
 package io
 
 type UpdateAddressReq struct {
-	Name         *string `json:"name,omitempty"`
-	Gender       *bool   `json:"gender,omitempty"`
-	Phone        *string `json:"phone,omitempty"`
-	ProvinceCode *string `json:"province_code,omitempty"`
-	DistrictCode *string `json:"district_code,omitempty"`
-	WardCode     *string `json:"ward_code,omitempty"`
-	Street       *string `json:"street,omitempty"`
+	Name       string `json:"name"`
+	Gender     *bool  `json:"gender"`
+	Phone      string `json:"phone"`
+	ProvinceID int    `json:"province_id"`
+	DistrictID int    `json:"district_id"`
+	WardCode   string `json:"ward_code"`
+	Province   string `json:"province"`
+	District   string `json:"district"`
+	Ward       string `json:"ward"`
+	Street     string `json:"street"`
 }

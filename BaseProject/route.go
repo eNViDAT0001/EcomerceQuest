@@ -19,7 +19,7 @@ func router(r *gin.Engine) {
 		chatGroup := v1.Group("/chats")
 		{
 			chatGroup.GET("/channels/users/:user_id", allHandler.chatHandler.ListChannel())
-			chatGroup.GET("/channels", allHandler.chatHandler.ListMessages())
+			chatGroup.GET("/channels/user_a/:user_id_a/user_b/:user_id_b", allHandler.chatHandler.ListMessages())
 			chatGroup.PATCH("/:message_id/user/:user_id/to/:to_id", allHandler.chatHandler.SeenMessages())
 			chatGroup.POST("", allHandler.chatHandler.CreateMessage())
 		}
@@ -240,20 +240,6 @@ func router(r *gin.Engine) {
 			authGroup.POST("/user/:user_id", allHandler.addressHandler.CreateAddress())
 			authGroup.DELETE("/user/:user_id", allHandler.addressHandler.DeleteAddressByIDs())
 			authGroup.PATCH("/:address_id/user/:user_id/", allHandler.addressHandler.UpdateAddress())
-		}
-
-		provinceGroup := v1.Group("/provinces")
-		{
-			provinceGroup.GET("", allHandler.addressHandler.GetProvinces())
-			provinceGroup.GET("/:province_code", allHandler.addressHandler.GetProvinceByCode())
-		}
-		districtGroup := v1.Group("/districts")
-		{
-			districtGroup.GET("/province/:province_code", allHandler.addressHandler.GetDistrictsWithProvinceCode())
-		}
-		wardGroup := v1.Group("/wards")
-		{
-			wardGroup.GET("/district/:district_code", allHandler.addressHandler.GetWardWithDistrictCode())
 		}
 
 	}
