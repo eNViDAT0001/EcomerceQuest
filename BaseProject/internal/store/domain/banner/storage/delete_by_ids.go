@@ -7,7 +7,7 @@ import (
 )
 
 func (b bannerStorage) DeleteBannerByIDs(ctx context.Context, bannerIDs []uint) error {
-	tableName := entities.BannerDetail{}.TableName()
+	tableName := entities.Banner{}.TableName()
 	db := wrap_gorm.GetDB()
 
 	err := db.Table(tableName).Where("id IN ?", bannerIDs).Delete(&entities.Banner{}).Error

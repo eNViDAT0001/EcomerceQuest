@@ -47,7 +47,10 @@ func (g *group) Run(ctx context.Context) error {
 func (g *group) runJob(ctx context.Context, j Job) error {
 	if err := j.Execute(ctx); err != nil {
 		for {
-			log.Println("Dummy Background Bug: ", err)
+			log.Println("--------------------------")
+			log.Println("Background Bug: ", err)
+			log.Println("--------------------------")
+
 			if j.State() == StateRetryFailed {
 				return err
 			}

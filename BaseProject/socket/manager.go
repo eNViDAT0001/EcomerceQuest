@@ -114,6 +114,7 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 			log.Println(err)
 			return
 		}
+
 		log.Println("New Client connect")
 		userID := cc.Param("user_id")
 		socketManager := GetManager()

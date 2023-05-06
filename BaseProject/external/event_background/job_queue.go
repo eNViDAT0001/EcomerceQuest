@@ -1,6 +1,9 @@
 package event_background
 
-import "context"
+import (
+	"context"
+	"log"
+)
 
 type backGroundJobs struct {
 	Group chan *group
@@ -21,7 +24,14 @@ func (b *backGroundJobs) Run() {
 	for {
 		select {
 		case g := <-b.Group:
-			go g.Run(context.Background())
+			go func() {
+				err := g.Run(context.Background())
+				if err != nil {
+					log.Println("--------------------------")
+					log.Println("Can not do job due to: ", err)
+					log.Println("--------------------------")
+				}
+			}()
 		}
 	}
 }
