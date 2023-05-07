@@ -48,5 +48,6 @@ func (s *jwtHandler) VerifyAdminToken() gin.HandlerFunc {
 			permissionCancel()
 			return
 		}
+		c.Next()
 	}
 }

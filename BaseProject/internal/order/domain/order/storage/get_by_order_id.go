@@ -9,7 +9,7 @@ import (
 func (s orderStorage) GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error) {
 	var result entities.Order
 	db := wrap_gorm.GetDB()
-	err := db.Model(entities.Order{}).Where("id = ?", orderID).Find(&result).Error
+	err := db.Model(entities.Order{}).Where("id = ?", orderID).First(&result).Error
 	if err != nil {
 		return result, err
 	}

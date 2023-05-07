@@ -2,17 +2,56 @@ package order
 
 import (
 	"context"
+	io2 "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order/io"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_query"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+	"strconv"
 )
 
 type orderHandler struct {
-	orderUC order.UseCase
+	orderUC  order.UseCase
+	useUC    user.UseCase
+	smtpUC   smtp.UseCase
+	notifyUC notification.UseCase
+}
+
+func (s *orderHandler) VerifyDeliveredStatus() func(ctx *gin.Context) {
+	return func(c *gin.Context) {
+		cc := request.FromContext(c)
+		newCtx := context.Background()
+
+		var input io2.UpdateOrderStatusReq
+		if err := cc.BindJSON(&input); err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		orderID, err := strconv.Atoi(cc.Param("order_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		userID, err := strconv.Atoi(cc.Param("user_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+
+		err = s.orderUC.VerifyDeliveredOrder(newCtx, uint(orderID), uint(userID))
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		cc.Ok("Verify Status success")
+	}
 }
 
 func (s *orderHandler) List() func(ctx *gin.Context) {
@@ -75,6 +114,6 @@ func (s *orderHandler) ListPreview() func(ctx *gin.Context) {
 	}
 }
 
-func NewOrderHandler(orderUC order.UseCase) order.HttpHandler {
-	return &orderHandler{orderUC: orderUC}
+func NewOrderHandler(orderUC order.UseCase, smtpUC smtp.UseCase, useUC user.UseCase, notifyUC notification.UseCase) order.HttpHandler {
+	return &orderHandler{orderUC: orderUC, smtpUC: smtpUC, useUC: useUC, notifyUC: notifyUC}
 }

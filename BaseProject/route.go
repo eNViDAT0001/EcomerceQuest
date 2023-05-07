@@ -198,7 +198,7 @@ func router(r *gin.Engine) {
 
 			authAminGroup.DELETE("", allHandler.bannerHandler.DeleteBannerByIDs())
 			authAminGroup.POST("", allHandler.bannerHandler.CreateBanner())
-			authAminGroup.PATCH("/:banner_id", allHandler.bannerHandler.UpdateBanner())
+			authAminGroup.PATCH("/:banner_id/user/:user_id", allHandler.bannerHandler.UpdateBanner())
 		}
 		cartGroup := v1.Group("/carts")
 		{
@@ -217,6 +217,7 @@ func router(r *gin.Engine) {
 			orderGroup.POST("", allHandler.orderHandler.CreateOrder())
 			orderGroup.PATCH("/:order_id", allHandler.orderHandler.UpdateOrderStatus())
 			orderGroup.PATCH("/:order_id/user/:user_id/cancel", allHandler.orderHandler.CancelOrder())
+			orderGroup.PATCH("/:order_id/user/:user_id/verify", allHandler.orderHandler.VerifyDeliveredStatus())
 			orderGroup.DELETE("/:order_id", allHandler.orderHandler.DeleteOrder())
 
 			orderGroup.GET("/:order_id/items", allHandler.orderItemHandler.ListByOrderID())

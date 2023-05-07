@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func GetOrderSuccessTemplate(url string, order entities.Order) string {
+func GetOrderTemplate(order entities.Order) string {
 	return `<!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
@@ -160,8 +160,7 @@ func GetOrderSuccessTemplate(url string, order entities.Order) string {
                       <tr>
                         <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                           <div style="font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:white;">
-                            <p style="margin: 0;"><br> Your Order has been delivered, please confirm at the link </p>
-							<a href="` + url + `" style="margin: 0;"><br> Your Order has been delivered, please confirm at the link </a>
+                            <p style="margin: 0;"><br> ` + order.Name + ` bought your products, please contact client soon. </p>
                           </div>
                         </td>
                       </tr>

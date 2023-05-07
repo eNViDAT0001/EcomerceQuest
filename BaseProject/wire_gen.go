@@ -109,7 +109,7 @@ func initHandlerCollection() *HandlerCollection {
 	notificationStorage := storage15.NewNotificationStorage()
 	notificationUseCase := usecase15.NewNotificationUseCase(notificationStorage)
 	orderUseCase := usecase16.NewOrderUseCase(orderStorage, userStorage, smtpUseCase, notificationUseCase)
-	orderHttpHandler := order.NewOrderHandler(orderUseCase)
+	orderHttpHandler := order.NewOrderHandler(orderUseCase, smtpUseCase, useCase, notificationUseCase)
 	order_itemStorage := storage16.NewOrderItemStorage()
 	order_itemUseCase := usecase17.NewOrderItemUseCase(order_itemStorage)
 	order_itemHttpHandler := order_items.NewOrderItemHandler(order_itemUseCase)

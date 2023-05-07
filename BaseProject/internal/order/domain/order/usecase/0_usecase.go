@@ -19,6 +19,10 @@ type orderUseCase struct {
 	notify   notification.UseCase
 }
 
+func (u *orderUseCase) VerifyDeliveredOrder(ctx context.Context, orderID uint, userID uint) error {
+	return u.orderSto.VerifyDeliveredOrder(ctx, orderID, userID)
+}
+
 func (u *orderUseCase) UpdateDeliveredOrderStatus(ctx context.Context, orderID uint, image string) error {
 	return u.orderSto.UpdateDeliveredOrderStatus(ctx, orderID, image)
 }

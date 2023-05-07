@@ -7,26 +7,40 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
+	"time"
 )
 
 type orderStorage struct {
 }
+
+func (s orderStorage) VerifyDeliveredOrder(ctx context.Context, orderID uint, userID uint) error {
+	db := wrap_gorm.GetDB()
+
+	err := db.Model(entities.Order{}).
+		Where("id = ? AND user_id = ?", orderID, userID).
+		Update("verify_delivered", 1).
+		Error
+
+	return err
+}
+
 type UpdateOrderStatus struct {
-	Status entities.OrderStatus `json:"status"`
-	Image  string               `json:"image"`
+	Status        entities.OrderStatus `json:"status"`
+	Image         string               `json:"image"`
+	DeliveredDate time.Time            `json:"delivered_date"`
 }
 
 func (s orderStorage) UpdateDeliveredOrderStatus(ctx context.Context, id uint, image string) error {
 	db := wrap_gorm.GetDB()
 	updateInfo := UpdateOrderStatus{
-		Status: entities.DeliveredOrder,
-		Image:  image,
+		Status:        entities.DeliveredOrder,
+		Image:         image,
+		DeliveredDate: time.Now(),
 	}
 	err := db.Model(entities.Order{}).
 		Where("id = ?", id).
 		Updates(&updateInfo).
 		Error
-
 	return err
 }
 

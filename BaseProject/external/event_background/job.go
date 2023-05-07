@@ -83,13 +83,14 @@ func (j *job) Retry(ctx context.Context) error {
 		return nil
 	}
 
-	if j.retryIndex == len(j.config.Retries)-1 {
-		j.state = StateRetryFailed
-		return err
-	}
+	//if j.retryIndex == len(j.config.Retries)-1 {
+	//	j.state = StateRetryFailed
+	//	return err
+	//}
 
 	j.state = StateFailed
-	return nil
+	return err
+	//return nil
 }
 func (j *job) State() JobState {
 

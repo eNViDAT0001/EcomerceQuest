@@ -17,6 +17,7 @@ type HttpHandler interface {
 
 	CreateOrder() func(ctx *gin.Context)
 
+	VerifyDeliveredStatus() func(ctx *gin.Context)
 	UpdateOrderStatus() func(ctx *gin.Context)
 	CancelOrder() func(ctx *gin.Context)
 	DeleteOrder() func(ctx *gin.Context)

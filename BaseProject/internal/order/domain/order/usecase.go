@@ -29,4 +29,5 @@ type UseCase interface {
 
 	GetOrderReportByProviderID(ctx context.Context, providerID uint) (report io.OrderReport, err error)
 	GetOrderReportByUserID(ctx context.Context, userID uint) (report io.OrderReport, err error)
+	VerifyDeliveredOrder(ctx context.Context, orderID uint, userID uint) error
 }
