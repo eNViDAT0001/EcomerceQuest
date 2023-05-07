@@ -11,6 +11,24 @@ import (
 
 type orderStorage struct {
 }
+type UpdateOrderStatus struct {
+	Status entities.OrderStatus `json:"status"`
+	Image  string               `json:"image"`
+}
+
+func (s orderStorage) UpdateDeliveredOrderStatus(ctx context.Context, id uint, image string) error {
+	db := wrap_gorm.GetDB()
+	updateInfo := UpdateOrderStatus{
+		Status: entities.DeliveredOrder,
+		Image:  image,
+	}
+	err := db.Model(entities.Order{}).
+		Where("id = ?", id).
+		Updates(&updateInfo).
+		Error
+
+	return err
+}
 
 func (s *orderStorage) CountListByUserID(ctx context.Context, userID uint, input paging.ParamsInput) (total int64, err error) {
 	db := wrap_gorm.GetDB()

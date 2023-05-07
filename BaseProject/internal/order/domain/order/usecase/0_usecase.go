@@ -19,6 +19,10 @@ type orderUseCase struct {
 	notify   notification.UseCase
 }
 
+func (u *orderUseCase) UpdateDeliveredOrderStatus(ctx context.Context, orderID uint, image string) error {
+	return u.orderSto.UpdateDeliveredOrderStatus(ctx, orderID, image)
+}
+
 func (u *orderUseCase) GetOrderReportByProviderID(ctx context.Context, providerID uint) (report io.OrderReport, err error) {
 	//TODO implement me
 	panic("implement me")

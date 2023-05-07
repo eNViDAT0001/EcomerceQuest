@@ -12,4 +12,8 @@ type ProductPreviewItem struct {
 	Media      datatypes.JSON `json:"media"`
 	Discount   int            `json:"discount"`
 	Rating     float32        `json:"rating"`
+	Height     int            `json:"height"`
+	Weight     int            `json:"weight"`
+	Length     int            `json:"length"`
+	Width      int            `json:"width"`
 }

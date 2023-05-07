@@ -23,6 +23,10 @@ func (s productStorage) ListProductsPreview(ctx context.Context, input io.ListPr
 				"Product.name, " +
 				"Product.price, " +
 				"Product.discount, " +
+				"Product.height, " +
+				"Product.weight, " +
+				"Product.width, " +
+				"Product.length, " +
 				"IF(COUNT(ProductMedia.id) = 0, NULL, JSON_ARRAYAGG(JSON_OBJECT( 'publicID', ProductMedia.public_id, 'mediaPath', ProductMedia.media_path, 'type', ProductMedia.media_type))) AS media, " +
 				"ROUND(AVG(Comment.rating),0) AS rating").
 		Joins("LEFT JOIN ProductMedia ON ProductMedia.product_id = Product.id").

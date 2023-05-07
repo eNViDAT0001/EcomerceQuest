@@ -23,6 +23,7 @@ type UseCase interface {
 	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (err error)
 
 	UpdateOrderStatus(ctx context.Context, orderID uint, status entities.OrderStatus) error
+	UpdateDeliveredOrderStatus(ctx context.Context, orderID uint, image string) error
 	CancelOrder(ctx context.Context, orderID uint) error
 	DeleteOrder(ctx context.Context, orderID uint) error
 

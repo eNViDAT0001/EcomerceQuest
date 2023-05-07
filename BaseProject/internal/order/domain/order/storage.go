@@ -34,4 +34,5 @@ type Storage interface {
 	DeleteOrder(ctx context.Context, orderID uint) error
 
 	GetOrdersReport(ctx context.Context, filter io.OrderReportFilter) (report io.OrderReport, err error)
+	UpdateDeliveredOrderStatus(ctx context.Context, id uint, image string) error
 }

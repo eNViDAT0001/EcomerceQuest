@@ -8,6 +8,10 @@ type ProductUpdateReq struct {
 	Name       string `json:"name"`
 	Price      *int   `json:"price"`
 	Discount   *int   `json:"discount"`
+	Height     int    `json:"height"`
+	Weight     int    `json:"weight"`
+	Length     int    `json:"length"`
+	Width      int    `json:"width"`
 }
 
 type ProductCreateReq struct {
@@ -18,6 +22,10 @@ type ProductCreateReq struct {
 	Name          string                         `json:"name"`
 	Discount      int                            `json:"discount"`
 	Price         int                            `json:"price"`
+	Height        int                            `json:"height"`
+	Weight        int                            `json:"weight"`
+	Length        int                            `json:"length"`
+	Width         int                            `json:"width"`
 	Media         []ProductMediaCreateReq        `json:"media"`
 	Specification ProductSpecificationCreateReq  `json:"specification"`
 	Options       []ProductOptionReq             `json:"options"`

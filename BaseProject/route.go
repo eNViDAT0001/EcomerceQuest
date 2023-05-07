@@ -30,8 +30,7 @@ func router(r *gin.Engine) {
 		}
 		socketGroup := v1.Group("/ws")
 		{
-			socketGroup.Use(allHandler.jwtHandler.VerifyUserToken())
-			socketGroup.GET("/user/:user_id", socketManager.ConnectChatWS())
+			socketGroup.GET("/user/:user_id/token/:token", socketManager.ConnectChatWS())
 		}
 		appGroup := v1.Group("/app")
 		{

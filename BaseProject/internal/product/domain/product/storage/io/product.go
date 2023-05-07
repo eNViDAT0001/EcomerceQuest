@@ -5,6 +5,10 @@ type ProductUpdateForm struct {
 	Name       string
 	Price      int
 	Discount   *int
+	Height     int
+	Weight     int
+	Length     int
+	Width      int
 }
 type ProductCreateForm struct {
 	ID         uint
@@ -14,6 +18,10 @@ type ProductCreateForm struct {
 	Name       string
 	Discount   int
 	Price      int
+	Height     int
+	Weight     int
+	Length     int
+	Width      int
 }
 type ProductFullUpdateForm struct {
 	CategoryID   uint                            `json:"category_id"`

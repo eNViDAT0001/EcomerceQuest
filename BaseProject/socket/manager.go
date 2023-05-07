@@ -5,10 +5,17 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
+	storage2 "github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/storage"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/user/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
 	"github.com/eNViDAT0001/Thesis/Backend/socket/io"
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/gorilla/websocket"
 	"log"
+	"net/http"
+	"strconv"
 	"sync"
 )
 
@@ -109,6 +116,38 @@ func (m *Manager) RemoveClient(client io.Client) {
 func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 	return func(ctx *gin.Context) {
 		cc := request.FromContext(ctx)
+		newCtx := context.Background()
+
+		tokenString := cc.Param("token")
+
+		jwtSto := storage.NewJwtStorage()
+		userSto := storage2.NewUserStorage()
+		jwtUC := usecase.NewJwtUseCase(userSto, jwtSto)
+		token, err := jwtUC.VerifyToken(newCtx, tokenString)
+		cancel := func() {
+			cc.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "invalid access_token"})
+		}
+		if err != nil {
+			cancel()
+			return
+		}
+		claims, _ := token.Claims.(jwt.MapClaims)
+
+		userID, _ := strconv.Atoi(claims["user_id"].(string))
+		user, err := userSto.GetUserDetailByID(newCtx, uint(userID))
+
+		id, err := strconv.Atoi(cc.Param("user_id"))
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+		if *user.Type != entities.Admin {
+			if id != int(user.ID) {
+				cc.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "invalid access_token"})
+				return
+			}
+		}
+
 		// Begin by upgrading the HTTP request
 		conn, err := GetWsServer().Upgrade(cc.Writer, cc.Request, nil)
 		if err != nil {
@@ -117,9 +156,8 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 		}
 
 		log.Println("New Client connect")
-		userID := cc.Param("user_id")
 		socketManager := GetManager()
-		client := NewSocketClient(conn, socketManager, userID)
+		client := NewSocketClient(conn, socketManager, strconv.Itoa(userID))
 		socketManager.AddClient(client)
 
 		go client.ReadMessage()

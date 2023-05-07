@@ -12,16 +12,20 @@ type Product struct {
 	Name       string `gorm:"column:name" json:"name"`
 	Price      int    `gorm:"column:price" json:"price"`
 	Discount   int    `gorm:"column:discount" json:"discount"`
+	Height     int    `gorm:"column:height" json:"height"`
+	Weight     int    `gorm:"column:weight" json:"weight"`
+	Length     int    `gorm:"column:length" json:"length"`
+	Width      int    `gorm:"column:width" json:"width"`
 }
 
 func (Product) WithFields() []string {
-	return []string{"name", "discount", "provider_id", "user_id", "category_id", "rating"}
+	return []string{"name", "discount", "provider_id", "user_id", "category_id", "rating", "height", "weight", "length", "width"}
 }
 func (Product) SearchFields() []string {
 	return []string{"name", "price", "id"}
 }
 func (Product) SortFields() []string {
-	return []string{"name", "discount", "price", "created_at", "provider_id", "user_id", "category_id", "id"}
+	return []string{"name", "discount", "price", "created_at", "provider_id", "user_id", "category_id", "id", "height", "weight", "length", "width"}
 }
 func (Product) TableName() string {
 	return "Product"
