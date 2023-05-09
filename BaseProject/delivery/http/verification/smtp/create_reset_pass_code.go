@@ -13,7 +13,7 @@ import (
 var tokens = make(map[string]string)
 
 func UseToken(token string) error {
-	if _, ok := tokens[token]; ok {
+	if _, ok := tokens[token]; !ok {
 		return errors.New("token not found")
 	}
 	delete(tokens, token)

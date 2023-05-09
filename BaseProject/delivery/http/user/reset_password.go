@@ -40,7 +40,7 @@ func (s userHandler) ResetPassword() func(*gin.Context) {
 
 		err = smtp.UseToken(input.Token)
 		if err != nil {
-			cc.ResponseError(request.NewUnauthorizedError("Code", input.Code, "Code is not valid"))
+			cc.ResponseError(request.NewUnauthorizedError("Code", input.Code, "Code not found"))
 			return
 		}
 
