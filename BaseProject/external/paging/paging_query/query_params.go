@@ -34,7 +34,25 @@ func GetPagingParams(cc *gin.Context, filter paging_params.EntityFilter) (pagina
 func SetCountListPagingQuery(input *paging.ParamsInput, tableName string, query *gorm.DB) {
 
 	if input.Type == paging.CursorPaging {
-		query = query.Where(fmt.Sprintf("%s.id > ?", tableName), input.Current())
+		sort := ">"
+		queryString := ""
+		if input.Filter.GetSort() != nil {
+			val, ok := (*input.Filter.GetSort())["id"]
+			if ok {
+				if val == "DESC" {
+					if input.Current() == 0 {
+						queryString = "Unknown"
+					}
+					sort = "<"
+				}
+			}
+			if len(queryString) < 1 {
+				queryString = fmt.Sprintf("%s.id %s ?", tableName, sort)
+			}
+		}
+		if queryString != "Unknown" {
+			query = query.Where(fmt.Sprintf("%s.id %s ?", tableName, sort), input.Current())
+		}
 	}
 
 	if input.Filter.GetFields() != nil {
@@ -63,10 +81,28 @@ func SetPagingQuery(input *paging.ParamsInput, tableName string, query *gorm.DB)
 
 	query = query.Limit(input.PerPage())
 	if input.Type == paging.CursorPaging {
-		if input.MarkerDefinition != nil {
-			query = query.Where(fmt.Sprintf("%s.%s > ?", tableName, *input.MarkerDefinition), input.Current())
-		} else {
-			query = query.Where(fmt.Sprintf("%s.id > ?", tableName), input.Current())
+		sort := ">"
+		queryString := ""
+		if input.Filter.GetSort() != nil {
+			val, ok := (*input.Filter.GetSort())["id"]
+			if ok {
+				if val == "DESC" {
+					if input.Current() == 0 {
+						queryString = "Unknown"
+					}
+					sort = "<"
+				}
+			}
+			if len(queryString) < 1 {
+				queryString = fmt.Sprintf("%s.id %s ?", tableName, sort)
+			}
+		}
+		if queryString != "Unknown" {
+			if input.MarkerDefinition != nil {
+				query = query.Where(fmt.Sprintf("%s.%s %s ?", tableName, *input.MarkerDefinition, sort), input.Current())
+			} else {
+				query = query.Where(fmt.Sprintf("%s.id %s ?", tableName, sort), input.Current())
+			}
 		}
 	} else {
 		offset := paging.Offset(input.Current(), input.PerPage())
