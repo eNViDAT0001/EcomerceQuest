@@ -19,6 +19,27 @@ type orderUseCase struct {
 	notify   notification.UseCase
 }
 
+func (u *orderUseCase) DeleteOrders(ctx context.Context, ids []uint) error {
+	return u.orderSto.DeleteOrders(ctx, ids)
+}
+
+func (u *orderUseCase) ListInvalidOrder(ctx context.Context) (orders []entities.Order, err error) {
+	unpayOrders, err := u.orderSto.ListUnPayOrder(ctx)
+	if err != nil {
+		return nil, err
+	}
+	unConfirmedOrders, err := u.orderSto.ListUnConfirmedDeliveredOrder(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return append(unpayOrders, unConfirmedOrders...), nil
+}
+
+func (u *orderUseCase) UpdateOrder(ctx context.Context, orderID uint, input io.UpdateOrderForm) error {
+	return u.orderSto.UpdateOrder(ctx, orderID, input)
+}
+
 func (u *orderUseCase) VerifyDeliveredOrder(ctx context.Context, orderID uint, userID uint) error {
 	return u.orderSto.VerifyDeliveredOrder(ctx, orderID, userID)
 }

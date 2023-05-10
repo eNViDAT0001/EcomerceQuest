@@ -6,11 +6,34 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_query"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
 	"time"
 )
 
 type orderStorage struct {
+	orderItemSto order_item.Storage
+}
+
+func (s orderStorage) ListUnPayOrder(ctx context.Context) ([]entities.Order, error) {
+	result := make([]entities.Order, 0)
+	db := wrap_gorm.GetDB()
+	err := db.Model(entities.Order{}).Where("payment_id IS NULL").Find(&result).Error
+
+	return result, err
+}
+
+func (s orderStorage) ListUnConfirmedDeliveredOrder(ctx context.Context) ([]entities.Order, error) {
+	result := make([]entities.Order, 0)
+	db := wrap_gorm.GetDB()
+	deadline := time.Now().Add(-48 * time.Hour)
+	err := db.Model(entities.Order{}).
+		Where("status = ?", entities.DeliveredOrder).
+		Where("verify_delivered = 0").
+		Where("delivered_date < ?", deadline).
+		Find(&result).Error
+
+	return result, err
 }
 
 func (s orderStorage) VerifyDeliveredOrder(ctx context.Context, orderID uint, userID uint) error {
@@ -131,6 +154,6 @@ func (s *orderStorage) CountPreview(ctx context.Context, input paging.ParamsInpu
 	return total, nil
 }
 
-func NewOrderStorage() order.Storage {
-	return &orderStorage{}
+func NewOrderStorage(orderItemSto order_item.Storage) order.Storage {
+	return &orderStorage{orderItemSto: orderItemSto}
 }

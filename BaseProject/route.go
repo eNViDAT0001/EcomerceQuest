@@ -4,7 +4,10 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/socket"
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
+	"github.com/roylee0704/gron"
+	"log"
 	"net/http"
+	"time"
 )
 
 func router(r *gin.Engine) {
@@ -209,6 +212,12 @@ func router(r *gin.Engine) {
 			cartGroup.PATCH("/:cart_id/items/:cart_item_id", allHandler.cartItemHandler.UpdateCartItem())
 			cartGroup.DELETE("/:cart_id/items/:cart_item_id", allHandler.cartItemHandler.DeleteCartItem())
 		}
+		paymentGroup := v1.Group("/payments")
+		{
+			paymentGroup.POST("", allHandler.paymentHandler.CreatePayment())
+			cartGroup.GET("/:payment_id", allHandler.paymentHandler.GetPaymentByID())
+		}
+
 		orderGroup := v1.Group("/orders")
 		{
 			orderAdminGroup := orderGroup.Group("")
@@ -216,6 +225,7 @@ func router(r *gin.Engine) {
 
 			orderGroup.POST("", allHandler.orderHandler.CreateOrder())
 			orderGroup.PATCH("/:order_id", allHandler.orderHandler.UpdateOrderStatus())
+			orderGroup.PATCH("/:order_id/update", allHandler.orderHandler.UpdateOrder())
 			orderGroup.PATCH("/:order_id/user/:user_id/cancel", allHandler.orderHandler.CancelOrder())
 			orderGroup.PATCH("/:order_id/user/:user_id/verify", allHandler.orderHandler.VerifyDeliveredStatus())
 			orderGroup.DELETE("/:order_id", allHandler.orderHandler.DeleteOrder())
@@ -249,5 +259,14 @@ func router(r *gin.Engine) {
 			"message": "pong",
 		})
 	})
+
+	c := gron.New()
+	c.AddFunc(gron.Every(1*time.Hour), func() {
+		err := allHandler.orderHandler.RemoveInvalidOrder()
+		if err != nil {
+			log.Fatal(err)
+		}
+	})
+	c.Start()
 
 }

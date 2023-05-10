@@ -17,6 +17,7 @@ import (
 	chat2 "github.com/eNViDAT0001/Thesis/Backend/delivery/http/notification"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
+	order_items2 "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/payment"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/product"
 	banner2 "github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/banner"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/category"
@@ -36,12 +37,14 @@ import (
 	usecase18 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/usecase"
 	storage7 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/storage"
 	usecase9 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/usecase"
-	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
+	storage16 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
 	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/usecase"
-	storage13 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage"
+	storage14 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage"
 	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
-	storage16 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
+	storage13 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
 	usecase17 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
+	storage18 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/storage"
+	usecase19 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/usecase"
 	storage10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
 	usecase10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/usecase"
 	storage6 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage"
@@ -58,7 +61,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/usecase"
 	storage2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
 	usecase2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
-	storage14 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
+	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
 	usecase14 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
 )
 
@@ -70,8 +73,8 @@ func initHandlerCollection() *HandlerCollection {
 	jwtStorage := storage2.NewJwtStorage()
 	jwtUseCase := usecase2.NewJwtUseCase(userStorage, jwtStorage)
 	httpHandler := user.NewUserHandler(useCase, jwtUseCase)
-	storage18 := storage3.NewAddressStorage()
-	userUseCase := usecase3.NewAddressUseCase(storage18)
+	storage19 := storage3.NewAddressStorage()
+	userUseCase := usecase3.NewAddressUseCase(storage19)
 	userHttpHandler := address.NewAddressHandler(userUseCase)
 	categoryStorage := storage4.NewCategoryStorage()
 	categoryUseCase := usecase4.NewCategoryUseCase(categoryStorage)
@@ -103,14 +106,14 @@ func initHandlerCollection() *HandlerCollection {
 	cart_itemStorage := storage12.NewCartItemStorage()
 	cart_itemUseCase := usecase13.NewCartItemUseCase(cart_itemStorage)
 	cart_itemHttpHandler := cart_items.NewCartItemHandler(cart_itemUseCase)
-	orderStorage := storage13.NewOrderStorage()
-	smtpStorage := storage14.NewSmtpStorage()
+	order_itemStorage := storage13.NewOrderItemStorage()
+	orderStorage := storage14.NewOrderStorage(order_itemStorage)
+	smtpStorage := storage15.NewSmtpStorage()
 	smtpUseCase := usecase14.NewSmtpUseCase(smtpStorage)
-	notificationStorage := storage15.NewNotificationStorage()
+	notificationStorage := storage16.NewNotificationStorage()
 	notificationUseCase := usecase15.NewNotificationUseCase(notificationStorage)
 	orderUseCase := usecase16.NewOrderUseCase(orderStorage, userStorage, smtpUseCase, notificationUseCase)
 	orderHttpHandler := order.NewOrderHandler(orderUseCase, smtpUseCase, useCase, notificationUseCase)
-	order_itemStorage := storage16.NewOrderItemStorage()
 	order_itemUseCase := usecase17.NewOrderItemUseCase(order_itemStorage)
 	order_itemHttpHandler := order_items.NewOrderItemHandler(order_itemUseCase)
 	smtpHttpHandler := smtp.NewSmtpHandler(jwtUseCase, useCase, smtpUseCase)
@@ -118,6 +121,9 @@ func initHandlerCollection() *HandlerCollection {
 	chatUseCase := usecase18.NewChatUseCase(chatStorage)
 	chatHttpHandler := chat.NewChatHandler(chatUseCase)
 	notificationHttpHandler := chat2.NewNotificationHandler(notificationUseCase)
-	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler)
+	paymentStorage := storage18.NewPaymentStorage()
+	paymentUseCase := usecase19.NewPaymentUseCase(paymentStorage)
+	paymentHttpHandler := order_items2.NewPaymentHandler(paymentUseCase)
+	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler)
 	return handlerCollection
 }

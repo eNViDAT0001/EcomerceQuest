@@ -14,6 +14,9 @@ type Storage interface {
 	ListPreviewByUserID(ctx context.Context, userID uint, input paging.ParamsInput) ([]io.OrderPreview, error)
 	CountPreviewByUserID(ctx context.Context, userID uint, input paging.ParamsInput) (total int64, err error)
 
+	ListUnPayOrder(ctx context.Context) ([]entities.Order, error)
+	ListUnConfirmedDeliveredOrder(ctx context.Context) ([]entities.Order, error)
+
 	ListByProviderID(ctx context.Context, providerID uint, input paging.ParamsInput) ([]entities.Order, error)
 	CountByProviderID(ctx context.Context, providerID uint, input paging.ParamsInput) (total int64, err error)
 
@@ -30,8 +33,10 @@ type Storage interface {
 	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error)
 
 	UpdateOrderStatus(ctx context.Context, orderID uint, status entities.OrderStatus) error
+	UpdateOrder(ctx context.Context, orderID uint, input io.UpdateOrderForm) error
 	CancelOrder(ctx context.Context, orderID uint) error
 	DeleteOrder(ctx context.Context, orderID uint) error
+	DeleteOrders(ctx context.Context, ids []uint) error
 
 	GetOrdersReport(ctx context.Context, filter io.OrderReportFilter) (report io.OrderReport, err error)
 	UpdateDeliveredOrderStatus(ctx context.Context, id uint, image string) error

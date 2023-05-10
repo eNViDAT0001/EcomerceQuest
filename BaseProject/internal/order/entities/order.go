@@ -9,6 +9,8 @@ type Order struct {
 	wrap_gorm.SoftDeleteModel
 	UserID             uint            `gorm:"column:user_id" json:"user_id"`
 	ProviderID         uint            `gorm:"column:provider_id" json:"provider_id"`
+	PaymentID          *string         `gorm:"column:payment_id" json:"payment_id"`
+	PaymentURL         *string         `gorm:"column:payment_url" json:"payment_url"`
 	Name               string          `gorm:"column:name" json:"name"`
 	Gender             *bool           `gorm:"column:gender" json:"gender"`
 	Phone              string          `gorm:"column:phone" json:"phone"`

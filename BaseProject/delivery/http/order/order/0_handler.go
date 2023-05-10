@@ -8,6 +8,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
@@ -21,6 +22,48 @@ type orderHandler struct {
 	useUC    user.UseCase
 	smtpUC   smtp.UseCase
 	notifyUC notification.UseCase
+}
+
+func (s *orderHandler) RemoveInvalidOrder() error {
+	ctx := context.Background()
+	invalidOrder, err := s.orderUC.ListInvalidOrder(ctx)
+	if err != nil {
+		return err
+	}
+
+	ids := make([]uint, len(invalidOrder))
+	for i, v := range invalidOrder {
+		ids[i] = v.ID
+	}
+
+	err = s.orderUC.DeleteOrders(ctx, ids)
+	return err
+}
+
+func (s *orderHandler) UpdateOrder() func(ctx *gin.Context) {
+	return func(c *gin.Context) {
+		cc := request.FromContext(c)
+		newCtx := context.Background()
+
+		var input io.UpdateOrderForm
+		if err := cc.BindJSON(&input); err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		orderID, err := strconv.Atoi(cc.Param("order_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+
+		err = s.orderUC.UpdateOrder(newCtx, uint(orderID), input)
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		cc.Ok("Update Status success")
+	}
 }
 
 func (s *orderHandler) VerifyDeliveredStatus() func(ctx *gin.Context) {

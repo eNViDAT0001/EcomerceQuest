@@ -18,14 +18,18 @@ type UseCase interface {
 	ListPreview(ctx context.Context, input paging.ParamsInput) (orders []io.OrderPreview, total int64, err error)
 	List(ctx context.Context, input paging.ParamsInput) (orders []entities.Order, total int64, err error)
 
+	ListInvalidOrder(ctx context.Context) (orders []entities.Order, err error)
+
 	GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error)
 
 	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (err error)
 
 	UpdateOrderStatus(ctx context.Context, orderID uint, status entities.OrderStatus) error
 	UpdateDeliveredOrderStatus(ctx context.Context, orderID uint, image string) error
+	UpdateOrder(ctx context.Context, orderID uint, input io.UpdateOrderForm) error
 	CancelOrder(ctx context.Context, orderID uint) error
 	DeleteOrder(ctx context.Context, orderID uint) error
+	DeleteOrders(ctx context.Context, ids []uint) error
 
 	GetOrderReportByProviderID(ctx context.Context, providerID uint) (report io.OrderReport, err error)
 	GetOrderReportByUserID(ctx context.Context, userID uint) (report io.OrderReport, err error)
