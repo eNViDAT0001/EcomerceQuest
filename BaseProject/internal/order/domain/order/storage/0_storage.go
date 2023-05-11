@@ -18,7 +18,8 @@ type orderStorage struct {
 func (s orderStorage) ListUnPayOrder(ctx context.Context) ([]entities.Order, error) {
 	result := make([]entities.Order, 0)
 	db := wrap_gorm.GetDB()
-	err := db.Model(entities.Order{}).Where("payment_id IS NULL").Find(&result).Error
+	deadline := time.Now().Add(-24 * time.Hour)
+	err := db.Model(entities.Order{}).Where("payment_id IS NULL AND status != 'CANCEL' AND created_at < ?", deadline).Find(&result).Error
 
 	return result, err
 }

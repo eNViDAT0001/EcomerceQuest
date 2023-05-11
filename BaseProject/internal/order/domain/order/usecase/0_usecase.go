@@ -23,17 +23,17 @@ func (u *orderUseCase) DeleteOrders(ctx context.Context, ids []uint) error {
 	return u.orderSto.DeleteOrders(ctx, ids)
 }
 
-func (u *orderUseCase) ListInvalidOrder(ctx context.Context) (orders []entities.Order, err error) {
-	unpayOrders, err := u.orderSto.ListUnPayOrder(ctx)
+func (u *orderUseCase) ListInvalidOrder(ctx context.Context) (unPayOrders []entities.Order, unConfirmedOrders []entities.Order, err error) {
+	unPayOrders, err = u.orderSto.ListUnPayOrder(ctx)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	unConfirmedOrders, err := u.orderSto.ListUnConfirmedDeliveredOrder(ctx)
+	unConfirmedOrders, err = u.orderSto.ListUnConfirmedDeliveredOrder(ctx)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	return append(unpayOrders, unConfirmedOrders...), nil
+	return unPayOrders, unConfirmedOrders, nil
 }
 
 func (u *orderUseCase) UpdateOrder(ctx context.Context, orderID uint, input io.UpdateOrderForm) error {

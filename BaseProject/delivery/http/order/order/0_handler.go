@@ -26,17 +26,28 @@ type orderHandler struct {
 
 func (s *orderHandler) RemoveInvalidOrder() error {
 	ctx := context.Background()
-	invalidOrder, err := s.orderUC.ListInvalidOrder(ctx)
+	unPayOrders, unConfirmedOrders, err := s.orderUC.ListInvalidOrder(ctx)
 	if err != nil {
 		return err
 	}
 
-	ids := make([]uint, len(invalidOrder))
-	for i, v := range invalidOrder {
-		ids[i] = v.ID
+	for _, v := range unPayOrders {
+		err = s.orderUC.CancelOrder(ctx, v.ID)
+		if err != nil {
+			return err
+		}
 	}
 
-	err = s.orderUC.DeleteOrders(ctx, ids)
+	delivered := true
+	for _, v := range unConfirmedOrders {
+		err = s.orderUC.UpdateOrder(ctx, v.ID, io.UpdateOrderForm{
+			VerifyDelivered: &delivered,
+		})
+		if err != nil {
+			return err
+		}
+	}
+
 	return err
 }
 

@@ -18,7 +18,7 @@ type UseCase interface {
 	ListPreview(ctx context.Context, input paging.ParamsInput) (orders []io.OrderPreview, total int64, err error)
 	List(ctx context.Context, input paging.ParamsInput) (orders []entities.Order, total int64, err error)
 
-	ListInvalidOrder(ctx context.Context) (orders []entities.Order, err error)
+	ListInvalidOrder(ctx context.Context) (unPayOrders []entities.Order, unConfirmedOrders []entities.Order, err error)
 
 	GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error)
 
