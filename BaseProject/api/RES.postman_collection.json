@@ -3,11 +3,12 @@
 		"_postman_id": "35031de7-580c-4bb6-acfb-b1fc7d41fe5a",
 		"name": "RES",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19782562"
+		"_exporter_id": "19782562",
+		"_collection_link": "https://warped-zodiac-31519.postman.co/workspace/CES-WorkSpace~bf6a08ff-2a9a-4e1a-84c8-766f838387f0/collection/19782562-35031de7-580c-4bb6-acfb-b1fc7d41fe5a?action=share&creator=19782562&source=collection_link"
 	},
 	"item": [
 		{
-			"name": "App",
+			"name": "Gateway",
 			"item": [
 				{
 					"name": "Auth",
@@ -40,7 +41,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"username\": \"eNViDXT\",\n    \"password\": \"admin\"\n}",
+									"raw": "{\n    \"username\": \"eNViDAT\",\n    \"password\": \"admin\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -362,7 +363,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"code\": \"eNViDXT\",\n    \"token\": 123456\n}",
+									"raw": "{\n    \"user_id\": 1,\n    \"code\": \"823884\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ndmlkYXRAZ21haWwuY29tIn0.6eL8XfseUE4BQEdJo1dyFjYRw0e-X1jMy1WzGngBK-g\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -388,12 +389,7 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Status code is 200\", () => {",
-											"    const resJson = pm.response.json();",
-											"    postman.setEnvironmentVariable(\"token\", resJson.data.Token.token);",
-											"    console.log(pm.variables.get(\"token\"));",
-											"    pm.expect(pm.response.code).to.eql(200);",
-											"});"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -415,25 +411,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{smtpV1Path}}/reset/user/:user_id?email=ngvidat@gmail.com",
+									"raw": "{{smtpV1Path}}/reset?email=ngvidat@gmail.com",
 									"host": [
 										"{{smtpV1Path}}"
 									],
 									"path": [
-										"reset",
-										"user",
-										":user_id"
+										"reset"
 									],
 									"query": [
 										{
 											"key": "email",
 											"value": "ngvidat@gmail.com"
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "1"
 										}
 									]
 								}
@@ -468,7 +456,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"description\": \"eNViDXT\"\n}",
+									"raw": "{\n    \"email\": \"eNViDXT\",\n    \"name\": \"Nguyen Van A\",\n    \"subject\": \"Title\",\n    \"descriptions\": \"I lớp du chịch chịch\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -476,24 +464,19 @@
 									}
 								},
 								"url": {
-									"raw": "{{smtpV1Path}}/report",
+									"raw": "{{smtpV1Path}}/feedback",
 									"host": [
 										"{{smtpV1Path}}"
 									],
 									"path": [
-										"report"
+										"feedback"
 									]
 								}
 							},
 							"response": []
-						}
-					]
-				},
-				{
-					"name": "Notification",
-					"item": [
+						},
 						{
-							"name": "Create Notify Hook",
+							"name": "Send Email",
 							"event": [
 								{
 									"listen": "test",
@@ -520,7 +503,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"description\": \"eNViDXT\"\n}",
+									"raw": "{\n    \"subject\": \"Dummy Title\",\n    \"content\": \"Noi dung email\",\n    \"to\": [\n        \"ngvidat@gmail.com\"\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -528,359 +511,57 @@
 									}
 								},
 								"url": {
-									"raw": "{{smtpV1Path}}/report",
+									"raw": "{{smtpV1Path}}",
+									"host": [
+										"{{smtpV1Path}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Feedback",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {",
+											"    const resJson = pm.response.json();",
+											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+											"    console.log(pm.variables.get(\"access_token\"));",
+											"    console.log(pm.variables.get(\"refresh_token\"));",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"eNViDXT\",\n    \"password\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{smtpV1Path}}/feedback",
 									"host": [
 										"{{smtpV1Path}}"
 									],
 									"path": [
-										"report"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Chat",
-					"item": [
-						{
-							"name": "Home Chat",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{chatsV1Path}}/users/:user_id",
-									"host": [
-										"{{chatsV1Path}}"
-									],
-									"path": [
-										"users",
-										":user_id"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": null
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Channel List",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{chatsV1Path}}/users/:user_id/channels",
-									"host": [
-										"{{chatsV1Path}}"
-									],
-									"path": [
-										"users",
-										":user_id",
-										"channels"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": null
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Channel info",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{chatsV1Path}}/channels/:channel_id",
-									"host": [
-										"{{chatsV1Path}}"
-									],
-									"path": [
-										"channels",
-										":channel_id"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "channel_id",
-											"value": null
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Channel's messages",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{chatsV1Path}}/channels/:channel_id/messages",
-									"host": [
-										"{{chatsV1Path}}"
-									],
-									"path": [
-										"channels",
-										":channel_id",
-										"messages"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "channel_id",
-											"value": null
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create Chat Hook",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", () => {",
-											"    const resJson = pm.response.json();",
-											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
-											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
-											"    console.log(pm.variables.get(\"access_token\"));",
-											"    console.log(pm.variables.get(\"refresh_token\"));",
-											"    pm.expect(pm.response.code).to.eql(200);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {}
-							},
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"description\": \"eNViDXT\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{chatsV1Path}}/users/:user_id",
-									"host": [
-										"{{chatsV1Path}}"
-									],
-									"path": [
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": null
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Send Message",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", () => {",
-											"    const resJson = pm.response.json();",
-											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
-											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
-											"    console.log(pm.variables.get(\"access_token\"));",
-											"    console.log(pm.variables.get(\"refresh_token\"));",
-											"    pm.expect(pm.response.code).to.eql(200);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {}
-							},
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"description\": \"eNViDXT\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{chatsV1Path}}/users/:user_id",
-									"host": [
-										"{{chatsV1Path}}"
-									],
-									"path": [
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": null
-										}
+										"feedback"
 									]
 								}
 							},
@@ -904,34 +585,7 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"pm.test(\"Status code is 401\", () => {",
-							"",
-							"    if (pm.response.status == 401) {",
-							"        const loginReq = {",
-							"        url: postman.variables.get(\"host\") + postman.variables.get(\"v1\") + '/app/login',",
-							"        method: 'POST',",
-							"        header: {",
-							"            'Content-Type': 'application/json',",
-							"            'Connection':  'keep-alive',",
-							"        },",
-							"        body: {",
-							"            mode: 'raw',",
-							"            rqw: JSON.stringify({",
-							"                username: \"eNViDAT\",",
-							"                password: \"admin\"",
-							"            })",
-							"            }",
-							"        }",
-							"        pm.sendRequest(loginReq, (err, res) => {",
-							"            const resJson = response.json();",
-							"            postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
-							"            postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
-							"            console.log(pm.variables.get(\"access_token\"));",
-							"            console.log(pm.variables.get(\"refresh_token\"));",
-							"            pm.expect(pm.response.code).to.eql(200);",
-							"        });",
-							"    }",
-							"});"
+							""
 						]
 					}
 				}
@@ -1416,7 +1070,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": \"327201\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ndmlkYXRAZ21haWwuY29tIn0.5782tbYo3A7IbH_hOx9ugEc10Pn-m_r912UQE1qRk28\",\r\n    \"new_password\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"code\": \"656025\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ndmlkYXRAZ21haWwuY29tIn0.0IiErD7T2RUi_EL0iqd3LPJG7u5yHGF0o5h2RgJ6H8I\",\r\n    \"new_password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1424,13 +1078,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{userV1Path}}/:user_id/reset_pass",
+							"raw": "{{userV1Path}}/reset_pass/:email",
 							"host": [
 								"{{userV1Path}}"
 							],
 							"path": [
-								":user_id",
-								"reset_pass"
+								"reset_pass",
+								":email"
 							],
 							"query": [
 								{
@@ -1446,8 +1100,8 @@
 							],
 							"variable": [
 								{
-									"key": "user_id",
-									"value": "1"
+									"key": "email",
+									"value": "ngvidat@gmail.com"
 								}
 							]
 						}
@@ -1612,69 +1266,6 @@
 					"response": []
 				},
 				{
-					"name": "Address List",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{addressV1Path}}",
-							"host": [
-								"{{addressV1Path}}"
-							],
-							"query": [
-								{
-									"key": "cursor",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "limit",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "offset",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "field",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "search",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "List by User ID",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1770,7 +1361,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": \"1\",\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": false,\r\n    \"phone\": \"0987654321\",\r\n    \"province_code\": \"10\",\r\n    \"district_code\": \"016\",\r\n    \"ward_code\": \"00037\",\r\n    \"street\": \"09 Nguyễn Chí Thanh\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": false,\r\n    \"phone\": \"0987654321\",\r\n    \"province_id\": 202,\r\n    \"district_id\": 3695,\r\n    \"ward_code\": \"90767\",\r\n    \"province\": \"Hồ Chí Minh\",\r\n    \"district\": \"Thành Phố Thủ Đức\",\r\n    \"ward\": \"Phường Bình Trưng Tây\",\r\n    \"street\": \"09 Nguyễn Chí Thanh\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1831,7 +1422,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": false,\r\n    \"phone\": \"09821\",\r\n    \"province_code\": \"10\",\r\n    \"district_code\": \"016\",\r\n    \"ward_code\": \"00037\",\r\n    \"street\": \"09 Nguyễn Chí Thanh\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": false,\r\n    \"phone\": \"0987654321\",\r\n    \"province_id\": 202,\r\n    \"district_id\": 3695,\r\n    \"ward_code\": \"90767\",\r\n    \"province\": \"Hồ Chí Minh\",\r\n    \"district\": \"Thành Phố Thủ Đức\",\r\n    \"ward\": \"Phường Bình Trưng Tây\",\r\n    \"street\": \"09 Nguyễn Chí Thanh\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1891,7 +1482,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    1,2,3\r\n]",
+							"raw": "{\r\n    \"ids\": [1,2,3]\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1930,72 +1521,6 @@
 					"response": []
 				},
 				{
-					"name": "Province List",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true,
-						"disabledSystemHeaders": {
-							"connection": true
-						}
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{provinceV1Path}}",
-							"host": [
-								"{{provinceV1Path}}"
-							],
-							"query": [
-								{
-									"key": "cursor",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "limit",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "offset",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "field",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "search",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Province",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -2012,7 +1537,13 @@
 							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "d7515382-ec14-11ed-a967-deea53ba3605",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -2023,12 +1554,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{provinceV1Path}}/:province_code",
+							"raw": "https://online-gateway.ghn.vn/shiip/public-api/master-data/province",
+							"protocol": "https",
 							"host": [
-								"{{provinceV1Path}}"
+								"online-gateway",
+								"ghn",
+								"vn"
 							],
 							"path": [
-								":province_code"
+								"shiip",
+								"public-api",
+								"master-data",
+								"province"
 							],
 							"query": [
 								{
@@ -2041,19 +1578,13 @@
 									"value": "",
 									"disabled": true
 								}
-							],
-							"variable": [
-								{
-									"key": "province_code",
-									"value": "01"
-								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "District List",
+					"name": "District",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -2069,10 +1600,16 @@
 							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "d7515382-ec14-11ed-a967-deea53ba3605",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"province_id\": 202\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2080,13 +1617,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{districtV1Path}}/province/:province_code",
+							"raw": "https://online-gateway.ghn.vn/shiip/public-api/master-data/district",
+							"protocol": "https",
 							"host": [
-								"{{districtV1Path}}"
+								"online-gateway",
+								"ghn",
+								"vn"
 							],
 							"path": [
-								"province",
-								":province_code"
+								"shiip",
+								"public-api",
+								"master-data",
+								"district"
 							],
 							"query": [
 								{
@@ -2114,19 +1656,13 @@
 									"value": "",
 									"disabled": true
 								}
-							],
-							"variable": [
-								{
-									"key": "province_code",
-									"value": "01"
-								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Ward List",
+					"name": "Ward",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -2142,10 +1678,16 @@
 							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "d7515382-ec14-11ed-a967-deea53ba3605",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"district_id\": 3695\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2153,13 +1695,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{wardV1Path}}/district/:district_code",
+							"raw": "https://online-gateway.ghn.vn/shiip/public-api/master-data/ward",
+							"protocol": "https",
 							"host": [
-								"{{wardV1Path}}"
+								"online-gateway",
+								"ghn",
+								"vn"
 							],
 							"path": [
-								"district",
-								":district_code"
+								"shiip",
+								"public-api",
+								"master-data",
+								"ward"
 							],
 							"query": [
 								{
@@ -2187,11 +1734,163 @@
 									"value": "",
 									"disabled": true
 								}
-							],
-							"variable": [
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Services",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "district_code",
-									"value": null
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "d7515382-ec14-11ed-a967-deea53ba3605",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shop_id\": 4074093,\r\n    \"from_district\": 3695,\r\n    \"to_district\": 2090\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services",
+							"protocol": "https",
+							"host": [
+								"online-gateway",
+								"ghn",
+								"vn"
+							],
+							"path": [
+								"shiip",
+								"public-api",
+								"v2",
+								"shipping-order",
+								"available-services"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "field",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shipping Cost",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services",
+							"protocol": "https",
+							"host": [
+								"online-gateway",
+								"ghn",
+								"vn"
+							],
+							"path": [
+								"shiip",
+								"public-api",
+								"v2",
+								"shipping-order",
+								"available-services"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "field",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "",
+									"disabled": true
 								}
 							]
 						}
@@ -2474,7 +2173,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user_id\": 1,\r\n    \"name\": \"admin\",\r\n    \"image_path\": \"https://res.cloudinary.com/damzcas3k/image/upload/v1671291124/Product/cyydihkdpdhdv7ktlq5e.png\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Addd\",\r\n    \"image_path\": \"https://res.cloudinary.com/damzcas3k/image/upload/v1671291124/Product/cyydihkdpdhdv7ktlq5e.png\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3028,7 +2727,7 @@
 									"variable": [
 										{
 											"key": "category_id",
-											"value": "7"
+											"value": "2"
 										}
 									]
 								}
@@ -3061,7 +2760,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Men's Fashion\",\r\n    \"image_path\": \"https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg\"\r\n}",
+									"raw": "{\r\n    \"category_parent_id\": 3,\r\n    \"name\": \"Men's Fashion\",\r\n    \"image_path\": \"https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3091,7 +2790,7 @@
 									"variable": [
 										{
 											"key": "category_id",
-											"value": "1"
+											"value": "4"
 										}
 									]
 								}
@@ -3406,7 +3105,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user_id\": 1,\r\n    \"title\": \"Very Super Gud\",\r\n    \"collection\": \"Highly Recommend\",\r\n    \"discount\": 10,\r\n    \"image\": \"https://www.w3schools.com/howto/img_forest.jpg\",\r\n    \"end_time\": {{$timestamp}},\r\n    \"product_ids_in\": [1, 2, 3],\r\n    \"product_ids_out\": [3]\r\n}",
+									"raw": "{\r\n    \"title\": \"Very Super Gud\",\r\n    \"collection\": \"Highly Recommend\",\r\n    \"discount\": 10,\r\n    \"image\": \"https://www.w3schools.com/howto/img_forest.jpg\",\r\n    \"end_time\": {{$timestamp}},\r\n    \"product_ids_in\": [1, 2, 3],\r\n    \"product_ids_out\": [3]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3414,14 +3113,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{bannerV1Path}}/:provider_id/user/:user_id",
+									"raw": "{{bannerV1Path}}/:banner_id",
 									"host": [
 										"{{bannerV1Path}}"
 									],
 									"path": [
-										":provider_id",
-										"user",
-										":user_id"
+										":banner_id"
 									],
 									"query": [
 										{
@@ -3437,12 +3134,8 @@
 									],
 									"variable": [
 										{
-											"key": "provider_id",
-											"value": "1"
-										},
-										{
-											"key": "user_id",
-											"value": "1"
+											"key": "banner_id",
+											"value": null
 										}
 									]
 								}
@@ -3474,30 +3167,15 @@
 									}
 								},
 								"url": {
-									"raw": "{{bannerV1Path}}/:provider_id/user/:user_id",
+									"raw": "{{bannerV1Path}}",
 									"host": [
 										"{{bannerV1Path}}"
-									],
-									"path": [
-										":provider_id",
-										"user",
-										":user_id"
 									],
 									"query": [
 										{
 											"key": "",
 											"value": "",
 											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "provider_id",
-											"value": "1"
-										},
-										{
-											"key": "user_id",
-											"value": "1"
 										}
 									]
 								}
@@ -3680,24 +3358,8 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "files",
-									"type": "file",
-									"src": []
-								},
-								{
-									"key": "name",
-									"value": "Ngừi lạ",
-									"type": "text"
-								},
-								{
-									"key": "descriptions",
-									"value": "Gud, Gất Gud",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 3,\r\n    \"description\": \"dssafdsf\",\r\n    \"media\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"priority\": 2,\r\n            \"media_path\": \"mnp\",\r\n            \"media_type\": \"IMAGE\"\r\n        }\r\n    ]Q\r\n}"
 						},
 						"url": {
 							"raw": "{{commentV1Path}}/product/:product_id/user/:user_id",
@@ -3725,11 +3387,11 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": null
+									"value": "1"
 								},
 								{
 									"key": "user_id",
-									"value": null
+									"value": "1"
 								}
 							]
 						}
@@ -3942,7 +3604,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_option_id\": 12,\r\n    \"quantity\": 10\r\n}"
+							"raw": "{\r\n    \"product_option_id\": 30,\r\n    \"quantity\": 10\r\n}"
 						},
 						"url": {
 							"raw": "{{cartV1Path}}/product/:product_id/provider/:provider_id/user/:user_id",
@@ -4114,11 +3776,11 @@
 							"variable": [
 								{
 									"key": "cart_id",
-									"value": null
+									"value": "7"
 								},
 								{
 									"key": "cart_item_id",
-									"value": null
+									"value": "26"
 								}
 							]
 						}
@@ -4275,6 +3937,213 @@
 									"key": "sorts[]",
 									"value": "",
 									"description": "\"provider_id\", \"user_id\", \"name\", \"gender\", \"status\", \"total\", \"discount\", \"id\", \"province\", \"district\", \"ward\"",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderV1Path}}/admin/:user_id",
+							"host": [
+								"{{orderV1Path}}"
+							],
+							"path": [
+								"admin",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "rating",
+									"value": "",
+									"description": "paging. cursor",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "cursor",
+									"disabled": true
+								},
+								{
+									"key": "marker",
+									"value": "0",
+									"description": "ignore if cursor != null",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "6",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "phone_0775702201",
+									"description": "\"provider_id\", \"user_id\", \"name\", \"gender\", \"status\", \"id\"",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "gender_0",
+									"description": "\"provider_id\", \"user_id\", \"name\", \"gender\", \"status\", \"id\"",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "gender_true",
+									"description": "\"name\", \"gender\", \"status\", \"phone\", \"province\", \"district\", \"ward\", \"street\", \"quantity\"",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"description": "\"name\", \"gender\", \"status\", \"phone\", \"province\", \"district\", \"ward\", \"street\", \"quantity\"",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"description": "\"provider_id\", \"user_id\", \"name\", \"gender\", \"status\", \"total\", \"discount\", \"id\", \"province\", \"district\", \"ward\"",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"description": "\"provider_id\", \"user_id\", \"name\", \"gender\", \"status\", \"total\", \"discount\", \"id\", \"province\", \"district\", \"ward\"",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Preview",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderV1Path}}/admin/:user_id/preview",
+							"host": [
+								"{{orderV1Path}}"
+							],
+							"path": [
+								"admin",
+								":user_id",
+								"preview"
+							],
+							"query": [
+								{
+									"key": "rating",
+									"value": "",
+									"description": "paging. cursor",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "cursor",
+									"disabled": true
+								},
+								{
+									"key": "marker",
+									"value": "0",
+									"description": "ignore if cursor != null",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "6",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "phone_0775702201",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "gender_0",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "gender_true",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
 									"disabled": true
 								}
 							],
@@ -4628,7 +4497,7 @@
 							"variable": [
 								{
 									"key": "order_id",
-									"value": "25"
+									"value": "2"
 								}
 							]
 						}
@@ -4710,7 +4579,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"status\": \"WAITING\"\r\n}",
+							"raw": "{\r\n    \"status\": \"DELIVERED\",\r\n    \"image\": \"dfasdfasdf\" // Require if status is DELIVERED\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4724,6 +4593,70 @@
 							],
 							"path": [
 								":order_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"DELIVERED\",\r\n    \"payment_id\": 3,\r\n    \"payment_url\": \"ád\",\r\n    \"verify_delivered\": 1,\r\n    \"delivered_image\": \"ưqe\",\r\n    \"delivered_date\": \"2022-11-09\"\r\n\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderV1Path}}/:order_id/update",
+							"host": [
+								"{{orderV1Path}}"
+							],
+							"path": [
+								":order_id",
+								"update"
 							],
 							"query": [
 								{
@@ -4818,6 +4751,76 @@
 					"response": []
 				},
 				{
+					"name": "Verify Delivered Order (User)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderV1Path}}/:order_id/user/:user_id/verify",
+							"host": [
+								"{{orderV1Path}}"
+							],
+							"path": [
+								":order_id",
+								"user",
+								":user_id",
+								"verify"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "9"
+								},
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Order",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
@@ -4883,10 +4886,10 @@
 			]
 		},
 		{
-			"name": "Discount",
+			"name": "Payment",
 			"item": [
 				{
-					"name": "List",
+					"name": "List By UserID",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -4913,108 +4916,17 @@
 							}
 						},
 						"url": {
-							"raw": "{{discountV1Path}}",
+							"raw": "{{paymentV1Path}}/:payment_id",
 							"host": [
-								"{{discountV1Path}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "List By ProviderID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{discountV1Path}}/provider/:provider_id",
-							"host": [
-								"{{discountV1Path}}"
+								"{{paymentV1Path}}"
 							],
 							"path": [
-								"provider",
-								":provider_id"
-							],
-							"query": [
-								{
-									"key": "rating",
-									"value": "",
-									"description": "paging. cursor",
-									"disabled": true
-								},
-								{
-									"key": "type",
-									"value": "cursor",
-									"disabled": true
-								},
-								{
-									"key": "marker",
-									"value": "0",
-									"description": "ignore if cursor != null",
-									"disabled": true
-								},
-								{
-									"key": "limit",
-									"value": "6",
-									"disabled": true
-								},
-								{
-									"key": "fields[]",
-									"value": "phone_0775702201",
-									"disabled": true
-								},
-								{
-									"key": "fields[]",
-									"value": "gender_0",
-									"disabled": true
-								},
-								{
-									"key": "search[]",
-									"value": "gender_true",
-									"disabled": true
-								},
-								{
-									"key": "search[]",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "sorts[]",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "sorts[]",
-									"value": "",
-									"disabled": true
-								}
+								":payment_id"
 							],
 							"variable": [
 								{
-									"key": "provider_id",
-									"value": null
+									"key": "payment_id",
+									"value": "3"
 								}
 							]
 						}
@@ -5022,7 +4934,7 @@
 					"response": []
 				},
 				{
-					"name": "Discount",
+					"name": "Payment",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
 					},
@@ -5046,108 +4958,14 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "files",
-									"type": "file",
-									"src": []
-								},
-								{
-									"key": "name",
-									"value": "Ngừi lạ",
-									"type": "text"
-								},
-								{
-									"key": "descriptions",
-									"value": "Gud, Gất Gud",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"account_id\": \"2erwe\",\r\n    \"email\": \"abc@gmail.com\",\r\n    \"name\": \"Nguyễn Văn A\",\r\n    \"status\": true\r\n}"
 						},
 						"url": {
-							"raw": "{{discountV1Path}}/:provider_id",
-							"host": [
-								"{{discountV1Path}}"
-							],
-							"path": [
-								":provider_id"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "provider_id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validate Discount",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {},
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "files",
-									"type": "file",
-									"src": []
-								},
-								{
-									"key": "name",
-									"value": "Ngừi lạ",
-									"type": "text"
-								},
-								{
-									"key": "descriptions",
-									"value": "Gud, Gất Gud",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{orderV1Path}}/:discount_code",
+							"raw": "{{orderV1Path}}",
 							"host": [
 								"{{orderV1Path}}"
 							],
-							"path": [
-								":discount_code"
-							],
 							"query": [
 								{
 									"key": "",
@@ -5158,75 +4976,6 @@
 									"key": "",
 									"value": "",
 									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "discount_code",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Discount",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{discountV1Path}}/:discount_id",
-							"host": [
-								"{{discountV1Path}}"
-							],
-							"path": [
-								":discount_id"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "discount_id",
-									"value": null
 								}
 							]
 						}
@@ -5433,6 +5182,88 @@
 								},
 								{
 									"key": "fields[]",
+									"value": "rating_4",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "name_a",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "category_id",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Banner's Product Preview",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productV1Path}}/banner/:banner_id/preview",
+							"host": [
+								"{{productV1Path}}"
+							],
+							"path": [
+								"banner",
+								":banner_id",
+								"preview"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "cursor",
+									"disabled": true
+								},
+								{
+									"key": "marker",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "6",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
 									"value": "",
 									"disabled": true
 								},
@@ -5464,8 +5295,8 @@
 							],
 							"variable": [
 								{
-									"key": "category_id",
-									"value": "1"
+									"key": "banner_id",
+									"value": "2"
 								}
 							]
 						}
@@ -5500,7 +5331,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{productV1Path}}/preview",
+							"raw": "{{productV1Path}}/preview?marker=1&limit=8&fields[]=provider_id_4",
 							"host": [
 								"{{productV1Path}}"
 							],
@@ -5515,13 +5346,11 @@
 								},
 								{
 									"key": "marker",
-									"value": "10",
-									"disabled": true
+									"value": "1"
 								},
 								{
 									"key": "limit",
-									"value": "6",
-									"disabled": true
+									"value": "8"
 								},
 								{
 									"key": "fields[]",
@@ -5530,12 +5359,11 @@
 								},
 								{
 									"key": "fields[]",
-									"value": "",
-									"disabled": true
+									"value": "provider_id_4"
 								},
 								{
 									"key": "search[]",
-									"value": "",
+									"value": "name_Pdf",
 									"disabled": true
 								},
 								{
@@ -5734,7 +5562,7 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": "1"
+									"value": "12"
 								}
 							]
 						}
@@ -5767,7 +5595,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"abc\",\r\n    \"discount\": 20,\r\n    \"price\": 20000,\r\n    \"media\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"priority\": 2,\r\n            \"media_path\": \"mnp\",\r\n            \"media_type\": \"IMAGE\"\r\n        }\r\n    ],\r\n    \"specifications\": [\r\n        {\r\n            \"specification\": {\r\n                \"properties\": \"Hường xuân\"\r\n            },\r\n            \"options\": [\r\n                {\r\n                    \"name\": \"Him\",\r\n                    \"price\": 20000,\r\n                    \"quantity\": 100\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"specification\": {\r\n                \"properties\": \"Hạ mùa\"\r\n            },\r\n            \"options\": [\r\n                {\r\n                    \"name\": \"Him\",\r\n                    \"price\": 20000,\r\n                    \"quantity\": 100\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"name\": \"abc\",\r\n            \"path\": \"mnp\"\r\n        }\r\n    ]\r\n}"
+							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"abc\",\r\n    \"discount\": 20,\r\n    \"price\": 20000,\r\n    \"media\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"priority\": 2,\r\n            \"media_path\": \"mnp\",\r\n            \"media_type\": \"IMAGE\"\r\n        }\r\n    ],\r\n    \"specification\": {\r\n        \"properties\": \"Hường xuân\"\r\n    },\r\n    \"options\": [\r\n        {\r\n            \"name\": \"Him\",\r\n            \"price\": 20000,\r\n            \"quantity\": 100\r\n        },\r\n        {\r\n            \"name\": \"Who\",\r\n            \"price\": 20000,\r\n            \"quantity\": 100\r\n        },\r\n        {\r\n            \"name\": \"Whom\",\r\n            \"price\": 20000,\r\n            \"quantity\": 100\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"name\": \"abc\",\r\n            \"path\": \"mnp\"\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
 							"raw": "{{productV1Path}}/provider/:provider_id/user/:user_id",
@@ -6075,7 +5903,7 @@
 					"response": []
 				},
 				{
-					"name": "Product",
+					"name": "Product Full Update",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
 					},
@@ -6100,7 +5928,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5\r\n}",
+							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5,\r\n    \"options\": [\r\n        {\r\n            \"id\": 1,\r\n            \"option\": {\r\n                \"name\": \"Him\",\r\n                \"price\": 20000,\r\n                \"quantity\": 100\r\n            }\r\n        }\r\n\r\n    ],\r\n    \"media\": [\r\n        {\r\n            \"id\": 1,\r\n            \"media_path\": \"asdasd\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"id\": 1,\r\n            \"description\": {\r\n                \"name\": \"zxc\",\r\n                \"public_id\": \"asdasd\",\r\n                \"descriptions_path\": \"ád\"\r\n            }\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -6202,75 +6030,6 @@
 					"response": []
 				},
 				{
-					"name": "Product Specifications",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"eNViDAT\",\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": true,\r\n    \"email\": \"ngvidat@gmail.com\",\r\n    \"Phone\": \"0775702201\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{productV1Path}}/:product_id/specification/:specification_id",
-							"host": [
-								"{{productV1Path}}"
-							],
-							"path": [
-								":product_id",
-								"specification",
-								":specification_id"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "product_id",
-									"value": null
-								},
-								{
-									"key": "specification_id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Product Descriptions",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
@@ -6295,13 +6054,19 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"eNViDAT\",\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": true,\r\n    \"email\": \"ngvidat@gmail.com\",\r\n    \"Phone\": \"0775702201\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "asd",
+									"type": "text"
+								},
+								{
+									"key": "descriptions_path",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/341097712_719094009906040_8048596510980720670_n.jpg"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{productV1Path}}/:product_id/descriptions/:description_id",
@@ -6328,11 +6093,11 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": null
+									"value": "1"
 								},
 								{
 									"key": "description_id",
-									"value": null
+									"value": "17"
 								}
 							]
 						}
@@ -6431,6 +6196,335 @@
 							"variable": [
 								{
 									"key": "provider_id",
+									"value": "55"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Channel List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{chatsV1Path}}/channels/users/:user_id?marker=2&limit=2",
+							"host": [
+								"{{chatsV1Path}}"
+							],
+							"path": [
+								"channels",
+								"users",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "marker",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Channel's messages List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{chatsV1Path}}/channels/user_a/:user_id_a/user_b/:user_id_b/?sorts[]=id_DESC",
+							"host": [
+								"{{chatsV1Path}}"
+							],
+							"path": [
+								"channels",
+								"user_a",
+								":user_id_a",
+								"user_b",
+								":user_id_b",
+								""
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "cursor",
+									"disabled": true
+								},
+								{
+									"key": "marker",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "8",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "user_id_1",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "to_user_id_22",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "name_Pdf",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "id_DESC"
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id_a",
+									"value": "1"
+								},
+								{
+									"key": "user_id_b",
+									"value": "22"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    const resJson = pm.response.json();",
+									"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+									"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+									"    console.log(pm.variables.get(\"access_token\"));",
+									"    console.log(pm.variables.get(\"refresh_token\"));",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"to_user_id\": 1,\n    \"content\": \"sadasd\",\n    \"seen\": false,\n    \"type\": \"TEXT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{chatsV1Path}}",
+							"host": [
+								"{{chatsV1Path}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Notification List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{notificationV1Path}}/users/:user_id",
+							"host": [
+								"{{notificationV1Path}}"
+							],
+							"path": [
+								"users",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Seen Notify",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{notificationV1Path}}/:notify_id/user/:user_id",
+							"host": [
+								"{{notificationV1Path}}"
+							],
+							"path": [
+								":notify_id",
+								"user",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "notify_id",
+									"value": "2"
+								},
+								{
+									"key": "user_id",
 									"value": "1"
 								}
 							]
@@ -6439,6 +6533,162 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Payment Detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "d7515382-ec14-11ed-a967-deea53ba3605",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"district_id\": 3695\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://online-gateway.ghn.vn/shiip/public-api/master-data/ward",
+					"protocol": "https",
+					"host": [
+						"online-gateway",
+						"ghn",
+						"vn"
+					],
+					"path": [
+						"shiip",
+						"public-api",
+						"master-data",
+						"ward"
+					],
+					"query": [
+						{
+							"key": "cursor",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "field",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Detail Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "d7515382-ec14-11ed-a967-deea53ba3605",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"district_id\": 3695\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://online-gateway.ghn.vn/shiip/public-api/master-data/ward",
+					"protocol": "https",
+					"host": [
+						"online-gateway",
+						"ghn",
+						"vn"
+					],
+					"path": [
+						"shiip",
+						"public-api",
+						"master-data",
+						"ward"
+					],
+					"query": [
+						{
+							"key": "cursor",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "field",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

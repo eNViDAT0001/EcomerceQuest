@@ -215,7 +215,7 @@ func router(r *gin.Engine) {
 		paymentGroup := v1.Group("/payments")
 		{
 			paymentGroup.POST("", allHandler.paymentHandler.CreatePayment())
-			cartGroup.GET("/:payment_id", allHandler.paymentHandler.GetPaymentByID())
+			paymentGroup.GET("/:payment_id", allHandler.paymentHandler.GetPaymentByID())
 		}
 
 		orderGroup := v1.Group("/orders")

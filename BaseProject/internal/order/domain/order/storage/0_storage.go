@@ -26,7 +26,7 @@ func (s orderStorage) ListUnPayOrder(ctx context.Context) ([]entities.Order, err
 func (s orderStorage) ListUnConfirmedDeliveredOrder(ctx context.Context) ([]entities.Order, error) {
 	result := make([]entities.Order, 0)
 	db := wrap_gorm.GetDB()
-	deadline := time.Now().Add(-48 * time.Hour)
+	deadline := time.Now().Add(-24 * time.Hour)
 	err := db.Model(entities.Order{}).
 		Where("status = ?", entities.DeliveredOrder).
 		Where("verify_delivered = 0").

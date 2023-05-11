@@ -1,15 +1,19 @@
 package entities
 
 import (
-	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
+	"gorm.io/gorm"
+	"time"
 )
 
 type Payment struct {
-	wrap_gorm.SoftDeleteModel
-	AccountID uint   `gorm:"column:account_id" json:"account_id"`
-	Email     uint   `gorm:"column:email" json:"email"`
-	Name      string `gorm:"column:name" json:"name"`
-	Status    *bool  `gorm:"column:status" json:"status"`
+	ID        string         `gorm:"primarykey" json:"id"`
+	AccountID string         `gorm:"column:account_id" json:"account_id"`
+	Email     string         `gorm:"column:email" json:"email"`
+	Name      string         `gorm:"column:name" json:"name"`
+	Status    *bool          `gorm:"column:status" json:"status"`
+	CreatedAt time.Time      `json:"created_at"`
+	UpdatedAt time.Time      `json:"updated_at"`
+	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted_at"`
 }
 
 func (Payment) WithFields() []string {
