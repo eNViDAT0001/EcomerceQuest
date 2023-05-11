@@ -4889,7 +4889,7 @@
 			"name": "Payment",
 			"item": [
 				{
-					"name": "List By UserID",
+					"name": "Detail",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -4926,7 +4926,7 @@
 							"variable": [
 								{
 									"key": "payment_id",
-									"value": "3"
+									"value": "abc"
 								}
 							]
 						}
@@ -4959,12 +4959,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"account_id\": \"2erwe\",\r\n    \"email\": \"abc@gmail.com\",\r\n    \"name\": \"Nguyễn Văn A\",\r\n    \"status\": true\r\n}"
+							"raw": "{\r\n    \"id\": \"abc\",\r\n    \"account_id\": \"2\",\r\n    \"email\": \"abc@gmail.com\",\r\n    \"name\": \"Nguyễn Văn A\",\r\n    \"status\": true\r\n}"
 						},
 						"url": {
-							"raw": "{{orderV1Path}}",
+							"raw": "{{paymentV1Path}}",
 							"host": [
-								"{{orderV1Path}}"
+								"{{paymentV1Path}}"
 							],
 							"query": [
 								{
