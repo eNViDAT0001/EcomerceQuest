@@ -29,12 +29,12 @@ func (s *orderHandler) CreateOrder() func(ctx *gin.Context) {
 			orderSto.Discount = 10
 		}
 
-		err = s.orderUC.CreateOrder(newCtx, orderSto, itemsSto, input.CartItemsIDS)
+		createdOrders, err := s.orderUC.CreateOrder(newCtx, orderSto, itemsSto, input.CartItemsIDS)
 		if err != nil {
 			cc.ResponseError(err)
 			return
 		}
 
-		cc.Ok("Make Order Success")
+		cc.Ok(createdOrders)
 	}
 }

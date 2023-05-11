@@ -16,20 +16,20 @@ import (
 	"strconv"
 )
 
-func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []orderItemsIO.CreateOrderItemForm, cartItemsIDs []uint) (err error) {
-	createdOrders, err := u.orderSto.CreateOrder(ctx, order, items, cartItemsIDs)
+func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []orderItemsIO.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error) {
+	createdOrders, err = u.orderSto.CreateOrder(ctx, order, items, cartItemsIDs)
 	providerIDs := make([]uint, 0)
 	for _, createdOrder := range createdOrders {
 		providerIDs = append(providerIDs, createdOrder.ProviderID)
 	}
 	users, err := u.userSto.GetListByProviderID(ctx, providerIDs)
 	if err != nil {
-		return err
+		return createdOrders, err
 	}
 
 	buyer, err := u.userSto.GetUserDetailByID(ctx, order.UserID)
 	if err != nil {
-		return err
+		return createdOrders, err
 	}
 
 	jobs := make([]event_background.Job, 0)
@@ -113,7 +113,7 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 	}
 	event_background.GetBackGroundJobs().Group <- event_background.NewGroup(true, jobs...)
 
-	return err
+	return createdOrders, err
 }
 
 func AddNotificationEvent(ctx context.Context, notification notifyIO.NotificationInput, CreateNotification func(context.Context, notifyIO.NotificationInput) (notifyIO.NotificationInput, error)) error {
