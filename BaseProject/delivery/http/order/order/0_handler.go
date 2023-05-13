@@ -76,6 +76,29 @@ func (s *orderHandler) UpdateOrder() func(ctx *gin.Context) {
 		cc.Ok("Update Status success")
 	}
 }
+func (s *orderHandler) UpdateOrderPayment() func(ctx *gin.Context) {
+	return func(c *gin.Context) {
+		cc := request.FromContext(c)
+		newCtx := context.Background()
+
+		var input io2.UpdateOrderPaymentReq
+		if err := cc.BindJSON(&input); err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		inputUC := io.UpdateOrderPaymentForm{
+			PaymentID:  input.PaymentID,
+			PaymentURL: input.PaymentURL,
+		}
+		err := s.orderUC.UpdateOrderPayment(newCtx, input.OrderIDs, inputUC)
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		cc.Ok("Update Order Payment success")
+	}
+}
 
 func (s *orderHandler) VerifyDeliveredStatus() func(ctx *gin.Context) {
 	return func(c *gin.Context) {

@@ -27,6 +27,7 @@ type UseCase interface {
 	UpdateOrderStatus(ctx context.Context, orderID uint, status entities.OrderStatus) error
 	UpdateDeliveredOrderStatus(ctx context.Context, orderID uint, image string) error
 	UpdateOrder(ctx context.Context, orderID uint, input io.UpdateOrderForm) error
+	UpdateOrderPayment(ctx context.Context, orderID []uint, input io.UpdateOrderPaymentForm) error
 	CancelOrder(ctx context.Context, orderID uint) error
 	DeleteOrder(ctx context.Context, orderID uint) error
 	DeleteOrders(ctx context.Context, ids []uint) error

@@ -27,24 +27,55 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 	if err != nil {
 		return nil, err
 	}
+
+	senderChannels := map[uint][]uint{}
+	receiverChannels := map[uint][]uint{}
 	for _, channel := range channels {
+		flag := false
+		for _, v := range senderChannels[channel.UserID] {
+			if v == channel.UserID {
+				receiverChannels[channel.UserID] = append(receiverChannels[channel.UserID], v)
+				flag = true
+				break
+			}
+		}
+		if !flag {
+			senderChannels[channel.UserID] = append(senderChannels[channel.UserID], channel.ToUserID)
+		}
+	}
+
+	for k, v := range senderChannels {
 		message := io.MessageChannel{}
 		query := db.Model(entities.Message{}).
 			Select("User.id AS channel_id, User.name, User.avatar, Message.id, Message.user_id, Message.content, Message.to_user_id, Message.seen, Message.type, Message.created_at").
-			Where("Message.user_id = ? AND Message.to_user_id = ?", channel.UserID, channel.ToUserID).
-			Order("Message.created_at DESC, Message.seen DESC")
-		if channel.UserID != userID {
-			query = query.Joins("JOIN User ON User.id = Message.user_id")
+			Where("Message.user_id = ? AND Message.to_user_id IN ?", k, v)
+		if fromIDs, ok := receiverChannels[k]; ok {
+			query = query.Or("Message.user_id IN ? AND Message.to_user_id = ?", fromIDs, k).
+				Joins("JOIN User ON User.id = Message.to_user_id")
 		} else {
-			query = query.Joins("JOIN User ON User.id = Message.to_user_id")
+			query = query.Joins("JOIN User ON User.id = Message.user_id")
 		}
-		query = query.Scan(&message)
+		query = query.Order("Message.id DESC, Message.seen DESC").Scan(&message)
 		if query.Error != nil {
 			return nil, query.Error
 		}
 		result = append(result, message)
 	}
 	return result, nil
+}
+func remove(slice []uint, s uint) []uint {
+	index := 0
+	for i, u := range slice {
+		if u == s {
+			index = i
+			break
+		}
+	}
+
+	if index == 0 {
+		return slice
+	}
+	return append(slice[:index], slice[index+1:]...)
 }
 func (s *chatStorage) ListMessageByChannel(ctx context.Context, userID uint, toID uint, filter *paging.ParamsInput) ([]entities.Message, error) {
 	result := make([]entities.Message, 0)

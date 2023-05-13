@@ -157,9 +157,13 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 		}
 
 		log.Println("New Client connect")
-		socketManager := GetManager()
-		client := NewSocketClient(conn, socketManager, strconv.Itoa(userID))
-		socketManager.AddClient(client)
+		oldClient, ok := m.Clients[cc.Param("user_id")]
+		if ok {
+			m.RemoveClient(oldClient)
+		}
+
+		client := NewSocketClient(conn, m, strconv.Itoa(userID))
+		m.AddClient(client)
 
 		go client.ReadMessage()
 		go client.WriteMessage()

@@ -10,6 +10,7 @@ type Client interface {
 	AddEvent(event Event)
 	WriteMessage()
 	ReadMessage()
+
 	GetConnection() *websocket.Conn
 	Pong(pongMsg string) error
 }

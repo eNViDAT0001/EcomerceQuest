@@ -34,6 +34,7 @@ type Storage interface {
 
 	UpdateOrderStatus(ctx context.Context, orderID uint, status entities.OrderStatus) error
 	UpdateOrder(ctx context.Context, orderID uint, input io.UpdateOrderForm) error
+	UpdateOrderPayment(ctx context.Context, orderIDs []uint, input io.UpdateOrderPaymentForm) error
 	CancelOrder(ctx context.Context, orderID uint) error
 	DeleteOrder(ctx context.Context, orderID uint) error
 	DeleteOrders(ctx context.Context, ids []uint) error

@@ -226,6 +226,7 @@ func router(r *gin.Engine) {
 			orderGroup.POST("", allHandler.orderHandler.CreateOrder())
 			orderGroup.PATCH("/:order_id", allHandler.orderHandler.UpdateOrderStatus())
 			orderGroup.PATCH("/:order_id/update", allHandler.orderHandler.UpdateOrder())
+			orderGroup.PATCH("/payment", allHandler.orderHandler.UpdateOrderPayment())
 			orderGroup.PATCH("/:order_id/user/:user_id/cancel", allHandler.orderHandler.CancelOrder())
 			orderGroup.PATCH("/:order_id/user/:user_id/verify", allHandler.orderHandler.VerifyDeliveredStatus())
 			orderGroup.DELETE("/:order_id", allHandler.orderHandler.DeleteOrder())

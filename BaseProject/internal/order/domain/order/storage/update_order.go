@@ -15,3 +15,11 @@ func (s orderStorage) UpdateOrder(ctx context.Context, orderID uint, input io.Up
 	}
 	return nil
 }
+func (s orderStorage) UpdateOrderPayment(ctx context.Context, orderIDs []uint, input io.UpdateOrderPaymentForm) error {
+	db := wrap_gorm.GetDB()
+	err := db.Model(entities.Order{}).Where("id IN ?", orderIDs).Updates(&input).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}

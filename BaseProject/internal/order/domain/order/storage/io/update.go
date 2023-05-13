@@ -24,3 +24,8 @@ type UpdateOrderForm struct {
 	VerifyDelivered    *bool           `json:"verify_delivered"`
 	DeliveredDate      *datatypes.Time `json:"delivered_date"`
 }
+
+type UpdateOrderPaymentForm struct {
+	PaymentID  *string `json:"payment_id"`
+	PaymentURL *string `json:"payment_url"`
+}

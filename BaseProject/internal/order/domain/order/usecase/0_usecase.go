@@ -40,6 +40,10 @@ func (u *orderUseCase) UpdateOrder(ctx context.Context, orderID uint, input io.U
 	return u.orderSto.UpdateOrder(ctx, orderID, input)
 }
 
+func (u *orderUseCase) UpdateOrderPayment(ctx context.Context, orderID []uint, input io.UpdateOrderPaymentForm) error {
+	return u.orderSto.UpdateOrderPayment(ctx, orderID, input)
+}
+
 func (u *orderUseCase) VerifyDeliveredOrder(ctx context.Context, orderID uint, userID uint) error {
 	return u.orderSto.VerifyDeliveredOrder(ctx, orderID, userID)
 }

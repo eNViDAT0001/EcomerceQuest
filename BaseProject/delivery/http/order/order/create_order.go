@@ -34,7 +34,11 @@ func (s *orderHandler) CreateOrder() func(ctx *gin.Context) {
 			cc.ResponseError(err)
 			return
 		}
+		orderIDs := make([]uint, len(createdOrders))
+		for _, order := range createdOrders {
+			orderIDs = append(orderIDs, order.ID)
+		}
 
-		cc.Ok(createdOrders)
+		cc.Ok(orderIDs)
 	}
 }
