@@ -8,80 +8,71 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/chat/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user"
 )
 
 type chatStorage struct {
+	userSto user.Storage
 }
 
-func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) ([]io.MessageChannel, error) {
-	result := make([]io.MessageChannel, 0)
+func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) ([]io.ChatRoom, error) {
+	chatRooms := make([]io.ChatRoom, 0)
 	db := wrap_gorm.GetDB()
+	query := db.Model(entities.ChatRoom{}).
+		Select("ChatRoom.id, Message.from_user_id, Message.to_user_id, Message.content, Message.seen, Message.type, Message.created_at").
+		Joins("JOIN Message ON Message.chat_room_id = ChatRoom.id").
+		Where("Message.id = (SELECT MAX(Message.id) FROM Message WHERE Message.chat_room_id = ChatRoom.id) AND (Message.from_user_id = ? OR Message.to_user_id = ?) AND Message.deleted_at IS NULL", userID, userID)
+	paging_query.SetPagingQuery(&filter, entities.Message{}.TableName(), query)
 
-	channels := make([]io.Channel, 0)
-	err := db.Raw("SELECT DISTINCT Message.user_id, Message.to_user_id "+
-		"FROM Message WHERE (Message.user_id, Message.to_user_id) "+
-		"IN ( SELECT Message.user_id, Message.to_user_id FROM Message GROUP BY Message.user_id, Message.to_user_id ORDER BY Message.created_at DESC, Message.seen DESC ) "+
-		"AND (Message.user_id = ? OR Message.to_user_id = ?) LIMIT ? OFFSET ?", userID, userID, filter.PerPage(), paging.Offset(filter.Current(), filter.PerPage())).
-		Find(&channels).
-		Error
+	err := query.Order("Message.id DESC").Scan(&chatRooms).Error
 	if err != nil {
 		return nil, err
 	}
+	fromUserIDsStorage := map[uint][]uint{}
+	for i, chatRoom := range chatRooms {
 
-	senderChannels := map[uint][]uint{}
-	receiverChannels := map[uint][]uint{}
-	for _, channel := range channels {
-		flag := false
-		for _, v := range senderChannels[channel.UserID] {
-			if v == channel.UserID {
-				receiverChannels[channel.UserID] = append(receiverChannels[channel.UserID], v)
-				flag = true
+		chatRoomExist := false
+		if _, ok := fromUserIDsStorage[chatRoom.FromUserID]; ok {
+			for _, toUserID := range fromUserIDsStorage[chatRoom.FromUserID] {
+				if toUserID == chatRoom.ToUserID {
+					chatRoomExist = true
+					break
+				}
+			}
+			if chatRoomExist {
 				break
 			}
 		}
-		if !flag {
-			senderChannels[channel.UserID] = append(senderChannels[channel.UserID], channel.ToUserID)
+		if !chatRoomExist {
+			fromUserIDsStorage[chatRoom.FromUserID] = append(fromUserIDsStorage[chatRoom.FromUserID], chatRoom.ToUserID)
 		}
+
+		if chatRoom.FromUserID == userID {
+			channelUser, err := s.userSto.GetUserDetailByID(ctx, chatRoom.ToUserID)
+			if err != nil {
+				return nil, err
+			}
+			chatRooms[i].Name = *channelUser.Name
+			chatRooms[i].Avatar = *channelUser.Avatar
+			continue
+		}
+
+		channelUser, err := s.userSto.GetUserDetailByID(ctx, chatRoom.FromUserID)
+		if err != nil {
+			return nil, err
+		}
+		chatRooms[i].Name = *channelUser.Name
+		chatRooms[i].Avatar = *channelUser.Avatar
 	}
 
-	for k, v := range senderChannels {
-		message := io.MessageChannel{}
-		query := db.Model(entities.Message{}).
-			Select("User.id AS channel_id, User.name, User.avatar, Message.id, Message.user_id, Message.content, Message.to_user_id, Message.seen, Message.type, Message.created_at").
-			Where("Message.user_id = ? AND Message.to_user_id IN ?", k, v)
-		if fromIDs, ok := receiverChannels[k]; ok {
-			query = query.Or("Message.user_id IN ? AND Message.to_user_id = ?", fromIDs, k).
-				Joins("JOIN User ON User.id = Message.to_user_id")
-		} else {
-			query = query.Joins("JOIN User ON User.id = Message.user_id")
-		}
-		query = query.Order("Message.id DESC, Message.seen DESC").Scan(&message)
-		if query.Error != nil {
-			return nil, query.Error
-		}
-		result = append(result, message)
-	}
-	return result, nil
+	return chatRooms, nil
 }
-func remove(slice []uint, s uint) []uint {
-	index := 0
-	for i, u := range slice {
-		if u == s {
-			index = i
-			break
-		}
-	}
 
-	if index == 0 {
-		return slice
-	}
-	return append(slice[:index], slice[index+1:]...)
-}
 func (s *chatStorage) ListMessageByChannel(ctx context.Context, userID uint, toID uint, filter *paging.ParamsInput) ([]entities.Message, error) {
 	result := make([]entities.Message, 0)
 	db := wrap_gorm.GetDB()
 	query := db.Model(entities.Message{}).
-		Where("user_id = ? AND to_user_id = ?", userID, toID)
+		Where("from_user_id = ? AND to_user_id = ?", userID, toID)
 
 	paging_query.SetPagingQuery(filter, entities.Message{}.TableName(), query)
 
@@ -97,8 +88,8 @@ func (s *chatStorage) CountListChannel(ctx context.Context, userID uint, filter 
 	db := wrap_gorm.GetDB()
 
 	query := db.Model(entities.Message{}).
-		Select("COUNT(DISTINCT Message.user_id, Message.to_user_id)").
-		Where("user_id = ? OR to_user_id = ?", userID, userID)
+		Select("COUNT(DISTINCT Message.from_user_id, Message.to_user_id)").
+		Where("from_user_id = ? OR to_user_id = ?", userID, userID)
 
 	paging_query.SetCountListPagingQuery(&filter, entities.Message{}.TableName(), query)
 
@@ -111,7 +102,19 @@ func (s *chatStorage) CountListChannel(ctx context.Context, userID uint, filter 
 
 func (s *chatStorage) Create(ctx context.Context, input io.MessageInput) (io.MessageInput, error) {
 	db := wrap_gorm.GetDB()
-	err := db.Table(entities.Message{}.TableName()).Create(&input).Error
+	if input.ChatRoomID != 0 {
+		err := db.Table(entities.Message{}.TableName()).Create(&input).Error
+		return input, err
+	}
+
+	var chatRoom entities.ChatRoom
+	err := db.Table(entities.ChatRoom{}.TableName()).Create(&chatRoom).Error
+	if err != nil {
+		return input, err
+	}
+
+	input.ChatRoomID = chatRoom.ID
+	err = db.Table(entities.Message{}.TableName()).Create(&input).Error
 	return input, err
 }
 func (s *chatStorage) Update(ctx context.Context, id uint, input io.MessageUpdateInput) error {
@@ -126,7 +129,7 @@ func (s chatStorage) SeenMessages(ctx context.Context, id uint, userID uint, toI
 	db := wrap_gorm.GetDB()
 	err := db.Model(&entities.Message{}).
 		Where("id <= ?", id).
-		Where("user_id = ?", userID).
+		Where("from_user_id = ?", userID).
 		Where("to_user_id = ?", userID).
 		Where("seen = ?", false).
 		Update("seen", true).Error
@@ -137,7 +140,7 @@ func (s chatStorage) Delete(ctx context.Context, id uint, userID uint) error {
 	db := wrap_gorm.GetDB()
 	err := db.Table(entities.Message{}.TableName()).
 		Where("id = ?", id).
-		Where("user_id = ?", userID).
+		Where("from_user_id = ?", userID).
 		Delete(entities.Message{}).Error
 	return err
 }
@@ -146,7 +149,7 @@ func (s chatStorage) List(ctx context.Context, input io.ListMessageInput) ([]ent
 	result := make([]entities.Message, 0)
 	db := wrap_gorm.GetDB()
 
-	query := db.Model(entities.Message{}).Where("(user_id = ? AND to_user_id = ?) OR (user_id = ? AND to_user_id = ?)", input.UserIDA, input.UserIDB, input.UserIDB, input.UserIDA)
+	query := db.Model(entities.Message{}).Where("(from_user_id = ? AND to_user_id = ?) OR (from_user_id = ? AND to_user_id = ?)", input.UserIDA, input.UserIDB, input.UserIDB, input.UserIDA)
 
 	paging_query.SetPagingQuery(&input.Paging, entities.Message{}.TableName(), query)
 
@@ -161,7 +164,7 @@ func (s chatStorage) CountList(ctx context.Context, input io.ListMessageInput) (
 	var count int64
 	db := wrap_gorm.GetDB()
 
-	query := db.Model(entities.Message{}).Where("(user_id = ? AND to_user_id = ?) OR (user_id = ? AND to_user_id = ?)", input.UserIDA, input.UserIDB, input.UserIDB, input.UserIDA)
+	query := db.Model(entities.Message{}).Where("(from_user_id = ? AND to_user_id = ?) OR (from_user_id = ? AND to_user_id = ?)", input.UserIDA, input.UserIDB, input.UserIDB, input.UserIDA)
 
 	paging_query.SetCountListPagingQuery(&input.Paging, entities.Message{}.TableName(), query)
 
@@ -172,6 +175,6 @@ func (s chatStorage) CountList(ctx context.Context, input io.ListMessageInput) (
 	return count, nil
 }
 
-func NewChatStorage() chat.Storage {
-	return &chatStorage{}
+func NewChatStorage(userSto user.Storage) chat.Storage {
+	return &chatStorage{userSto: userSto}
 }

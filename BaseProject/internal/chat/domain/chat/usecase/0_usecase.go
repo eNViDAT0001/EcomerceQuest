@@ -28,7 +28,7 @@ func (u *chatUseCase) Update(ctx context.Context, id uint, input io.MessageUpdat
 func (u *chatUseCase) Delete(ctx context.Context, id uint, userID uint) error {
 	return u.chatSto.Delete(ctx, id, userID)
 }
-func (u *chatUseCase) ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) (messages []io.MessageChannel, total int64, err error) {
+func (u *chatUseCase) ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) (chatRooms []io.ChatRoom, total int64, err error) {
 	total, err = u.chatSto.CountListChannel(ctx, userID, filter)
 	if err != nil {
 		return nil, 0, err
@@ -36,12 +36,12 @@ func (u *chatUseCase) ListChannel(ctx context.Context, userID uint, filter pagin
 	if total == 0 {
 		return nil, 0, gorm.ErrRecordNotFound
 	}
-	messages, err = u.chatSto.ListChannel(ctx, userID, filter)
+	chatRooms, err = u.chatSto.ListChannel(ctx, userID, filter)
 	if err != nil {
 		return nil, 0, err
 	}
 
-	return messages, total, err
+	return chatRooms, total, err
 }
 func (u *chatUseCase) List(ctx context.Context, input io.ListMessageInput) (messages []entities.Message, total int64, err error) {
 	total, err = u.chatSto.CountList(ctx, input)

@@ -117,7 +117,7 @@ func initHandlerCollection() *HandlerCollection {
 	order_itemUseCase := usecase17.NewOrderItemUseCase(order_itemStorage)
 	order_itemHttpHandler := order_items.NewOrderItemHandler(order_itemUseCase)
 	smtpHttpHandler := smtp.NewSmtpHandler(jwtUseCase, useCase, smtpUseCase)
-	chatStorage := storage17.NewChatStorage()
+	chatStorage := storage17.NewChatStorage(userStorage)
 	chatUseCase := usecase18.NewChatUseCase(chatStorage)
 	chatHttpHandler := chat.NewChatHandler(chatUseCase)
 	notificationHttpHandler := chat2.NewNotificationHandler(notificationUseCase)

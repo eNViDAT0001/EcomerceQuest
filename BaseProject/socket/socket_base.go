@@ -3,6 +3,7 @@ package socket
 import (
 	chatHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/websocket/chat"
 	notifyHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/websocket/notify"
+	userStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/storage"
 
 	chatPKG "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat"
 	chatStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
@@ -19,6 +20,7 @@ var IteratorCollection = wire.NewSet(
 	chatHandlerPKG.NewSocketChatHandler,
 	chatUCPKG.NewChatUseCase,
 	chatStoPKG.NewChatStorage,
+	userStoPKG.NewUserStorage,
 
 	notifyHandlerPKG.NewSocketNotificationHandler,
 	notificationUCPKG.NewNotificationUseCase,

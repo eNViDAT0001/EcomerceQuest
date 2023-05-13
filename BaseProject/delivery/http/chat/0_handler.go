@@ -222,7 +222,7 @@ func (s *chatHandler) ListChannel() func(ctx *gin.Context) {
 
 		paginator.Total = int(total)
 		if paginator.Type == paging.CursorPaging && len(result) > 0 {
-			paginator.Marker = int(result[len(result)-1].ChannelID)
+			paginator.Marker = int(result[len(result)-1].ID)
 		}
 		cc.OkPaging(paginator, result)
 	}
