@@ -148,18 +148,17 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 				return
 			}
 		}
+		log.Println("New Client connect")
+		oldClient, ok := m.Clients[cc.Param("user_id")]
+		if ok {
+			m.RemoveClient(oldClient)
+		}
 
 		// Begin by upgrading the HTTP request
 		conn, err := GetWsServer().Upgrade(cc.Writer, cc.Request, nil)
 		if err != nil {
 			log.Println(err)
 			return
-		}
-
-		log.Println("New Client connect")
-		oldClient, ok := m.Clients[cc.Param("user_id")]
-		if ok {
-			m.RemoveClient(oldClient)
 		}
 
 		client := NewSocketClient(conn, m, strconv.Itoa(userID))

@@ -32,7 +32,7 @@ func (s *socketClient) GetConnection() *websocket.Conn {
 }
 
 func (s *socketClient) WriteMessage() {
-	ticker := time.NewTicker(io.PingInterval)
+	ticker := time.NewTicker(1)
 	defer func() {
 		ticker.Stop()
 		manager.RemoveClient(s)
@@ -65,7 +65,7 @@ func (s *socketClient) WriteMessage() {
 			// Send the Ping
 			if err := s.connection.WriteMessage(websocket.PingMessage, []byte{}); err != nil {
 				log.Println("writemsg: ", err)
-				return // return to break this goroutine triggeing cleanup
+				return // return to break this goroutine triggering cleanup
 			}
 		}
 	}
