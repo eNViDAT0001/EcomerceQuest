@@ -21,39 +21,29 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 	query := db.Model(entities.ChatRoom{}).
 		Select("ChatRoom.id, Message.from_user_id, Message.to_user_id, Message.content, Message.seen, Message.type, Message.created_at").
 		Joins("JOIN Message ON Message.chat_room_id = ChatRoom.id").
-		Where("Message.id = (SELECT MAX(Message.id) FROM Message WHERE Message.chat_room_id = ChatRoom.id) AND (Message.from_user_id = ? OR Message.to_user_id = ?) AND Message.deleted_at IS NULL", userID, userID)
+		Joins("JOIN User ON User.id = Message.from_user_id").
+		Where("Message.id = (SELECT MAX(Message.id) FROM Message WHERE Message.chat_room_id = ChatRoom.id) AND (Message.from_user_id = ? OR Message.to_user_id = ?) AND User.deleted_at IS NULL AND Message.deleted_at IS NULL AND `ChatRoom`.`deleted_at` IS NULL", userID, userID)
 	paging_query.SetPagingQuery(&filter, entities.Message{}.TableName(), query)
 
 	err := query.Order("Message.id DESC").Scan(&chatRooms).Error
 	if err != nil {
 		return nil, err
 	}
-	fromUserIDsStorage := map[uint][]uint{}
 	for i, chatRoom := range chatRooms {
-
-		chatRoomExist := false
-		if _, ok := fromUserIDsStorage[chatRoom.FromUserID]; ok {
-			for _, toUserID := range fromUserIDsStorage[chatRoom.FromUserID] {
-				if toUserID == chatRoom.ToUserID {
-					chatRoomExist = true
-					break
-				}
-			}
-			if chatRoomExist {
-				break
-			}
-		}
-		if !chatRoomExist {
-			fromUserIDsStorage[chatRoom.FromUserID] = append(fromUserIDsStorage[chatRoom.FromUserID], chatRoom.ToUserID)
-		}
 
 		if chatRoom.FromUserID == userID {
 			channelUser, err := s.userSto.GetUserDetailByID(ctx, chatRoom.ToUserID)
 			if err != nil {
 				return nil, err
 			}
-			chatRooms[i].Name = *channelUser.Name
-			chatRooms[i].Avatar = *channelUser.Avatar
+			chatRooms[i].Name = ""
+			chatRooms[i].Avatar = ""
+			if channelUser.Name != nil {
+				chatRooms[i].Name = *channelUser.Name
+			}
+			if channelUser.Avatar != nil {
+				chatRooms[i].Avatar = *channelUser.Avatar
+			}
 			continue
 		}
 
@@ -61,8 +51,14 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 		if err != nil {
 			return nil, err
 		}
-		chatRooms[i].Name = *channelUser.Name
-		chatRooms[i].Avatar = *channelUser.Avatar
+		chatRooms[i].Name = ""
+		chatRooms[i].Avatar = ""
+		if channelUser.Name != nil {
+			chatRooms[i].Name = *channelUser.Name
+		}
+		if channelUser.Avatar != nil {
+			chatRooms[i].Avatar = *channelUser.Avatar
+		}
 	}
 
 	return chatRooms, nil
@@ -84,20 +80,47 @@ func (s *chatStorage) ListMessageByChannel(ctx context.Context, userID uint, toI
 }
 
 func (s *chatStorage) CountListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) (int64, error) {
-	var count int64
 	db := wrap_gorm.GetDB()
-
+	var chatRooms []ChatRoomFk
 	query := db.Model(entities.Message{}).
-		Select("COUNT(DISTINCT Message.from_user_id, Message.to_user_id)").
+		Select("DISTINCT Message.from_user_id, Message.to_user_id").
 		Where("from_user_id = ? OR to_user_id = ?", userID, userID)
 
 	paging_query.SetCountListPagingQuery(&filter, entities.Message{}.TableName(), query)
 
-	err := query.Order("created_at DESC, seen DESC").Scan(&count).Error
+	err := query.Scan(&chatRooms).Error
 	if err != nil {
 		return 0, err
 	}
+
+	fromUserIDsStorage := map[uint][]uint{}
+	for _, chatRoom := range chatRooms {
+		if _, ok := fromUserIDsStorage[chatRoom.ToUserID]; !ok {
+			fromUserIDsStorage[chatRoom.FromUserID] = append(fromUserIDsStorage[chatRoom.FromUserID], chatRoom.ToUserID)
+			continue
+		}
+
+		duplicateKey := false
+		for _, v := range fromUserIDsStorage[chatRoom.ToUserID] {
+			if v == chatRoom.FromUserID {
+				duplicateKey = true
+				continue
+			}
+		}
+		if !duplicateKey {
+			fromUserIDsStorage[chatRoom.ToUserID] = append(fromUserIDsStorage[chatRoom.ToUserID], chatRoom.FromUserID)
+		}
+	}
+	var count int64 = 0
+	for _, toUserIDs := range fromUserIDsStorage {
+		count += int64(len(toUserIDs))
+	}
 	return count, nil
+}
+
+type ChatRoomFk struct {
+	FromUserID uint
+	ToUserID   uint
 }
 
 func (s *chatStorage) Create(ctx context.Context, input io.MessageInput) (io.MessageInput, error) {

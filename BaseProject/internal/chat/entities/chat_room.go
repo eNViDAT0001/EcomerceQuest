@@ -7,13 +7,13 @@ type ChatRoom struct {
 }
 
 func (ChatRoom) WithFields() []string {
-	return []string{"seen", "user_id", "to_user_id"}
+	return []string{}
 }
 func (ChatRoom) SearchFields() []string {
-	return []string{"description"}
+	return []string{}
 }
 func (ChatRoom) SortFields() []string {
-	return []string{"id", "created_at"}
+	return []string{}
 }
 
 func (ChatRoom) TableName() string {
