@@ -21,8 +21,7 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 	query := db.Model(entities.ChatRoom{}).
 		Select("ChatRoom.id, Message.from_user_id, Message.to_user_id, Message.content, Message.seen, Message.type, Message.created_at").
 		Joins("JOIN Message ON Message.chat_room_id = ChatRoom.id").
-		Joins("JOIN User ON User.id = Message.from_user_id").
-		Where("Message.id = (SELECT MAX(Message.id) FROM Message WHERE Message.chat_room_id = ChatRoom.id) AND (Message.from_user_id = ? OR Message.to_user_id = ?) AND User.deleted_at IS NULL AND Message.deleted_at IS NULL AND `ChatRoom`.`deleted_at` IS NULL", userID, userID)
+		Where("Message.id = (SELECT MAX(Message.id) FROM Message WHERE Message.chat_room_id = ChatRoom.id) AND (Message.from_user_id = ? OR Message.to_user_id = ?) AND Message.from_user_id IN (SELECT UserMessage.id as from_user_id From UserMessage) AND Message.to_user_id IN (SELECT UserMessage.id as to_user_id From UserMessage) AND Message.deleted_at IS NULL AND `ChatRoom`.`deleted_at` IS NULL", userID, userID)
 	paging_query.SetPagingQuery(&filter, entities.Message{}.TableName(), query)
 
 	err := query.Order("Message.id DESC").Scan(&chatRooms).Error
@@ -68,7 +67,9 @@ func (s *chatStorage) ListMessageByChannel(ctx context.Context, userID uint, toI
 	result := make([]entities.Message, 0)
 	db := wrap_gorm.GetDB()
 	query := db.Model(entities.Message{}).
-		Where("from_user_id = ? AND to_user_id = ?", userID, toID)
+		Where("from_user_id = ? AND to_user_id = ?", userID, toID).
+		Where("Message.from_user_id IN (SELECT UserMessage.id as from_user_id From UserMessage)").
+		Where("Message.to_user_id IN (SELECT UserMessage.id as to_user_id From UserMessage)")
 
 	paging_query.SetPagingQuery(filter, entities.Message{}.TableName(), query)
 
@@ -153,7 +154,7 @@ func (s chatStorage) SeenMessages(ctx context.Context, id uint, userID uint, toI
 	err := db.Model(&entities.Message{}).
 		Where("id <= ?", id).
 		Where("from_user_id = ?", userID).
-		Where("to_user_id = ?", userID).
+		Where("to_user_id = ?", toID).
 		Where("seen = ?", false).
 		Update("seen", true).Error
 	return err
