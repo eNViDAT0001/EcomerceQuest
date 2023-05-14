@@ -13,4 +13,5 @@ type NotificationInput struct {
 	Content string `json:"content"`
 	Seen    *bool  `json:"seen"`
 	URL     string `json:"url"`
+	Image   string `json:"image"`
 }
