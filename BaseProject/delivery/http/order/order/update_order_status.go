@@ -71,6 +71,7 @@ func (s *orderHandler) UpdateOrderStatus() func(ctx *gin.Context) {
 					Content: "Your order has arrived",
 					Seen:    &seen,
 					URL:     fmt.Sprintf(`localhost:3000/user/order/%d`, orderID),
+					Image:   "http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png",
 				})
 
 				err = socket.GetManager().EmitNotify(io3.NotificationNew, newNotification, strconv.Itoa(int(user.ID)))
