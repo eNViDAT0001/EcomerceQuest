@@ -16,4 +16,5 @@ type Storage interface {
 	CountList(ctx context.Context, input io.ListMessageInput) (int64, error)
 	ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) ([]io.ChatRoom, error)
 	CountListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) (int64, error)
+	GetByID(ctx context.Context, fromUserID uint, toUserID uint) (entities.ChatRoom, error)
 }

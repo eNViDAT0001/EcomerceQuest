@@ -159,6 +159,16 @@ func (s chatStorage) SeenMessages(ctx context.Context, id uint, userID uint, toI
 		Update("seen", true).Error
 	return err
 }
+func (s chatStorage) GetByID(ctx context.Context, fromUserID uint, toUserID uint) (entities.ChatRoom, error) {
+	var result entities.ChatRoom
+	db := wrap_gorm.GetDB()
+	err := db.Model(&entities.ChatRoom{}).
+		Joins("JOIN Message ON ChatRoom.id = Message.chat_room_id").
+		Where("Message.from_user_id = ?", fromUserID).
+		Where("Message.to_user_id = ?", toUserID).
+		First(&result).Error
+	return result, err
+}
 
 func (s chatStorage) Delete(ctx context.Context, id uint, userID uint) error {
 	db := wrap_gorm.GetDB()

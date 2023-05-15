@@ -14,4 +14,5 @@ type UseCase interface {
 	SeenMessages(ctx context.Context, id uint, userID uint, toID uint) error
 	List(ctx context.Context, input io.ListMessageInput) (messages []entities.Message, total int64, err error)
 	ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) (chatRooms []io.ChatRoom, total int64, err error)
+	GetByID(ctx context.Context, fromUserID uint, toUserID uint) (entities.ChatRoom, error)
 }

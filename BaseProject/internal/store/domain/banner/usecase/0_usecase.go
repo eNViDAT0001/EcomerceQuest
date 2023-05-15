@@ -24,6 +24,9 @@ func (u bannerUseCase) CreateBanner(ctx context.Context, input io.BannerCreateFo
 func (u bannerUseCase) GetBannerByID(ctx context.Context, bannerID uint) (io.BannerDetail, error) {
 	return u.bannerSto.GetBannerByID(ctx, bannerID)
 }
+func (u bannerUseCase) GetBannerDetailByID(ctx context.Context, bannerID uint) (entities.Banner, error) {
+	return u.bannerSto.GetBannerDetailByID(ctx, bannerID)
+}
 
 func (u bannerUseCase) UpdateBanner(ctx context.Context, bannerID uint, input io.BannerUpdateForm, productIDsIN []uint, productIDsOUT []uint) error {
 	return u.bannerSto.UpdateBanner(ctx, bannerID, input, productIDsIN, productIDsOUT)

@@ -197,6 +197,7 @@ func router(r *gin.Engine) {
 
 			bannerGroup.GET("", allHandler.bannerHandler.ListBanner())
 			bannerGroup.GET("/:banner_id", allHandler.bannerHandler.GetBannerByID())
+			bannerGroup.GET("/:banner_id/detail", allHandler.bannerHandler.GetBannerDetailByID())
 			bannerGroup.GET("/:banner_id/products", allHandler.bannerHandler.ListProductByBannerID())
 			bannerGroup.GET("/:banner_id/products/preview", allHandler.bannerHandler.ListProductPreviewByBannerID())
 			bannerGroup.GET("/:banner_id/products/no", allHandler.bannerHandler.ListProductNotInBannerID())

@@ -5,7 +5,6 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
-	"gorm.io/gorm"
 )
 
 func (b bannerStorage) GetBannerByID(ctx context.Context, bannerID uint) (io.BannerDetail, error) {
@@ -24,8 +23,20 @@ func (b bannerStorage) GetBannerByID(ctx context.Context, bannerID uint) (io.Ban
 	if err != nil {
 		return result, err
 	}
-	if query.RowsAffected < 1 {
-		return result, gorm.ErrRecordNotFound
+
+	return result, nil
+}
+func (b bannerStorage) GetBannerDetailByID(ctx context.Context, bannerID uint) (entities.Banner, error) {
+	var result entities.Banner
+	db := wrap_gorm.GetDB()
+	query := db.Table(entities.Banner{}.TableName()).
+		Where("Banner.id = ?", bannerID).
+		Where("Banner.deleted_at IS NULL").
+		Scan(&result)
+
+	err := query.Error
+	if err != nil {
+		return result, err
 	}
 
 	return result, nil

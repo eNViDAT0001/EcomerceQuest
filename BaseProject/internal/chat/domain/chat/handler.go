@@ -11,6 +11,7 @@ type HttpHandler interface {
 	SeenMessages() func(ctx *gin.Context)
 	ListMessages() func(ctx *gin.Context)
 	ListChannel() func(ctx *gin.Context)
+	GetByID() func(ctx *gin.Context)
 }
 
 type WebSocketHandler interface {

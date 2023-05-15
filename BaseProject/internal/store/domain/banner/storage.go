@@ -10,6 +10,7 @@ import (
 type Storage interface {
 	CreateBanner(ctx context.Context, input io.BannerCreateForm, productIDs []uint) (BannerID uint, err error)
 	GetBannerByID(ctx context.Context, bannerID uint) (io.BannerDetail, error)
+	GetBannerDetailByID(ctx context.Context, bannerID uint) (entities.Banner, error)
 	UpdateBanner(ctx context.Context, bannerID uint, input io.BannerUpdateForm, productIDsIN []uint, productIDsOUT []uint) error
 	DeleteBannerByIDs(ctx context.Context, bannerID []uint) error
 	ListBanner(ctx context.Context, filter paging.ParamsInput) ([]entities.Banner, error)

@@ -16,6 +16,9 @@ type chatUseCase struct {
 func (u *chatUseCase) SeenMessages(ctx context.Context, id uint, userID uint, toID uint) error {
 	return u.chatSto.SeenMessages(ctx, id, userID, toID)
 }
+func (u *chatUseCase) GetByID(ctx context.Context, fromUserID uint, toUserID uint) (entities.ChatRoom, error) {
+	return u.chatSto.GetByID(ctx, fromUserID, toUserID)
+}
 
 func (u *chatUseCase) Create(ctx context.Context, input io.MessageInput) (io.MessageInput, error) {
 	return u.chatSto.Create(ctx, input)

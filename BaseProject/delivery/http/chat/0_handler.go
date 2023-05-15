@@ -50,6 +50,30 @@ func (s *chatHandler) SeenMessages() func(ctx *gin.Context) {
 		cc.Ok("Update Message Success")
 	}
 }
+func (s *chatHandler) GetByID() func(ctx *gin.Context) {
+	return func(c *gin.Context) {
+		cc := request.FromContext(c)
+		newCtx := context.Background()
+
+		fromUserID, err := strconv.Atoi(cc.Param("from_user_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		toID, err := strconv.Atoi(cc.Param("to_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+		chatRoom, err := s.chatUC.GetByID(newCtx, uint(fromUserID), uint(toID))
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		cc.Ok(chatRoom)
+	}
+}
 
 func (s *chatHandler) CreateMessage() func(ctx *gin.Context) {
 	return func(c *gin.Context) {
