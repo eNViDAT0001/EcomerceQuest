@@ -148,12 +148,19 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 				return
 			}
 		}
+		m.Lock()
 		log.Println("New Client connect")
 		oldClient, ok := m.Clients[cc.Param("user_id")]
 		if ok {
-			m.RemoveClient(oldClient)
+			err := oldClient.GetConnection().Close()
+			if err != nil {
+				log.Fatal("Error closing connection: ", err)
+			}
+			// remove
+			delete(m.Clients, oldClient.GetID())
 		}
-
+		m.Unlock()
+		m.Lock()
 		// Begin by upgrading the HTTP request
 		conn, err := GetWsServer().Upgrade(cc.Writer, cc.Request, nil)
 		if err != nil {
@@ -163,6 +170,7 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 
 		client := NewSocketClient(conn, m, strconv.Itoa(userID))
 		m.AddClient(client)
+		m.Unlock()
 
 		go client.ReadMessage()
 		go client.WriteMessage()

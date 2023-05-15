@@ -105,11 +105,6 @@ func (s *orderHandler) VerifyDeliveredStatus() func(ctx *gin.Context) {
 		cc := request.FromContext(c)
 		newCtx := context.Background()
 
-		var input io2.UpdateOrderStatusReq
-		if err := cc.BindJSON(&input); err != nil {
-			cc.BadRequest(err)
-			return
-		}
 		orderID, err := strconv.Atoi(cc.Param("order_id"))
 		if err != nil {
 			cc.BadRequest(err)

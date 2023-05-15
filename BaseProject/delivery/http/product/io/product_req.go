@@ -33,10 +33,16 @@ type ProductCreateReq struct {
 }
 
 type ProductFullUpdateReq struct {
-	CategoryID   uint                           `json:"category_id"`
-	Name         string                         `json:"name"`
-	Price        *int                           `json:"price"`
-	Discount     *int                           `json:"discount"`
+	CategoryID uint   `json:"category_id"`
+	Name       string `json:"name"`
+	Price      *int   `json:"price"`
+	Discount   *int   `json:"discount"`
+
+	Height int `json:"height"`
+	Weight int `json:"weight"`
+	Length int `json:"length"`
+	Width  int `json:"width"`
+
 	Options      []OptionsUpdateReq             `json:"options"`
 	Media        []ProductMediaUpdateReq        `json:"media"`
 	Descriptions []ProductDescriptionsUpdateReq `json:"descriptions"`
