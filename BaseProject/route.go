@@ -199,8 +199,8 @@ func router(r *gin.Engine) {
 			bannerGroup.GET("/:banner_id", allHandler.bannerHandler.GetBannerByID())
 			bannerGroup.GET("/:banner_id/products", allHandler.bannerHandler.ListProductByBannerID())
 			bannerGroup.GET("/:banner_id/products/preview", allHandler.bannerHandler.ListProductPreviewByBannerID())
-			bannerGroup.GET("/:banner_id/products/no", allHandler.bannerHandler.ListProductByBannerID())
-			bannerGroup.GET("/:banner_id/products/preview/no", allHandler.bannerHandler.ListProductPreviewByBannerID())
+			bannerGroup.GET("/:banner_id/products/no", allHandler.bannerHandler.ListProductNotInBannerID())
+			bannerGroup.GET("/:banner_id/products/preview/no", allHandler.bannerHandler.ListProductPreviewNotInBannerID())
 
 			authAminGroup.DELETE("", allHandler.bannerHandler.DeleteBannerByIDs())
 			authAminGroup.POST("", allHandler.bannerHandler.CreateBanner())
