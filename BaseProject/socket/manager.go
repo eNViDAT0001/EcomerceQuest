@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"strconv"
 	"sync"
+	"time"
 )
 
 var websocketUpgrader *websocket.Upgrader
@@ -149,6 +150,7 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 			}
 		}
 		m.Lock()
+		time.Sleep(100)
 		log.Println("New Client connect")
 		oldClient, ok := m.Clients[cc.Param("user_id")]
 		if ok {
@@ -159,17 +161,14 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 			// remove
 			delete(m.Clients, oldClient.GetID())
 		}
-		m.Unlock()
-		m.Lock()
-		// Begin by upgrading the HTTP request
 		conn, err := GetWsServer().Upgrade(cc.Writer, cc.Request, nil)
 		if err != nil {
 			log.Println(err)
+			m.Unlock()
 			return
 		}
-
 		client := NewSocketClient(conn, m, strconv.Itoa(userID))
-		m.AddClient(client)
+		m.Clients[client.GetID()] = client
 		m.Unlock()
 
 		go client.ReadMessage()
