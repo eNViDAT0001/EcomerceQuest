@@ -6,6 +6,7 @@ type CreateOrderForm struct {
 	ID                uint   `json:"id"`
 	UserID            uint   `json:"user_id"`
 	ProviderID        uint   `json:"provider_id"`
+	Cod               bool   `json:"cod"`
 	Name              string `json:"name"`
 	Gender            *bool  `json:"gender"`
 	Phone             string `json:"phone"`

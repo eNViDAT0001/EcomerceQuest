@@ -169,6 +169,7 @@ func router(r *gin.Engine) {
 			productGroup.GET("/category/:category_id/preview", allHandler.productHandler.ListProductPreviewWithCategoryID())
 			productGroup.GET("/category/:category_id", allHandler.productHandler.ListProductWithCategoryID())
 			productGroup.GET("/banner/:banner_id/preview", allHandler.productHandler.ListProductPreviewWithBannerID())
+			productGroup.GET("/banner/:banner_id/preview/no", allHandler.productHandler.ListProductPreviewNotInBannerID())
 
 			authProviderGroup.POST("/provider/:provider_id/user/:user_id", allHandler.productHandler.CreateProduct())
 			authGroup.POST("/:product_id/description", allHandler.productHandler.CreateDescriptions())
@@ -197,7 +198,9 @@ func router(r *gin.Engine) {
 			bannerGroup.GET("", allHandler.bannerHandler.ListBanner())
 			bannerGroup.GET("/:banner_id", allHandler.bannerHandler.GetBannerByID())
 			bannerGroup.GET("/:banner_id/products", allHandler.bannerHandler.ListProductByBannerID())
-			bannerGroup.GET("/:banner_id/product/preview", allHandler.bannerHandler.ListProductPreviewByBannerID())
+			bannerGroup.GET("/:banner_id/products/preview", allHandler.bannerHandler.ListProductPreviewByBannerID())
+			bannerGroup.GET("/:banner_id/products/no", allHandler.bannerHandler.ListProductByBannerID())
+			bannerGroup.GET("/:banner_id/products/preview/no", allHandler.bannerHandler.ListProductPreviewByBannerID())
 
 			authAminGroup.DELETE("", allHandler.bannerHandler.DeleteBannerByIDs())
 			authAminGroup.POST("", allHandler.bannerHandler.CreateBanner())

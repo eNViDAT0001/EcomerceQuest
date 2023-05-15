@@ -11,6 +11,7 @@ type Order struct {
 	ProviderID         uint            `gorm:"column:provider_id" json:"provider_id"`
 	PaymentID          *string         `gorm:"column:payment_id" json:"payment_id"`
 	PaymentURL         *string         `gorm:"column:payment_url" json:"payment_url"`
+	COD                *bool           `gorm:"column:cod" json:"cod"`
 	Name               string          `gorm:"column:name" json:"name"`
 	Gender             *bool           `gorm:"column:gender" json:"gender"`
 	Phone              string          `gorm:"column:phone" json:"phone"`

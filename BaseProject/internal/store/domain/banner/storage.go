@@ -15,5 +15,6 @@ type Storage interface {
 	ListBanner(ctx context.Context, filter paging.ParamsInput) ([]entities.Banner, error)
 	CountListBanner(ctx context.Context, filter paging.ParamsInput, bannerID uint) (total int64, err error)
 	ListProductIDsByBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) ([]uint, error)
+	ProductIDsByNotInBannerID(ctx context.Context, bannerID uint) ([]uint, error)
 	ProductIDsByBannerID(ctx context.Context, bannerID uint) ([]uint, error)
 }

@@ -12,4 +12,6 @@ type HttpHandler interface {
 	ListBanner() func(*gin.Context)
 	ListProductByBannerID() func(*gin.Context)
 	ListProductPreviewByBannerID() func(*gin.Context)
+	ListProductNotInBannerID() func(*gin.Context)
+	ListProductPreviewNotInBannerID() func(*gin.Context)
 }

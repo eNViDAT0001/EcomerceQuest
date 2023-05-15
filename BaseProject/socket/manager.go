@@ -47,6 +47,10 @@ type Manager struct {
 	// handlers are functions that are used to handle Events
 	Handlers map[string]io.EventHandler
 }
+type ClientStorage struct {
+	Clients map[string]io.Client
+	sync.RWMutex
+}
 
 var manager *Manager
 

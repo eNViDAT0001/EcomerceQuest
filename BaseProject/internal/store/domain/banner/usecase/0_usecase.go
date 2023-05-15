@@ -50,7 +50,7 @@ func (u bannerUseCase) ListBanner(ctx context.Context, filter paging.ParamsInput
 }
 
 func (u bannerUseCase) ListProductPreviewByBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []ioProductSto.ProductPreviewItem, total int64, err error) {
-	productIDs, err := u.bannerSto.ListProductIDsByBannerID(ctx, bannerID, filter)
+	productIDs, err := u.bannerSto.ProductIDsByBannerID(ctx, bannerID)
 	if len(productIDs) < 1 {
 		return nil, 0, gorm.ErrRecordNotFound
 	}
@@ -70,8 +70,9 @@ func (u bannerUseCase) ListProductPreviewByBannerID(ctx context.Context, bannerI
 
 	return products, total, err
 }
+
 func (u bannerUseCase) ListProductByBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []productEntities.Product, total int64, err error) {
-	productIDs, err := u.bannerSto.ListProductIDsByBannerID(ctx, bannerID, filter)
+	productIDs, err := u.bannerSto.ProductIDsByBannerID(ctx, bannerID)
 	if len(productIDs) < 1 {
 		return nil, 0, gorm.ErrRecordNotFound
 	}
@@ -91,7 +92,48 @@ func (u bannerUseCase) ListProductByBannerID(ctx context.Context, bannerID uint,
 
 	return products, total, err
 }
+func (u bannerUseCase) ListProductPreviewNotInBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []ioProductSto.ProductPreviewItem, total int64, err error) {
+	productIDs, err := u.bannerSto.ProductIDsByNotInBannerID(ctx, bannerID)
+	if len(productIDs) < 1 {
+		return nil, 0, gorm.ErrRecordNotFound
+	}
+	productFilter := ioProductSto.ListProductInput{
+		ProductIDs: productIDs,
+		Paging:     filter,
+	}
+	total, err = u.productSto.ListCountProductsPreview(ctx, productFilter)
 
+	if total == 0 {
+		return nil, 0, gorm.ErrRecordNotFound
+	}
+	products, err = u.productSto.ListProductsPreview(ctx, productFilter)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return products, total, err
+}
+func (u bannerUseCase) ListProductNotINBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []productEntities.Product, total int64, err error) {
+	productIDs, err := u.bannerSto.ProductIDsByNotInBannerID(ctx, bannerID)
+	if len(productIDs) < 1 {
+		return nil, 0, gorm.ErrRecordNotFound
+	}
+	productFilter := ioProductSto.ListProductInput{
+		ProductIDs: productIDs,
+		Paging:     filter,
+	}
+	total, err = u.productSto.ListCountProduct(ctx, productFilter)
+
+	if total == 0 {
+		return nil, 0, gorm.ErrRecordNotFound
+	}
+	products, err = u.productSto.ListProduct(ctx, productFilter)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return products, total, err
+}
 func NewBannerUseCase(
 	bannerSto banner.Storage,
 	productSto product.Storage,
