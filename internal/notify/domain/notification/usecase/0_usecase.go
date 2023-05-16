@@ -15,6 +15,9 @@ type notificationUseCase struct {
 func (u *notificationUseCase) SeenNotification(ctx context.Context, id uint, userID uint) error {
 	return u.notifySto.SeenNotification(ctx, id, userID)
 }
+func (u *notificationUseCase) SeenAllNotification(ctx context.Context, id uint, userID uint) error {
+	return u.notifySto.SeenAllNotification(ctx, userID)
+}
 
 func (u *notificationUseCase) CreateNotification(ctx context.Context, input io.NotificationInput) (io.NotificationInput, error) {
 	return u.notifySto.CreateNotification(ctx, input)

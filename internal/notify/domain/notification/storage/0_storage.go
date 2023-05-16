@@ -26,6 +26,13 @@ func (n notificationStorage) SeenNotification(ctx context.Context, id uint, user
 		Where("seen = ?", false).Update("seen", true).Error
 	return err
 }
+func (n notificationStorage) SeenAllNotification(ctx context.Context, userID uint) error {
+	db := wrap_gorm.GetDB()
+	err := db.Model(&entities.Notification{}).
+		Where("user_id = ?", userID).
+		Where("seen = ?", false).Update("seen", true).Error
+	return err
+}
 
 func (n notificationStorage) DeleteByNotificationID(ctx context.Context, id []uint) error {
 	db := wrap_gorm.GetDB()

@@ -42,6 +42,26 @@ func (s *notificationHandler) SeenNotification() func(ctx *gin.Context) {
 		cc.Ok("Update Message Success")
 	}
 }
+func (s *notificationHandler) SeenAllNotification() func(ctx *gin.Context) {
+	return func(c *gin.Context) {
+		cc := request.FromContext(c)
+		newCtx := context.Background()
+
+		userID, err := strconv.Atoi(cc.Param("user_id"))
+		if err != nil {
+			cc.BadRequest(err)
+			return
+		}
+
+		err = s.notifyUC.SeenAllNotification(newCtx, uint(userID))
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		cc.Ok("Update Message Success")
+	}
+}
 
 func (s *notificationHandler) ListNotifications() func(ctx *gin.Context) {
 	return func(c *gin.Context) {

@@ -30,6 +30,7 @@ func router(r *gin.Engine) {
 		{
 			notifyGroup.GET("/users/:user_id", allHandler.notificationHandler.ListNotifications())
 			notifyGroup.PATCH("/:notify_id/user/:user_id", allHandler.notificationHandler.SeenNotification())
+			notifyGroup.PATCH("user/:user_id", allHandler.notificationHandler.SeenAllNotification())
 		}
 		socketGroup := v1.Group("/ws")
 		{
