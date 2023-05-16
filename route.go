@@ -265,6 +265,7 @@ func router(r *gin.Engine) {
 		})
 	})
 
+	//Dummy Schedule job
 	c := gron.New()
 	c.AddFunc(gron.Every(1*time.Hour), func() {
 		err := allHandler.orderHandler.RemoveInvalidOrder()
