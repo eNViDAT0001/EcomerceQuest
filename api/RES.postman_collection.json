@@ -7123,6 +7123,58 @@
 			]
 		},
 		{
+			"name": "Seen All Notify",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{notificationV1Path}}/user/:user_id",
+					"host": [
+						"{{notificationV1Path}}"
+					],
+					"path": [
+						"user",
+						":user_id"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+},
+		{
 			"name": "Payment Detail",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
