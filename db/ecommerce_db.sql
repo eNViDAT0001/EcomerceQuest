@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: May 10, 2023 at 11:41 PM
+-- Generation Time: May 16, 2023 at 12:45 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.17
 
@@ -248,7 +248,13 @@ INSERT INTO `BannerDetail` (`banner_id`, `product_id`, `created_at`, `updated_at
 (1, 9, '2023-05-07 13:33:17', '2023-05-07 13:33:17', NULL),
 (1, 10, '2023-05-07 13:33:17', '2023-05-07 13:33:17', NULL),
 (1, 11, '2023-05-07 13:33:17', '2023-05-07 13:33:17', NULL),
-(1, 12, '2023-05-07 13:33:17', '2023-05-07 13:33:17', NULL);
+(1, 12, '2023-05-07 13:33:17', '2023-05-07 13:33:17', NULL),
+(1, 7, '2023-05-15 15:39:03', '2023-05-15 15:39:03', NULL),
+(1, 8, '2023-05-15 15:39:03', '2023-05-15 15:39:03', NULL),
+(1, 9, '2023-05-15 15:39:03', '2023-05-15 15:39:03', NULL),
+(1, 10, '2023-05-15 15:39:03', '2023-05-15 15:39:03', NULL),
+(1, 11, '2023-05-15 15:39:03', '2023-05-15 15:39:03', NULL),
+(1, 12, '2023-05-15 15:39:03', '2023-05-15 15:39:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -345,6 +351,33 @@ INSERT INTO `Category` (`id`, `category_parent_id`, `name`, `image_path`, `creat
 (34, 26, '{{$ran}}', 'https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg', '2023-04-15 14:26:16', '2023-04-15 14:26:16', NULL),
 (35, 26, '{{$ran}}', 'https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg', '2023-04-15 14:26:18', '2023-04-15 14:26:18', NULL),
 (36, 26, '{{$ran}}', 'https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg', '2023-04-15 14:26:19', '2023-04-15 14:26:19', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ChatRoom`
+--
+
+CREATE TABLE `ChatRoom` (
+  `id` bigint UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `ChatRoom`
+--
+
+INSERT INTO `ChatRoom` (`id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '2023-05-13 19:17:08', '2023-05-13 19:17:08', NULL),
+(2, '2023-05-13 19:17:08', '2023-05-13 19:17:08', NULL),
+(3, '2023-05-13 19:17:08', '2023-05-13 19:17:08', NULL),
+(4, '2023-05-13 19:17:08', '2023-05-13 19:17:08', NULL),
+(5, '2023-05-13 19:17:08', '2023-05-13 19:17:08', NULL),
+(6, '2023-05-13 20:19:04', '2023-05-13 20:19:04', NULL),
+(7, '2023-05-13 20:19:23', '2023-05-13 20:19:23', NULL),
+(8, '2023-05-13 20:21:47', '2023-05-13 20:21:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -467,9 +500,10 @@ INSERT INTO `Favorite` (`id`, `user_id`, `provider_id`) VALUES
 
 CREATE TABLE `Message` (
   `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `content` varchar(255) NOT NULL,
+  `chat_room_id` bigint UNSIGNED NOT NULL,
+  `from_user_id` bigint UNSIGNED NOT NULL,
   `to_user_id` bigint UNSIGNED NOT NULL,
+  `content` varchar(255) NOT NULL,
   `seen` tinyint(1) NOT NULL DEFAULT '0',
   `type` enum('TEXT','MEDIA') NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -481,44 +515,14 @@ CREATE TABLE `Message` (
 -- Dumping data for table `Message`
 --
 
-INSERT INTO `Message` (`id`, `user_id`, `content`, `to_user_id`, `seen`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'asdfasdf', 22, 0, 'TEXT', '2023-05-03 02:32:35', '2023-05-03 02:32:35', NULL),
-(2, 1, 'asdfasdf', 22, 0, 'TEXT', '2023-05-03 02:32:39', '2023-05-03 02:32:39', NULL),
-(3, 1, 'trgdfg', 24, 0, 'TEXT', '2023-05-03 04:56:23', '2023-05-03 04:56:23', NULL),
-(4, 1, 'trgdfg', 24, 0, 'TEXT', '2023-05-03 04:56:26', '2023-05-03 04:56:26', NULL),
-(5, 22, '65yryt', 1, 0, 'TEXT', '2023-05-03 04:56:54', '2023-05-03 04:56:54', NULL),
-(6, 22, '65yryt', 1, 0, 'TEXT', '2023-05-03 04:56:59', '2023-05-03 04:56:59', NULL),
-(7, 22, '65yryt', 1, 0, 'TEXT', '2023-05-03 04:57:03', '2023-05-03 04:57:03', NULL),
-(8, 22, '65yryt', 1, 0, 'TEXT', '2023-05-03 04:57:09', '2023-05-03 04:57:09', NULL),
-(9, 22, '65yryt', 1, 0, 'TEXT', '2023-05-03 04:57:09', '2023-05-03 04:57:09', NULL),
-(10, 22, '65yryt', 1, 0, 'TEXT', '2023-05-03 04:57:09', '2023-05-03 04:57:09', NULL),
-(11, 22, '65yryt', 1, 0, 'TEXT', '2023-05-03 04:57:09', '2023-05-03 04:57:09', NULL),
-(12, 22, '65yryt', 1, 0, 'TEXT', '2023-05-03 04:57:09', '2023-05-03 04:57:09', NULL),
-(13, 1, 'sadasd', 1, 0, 'TEXT', '2023-05-03 12:13:53', '2023-05-03 12:13:53', NULL),
-(14, 1, 'sadasd', 1, 0, 'TEXT', '2023-05-06 05:48:34', '2023-05-06 05:48:34', NULL),
-(16, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-07 07:50:18', '2023-05-07 07:50:18', NULL),
-(17, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-07 10:36:02', '2023-05-07 10:36:02', NULL),
-(18, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-07 14:18:24', '2023-05-07 14:18:24', NULL),
-(19, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-07 14:24:17', '2023-05-07 14:24:17', NULL),
-(20, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-07 14:24:52', '2023-05-07 14:24:52', NULL),
-(21, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:22:45', '2023-05-08 09:22:45', NULL),
-(22, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:23:58', '2023-05-08 09:23:58', NULL),
-(23, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:41:04', '2023-05-08 09:41:04', NULL),
-(24, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:41:30', '2023-05-08 09:41:30', NULL),
-(25, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:42:46', '2023-05-08 09:42:46', NULL),
-(26, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:42:54', '2023-05-08 09:42:54', NULL),
-(27, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:42:55', '2023-05-08 09:42:55', NULL),
-(28, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:55:28', '2023-05-08 09:55:28', NULL),
-(29, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:55:29', '2023-05-08 09:55:29', NULL),
-(30, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:55:30', '2023-05-08 09:55:30', NULL),
-(31, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:55:31', '2023-05-08 09:55:31', NULL),
-(32, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:55:31', '2023-05-08 09:55:31', NULL),
-(33, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:55:32', '2023-05-08 09:55:32', NULL),
-(34, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:55:33', '2023-05-08 09:55:33', NULL),
-(35, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-08 09:55:35', '2023-05-08 09:55:35', NULL),
-(36, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-10 13:20:00', '2023-05-10 13:20:00', NULL),
-(37, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-10 13:20:13', '2023-05-10 13:20:13', NULL),
-(38, 22, 'sadasd', 1, 0, 'TEXT', '2023-05-10 14:35:06', '2023-05-10 14:35:06', NULL);
+INSERT INTO `Message` (`id`, `chat_room_id`, `from_user_id`, `to_user_id`, `content`, `seen`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(82, 1, 1, 23, 'dfa', 0, 'TEXT', '2023-05-13 18:35:37', '2023-05-13 18:35:37', NULL),
+(83, 2, 1, 24, 'dfa', 0, 'TEXT', '2023-05-13 18:35:39', '2023-05-13 18:35:39', NULL),
+(84, 3, 1, 25, 'dfa', 0, 'TEXT', '2023-05-13 18:35:45', '2023-05-13 18:35:45', NULL),
+(85, 4, 1, 26, 'dfa', 0, 'TEXT', '2023-05-13 18:35:50', '2023-05-13 18:35:50', NULL),
+(86, 5, 1, 22, 'dfa', 1, 'TEXT', '2023-05-13 18:35:55', '2023-05-14 09:15:58', NULL),
+(87, 5, 22, 1, 'dfa', 0, 'TEXT', '2023-05-13 18:36:00', '2023-05-13 18:36:00', NULL),
+(90, 8, 30, 1, 'sadasd', 0, 'TEXT', '2023-05-13 20:21:48', '2023-05-13 20:21:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -532,6 +536,7 @@ CREATE TABLE `Notification` (
   `content` varchar(255) NOT NULL,
   `seen` tinyint(1) NOT NULL DEFAULT '0',
   `url` varchar(255) NOT NULL,
+  `Image` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL
@@ -541,67 +546,89 @@ CREATE TABLE `Notification` (
 -- Dumping data for table `Notification`
 --
 
-INSERT INTO `Notification` (`id`, `user_id`, `content`, `seen`, `url`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'qưefqwef', 1, 'ádfasdf', '2023-05-03 12:28:14', '2023-05-03 12:33:02', NULL),
-(2, 1, 'qưefqwef', 0, 'ádfasdf', '2023-05-03 12:28:20', '2023-05-03 12:28:20', NULL),
-(3, 1, 'qưefqwef', 0, 'ádfasdf', '2023-05-03 12:28:20', '2023-05-03 12:28:20', NULL),
-(4, 1, 'qưefqwef', 0, 'ádfasdf', '2023-05-03 12:28:20', '2023-05-03 12:28:20', NULL),
-(5, 1, 'qưefqwef', 0, 'ádfasdf', '2023-05-03 12:28:21', '2023-05-03 12:28:21', NULL),
-(6, 1, 'qưefqwef', 0, 'ádfasdf', '2023-05-03 12:28:21', '2023-05-03 12:28:21', NULL),
-(7, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/91', '2023-05-03 14:37:33', '2023-05-03 14:37:33', NULL),
-(8, 1, 'Create order successfully', 0, 'api/v1/orders/91', '2023-05-03 14:37:33', '2023-05-03 14:37:33', NULL),
-(9, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/92', '2023-05-03 14:39:20', '2023-05-03 14:39:20', NULL),
-(10, 1, 'Create order successfully', 0, 'api/v1/orders/92', '2023-05-03 14:39:20', '2023-05-03 14:39:20', NULL),
-(11, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/93', '2023-05-03 14:44:10', '2023-05-03 14:44:10', NULL),
-(12, 1, 'Create order successfully', 0, 'api/v1/orders/93', '2023-05-03 14:44:10', '2023-05-03 14:44:10', NULL),
-(13, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/94', '2023-05-04 14:33:14', '2023-05-04 14:33:14', NULL),
-(14, 1, 'Create order successfully', 0, 'api/v1/orders/94', '2023-05-04 14:33:14', '2023-05-04 14:33:14', NULL),
-(15, 1, 'Create order successfully', 0, 'api/v1/orders/95', '2023-05-04 14:34:38', '2023-05-04 14:34:38', NULL),
-(16, 1, 'Create order successfully', 0, 'api/v1/orders/95', '2023-05-04 14:34:38', '2023-05-04 14:34:38', NULL),
-(17, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/96', '2023-05-04 14:37:22', '2023-05-04 14:37:22', NULL),
-(18, 1, 'Create order successfully', 0, 'api/v1/orders/96', '2023-05-04 14:37:22', '2023-05-04 14:37:22', NULL),
-(19, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/98', '2023-05-04 14:44:21', '2023-05-04 14:44:21', NULL),
-(20, 1, 'Create order successfully', 0, 'api/v1/orders/98', '2023-05-04 14:44:21', '2023-05-04 14:44:21', NULL),
-(21, 1, 'Create order successfully', 0, 'api/v1/orders/99', '2023-05-04 14:45:11', '2023-05-04 14:45:11', NULL),
-(22, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/99', '2023-05-04 14:45:11', '2023-05-04 14:45:11', NULL),
-(23, 1, 'Create order successfully', 0, 'api/v1/orders/99', '2023-05-04 14:45:12', '2023-05-04 14:45:12', NULL),
-(24, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/99', '2023-05-04 14:45:12', '2023-05-04 14:45:12', NULL),
-(25, 1, 'Create order successfully', 0, 'api/v1/orders/99', '2023-05-04 14:45:18', '2023-05-04 14:45:18', NULL),
-(26, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/99', '2023-05-04 14:45:18', '2023-05-04 14:45:18', NULL),
-(27, 1, 'Create order successfully', 0, 'api/v1/orders/99', '2023-05-04 14:45:28', '2023-05-04 14:45:28', NULL),
-(28, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/99', '2023-05-04 14:45:28', '2023-05-04 14:45:28', NULL),
-(29, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/100', '2023-05-05 14:31:59', '2023-05-05 14:31:59', NULL),
-(30, 1, 'Create order successfully', 0, 'api/v1/orders/100', '2023-05-05 14:31:59', '2023-05-05 14:31:59', NULL),
-(31, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/100', '2023-05-05 14:32:00', '2023-05-05 14:32:00', NULL),
-(32, 1, 'Create order successfully', 0, 'api/v1/orders/100', '2023-05-05 14:32:00', '2023-05-05 14:32:00', NULL),
-(33, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/100', '2023-05-05 14:32:05', '2023-05-05 14:32:05', NULL),
-(34, 1, 'Create order successfully', 0, 'api/v1/orders/100', '2023-05-05 14:32:05', '2023-05-05 14:32:05', NULL),
-(35, 1, 'Create order successfully', 0, 'api/v1/orders/100', '2023-05-05 14:32:15', '2023-05-05 14:32:15', NULL),
-(36, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/100', '2023-05-05 14:32:15', '2023-05-05 14:32:15', NULL),
-(37, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/101', '2023-05-05 14:33:35', '2023-05-05 14:33:35', NULL),
-(38, 1, 'Create order successfully', 0, 'api/v1/orders/101', '2023-05-05 14:33:35', '2023-05-05 14:33:35', NULL),
-(39, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/102', '2023-05-06 06:00:27', '2023-05-06 06:00:27', NULL),
-(40, 1, 'Create order successfully', 0, 'api/v1/orders/102', '2023-05-06 06:00:27', '2023-05-06 06:00:27', NULL),
-(41, 1, 'Create order successfully', 0, 'api/v1/orders/103', '2023-05-06 06:49:54', '2023-05-06 06:49:54', NULL),
-(42, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/103', '2023-05-06 06:49:54', '2023-05-06 06:49:54', NULL),
-(43, 1, 'Create order successfully', 0, '/user/order/104', '2023-05-06 14:53:39', '2023-05-06 14:53:39', NULL),
-(44, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/104', '2023-05-06 14:53:39', '2023-05-06 14:53:39', NULL),
-(45, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/105', '2023-05-06 15:13:43', '2023-05-06 15:13:43', NULL),
-(46, 1, 'Create order successfully', 0, '/user/order/105', '2023-05-06 15:13:43', '2023-05-06 15:13:43', NULL),
-(47, 1, 'Create order successfully', 0, '/user/order/106', '2023-05-07 07:48:15', '2023-05-07 07:48:15', NULL),
-(48, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/106', '2023-05-07 07:48:15', '2023-05-07 07:48:15', NULL),
-(49, 1, 'Your order has arrived', 0, 'localhost:3000/user/order/46', '2023-05-07 12:26:36', '2023-05-07 12:26:36', NULL),
-(50, 1, 'Your order has arrived', 0, 'localhost:3000/user/order/46', '2023-05-07 12:30:57', '2023-05-07 12:30:57', NULL),
-(51, 1, 'Create order successfully', 0, '/user/order/107', '2023-05-07 14:25:45', '2023-05-07 14:25:45', NULL),
-(52, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/107', '2023-05-07 14:25:45', '2023-05-07 14:25:45', NULL),
-(53, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/108', '2023-05-07 14:46:44', '2023-05-07 14:46:44', NULL),
-(54, 1, 'Create order successfully', 0, '/user/order/108', '2023-05-07 14:46:44', '2023-05-07 14:46:44', NULL),
-(55, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/109', '2023-05-07 14:49:10', '2023-05-07 14:49:10', NULL),
-(56, 1, 'Create order successfully', 0, '/user/order/109', '2023-05-07 14:49:10', '2023-05-07 14:49:10', NULL),
-(57, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/110', '2023-05-07 14:52:12', '2023-05-07 14:52:12', NULL),
-(58, 1, 'Create order successfully', 0, '/user/order/110', '2023-05-07 14:52:12', '2023-05-07 14:52:12', NULL),
-(59, 1, 'Create order successfully', 0, '/user/order/111', '2023-05-08 09:24:13', '2023-05-08 09:24:13', NULL),
-(60, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/111', '2023-05-08 09:24:13', '2023-05-08 09:24:13', NULL);
+INSERT INTO `Notification` (`id`, `user_id`, `content`, `seen`, `url`, `Image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'qưefqwef', 1, 'ádfasdf', '', '2023-05-03 12:28:14', '2023-05-03 12:33:02', NULL),
+(2, 1, 'qưefqwef', 0, 'ádfasdf', '', '2023-05-03 12:28:20', '2023-05-03 12:28:20', NULL),
+(3, 1, 'qưefqwef', 0, 'ádfasdf', '', '2023-05-03 12:28:20', '2023-05-03 12:28:20', NULL),
+(4, 1, 'qưefqwef', 0, 'ádfasdf', '', '2023-05-03 12:28:20', '2023-05-03 12:28:20', NULL),
+(5, 1, 'qưefqwef', 0, 'ádfasdf', '', '2023-05-03 12:28:21', '2023-05-03 12:28:21', NULL),
+(6, 1, 'qưefqwef', 0, 'ádfasdf', '', '2023-05-03 12:28:21', '2023-05-03 12:28:21', NULL),
+(7, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/91', '', '2023-05-03 14:37:33', '2023-05-03 14:37:33', NULL),
+(8, 1, 'Create order successfully', 0, 'api/v1/orders/91', '', '2023-05-03 14:37:33', '2023-05-03 14:37:33', NULL),
+(9, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/92', '', '2023-05-03 14:39:20', '2023-05-03 14:39:20', NULL),
+(10, 1, 'Create order successfully', 0, 'api/v1/orders/92', '', '2023-05-03 14:39:20', '2023-05-03 14:39:20', NULL),
+(11, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/93', '', '2023-05-03 14:44:10', '2023-05-03 14:44:10', NULL),
+(12, 1, 'Create order successfully', 0, 'api/v1/orders/93', '', '2023-05-03 14:44:10', '2023-05-03 14:44:10', NULL),
+(13, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/94', '', '2023-05-04 14:33:14', '2023-05-04 14:33:14', NULL),
+(14, 1, 'Create order successfully', 0, 'api/v1/orders/94', '', '2023-05-04 14:33:14', '2023-05-04 14:33:14', NULL),
+(15, 1, 'Create order successfully', 0, 'api/v1/orders/95', '', '2023-05-04 14:34:38', '2023-05-04 14:34:38', NULL),
+(16, 1, 'Create order successfully', 0, 'api/v1/orders/95', '', '2023-05-04 14:34:38', '2023-05-04 14:34:38', NULL),
+(17, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/96', '', '2023-05-04 14:37:22', '2023-05-04 14:37:22', NULL),
+(18, 1, 'Create order successfully', 0, 'api/v1/orders/96', '', '2023-05-04 14:37:22', '2023-05-04 14:37:22', NULL),
+(19, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/98', '', '2023-05-04 14:44:21', '2023-05-04 14:44:21', NULL),
+(20, 1, 'Create order successfully', 0, 'api/v1/orders/98', '', '2023-05-04 14:44:21', '2023-05-04 14:44:21', NULL),
+(21, 1, 'Create order successfully', 0, 'api/v1/orders/99', '', '2023-05-04 14:45:11', '2023-05-04 14:45:11', NULL),
+(22, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/99', '', '2023-05-04 14:45:11', '2023-05-04 14:45:11', NULL),
+(23, 1, 'Create order successfully', 0, 'api/v1/orders/99', '', '2023-05-04 14:45:12', '2023-05-04 14:45:12', NULL),
+(24, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/99', '', '2023-05-04 14:45:12', '2023-05-04 14:45:12', NULL),
+(25, 1, 'Create order successfully', 0, 'api/v1/orders/99', '', '2023-05-04 14:45:18', '2023-05-04 14:45:18', NULL),
+(26, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/99', '', '2023-05-04 14:45:18', '2023-05-04 14:45:18', NULL),
+(27, 1, 'Create order successfully', 0, 'api/v1/orders/99', '', '2023-05-04 14:45:28', '2023-05-04 14:45:28', NULL),
+(28, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/99', '', '2023-05-04 14:45:28', '2023-05-04 14:45:28', NULL),
+(29, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/100', '', '2023-05-05 14:31:59', '2023-05-05 14:31:59', NULL),
+(30, 1, 'Create order successfully', 0, 'api/v1/orders/100', '', '2023-05-05 14:31:59', '2023-05-05 14:31:59', NULL),
+(31, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/100', '', '2023-05-05 14:32:00', '2023-05-05 14:32:00', NULL),
+(32, 1, 'Create order successfully', 0, 'api/v1/orders/100', '', '2023-05-05 14:32:00', '2023-05-05 14:32:00', NULL),
+(33, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/100', '', '2023-05-05 14:32:05', '2023-05-05 14:32:05', NULL),
+(34, 1, 'Create order successfully', 0, 'api/v1/orders/100', '', '2023-05-05 14:32:05', '2023-05-05 14:32:05', NULL),
+(35, 1, 'Create order successfully', 0, 'api/v1/orders/100', '', '2023-05-05 14:32:15', '2023-05-05 14:32:15', NULL),
+(36, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/100', '', '2023-05-05 14:32:15', '2023-05-05 14:32:15', NULL),
+(37, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/101', '', '2023-05-05 14:33:35', '2023-05-05 14:33:35', NULL),
+(38, 1, 'Create order successfully', 0, 'api/v1/orders/101', '', '2023-05-05 14:33:35', '2023-05-05 14:33:35', NULL),
+(39, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/102', '', '2023-05-06 06:00:27', '2023-05-06 06:00:27', NULL),
+(40, 1, 'Create order successfully', 0, 'api/v1/orders/102', '', '2023-05-06 06:00:27', '2023-05-06 06:00:27', NULL),
+(41, 1, 'Create order successfully', 0, 'api/v1/orders/103', '', '2023-05-06 06:49:54', '2023-05-06 06:49:54', NULL),
+(42, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, 'api/v1/orders/103', '', '2023-05-06 06:49:54', '2023-05-06 06:49:54', NULL),
+(43, 1, 'Create order successfully', 0, '/user/order/104', '', '2023-05-06 14:53:39', '2023-05-06 14:53:39', NULL),
+(44, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/104', '', '2023-05-06 14:53:39', '2023-05-06 14:53:39', NULL),
+(45, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/105', '', '2023-05-06 15:13:43', '2023-05-06 15:13:43', NULL),
+(46, 1, 'Create order successfully', 0, '/user/order/105', '', '2023-05-06 15:13:43', '2023-05-06 15:13:43', NULL),
+(47, 1, 'Create order successfully', 0, '/user/order/106', '', '2023-05-07 07:48:15', '2023-05-07 07:48:15', NULL),
+(48, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/106', '', '2023-05-07 07:48:15', '2023-05-07 07:48:15', NULL),
+(49, 1, 'Your order has arrived', 0, 'localhost:3000/user/order/46', '', '2023-05-07 12:26:36', '2023-05-07 12:26:36', NULL),
+(50, 1, 'Your order has arrived', 0, 'localhost:3000/user/order/46', '', '2023-05-07 12:30:57', '2023-05-07 12:30:57', NULL),
+(51, 1, 'Create order successfully', 0, '/user/order/107', '', '2023-05-07 14:25:45', '2023-05-07 14:25:45', NULL),
+(52, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/107', '', '2023-05-07 14:25:45', '2023-05-07 14:25:45', NULL),
+(53, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/108', '', '2023-05-07 14:46:44', '2023-05-07 14:46:44', NULL),
+(54, 1, 'Create order successfully', 0, '/user/order/108', '', '2023-05-07 14:46:44', '2023-05-07 14:46:44', NULL),
+(55, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/109', '', '2023-05-07 14:49:10', '2023-05-07 14:49:10', NULL),
+(56, 1, 'Create order successfully', 0, '/user/order/109', '', '2023-05-07 14:49:10', '2023-05-07 14:49:10', NULL),
+(57, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/110', '', '2023-05-07 14:52:12', '2023-05-07 14:52:12', NULL),
+(58, 1, 'Create order successfully', 0, '/user/order/110', '', '2023-05-07 14:52:12', '2023-05-07 14:52:12', NULL),
+(59, 1, 'Create order successfully', 0, '/user/order/111', '', '2023-05-08 09:24:13', '2023-05-08 09:24:13', NULL),
+(60, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/111', '', '2023-05-08 09:24:13', '2023-05-08 09:24:13', NULL),
+(61, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/112', '', '2023-05-11 14:50:45', '2023-05-11 14:50:45', NULL),
+(62, 1, 'Create order successfully', 0, '/user/order/112', '', '2023-05-11 14:50:45', '2023-05-11 14:50:45', NULL),
+(63, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/113', '', '2023-05-11 14:51:40', '2023-05-11 14:51:40', NULL),
+(64, 1, 'Create order successfully', 0, '/user/order/113', '', '2023-05-11 14:51:40', '2023-05-11 14:51:40', NULL),
+(65, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/114', '', '2023-05-13 13:54:20', '2023-05-13 13:54:20', NULL),
+(66, 1, 'Create order successfully', 0, '/user/order/114', '', '2023-05-13 13:54:20', '2023-05-13 13:54:20', NULL),
+(67, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/115', '', '2023-05-13 14:12:19', '2023-05-13 14:12:19', NULL),
+(68, 1, 'Create order successfully', 0, '/user/order/115', '', '2023-05-13 14:12:19', '2023-05-13 14:12:19', NULL),
+(69, 1, 'Create order successfully', 0, '/user/order/116', '', '2023-05-13 14:12:53', '2023-05-13 14:12:53', NULL),
+(70, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/116', '', '2023-05-13 14:12:53', '2023-05-13 14:12:53', NULL),
+(71, 1, 'Create order successfully', 0, '/user/order/117', '', '2023-05-13 14:13:28', '2023-05-13 14:13:28', NULL),
+(72, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/117', '', '2023-05-13 14:13:28', '2023-05-13 14:13:28', NULL),
+(73, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/118', '', '2023-05-13 14:14:16', '2023-05-13 14:14:16', NULL),
+(74, 1, 'Create order successfully', 0, '/user/order/118', '', '2023-05-13 14:14:16', '2023-05-13 14:14:16', NULL),
+(75, 1, 'Create order successfully', 0, '/user/order/119', '', '2023-05-13 14:15:06', '2023-05-13 14:15:06', NULL),
+(76, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/119', '', '2023-05-13 14:15:06', '2023-05-13 14:15:06', NULL),
+(77, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/120', '', '2023-05-13 14:15:49', '2023-05-13 14:15:49', NULL),
+(78, 1, 'Create order successfully', 0, '/user/order/120', '', '2023-05-13 14:15:49', '2023-05-13 14:15:49', NULL),
+(79, 1, 'Create order successfully', 0, '/user/order/121', 'http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png', '2023-05-14 08:11:32', '2023-05-14 08:11:32', NULL),
+(80, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/121', 'http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png', '2023-05-14 08:11:32', '2023-05-14 08:11:32', NULL),
+(81, 1, 'You have a new order from user: Nguyễn Văn Đạt', 0, '/brand-detail/order/122', 'http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png', '2023-05-14 08:11:40', '2023-05-14 08:11:40', NULL),
+(82, 1, 'Create order successfully', 0, '/user/order/122', 'http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png', '2023-05-14 08:11:40', '2023-05-14 08:11:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -615,6 +642,7 @@ CREATE TABLE `Order` (
   `provider_id` bigint UNSIGNED NOT NULL,
   `payment_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cod` tinyint(1) NOT NULL DEFAULT '0',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` tinyint(1) NOT NULL DEFAULT '1',
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -634,6 +662,23 @@ CREATE TABLE `Order` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Order`
+--
+
+INSERT INTO `Order` (`id`, `user_id`, `provider_id`, `payment_id`, `payment_url`, `cod`, `name`, `gender`, `phone`, `province`, `district`, `ward`, `street`, `quantity`, `total`, `discount`, `status`, `status_description`, `delivered_image`, `verify_delivered`, `delivered_date`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(112, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-11 14:50:45', '2023-05-11 15:01:05', NULL),
+(113, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-11 14:51:40', '2023-05-11 15:01:05', NULL),
+(114, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-13 13:54:20', '2023-05-15 13:36:25', NULL),
+(115, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-13 14:12:19', '2023-05-15 13:36:25', NULL),
+(116, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-13 14:12:53', '2023-05-15 13:36:25', NULL),
+(117, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-13 14:13:16', '2023-05-15 13:36:26', NULL),
+(118, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-13 14:13:47', '2023-05-15 13:36:26', NULL),
+(119, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-13 14:14:54', '2023-05-15 13:36:26', NULL),
+(120, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-13 14:15:46', '2023-05-15 13:36:26', NULL),
+(121, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-14 08:11:32', '2023-05-15 13:36:26', NULL),
+(122, 1, 2, NULL, NULL, 0, 'Ngừi Địp', 1, '1234567890', 'Bình Chánh', 'Ninh Thuận', 'Quảng Bình', 'Trường chinh', 1, 1, 20, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-05-14 08:11:40', '2023-05-15 13:36:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -658,6 +703,23 @@ CREATE TABLE `OrderItem` (
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `OrderItem`
+--
+
+INSERT INTO `OrderItem` (`id`, `order_id`, `product_id`, `product_option_id`, `provider_id`, `name`, `price`, `option`, `quantity`, `discount`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 112, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-11 14:50:45', '2023-05-11 14:50:45', NULL),
+(2, 113, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-11 14:51:39', '2023-05-11 14:51:39', NULL),
+(3, 114, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-13 13:54:20', '2023-05-13 13:54:20', NULL),
+(4, 115, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-13 14:12:19', '2023-05-13 14:12:19', NULL),
+(5, 116, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-13 14:12:53', '2023-05-13 14:12:53', NULL),
+(6, 117, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-13 14:13:15', '2023-05-13 14:13:15', NULL),
+(7, 118, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-13 14:13:47', '2023-05-13 14:13:47', NULL),
+(8, 119, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-13 14:14:53', '2023-05-13 14:14:53', NULL),
+(9, 120, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-13 14:15:46', '2023-05-13 14:15:46', NULL),
+(10, 121, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-14 08:11:32', '2023-05-14 08:11:32', NULL),
+(11, 122, 1, 30, 2, 'Dummy Name', 1, 'Spec: Option', 1, 1, 'ádf', '2023-05-14 08:11:39', '2023-05-14 08:11:39', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -674,6 +736,14 @@ CREATE TABLE `Payment` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `Payment`
+--
+
+INSERT INTO `Payment` (`id`, `status`, `account_id`, `email`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('ád', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-10 23:54:35', '2023-05-10 23:54:35', NULL),
+('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-10 23:55:34', '2023-05-10 23:55:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -703,7 +773,7 @@ CREATE TABLE `Product` (
 --
 
 INSERT INTO `Product` (`id`, `provider_id`, `category_id`, `user_id`, `name`, `price`, `discount`, `length`, `height`, `weight`, `width`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 4, 1, 1, 'HighLight', 100000, 5, 0, 0, 0, 0, '2022-12-17 16:46:42', '2022-12-17 16:46:42', NULL),
+(1, 4, 1, 1, 'HighLight', 100000, 5, 100, 100, 100, 100, '2022-12-17 16:46:42', '2022-12-17 16:46:42', NULL),
 (7, 7, 1, 1, 'Nón mới ra', 700000, 30, 456, 3423, 1234, 534, '2022-12-30 09:48:29', '2022-12-30 09:48:29', NULL),
 (8, 7, 1, 1, 'Nón mới ra phiên bản 2', 700000, 30, 0, 0, 0, 0, '2022-12-30 09:48:52', '2022-12-30 09:48:52', NULL),
 (9, 7, 1, 1, 'Áo nam hàng hiệu', 900000, 30, 0, 0, 0, 0, '2022-12-30 09:49:53', '2022-12-30 09:49:53', NULL),
@@ -730,7 +800,10 @@ INSERT INTO `Product` (`id`, `provider_id`, `category_id`, `user_id`, `name`, `p
 (35, 2, 1, 1, 'abc', 20000, 20, 0, 0, 0, 0, '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
 (36, 2, 1, 1, 'abc', 20000, 20, 0, 0, 0, 0, '2023-04-27 14:37:38', '2023-04-27 14:37:38', NULL),
 (37, 2, 1, 1, 'abc', 20000, 20, 0, 0, 0, 0, '2023-04-27 14:41:09', '2023-04-27 14:41:09', NULL),
-(38, 2, 1, 1, 'abc', 20000, 20, 0, 0, 0, 0, '2023-04-28 14:41:46', '2023-04-28 14:41:46', NULL);
+(38, 2, 1, 1, 'abc', 20000, 20, 0, 0, 0, 0, '2023-04-28 14:41:46', '2023-04-28 14:41:46', NULL),
+(39, 2, 1, 1, 'abc', 20000, 20, 0, 0, 0, 0, '2023-05-15 11:05:49', '2023-05-15 11:05:49', NULL),
+(40, 2, 1, 1, 'abc', 20000, 20, 100, 100, 100, 100, '2023-05-15 11:06:42', '2023-05-15 11:06:42', NULL),
+(41, 2, 1, 1, 'abc', 20000, 20, 100, 100, 100, 100, '2023-05-16 00:26:45', '2023-05-16 00:26:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -770,7 +843,10 @@ INSERT INTO `ProductDescriptions` (`id`, `product_id`, `name`, `public_id`, `des
 (15, 15, 'dasd', 'asdasd', 'asd', '2023-04-27 15:11:47', '2023-04-27 15:11:47', NULL),
 (16, 1, 'gerg', 'werg', 'werg', '2023-04-27 15:12:13', '2023-04-27 15:12:13', NULL),
 (17, 1, 'asd', 'ProductDescriptions/wne9jj48ufqp83fkxzwn', 'http://res.cloudinary.com/damzcas3k/image/upload/v1682608941/ProductDescriptions/wne9jj48ufqp83fkxzwn.jpg', '2023-04-27 15:12:19', '2023-04-27 15:12:19', NULL),
-(18, 38, 'abc', 'xyz', 'mnp', '2023-04-28 14:41:47', '2023-04-28 14:41:47', NULL);
+(18, 38, 'abc', 'xyz', 'mnp', '2023-04-28 14:41:47', '2023-04-28 14:41:47', NULL),
+(19, 39, 'abc', 'xyz', 'mnp', '2023-05-15 11:05:49', '2023-05-15 11:05:49', NULL),
+(20, 40, 'abc', 'xyz', 'mnp', '2023-05-15 11:06:42', '2023-05-15 11:06:42', NULL),
+(21, 41, 'abc', 'xyz', 'mnp', '2023-05-16 00:26:46', '2023-05-16 00:26:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -823,7 +899,10 @@ INSERT INTO `ProductMedia` (`id`, `product_id`, `public_id`, `media_path`, `medi
 (27, 35, 'xyz', 'mnp', 'IMAGE', '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
 (28, 36, 'xyz', 'mnp', 'IMAGE', '2023-04-27 14:37:38', '2023-04-27 14:37:38', NULL),
 (29, 37, 'xyz', 'mnp', 'IMAGE', '2023-04-27 14:41:09', '2023-04-27 14:41:09', NULL),
-(30, 38, 'xyz', 'mnp', 'IMAGE', '2023-04-28 14:41:46', '2023-04-28 14:41:46', NULL);
+(30, 38, 'xyz', 'mnp', 'IMAGE', '2023-04-28 14:41:46', '2023-04-28 14:41:46', NULL),
+(31, 39, 'xyz', 'mnp', 'IMAGE', '2023-05-15 11:05:49', '2023-05-15 11:05:49', NULL),
+(32, 40, 'xyz', 'mnp', 'IMAGE', '2023-05-15 11:06:42', '2023-05-15 11:06:42', NULL),
+(33, 41, 'xyz', 'mnp', 'IMAGE', '2023-05-16 00:26:45', '2023-05-16 00:26:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -848,7 +927,7 @@ CREATE TABLE `ProductOption` (
 --
 
 INSERT INTO `ProductOption` (`id`, `product_id`, `specification_id`, `name`, `price`, `quantity`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(30, 35, 21, 'Him', 20000, 38, '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
+(30, 35, 21, 'Him', 20000, 52, '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
 (31, 35, 21, 'Who', 20000, 100, '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
 (32, 35, 21, 'Whom', 20000, 100, '2023-03-26 17:12:42', '2023-03-26 17:12:42', NULL),
 (90, 12, 41, 'Him', 20000, 100, '2023-03-26 17:43:05', '2023-03-26 17:43:05', NULL),
@@ -862,7 +941,16 @@ INSERT INTO `ProductOption` (`id`, `product_id`, `specification_id`, `name`, `pr
 (101, 37, 44, 'Whom', 20000, 100, '2023-04-27 14:41:09', '2023-04-27 14:41:09', NULL),
 (102, 38, 45, 'Him', 20000, 100, '2023-04-28 14:41:47', '2023-04-28 14:41:47', NULL),
 (103, 38, 45, 'Who', 20000, 100, '2023-04-28 14:41:47', '2023-04-28 14:41:47', NULL),
-(104, 38, 45, 'Whom', 20000, 100, '2023-04-28 14:41:47', '2023-04-28 14:41:47', NULL);
+(104, 38, 45, 'Whom', 20000, 100, '2023-04-28 14:41:47', '2023-04-28 14:41:47', NULL),
+(105, 39, 46, 'Him', 20000, 100, '2023-05-15 11:05:49', '2023-05-15 11:05:49', NULL),
+(106, 39, 46, 'Who', 20000, 100, '2023-05-15 11:05:49', '2023-05-15 11:05:49', NULL),
+(107, 39, 46, 'Whom', 20000, 100, '2023-05-15 11:05:49', '2023-05-15 11:05:49', NULL),
+(108, 40, 47, 'Him', 20000, 100, '2023-05-15 11:06:42', '2023-05-15 11:06:42', NULL),
+(109, 40, 47, 'Who', 20000, 100, '2023-05-15 11:06:42', '2023-05-15 11:06:42', NULL),
+(110, 40, 47, 'Whom', 20000, 100, '2023-05-15 11:06:42', '2023-05-15 11:06:42', NULL),
+(111, 41, 48, 'Him', 20000, 100, '2023-05-16 00:26:46', '2023-05-16 00:26:46', NULL),
+(112, 41, 48, 'Who', 20000, 100, '2023-05-16 00:26:46', '2023-05-16 00:26:46', NULL),
+(113, 41, 48, 'Whom', 20000, 100, '2023-05-16 00:26:46', '2023-05-16 00:26:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -890,7 +978,10 @@ INSERT INTO `ProductSpecification` (`id`, `product_id`, `properties`, `created_a
 (41, 12, 'Hường xuân', '2023-03-26 17:43:05', '2023-03-26 17:43:05', NULL),
 (43, 36, 'Hường xuân', '2023-04-27 14:37:38', '2023-04-27 14:37:38', NULL),
 (44, 37, 'Hường xuân', '2023-04-27 14:41:09', '2023-04-27 14:41:09', NULL),
-(45, 38, 'Hường xuân', '2023-04-28 14:41:46', '2023-04-28 14:41:46', NULL);
+(45, 38, 'Hường xuân', '2023-04-28 14:41:46', '2023-04-28 14:41:46', NULL),
+(46, 39, 'Hường xuân', '2023-05-15 11:05:49', '2023-05-15 11:05:49', NULL),
+(47, 40, 'Hường xuân', '2023-05-15 11:06:42', '2023-05-15 11:06:42', NULL),
+(48, 41, 'Hường xuân', '2023-05-16 00:26:45', '2023-05-16 00:26:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -956,9 +1047,9 @@ INSERT INTO `User` (`id`, `username`, `password`, `salt`, `name`, `birthday`, `g
 (1, 'eNViDAT', '$2a$04$YKNp5sLdAF.24i3533AB6u0t53gEh8Unl6kV9GAvPhhFgnEl0ZpgK', '2022-12-01 17:53:50.2323002 +0700 +07 m=+93.342681801', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'ngvidat@gmail.com', '0775702201', 0, 'ADMIN', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-01 10:53:50', '2022-12-01 10:53:50', NULL),
 (22, 'khanhsd0901', '$2a$04$2WU19Up7bFqLX7qZll.J7OHUFO5Q7LQ1Z.8rilPam/mRY0f4RUDi6', '2022-12-10 12:13:49.124386 +0700 +07 m=+189.306835601', 'Le Khan1h', '2001-01-01', 1, 'khanhsd091101@gmail.com', '09459581952', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 05:13:49', '2022-12-10 05:13:49', NULL),
 (23, 'khanh', '$2a$04$GwL630qoYRHNeJAxKw6BuedX36jXY.kPj.z7P2aPvujpPzzuLavBy', '2022-12-10 12:16:37.0707576 +0700 +07 m=+357.253207201', 'Le Khan2h', '2001-01-01', 1, 'khanhsd022901@gmail.com', '09459589522', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 05:16:37', '2022-12-10 05:16:37', NULL),
-(24, '11122222', '$2a$04$R4ksrJDAeuCjGJImmCdj..Gn0zdcT2KT36fjpUs2MNtW7wfY0yYvK', '2022-12-10 12:34:21.2439553 +0700 +07 m=+1421.426404901', 'Le Khan1h', '2001-01-01', 1, 'khanhsd0291101@gmail.com', '094592581952', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 05:34:21', '2022-12-10 05:34:21', '2022-12-19 03:54:27'),
-(25, 'test111', '$2a$04$B4Mf8LuI1oRnKhTrgz5AOuW3C1rIwORq8oj83VUMSBUOob8CxgcB.', '2022-12-10 13:32:18.6492071 +0700 +07 m=+4898.831656701', 'ssad', '2001-01-01', 1, 'sdsdawda', '1112', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 06:32:19', '2022-12-10 06:32:19', '2022-12-19 03:54:14'),
-(26, 'eNViDsT', '$2a$04$61bOtopdvZsVJInIkhYyUeny84.OuWOwFDzvYhz/QGZl.xYZXuzQi', '2022-12-21 09:33:58.6435133 +0700 +07 m=+42.628213001', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gaisl.com', '077502222301', 0, 'ADMIN', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-21 02:33:59', '2022-12-21 02:33:59', NULL),
+(24, '11122222', '$2a$04$R4ksrJDAeuCjGJImmCdj..Gn0zdcT2KT36fjpUs2MNtW7wfY0yYvK', '2022-12-10 12:34:21.2439553 +0700 +07 m=+1421.426404901', 'Le Khan1h', '2001-01-01', 1, 'khanhsd0291101@gmail.com', '094592581952', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 05:34:21', '2022-12-10 05:34:21', NULL),
+(25, 'test111', '$2a$04$B4Mf8LuI1oRnKhTrgz5AOuW3C1rIwORq8oj83VUMSBUOob8CxgcB.', '2022-12-10 13:32:18.6492071 +0700 +07 m=+4898.831656701', 'ssad', '2001-01-01', 1, 'sdsdawda', '1112', 0, 'BUYER', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-10 06:32:19', '2022-12-10 06:32:19', NULL),
+(26, 'eNViDsT', '$2a$04$61bOtopdvZsVJInIkhYyUeny84.OuWOwFDzvYhz/QGZl.xYZXuzQi', '2022-12-21 09:33:58.6435133 +0700 +07 m=+42.628213001', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gaisl.com', '077502222301', 0, 'ADMIN', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-21 02:33:59', '2022-12-21 02:33:59', '2023-05-01 15:39:32'),
 (27, 'eNViDXT', '$2a$04$94zB9qSUcr5.zZdE8M8jAueWtLAKJ3DOPxgmfs005ihVW/sfpK94O', '2022-12-21 09:34:32.6491548 +0700 +07 m=+76.633854501', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gsl.com', '0775001', 0, 'ADMIN', 'https://4xucy2kyby51ggkud2tadg3d-wpengine.netdna-ssl.com/wp-content/uploads/sites/37/2017/02/IAFOR-Blank-Avatar-Image.jpg', '2022-12-21 02:34:33', '2022-12-21 02:34:33', NULL),
 (29, 'eNViDAXT', '$2a$04$YpqZwVNxenNxF0NMw5mq/.ww450ThAjL7E7XTz06MPGndzw0/JBc.', '2023-02-12 20:16:10.5689094 +0700 +07 m=+19.819286801', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gaiasl.com', '077502226301', 0, 'ADMIN', NULL, '2023-02-12 13:16:11', '2023-02-12 13:16:11', NULL),
 (30, 'eNViDsT2', '$2a$04$msFlZO5jyQfAfx.2vLkzg.PIl6CH/jK9p8v9vfyq3WHdtvRlcIVUO', '2023-02-16 21:45:29.4101073 +0700 +07 m=+21.469918501', 'Nguyễn Văn Đạt', '2022-11-09', 1, 'abcc@gaisl2.com', '077502222302', 0, 'ADMIN', NULL, '2023-02-16 14:45:29', '2023-02-16 14:45:29', NULL);
@@ -1029,6 +1120,12 @@ ALTER TABLE `Category`
   ADD KEY `category_parent_id` (`category_parent_id`);
 
 --
+-- Indexes for table `ChatRoom`
+--
+ALTER TABLE `ChatRoom`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `Comment`
 --
 ALTER TABLE `Comment`
@@ -1060,8 +1157,9 @@ ALTER TABLE `Favorite`
 --
 ALTER TABLE `Message`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `to_user_id` (`to_user_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `Message_ibfk_1` (`from_user_id`),
+  ADD KEY `chat_room_id` (`chat_room_id`),
+  ADD KEY `to_user_id` (`to_user_id`);
 
 --
 -- Indexes for table `Notification`
@@ -1180,6 +1278,12 @@ ALTER TABLE `Category`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
+-- AUTO_INCREMENT for table `ChatRoom`
+--
+ALTER TABLE `ChatRoom`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `Comment`
 --
 ALTER TABLE `Comment`
@@ -1207,55 +1311,55 @@ ALTER TABLE `Favorite`
 -- AUTO_INCREMENT for table `Message`
 --
 ALTER TABLE `Message`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `Notification`
 --
 ALTER TABLE `Notification`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `Order`
 --
 ALTER TABLE `Order`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `OrderItem`
 --
 ALTER TABLE `OrderItem`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `Product`
 --
 ALTER TABLE `Product`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `ProductDescriptions`
 --
 ALTER TABLE `ProductDescriptions`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `ProductMedia`
 --
 ALTER TABLE `ProductMedia`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `ProductOption`
 --
 ALTER TABLE `ProductOption`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT for table `ProductSpecification`
 --
 ALTER TABLE `ProductSpecification`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `Provider`
@@ -1331,8 +1435,9 @@ ALTER TABLE `CommentMedia`
 -- Constraints for table `Message`
 --
 ALTER TABLE `Message`
-  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`to_user_id`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`from_user_id`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `Message_ibfk_3` FOREIGN KEY (`chat_room_id`) REFERENCES `ChatRoom` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `Message_ibfk_4` FOREIGN KEY (`to_user_id`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `Notification`
