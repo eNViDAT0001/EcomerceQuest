@@ -21,7 +21,7 @@ func (n notificationStorage) CreateNotification(ctx context.Context, input io.No
 func (n notificationStorage) SeenNotification(ctx context.Context, id uint, userID uint) error {
 	db := wrap_gorm.GetDB()
 	err := db.Model(&entities.Notification{}).
-		Where("id < ?", id).
+		Where("id = ?", id).
 		Where("user_id = ?", userID).
 		Where("seen = ?", false).Update("seen", true).Error
 	return err
