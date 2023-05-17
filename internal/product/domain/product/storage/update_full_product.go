@@ -12,14 +12,15 @@ func (s productStorage) UpdateFullProduct(ctx context.Context, productID uint, p
 	db := wrap_gorm.GetDB()
 	err := db.Transaction(func(tx *gorm.DB) error {
 		productUpdateForm := io.ProductUpdateForm{
-			Name:       product.Name,
-			Price:      product.Price,
-			Discount:   product.Discount,
-			CategoryID: product.CategoryID,
-			Height:     product.Height,
-			Width:      product.Width,
-			Length:     product.Length,
-			Weight:     product.Weight,
+			Name:              product.Name,
+			Price:             product.Price,
+			Discount:          product.Discount,
+			CategoryID:        product.CategoryID,
+			ShortDescriptions: product.ShortDescriptions,
+			Height:            product.Height,
+			Width:             product.Width,
+			Length:            product.Length,
+			Weight:            product.Weight,
 		}
 		err := tx.Model(entities.Product{}).
 			Where("id = ?", productID).

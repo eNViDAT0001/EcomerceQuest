@@ -5,6 +5,7 @@ import "github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 type Notification struct {
 	wrap_gorm.SoftDeleteModel
 	UserID  uint   `gorm:"column:user_id" json:"user_id"`
+	Title   string `gorm:"column:title" json:"title"`
 	Content string `gorm:"column:content" json:"content"`
 	Seen    *bool  `gorm:"column:seen" json:"seen"`
 	URl     string `gorm:"column:url" json:"url"`

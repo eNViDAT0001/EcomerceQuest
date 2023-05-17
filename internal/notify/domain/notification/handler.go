@@ -7,6 +7,7 @@ import (
 
 type HttpHandler interface {
 	ListNotifications() func(ctx *gin.Context)
+	ListNotificationFullView() func(ctx *gin.Context)
 	SeenNotification() func(ctx *gin.Context)
 	SeenAllNotification() func(ctx *gin.Context)
 }

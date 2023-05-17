@@ -68,6 +68,18 @@ func (n notificationStorage) CountListNotification(ctx context.Context, input io
 	}
 	return count, nil
 }
+func (n notificationStorage) CountUnseenNotification(ctx context.Context, userID uint) (int64, error) {
+	var count int64
+	db := wrap_gorm.GetDB()
+
+	query := db.Model(entities.Notification{}).Where("user_id = ?", userID).Where("seen = ?", false)
+
+	err := query.Count(&count).Error
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
+}
 
 func NewNotificationStorage() notification.Storage {
 	return &notificationStorage{}

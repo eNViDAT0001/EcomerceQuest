@@ -13,4 +13,5 @@ type Storage interface {
 	DeleteByNotificationID(ctx context.Context, id []uint) error
 	ListNotification(ctx context.Context, input io.ListNotifyInput) ([]entities.Notification, error)
 	CountListNotification(ctx context.Context, input io.ListNotifyInput) (int64, error)
+	CountUnseenNotification(ctx context.Context, userID uint) (int64, error)
 }

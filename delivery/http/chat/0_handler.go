@@ -60,7 +60,7 @@ func (s *chatHandler) GetByID() func(ctx *gin.Context) {
 			cc.BadRequest(err)
 			return
 		}
-		toID, err := strconv.Atoi(cc.Param("to_id"))
+		toID, err := strconv.Atoi(cc.Param("to_user_id"))
 		if err != nil {
 			cc.BadRequest(err)
 			return
@@ -70,8 +70,10 @@ func (s *chatHandler) GetByID() func(ctx *gin.Context) {
 			cc.ResponseError(err)
 			return
 		}
-
-		cc.Ok(chatRoom)
+		result := map[string]interface{}{
+			"ChatRoom": chatRoom,
+		}
+		cc.Ok(result)
 	}
 }
 

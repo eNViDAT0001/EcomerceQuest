@@ -1,33 +1,36 @@
 package io
 
 type ProductUpdateForm struct {
-	CategoryID uint
-	Name       string
-	Price      int
-	Discount   *int
-	Height     int
-	Weight     int
-	Length     int
-	Width      int
+	CategoryID        uint
+	Name              string
+	Price             int
+	Discount          *int
+	ShortDescriptions string
+	Height            int
+	Weight            int
+	Length            int
+	Width             int
 }
 type ProductCreateForm struct {
-	ID         uint
-	ProviderID uint
-	CategoryID uint
-	UserID     uint
-	Name       string
-	Discount   int
-	Price      int
-	Height     int
-	Weight     int
-	Length     int
-	Width      int
+	ID                uint
+	ProviderID        uint
+	CategoryID        uint
+	UserID            uint
+	Name              string
+	Discount          int
+	ShortDescriptions string
+	Price             int
+	Height            int
+	Weight            int
+	Length            int
+	Width             int
 }
 type ProductFullUpdateForm struct {
-	CategoryID uint   `json:"category_id"`
-	Name       string `json:"name"`
-	Price      int    `json:"price"`
-	Discount   *int   `json:"discount"`
+	CategoryID        uint   `json:"category_id"`
+	Name              string `json:"name"`
+	Price             int    `json:"price"`
+	Discount          *int   `json:"discount"`
+	ShortDescriptions string `json:"short_descriptions"`
 
 	Height int `json:"height"`
 	Weight int `json:"weight"`

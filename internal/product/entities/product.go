@@ -6,16 +6,17 @@ import (
 
 type Product struct {
 	wrap_gorm.SoftDeleteModel
-	ProviderID uint   `gorm:"column:provider_id" json:"provider_id"`
-	CategoryID uint   `gorm:"column:category_id" json:"category_id"`
-	UserID     uint   `gorm:"column:user_id" json:"user_id"`
-	Name       string `gorm:"column:name" json:"name"`
-	Price      int    `gorm:"column:price" json:"price"`
-	Discount   int    `gorm:"column:discount" json:"discount"`
-	Height     int    `gorm:"column:height" json:"height"`
-	Weight     int    `gorm:"column:weight" json:"weight"`
-	Length     int    `gorm:"column:length" json:"length"`
-	Width      int    `gorm:"column:width" json:"width"`
+	ProviderID        uint   `gorm:"column:provider_id" json:"provider_id"`
+	CategoryID        uint   `gorm:"column:category_id" json:"category_id"`
+	UserID            uint   `gorm:"column:user_id" json:"user_id"`
+	Name              string `gorm:"column:name" json:"name"`
+	Price             int    `gorm:"column:price" json:"price"`
+	Discount          int    `gorm:"column:discount" json:"discount"`
+	ShortDescriptions string `gorm:"column:short_descriptions" json:"short_descriptions"`
+	Height            int    `gorm:"column:height" json:"height"`
+	Weight            int    `gorm:"column:weight" json:"weight"`
+	Length            int    `gorm:"column:length" json:"length"`
+	Width             int    `gorm:"column:width" json:"width"`
 }
 
 func (Product) WithFields() []string {

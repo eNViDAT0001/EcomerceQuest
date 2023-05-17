@@ -23,6 +23,7 @@ func (s productStorage) ListProductsPreview(ctx context.Context, input io.ListPr
 				"Product.name, " +
 				"Product.price, " +
 				"Product.discount, " +
+				"Product.short_descriptions, " +
 				"Product.height, " +
 				"Product.weight, " +
 				"Product.width, " +

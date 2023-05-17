@@ -22,6 +22,7 @@ func router(r *gin.Engine) {
 		chatGroup := v1.Group("/chats")
 		{
 			chatGroup.GET("/channels/users/:user_id", allHandler.chatHandler.ListChannel())
+			chatGroup.GET("/channels/from/:from_user_id/to/:to_user_id", allHandler.chatHandler.GetByID())
 			chatGroup.GET("/channels/user_a/:user_id_a/user_b/:user_id_b", allHandler.chatHandler.ListMessages())
 			chatGroup.PATCH("/:message_id/user/:user_id/to/:to_id", allHandler.chatHandler.SeenMessages())
 			chatGroup.POST("", allHandler.chatHandler.CreateMessage())
@@ -29,6 +30,7 @@ func router(r *gin.Engine) {
 		notifyGroup := v1.Group("/notifications")
 		{
 			notifyGroup.GET("/users/:user_id", allHandler.notificationHandler.ListNotifications())
+			notifyGroup.GET("/fullview/users/:user_id", allHandler.notificationHandler.ListNotificationFullView())
 			notifyGroup.PATCH("/:notify_id/user/:user_id", allHandler.notificationHandler.SeenNotification())
 			notifyGroup.PATCH("/user/:user_id", allHandler.notificationHandler.SeenAllNotification())
 		}

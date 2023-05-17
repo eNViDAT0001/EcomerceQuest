@@ -90,8 +90,8 @@ func (s *context) BindError(err error) {
 	s.BadRequest(NewBadRequestError(key, "", message))
 }
 
-func (s *context) OkPaging(paging paging.Paging, data interface{}) {
-	s.JSON(http.StatusOK, NewSuccessResponse(data).WithPaging(paging))
+func (s *context) OkPaging(paging paging.Paging, data interface{}, extraData ...ExtraData) {
+	s.JSON(http.StatusOK, NewSuccessResponse(data, extraData...).WithPaging(paging))
 }
 
 func (s *context) OkIndicator(indicator *Indicator, data interface{}) {

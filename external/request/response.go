@@ -24,10 +24,15 @@ func NewMeta(version string, paging *paging.Paginator, indicator *Indicator) *Me
 	}
 }
 
+type ExtraData struct {
+	Name string
+	Data interface{}
+}
 type Response struct {
-	Data   interface{} `json:"data,omitempty"`
-	Errors []*Error    `json:"errors,omitempty"`
-	Meta   *Meta       `json:"meta,omitempty"`
+	Data      interface{} `json:"data,omitempty"`
+	ExtraData interface{} `json:"extra_data,omitempty"`
+	Errors    []*Error    `json:"errors,omitempty"`
+	Meta      *Meta       `json:"meta,omitempty"`
 }
 
 func (s *Response) WithError(err *Error) *Response {
@@ -78,10 +83,21 @@ func (s *Response) WithVersion(version string) *Response {
 	return s
 }
 
-func NewSuccessResponse(data interface{}) *Response {
+func NewSuccessResponse(data interface{}, extraDatas ...ExtraData) *Response {
 	version := viper.GetString("VERSION")
+	if len(extraDatas) < 1 {
+		return &Response{
+			Data: data,
+		}
+	}
+
+	extraData := map[string]interface{}{}
+	for _, v := range extraDatas {
+		extraData[v.Name] = v.Data
+	}
 	res := &Response{
-		Data: data,
+		Data:      data,
+		ExtraData: extraData,
 	}
 
 	if version != "" {

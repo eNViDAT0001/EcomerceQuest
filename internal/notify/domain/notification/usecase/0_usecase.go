@@ -43,6 +43,23 @@ func (u *notificationUseCase) ListNotification(ctx context.Context, input io.Lis
 	return notifications, total, err
 }
 
+func (u *notificationUseCase) ListNotificationFullView(ctx context.Context, input io.ListNotifyInput) ([]entities.Notification, int64, int64, error) {
+	total, err := u.notifySto.CountListNotification(ctx, input)
+	if err != nil {
+		return nil, 0, 0, err
+	}
+	if total == 0 {
+		return nil, 0, 0, gorm.ErrRecordNotFound
+	}
+	notifications, err := u.notifySto.ListNotification(ctx, input)
+	if err != nil {
+		return nil, 0, 0, err
+	}
+
+	totalUnseen, err := u.notifySto.CountUnseenNotification(ctx, input.UserID)
+	return notifications, total, totalUnseen, err
+}
+
 func NewNotificationUseCase(notifySto notification.Storage) notification.UseCase {
 	return &notificationUseCase{notifySto: notifySto}
 }
