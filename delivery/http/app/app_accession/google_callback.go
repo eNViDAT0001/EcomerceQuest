@@ -8,6 +8,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/app/app_accession/io"
 	"github.com/eNViDAT0001/Thesis/Backend/external/oidc"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
+	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_viper"
 	io2 "github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/entities"
 	ioJwtSto "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage/io"
@@ -84,12 +85,13 @@ func (a *appAccessionHandler) CallbackGoogleSSO() func(*gin.Context) {
 			cc.ResponseError(err)
 			return
 		}
-
-		c.SetCookie("user_id", strconv.Itoa(int(user.ID)), 3600, "/", "localhost", false, true)
-		c.SetCookie("access_token", token.AccessToken, 3600, "/", "localhost", false, true)
-		c.SetCookie("access_token_expiry", strconv.FormatInt(token.AccessTokenExpiry, 10), 3600, "/", "localhost", false, true)
-		c.SetCookie("refresh_token", token.RefreshToken, 3600, "/", "localhost", false, true)
-		c.SetCookie("refresh_token_expiry", strconv.FormatInt(token.RefreshTokenExpiry, 10), 3600, "/", "localhost", false, true)
+		vp := wrap_viper.GetViper()
+		feDomain := vp.GetString("FE.DOMAIN")
+		c.SetCookie("user_id", strconv.Itoa(int(user.ID)), 3600, "/", feDomain, false, true)
+		c.SetCookie("access_token", token.AccessToken, 3600, "/", feDomain, false, true)
+		c.SetCookie("access_token_expiry", strconv.FormatInt(token.AccessTokenExpiry, 10), 3600, "/", feDomain, false, true)
+		c.SetCookie("refresh_token", token.RefreshToken, 3600, "/", feDomain, false, true)
+		c.SetCookie("refresh_token_expiry", strconv.FormatInt(token.RefreshTokenExpiry, 10), 3600, "/", feDomain, false, true)
 		cc.Redirect(http.StatusFound, "http://localhost:3000/login")
 	}
 }

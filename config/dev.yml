@@ -9,7 +9,9 @@ DB_NAME: ecommerce_db
 DB_USER: admin
 DB_PASSWORD: admin
 
-
+FE:
+  DOMAIN: localhost
+  URL: http://localhost:3000
 CLOUDINARY:
   NAME: damzcas3k
   API_KEY: 332611833886276
