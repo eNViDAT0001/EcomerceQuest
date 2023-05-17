@@ -92,7 +92,7 @@ func (a *appAccessionHandler) CallbackGoogleSSO() func(*gin.Context) {
 		c.SetCookie("access_token_expiry", strconv.FormatInt(token.AccessTokenExpiry, 10), 3600, "/", feDomain, false, true)
 		c.SetCookie("refresh_token", token.RefreshToken, 3600, "/", feDomain, false, true)
 		c.SetCookie("refresh_token_expiry", strconv.FormatInt(token.RefreshTokenExpiry, 10), 3600, "/", feDomain, false, true)
-		cc.Redirect(http.StatusFound, "http://localhost:3000/login")
+		cc.Redirect(http.StatusFound, "http://localhost:3000")
 	}
 }
 func getGoogleUserData(state, code string) (io.GoogleProfile, error) {
