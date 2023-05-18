@@ -9,6 +9,7 @@ type UpdateOrderForm struct {
 	ProviderID         uint            `json:"provider_id"`
 	PaymentID          *string         `json:"payment_id"`
 	PaymentURL         *string         `json:"payment_url"`
+	COD                *bool           `json:"cod"`
 	Name               string          `json:"name"`
 	Gender             *bool           `json:"gender"`
 	Phone              string          `json:"phone"`

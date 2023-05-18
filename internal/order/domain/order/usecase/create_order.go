@@ -3,14 +3,13 @@ package usecase
 import (
 	"context"
 	"fmt"
-	"github.com/eNViDAT0001/Thesis/Backend/external/event_background"
 	"github.com/eNViDAT0001/Thesis/Backend/external/html_template"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	notifyIO "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage/io"
 	orderItemsIO "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
-	smtpIO "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase/io"
+	smtpIO "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/socket"
 	io2 "github.com/eNViDAT0001/Thesis/Backend/socket/io"
 	"strconv"
@@ -18,6 +17,9 @@ import (
 
 func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []orderItemsIO.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error) {
 	createdOrders, err = u.orderSto.CreateOrder(ctx, order, items, cartItemsIDs)
+	if err != nil {
+		return createdOrders, err
+	}
 	providerIDs := make([]uint, 0)
 	for _, createdOrder := range createdOrders {
 		providerIDs = append(providerIDs, createdOrder.ProviderID)
@@ -32,7 +34,6 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 		return createdOrders, err
 	}
 
-	jobs := make([]event_background.Job, 0)
 	for _, user := range users {
 		createdOrder := io.CreateOrderForm{}
 		for _, v := range createdOrders {
@@ -70,22 +71,23 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 		}
 		var unSeen = false
 
-		jobs = append(jobs, event_background.NewJob(func(ctx context.Context) error {
-			newNotification := notifyIO.NotificationInput{
-				ID:      0,
-				UserID:  user.ID,
-				Content: "You have a new order from user: " + *user.Name,
-				Seen:    &unSeen,
-				URL:     "/brand-detail/order/" + strconv.Itoa(int(orderBody.ID)),
-				Image:   "http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png",
-			}
+		newNotification := notifyIO.NotificationInput{
+			ID:      0,
+			UserID:  user.ID,
+			Content: "You have a new order from user: " + *user.Name,
+			Seen:    &unSeen,
+			URL:     "/brand-detail/order/" + strconv.Itoa(int(orderBody.ID)),
+			Image:   "http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png",
+		}
 
-			err = AddNotificationEvent(ctx, newNotification, u.notify.CreateNotification)
-			if err != nil {
-				return err
-			}
-			return u.smtpUC.SendEmail(ctx, email)
-		}))
+		err = AddNotificationEvent(ctx, newNotification, u.notify.CreateNotification)
+		if err != nil {
+			return createdOrders, err
+		}
+		err = u.smtpUC.SendEmail(ctx, email)
+		if err != nil {
+			return createdOrders, err
+		}
 		///
 		email = smtpIO.EmailForm{
 			Subject:     "Thanks for your purchase",
@@ -96,24 +98,23 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 			AttachFiles: nil,
 		}
 
-		jobs = append(jobs, event_background.NewJob(func(ctx context.Context) error {
-			newNotification := notifyIO.NotificationInput{
-				ID:      0,
-				UserID:  buyer.ID,
-				Content: "Create order successfully",
-				Seen:    &unSeen,
-				URL:     "/user/order/" + strconv.Itoa(int(orderBody.ID)),
-				Image:   "http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png",
-			}
-			err = AddNotificationEvent(ctx, newNotification, u.notify.CreateNotification)
-			if err != nil {
-				return err
-			}
-
-			return u.smtpUC.SendEmail(ctx, email)
-		}))
+		newNotification = notifyIO.NotificationInput{
+			ID:      0,
+			UserID:  buyer.ID,
+			Content: "Create order successfully",
+			Seen:    &unSeen,
+			URL:     "/user/order/" + strconv.Itoa(int(orderBody.ID)),
+			Image:   "http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png",
+		}
+		err = AddNotificationEvent(ctx, newNotification, u.notify.CreateNotification)
+		if err != nil {
+			return createdOrders, err
+		}
+		err = u.smtpUC.SendEmail(ctx, email)
+		if err != nil {
+			return createdOrders, err
+		}
 	}
-	event_background.GetBackGroundJobs().Group <- event_background.NewGroup(true, jobs...)
 
 	return createdOrders, err
 }

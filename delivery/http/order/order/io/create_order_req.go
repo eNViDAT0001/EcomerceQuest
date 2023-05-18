@@ -3,6 +3,7 @@ package io
 type CreateOrderReq struct {
 	ID                uint
 	UserID            uint                 `json:"user_id"`
+	COD               *bool                `json:"cod"`
 	Name              string               `json:"name"`
 	Gender            *bool                `json:"gender"`
 	Phone             string               `json:"phone"`

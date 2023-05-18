@@ -520,6 +520,53 @@
 							"response": []
 						},
 						{
+							"name": "Resend all failed email",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {",
+											"    const resJson = pm.response.json();",
+											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+											"    console.log(pm.variables.get(\"access_token\"));",
+											"    console.log(pm.variables.get(\"refresh_token\"));",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"eNViDXT\",\n    \"name\": \"Nguyen Van A\",\n    \"subject\": \"Title\",\n    \"descriptions\": \"I lớp du chịch chịch\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{smtpV1Path}}/feedback",
+									"host": [
+										"{{smtpV1Path}}"
+									],
+									"path": [
+										"feedback"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "List Feedback",
 							"event": [
 								{
@@ -4911,7 +4958,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": 1,\r\n    \"name\": \"Ngừi Địp\",\r\n    \"gender\": true,\r\n    \"phone\": \"1234567890\",\r\n    \"province\": \"Bình Chánh\",\r\n    \"district\": \"Ninh Thuận\",\r\n    \"ward\": \"Quảng Bình\",\r\n    \"street\": \"Trường chinh\",\r\n    \"quantity\": 20,\r\n    \"total\": 300000,\r\n    \"discount\": 20,\r\n    \"status_description\":\"Provider Will call you soon\",\r\n    \"items\":[\r\n        {\r\n            \"category_id\": 3,\r\n            \"product_id\": 1,\r\n            \"product_option_id\": 30,\r\n            \"provider_id\": 2,\r\n            \"name\": \"Dummy Name\",\r\n            \"price\": 1,\r\n            \"option\": \"Spec: Option\",\r\n            \"quantity\": 1,\r\n            \"discount\": 1,\r\n            \"image\": \"ádf\"\r\n        }\r\n    ],\r\n    \"cart_items_ids\": [1, 2]\r\n}"
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"name\": \"Ngừi Địp\",\r\n    \"gender\": true,\r\n    \"phone\": \"1234567890\",\r\n    \"province\": \"Bình Chánh\",\r\n    \"district\": \"Ninh Thuận\",\r\n    \"ward\": \"Quảng Bình\",\r\n    \"street\": \"Trường chinh\",\r\n    \"quantity\": 20,\r\n    \"total\": 300000,\r\n    \"discount\": 20,\r\n    \"cod\": true,\r\n    \"status_description\":\"Provider Will call you soon\",\r\n    \"items\":[\r\n        {\r\n            \"category_id\": 15,\r\n            \"product_id\": 1,\r\n            \"product_option_id\": 30,\r\n            \"provider_id\": 2,\r\n            \"name\": \"Dummy Name\",\r\n            \"price\": 1,\r\n            \"option\": \"Spec: Option\",\r\n            \"quantity\": 1,\r\n            \"discount\": 1,\r\n            \"image\": \"ádf\"\r\n        }\r\n    ],\r\n    \"cart_items_ids\": [1, 2]\r\n}"
 						},
 						"url": {
 							"raw": "{{orderV1Path}}",
@@ -6116,7 +6163,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"abc\",\r\n    \"discount\": 20,\r\n    \"price\": 20000,\r\n    \"height\": 100,\r\n    \"weight\": 100,\r\n    \"length\": 100,\r\n    \"width\": 100,\r\n    \"media\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"priority\": 2,\r\n            \"media_path\": \"mnp\",\r\n            \"media_type\": \"IMAGE\"\r\n        }\r\n    ],\r\n    \"specification\": {\r\n        \"properties\": \"Hường xuân\"\r\n    },\r\n    \"options\": [\r\n        {\r\n            \"name\": \"Him\",\r\n            \"price\": 20000,\r\n            \"quantity\": 100\r\n        },\r\n        {\r\n            \"name\": \"Who\",\r\n            \"price\": 20000,\r\n            \"quantity\": 100\r\n        },\r\n        {\r\n            \"name\": \"Whom\",\r\n            \"price\": 20000,\r\n            \"quantity\": 100\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"name\": \"abc\",\r\n            \"path\": \"mnp\"\r\n        }\r\n    ]\r\n}"
+							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"abc\",\r\n    \"discount\": 20,\r\n    \"short_descriptions\": \"ádasdasdasdsad\",\r\n    \"price\": 20000,\r\n    \"height\": 100,\r\n    \"weight\": 100,\r\n    \"length\": 100,\r\n    \"width\": 100,\r\n    \"media\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"priority\": 2,\r\n            \"media_path\": \"mnp\",\r\n            \"media_type\": \"IMAGE\"\r\n        }\r\n    ],\r\n    \"specification\": {\r\n        \"properties\": \"Hường xuân\"\r\n    },\r\n    \"options\": [\r\n        {\r\n            \"name\": \"Him\",\r\n            \"price\": 20000,\r\n            \"quantity\": 100\r\n        },\r\n        {\r\n            \"name\": \"Who\",\r\n            \"price\": 20000,\r\n            \"quantity\": 100\r\n        },\r\n        {\r\n            \"name\": \"Whom\",\r\n            \"price\": 20000,\r\n            \"quantity\": 100\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"name\": \"abc\",\r\n            \"path\": \"mnp\"\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
 							"raw": "{{productV1Path}}/provider/:provider_id/user/:user_id",
@@ -6449,7 +6496,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5,\r\n    \"options\": [\r\n        {\r\n            \"id\": 1,\r\n            \"option\": {\r\n                \"name\": \"Him\",\r\n                \"price\": 20000,\r\n                \"quantity\": 100\r\n            }\r\n        }\r\n\r\n    ],\r\n    \"media\": [\r\n        {\r\n            \"id\": 1,\r\n            \"media_path\": \"asdasd\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"id\": 1,\r\n            \"description\": {\r\n                \"name\": \"zxc\",\r\n                \"public_id\": \"asdasd\",\r\n                \"descriptions_path\": \"ád\"\r\n            }\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5,\r\n    \"short_descriptions\": \"ádasdasdasdsad\",\r\n    \"height\": 100,\r\n    \"weight\": 100,\r\n    \"length\": 100,\r\n    \"width\": 100,\r\n    \"options\": [\r\n        {\r\n            \"id\": 1,\r\n            \"option\": {\r\n                \"name\": \"Him\",\r\n                \"price\": 20000,\r\n                \"quantity\": 100\r\n            }\r\n        }\r\n\r\n    ],\r\n    \"media\": [\r\n        {\r\n            \"id\": 1,\r\n            \"media_path\": \"asdasd\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"id\": 1,\r\n            \"description\": {\r\n                \"name\": \"zxc\",\r\n                \"public_id\": \"asdasd\",\r\n                \"descriptions_path\": \"ád\"\r\n            }\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -6730,7 +6777,7 @@
 			"name": "Chat",
 			"item": [
 				{
-					"name": "Channel List",
+					"name": "Chat Room List",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -6782,6 +6829,71 @@
 								{
 									"key": "user_id",
 									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat Room by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{chatsV1Path}}/channels/user_a/:from_user_id/user_b/:to_user_id",
+							"host": [
+								"{{chatsV1Path}}"
+							],
+							"path": [
+								"channels",
+								"user_a",
+								":from_user_id",
+								"user_b",
+								":to_user_id"
+							],
+							"query": [
+								{
+									"key": "marker",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "from_user_id",
+									"value": null
+								},
+								{
+									"key": "to_user_id",
+									"value": null
 								}
 							]
 						}
@@ -7061,6 +7173,65 @@
 					"response": []
 				},
 				{
+					"name": "Notification List Fullview",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{notificationV1Path}}/fullview/users/:user_id",
+							"host": [
+								"{{notificationV1Path}}"
+							],
+							"path": [
+								"fullview",
+								"users",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Seen Notify",
 					"request": {
 						"auth": {
@@ -7119,61 +7290,64 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Seen All Notify",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{notificationV1Path}}/user/:user_id",
+							"host": [
+								"{{notificationV1Path}}"
+							],
+							"path": [
+								"user",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
-		{
-			"name": "Seen All Notify",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{access_token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{notificationV1Path}}/user/:user_id",
-					"host": [
-						"{{notificationV1Path}}"
-					],
-					"path": [
-						"user",
-						":user_id"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": "",
-							"disabled": true
-						}
-					],
-					"variable": [
-						{
-							"key": "user_id",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		}
-	]
-},
 		{
 			"name": "Payment Detail",
 			"protocolProfileBehavior": {

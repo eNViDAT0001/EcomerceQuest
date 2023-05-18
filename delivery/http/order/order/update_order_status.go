@@ -10,7 +10,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
-	smtpIO "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase/io"
+	smtpIO "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/socket"
 	io3 "github.com/eNViDAT0001/Thesis/Backend/socket/io"
 	"github.com/gin-gonic/gin"
@@ -46,8 +46,7 @@ func (s *orderHandler) UpdateOrderStatus() func(ctx *gin.Context) {
 				return
 			}
 
-			jobs := make([]event_background.Job, 0)
-			jobs = append(jobs, event_background.NewJob(func(ctx context.Context) error {
+			event_background.AddBackgroundJobs(false, event_background.NewJob(func(ctx context.Context) error {
 				order, err := s.orderUC.GetByOrderID(newCtx, uint(orderID))
 				if err != nil {
 					return err
@@ -78,10 +77,8 @@ func (s *orderHandler) UpdateOrderStatus() func(ctx *gin.Context) {
 				if err != nil {
 					log.Fatal(err)
 				}
-
 				return s.smtpUC.SendEmail(ctx, email)
 			}))
-			event_background.GetBackGroundJobs().Group <- event_background.NewGroup(false, jobs...)
 
 			cc.Ok("Update Status success")
 			return

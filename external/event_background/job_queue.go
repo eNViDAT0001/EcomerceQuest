@@ -11,7 +11,7 @@ type backGroundJobs struct {
 
 var bgJobs *backGroundJobs
 
-func GetBackGroundJobs() *backGroundJobs {
+func getBackGroundJobs() *backGroundJobs {
 	if bgJobs == nil {
 		bgJobs = &backGroundJobs{
 			Group: make(chan *group),
@@ -19,6 +19,9 @@ func GetBackGroundJobs() *backGroundJobs {
 		go bgJobs.Run()
 	}
 	return bgJobs
+}
+func AddBackgroundJobs(isConcurency bool, jobs ...Job) {
+	getBackGroundJobs().Group <- NewGroup(isConcurency, jobs...)
 }
 func (b *backGroundJobs) Run() {
 	for {

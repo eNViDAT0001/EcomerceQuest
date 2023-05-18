@@ -61,6 +61,7 @@ func router(r *gin.Engine) {
 			mailGroup.POST("/verify", allHandler.smtpHandler.VerifyCode())
 			mailGroup.POST("/reset", allHandler.smtpHandler.CreateResetPassCode())
 			mailGroup.POST("/feedback", allHandler.smtpHandler.CreateEmailFeedback())
+			mailGroup.POST("/unsend/failed", allHandler.smtpHandler.ReSendFailedEmail())
 
 			authAminGroup.GET("/feedback", allHandler.smtpHandler.List())
 			authAminGroup.POST("", allHandler.smtpHandler.SendEmail())
@@ -272,6 +273,13 @@ func router(r *gin.Engine) {
 	c := gron.New()
 	c.AddFunc(gron.Every(1*time.Hour), func() {
 		err := allHandler.orderHandler.RemoveInvalidOrder()
+		if err != nil {
+			log.Fatal(err)
+		}
+	})
+
+	c.AddFunc(gron.Every(15*time.Minute), func() {
+		err := allHandler.smtpHandler.ReSendUnSendEmail()
 		if err != nil {
 			log.Fatal(err)
 		}
