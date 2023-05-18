@@ -154,7 +154,6 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 			}
 		}
 		m.Lock()
-		time.Sleep(100)
 		log.Println("New Client connect")
 		oldClient, ok := m.Clients[cc.Param("user_id")]
 		if ok {
@@ -165,13 +164,17 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 			// remove
 			delete(m.Clients, oldClient.GetID())
 		}
+		m.Unlock()
+		time.Sleep(5)
+		m.Lock()
+		time.Sleep(5)
 		conn, err := GetWsServer().Upgrade(cc.Writer, cc.Request, nil)
 		if err != nil {
 			log.Println(err)
 			m.Unlock()
 			return
 		}
-		client := NewSocketClient(conn, m, strconv.Itoa(userID))
+		client := NewSocketClient(conn, m, cc.Param("user_id"))
 		m.Clients[client.GetID()] = client
 		m.Unlock()
 

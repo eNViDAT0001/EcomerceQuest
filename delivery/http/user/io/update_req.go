@@ -23,6 +23,7 @@ type UpdateUserInfoReq struct {
 	Name     string `json:"name"`
 	Birthday string `json:"birthday"`
 	Gender   *bool  `json:"gender"`
+	Avatar   string `json:"avatar"`
 }
 
 type UpdateUserReq interface {

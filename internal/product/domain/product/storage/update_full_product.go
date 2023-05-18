@@ -40,13 +40,23 @@ func (s productStorage) UpdateFullProduct(ctx context.Context, productID uint, p
 		}
 
 		for _, description := range product.Descriptions {
+			if description.ID != 0 {
+				err = tx.Table(entities.ProductDescriptions{}.TableName()).
+					Where("id = ?", description.ID).
+					Where("product_id = ?", productID).
+					Updates(&description.Description).Error
+				if err != nil {
+					return err
+				}
+				continue
+			}
+			description.Description.ProductID = productID
 			err = tx.Table(entities.ProductDescriptions{}.TableName()).
-				Where("id = ?", description.ID).
-				Where("product_id = ?", productID).
-				Updates(&description.Description).Error
+				Create(&description.Description).Error
 			if err != nil {
 				return err
 			}
+
 		}
 		for _, media := range product.Media {
 			err = tx.Model(entities.ProductMedia{}).
