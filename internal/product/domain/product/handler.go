@@ -32,4 +32,5 @@ type HttpHandler interface {
 
 	DeleteProductByIDs() func(ctx *gin.Context)
 	DeleteProductByID() func(ctx *gin.Context)
+	DeleteElementByIDs() func(ctx *gin.Context)
 }

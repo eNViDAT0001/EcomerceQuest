@@ -182,6 +182,7 @@ func router(r *gin.Engine) {
 			authGroup.POST("/:product_id/specification", allHandler.productHandler.CreateSpecification())
 
 			authGroup.DELETE("/:product_id", allHandler.productHandler.DeleteProductByID())
+			authGroup.DELETE("/:product_id/user/:user_id/elements", allHandler.productHandler.DeleteElementByIDs())
 			authProviderGroup.DELETE("/provider/:provider_id", allHandler.productHandler.DeleteProductByIDs())
 
 			authGroup.PATCH("/:product_id/option", allHandler.productHandler.UpdateProductOptions())

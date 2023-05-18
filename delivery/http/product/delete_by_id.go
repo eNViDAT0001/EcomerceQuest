@@ -27,3 +27,35 @@ func (s *productHandler) DeleteProductByID() func(ctx *gin.Context) {
 		cc.Ok("Delete Product success")
 	}
 }
+
+type ProductElementIDs struct {
+	DescriptionsIDs []uint `json:"descriptions_ids"`
+	ImagesIDs       []uint `json:"images_ids"`
+}
+
+func (s *productHandler) DeleteElementByIDs() func(ctx *gin.Context) {
+	return func(c *gin.Context) {
+		cc := request.FromContext(c)
+		newCtx := context.Background()
+
+		var input ProductElementIDs
+		if err := c.ShouldBindJSON(&input); err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		productID, err := strconv.Atoi(cc.Param("product_id"))
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		err = s.productUC.DeleteElementByIDs(newCtx, uint(productID), input.DescriptionsIDs, input.ImagesIDs)
+		if err != nil {
+			cc.ResponseError(err)
+			return
+		}
+
+		cc.Ok("Delete Product success")
+	}
+}
