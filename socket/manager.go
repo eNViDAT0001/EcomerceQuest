@@ -165,7 +165,7 @@ func (m *Manager) ConnectChatWS() func(ctx *gin.Context) {
 			delete(m.Clients, oldClient.GetID())
 		}
 		m.Unlock()
-		time.Sleep(5)
+		time.Sleep(1 * time.Second)
 		m.Lock()
 		time.Sleep(5)
 		conn, err := GetWsServer().Upgrade(cc.Writer, cc.Request, nil)
