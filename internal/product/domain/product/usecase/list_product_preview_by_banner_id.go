@@ -11,6 +11,9 @@ func (u *productUseCase) ListProductPreviewByBannerID(ctx context.Context, input
 	if err != nil {
 		return nil, 0, err
 	}
+	if len(productIDs) == 0 {
+		return nil, 0, gorm.ErrRecordNotFound
+	}
 
 	input.ProductIDs = productIDs
 	total, err = u.productSto.ListCountProductsPreview(ctx, input)
@@ -31,6 +34,9 @@ func (u *productUseCase) ListProductPreviewNotInBannerID(ctx context.Context, in
 	productIDs, err := u.bannerSto.ProductIDsByNotInBannerID(ctx, input.BannerID)
 	if err != nil {
 		return nil, 0, err
+	}
+	if len(productIDs) == 0 {
+		return nil, 0, gorm.ErrRecordNotFound
 	}
 
 	input.ProductIDs = productIDs
