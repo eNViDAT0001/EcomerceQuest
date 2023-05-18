@@ -54,6 +54,9 @@ func (u bannerUseCase) ListBanner(ctx context.Context, filter paging.ParamsInput
 
 func (u bannerUseCase) ListProductPreviewByBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []ioProductSto.ProductPreviewItem, total int64, err error) {
 	productIDs, err := u.bannerSto.ProductIDsByBannerID(ctx, bannerID)
+	if err != nil {
+		return nil, 0, err
+	}
 	if len(productIDs) < 1 {
 		return nil, 0, gorm.ErrRecordNotFound
 	}
@@ -76,6 +79,9 @@ func (u bannerUseCase) ListProductPreviewByBannerID(ctx context.Context, bannerI
 
 func (u bannerUseCase) ListProductByBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []productEntities.Product, total int64, err error) {
 	productIDs, err := u.bannerSto.ProductIDsByBannerID(ctx, bannerID)
+	if err != nil {
+		return nil, 0, err
+	}
 	if len(productIDs) < 1 {
 		return nil, 0, gorm.ErrRecordNotFound
 	}
@@ -97,9 +103,10 @@ func (u bannerUseCase) ListProductByBannerID(ctx context.Context, bannerID uint,
 }
 func (u bannerUseCase) ListProductPreviewNotInBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []ioProductSto.ProductPreviewItem, total int64, err error) {
 	productIDs, err := u.bannerSto.ProductIDsByNotInBannerID(ctx, bannerID)
-	if len(productIDs) < 1 {
-		return nil, 0, gorm.ErrRecordNotFound
+	if err != nil {
+		return nil, 0, err
 	}
+
 	productFilter := ioProductSto.ListProductInput{
 		ProductIDs: productIDs,
 		Paging:     filter,
@@ -118,9 +125,10 @@ func (u bannerUseCase) ListProductPreviewNotInBannerID(ctx context.Context, bann
 }
 func (u bannerUseCase) ListProductNotINBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []productEntities.Product, total int64, err error) {
 	productIDs, err := u.bannerSto.ProductIDsByNotInBannerID(ctx, bannerID)
-	if len(productIDs) < 1 {
-		return nil, 0, gorm.ErrRecordNotFound
+	if err != nil {
+		return nil, 0, err
 	}
+
 	productFilter := ioProductSto.ListProductInput{
 		ProductIDs: productIDs,
 		Paging:     filter,

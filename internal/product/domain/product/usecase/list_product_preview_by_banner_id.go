@@ -35,9 +35,6 @@ func (u *productUseCase) ListProductPreviewNotInBannerID(ctx context.Context, in
 	if err != nil {
 		return nil, 0, err
 	}
-	if len(productIDs) == 0 {
-		return nil, 0, gorm.ErrRecordNotFound
-	}
 
 	input.ProductIDs = productIDs
 	total, err = u.productSto.ListCountProductsPreview(ctx, input)
