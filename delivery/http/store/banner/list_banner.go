@@ -3,7 +3,7 @@ package banner
 import (
 	"context"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
-	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_params"
+	paging_query "github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_query"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
 	"github.com/gin-gonic/gin"
@@ -15,25 +15,9 @@ func (s bannerHandler) ListBanner() func(*gin.Context) {
 		cc := request.FromContext(c)
 		newCtx := context.Background()
 
-		paginator := paging.ParamsInput{}
-		if err := cc.BindQuery(&paginator); err != nil {
-			cc.BadRequest(err)
-			return
-		}
-
-		search := cc.QueryArray("search[]")
-		fields := cc.QueryArray("fields[]")
-		sort := cc.QueryArray("sorts[]")
-
-		paginator.Filter = paging_params.NewFilterBuilder().
-			WithSearch(search).
-			WithFields(fields).
-			WithSorts(sort).
-			Build()
-
-		inValidField, val := paging_params.ValidateFilter(paginator.Filter, entities.Banner{})
-		if len(inValidField) > 0 {
-			cc.ResponseError(request.NewBadRequestError(inValidField, val, "invalid key and value"))
+		paginator, err := paging_query.GetPagingParams(cc.Context, entities.Banner{})
+		if err != nil {
+			cc.ResponseError(err)
 			return
 		}
 
