@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/external/enum"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
@@ -59,10 +60,20 @@ func (s productStorage) UpdateFullProduct(ctx context.Context, productID uint, p
 
 		}
 		for _, media := range product.Media {
-			err = tx.Model(entities.ProductMedia{}).
-				Where("id = ?", media.ID).
-				Where("product_id = ?", productID).
-				Update("media_path", media.MediaPath).Error
+			if media.ID != 0 {
+				err = tx.Model(entities.ProductMedia{}).
+					Where("id = ?", media.ID).
+					Where("product_id = ?", productID).
+					Update("media_path", media.Media.MediaPath).Error
+				if err != nil {
+					return err
+				}
+				continue
+			}
+			media.Media.ProductID = productID
+			media.Media.MediaType = string(enum.MediaImage)
+			err = tx.Table(entities.ProductMedia{}.TableName()).
+				Create(&media.Media).Error
 			if err != nil {
 				return err
 			}
