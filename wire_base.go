@@ -2,6 +2,7 @@ package main
 
 import (
 	addressHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/address"
+	adminHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/admin"
 	appAccessionHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/app/app_accession"
 	mediaHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/app/app_file"
 	cartHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/cart/cart"
@@ -12,6 +13,9 @@ import (
 	orderItemsHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
 	paymentHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/payment"
 	smtpHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
+
+	adminPKG "github.com/eNViDAT0001/Thesis/Backend/internal/admin"
+
 	chatPKG "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat"
 	chatStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
 	chatUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/usecase"
@@ -101,6 +105,8 @@ import (
 )
 
 var IteratorCollection = wire.NewSet(
+
+	adminHttpHandlerPKG.NewAdminHandler,
 
 	userHttpHandlerPKG.NewUserHandler,
 	userUCPKG.NewUserUseCase,
@@ -201,6 +207,7 @@ type HandlerCollection struct {
 	chatHandler         chatPKG.HttpHandler
 	notificationHandler notificationPKG.HttpHandler
 	paymentHandler      paymentPKG.HttpHandler
+	adminHandler        adminPKG.HttpHandler
 }
 
 func NewHandlerCollection(
@@ -223,6 +230,7 @@ func NewHandlerCollection(
 	chatHandler chatPKG.HttpHandler,
 	notificationHandler notificationPKG.HttpHandler,
 	paymentHandler paymentPKG.HttpHandler,
+	adminHandler adminPKG.HttpHandler,
 
 ) *HandlerCollection {
 	return &HandlerCollection{
@@ -245,5 +253,6 @@ func NewHandlerCollection(
 		chatHandler:         chatHandler,
 		notificationHandler: notificationHandler,
 		paymentHandler:      paymentHandler,
+		adminHandler:        adminHandler,
 	}
 }

@@ -8,6 +8,7 @@ package main
 
 import (
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/address"
+	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/admin"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/app/app_accession"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/app/app_file"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/cart/cart"
@@ -124,6 +125,7 @@ func initHandlerCollection() *HandlerCollection {
 	paymentStorage := storage18.NewPaymentStorage()
 	paymentUseCase := usecase19.NewPaymentUseCase(paymentStorage)
 	paymentHttpHandler := order_items2.NewPaymentHandler(paymentUseCase)
-	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler)
+	adminHttpHandler := admin.NewAdminHandler()
+	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler, adminHttpHandler)
 	return handlerCollection
 }

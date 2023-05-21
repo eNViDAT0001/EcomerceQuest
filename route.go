@@ -19,6 +19,10 @@ func router(r *gin.Engine) {
 	// Validate Admin's Token: allHandler.jwtHandler.VerifyAdminToken()
 	v1 := r.Group("/api/v1")
 	{
+		adminGroup := v1.Group("/admin")
+		{
+			adminGroup.GET("/report", allHandler.adminHandler.GetAdminReport())
+		}
 		chatGroup := v1.Group("/chats")
 		{
 			chatGroup.GET("/channels/users/:user_id", allHandler.chatHandler.ListChannel())
