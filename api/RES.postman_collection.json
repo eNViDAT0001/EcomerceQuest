@@ -990,7 +990,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"eNViDAT\",\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": true,\r\n    \"email\": \"ngvidat@gmail.com\",\r\n    \"Phone\": \"0775702201\"\r\n}",
+							"raw": "{\r\n    \"username\": \"eNViDATT\",\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": true,\r\n    \"email\": \"ngvidat@gmail.com\",\r\n    \"Phone\": \"0775702201\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2396,194 +2396,6 @@
 					]
 				},
 				{
-					"name": "Favorite",
-					"item": [
-						{
-							"name": "Providers By UserID",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{favoriteV1Path}}/user/:user_id",
-									"host": [
-										"{{favoriteV1Path}}"
-									],
-									"path": [
-										"user",
-										":user_id"
-									],
-									"query": [
-										{
-											"key": "fields[]",
-											"value": "gender_0",
-											"disabled": true
-										},
-										{
-											"key": "search[]",
-											"value": "gender_true",
-											"disabled": true
-										},
-										{
-											"key": "search[]",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "sorts[]",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "sorts[]",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add Favorite",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {}
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"user_id\": 1,\r\n    \"provider_id\": 2\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{favoriteV1Path}}",
-									"host": [
-										"{{favoriteV1Path}}"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Favorite",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\r\n    3,\r\n    4\r\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{favoriteV1Path}}/user/:user_id/provider/:provider_id",
-									"host": [
-										"{{favoriteV1Path}}"
-									],
-									"path": [
-										"user",
-										":user_id",
-										"provider",
-										":provider_id"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": null
-										},
-										{
-											"key": "provider_id",
-											"value": null
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "Category",
 					"item": [
 						{
@@ -3787,7 +3599,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"rating\": 3,\r\n    \"description\": \"dssafdsf\",\r\n    \"media\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"priority\": 2,\r\n            \"media_path\": \"mnp\",\r\n            \"media_type\": \"IMAGE\"\r\n        }\r\n    ]Q\r\n}"
+							"raw": "{\r\n    \"rating\": 3,\r\n    \"description\": \"dssafdsf\",\r\n    \"media\": [\r\n        {\r\n            \"public_id\": \"xyz\",\r\n            \"priority\": 2,\r\n            \"media_path\": \"mnp\",\r\n            \"media_type\": \"IMAGE\"\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
 							"raw": "{{commentV1Path}}/product/:product_id/user/:user_id",
@@ -5339,9 +5151,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{cartV1Path}}/:order_id",
+							"raw": "{{orderV1Path}}/:order_id",
 							"host": [
-								"{{cartV1Path}}"
+								"{{orderV1Path}}"
 							],
 							"path": [
 								":order_id"
@@ -5361,7 +5173,7 @@
 							"variable": [
 								{
 									"key": "order_id",
-									"value": null
+									"value": "1"
 								}
 							]
 						}
@@ -5993,7 +5805,7 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": null
+									"value": "23"
 								}
 							]
 						}
@@ -6496,7 +6308,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5,\r\n    \"short_descriptions\": \"ádasdasdasdsad\",\r\n    \"height\": 100,\r\n    \"weight\": 100,\r\n    \"length\": 100,\r\n    \"width\": 100,\r\n    \"options\": [\r\n        {\r\n            \"id\": 1,\r\n            \"option\": {\r\n                \"name\": \"Him\",\r\n                \"price\": 20000,\r\n                \"quantity\": 100\r\n            }\r\n        }\r\n\r\n    ],\r\n    \"media\": [\r\n        {\r\n            \"id\": 1,\r\n            \"media_path\": \"asdasd\"\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"id\": 1,\r\n            \"description\": {\r\n                \"name\": \"zxc\",\r\n                \"public_id\": \"asdasd\",\r\n                \"descriptions_path\": \"ád\"\r\n            }\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5,\r\n    \"short_descriptions\": \"ádasdasdasdsad\",\r\n    \"height\": 100,\r\n    \"weight\": 100,\r\n    \"length\": 100,\r\n    \"width\": 100,\r\n    \"options\": [\r\n        {\r\n            \"id\": 1,\r\n            \"option\": {\r\n                \"name\": \"Him\",\r\n                \"price\": 20000,\r\n                \"quantity\": 100\r\n            }\r\n        }\r\n\r\n    ],\r\n    \"media\": [\r\n        {\r\n            \"id\": 0,\r\n            \"media\": {\r\n                \"media_path\": \"ádfdsf\"\r\n            }\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"id\": 1,\r\n            \"description\": {\r\n                \"name\": \"zxc\",\r\n                \"public_id\": \"asdasd\",\r\n                \"descriptions_path\": \"ád\"\r\n            }\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -6765,6 +6577,62 @@
 								{
 									"key": "provider_id",
 									"value": "55"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elements",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descriptions_ids\": [10],\r\n    \"images_ids\": [12]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productV1Path}}/:product_id/user/:user_id/elements",
+							"host": [
+								"{{productV1Path}}"
+							],
+							"path": [
+								":product_id",
+								"user",
+								":user_id",
+								"elements"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "1"
+								},
+								{
+									"key": "user_id",
+									"value": "1"
 								}
 							]
 						}
@@ -7333,6 +7201,70 @@
 								{
 									"key": "",
 									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Admin Report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{chatsV1Path}}/channels/users/:user_id",
+							"host": [
+								"{{chatsV1Path}}"
+							],
+							"path": [
+								"channels",
+								"users",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "marker",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
 									"disabled": true
 								}
 							],
