@@ -31,6 +31,7 @@ func (s *productHandler) DeleteProductByID() func(ctx *gin.Context) {
 type ProductElementIDs struct {
 	DescriptionsIDs []uint `json:"descriptions_ids"`
 	ImagesIDs       []uint `json:"images_ids"`
+	OptionIDs       []uint `json:"option_ids"`
 }
 
 func (s *productHandler) DeleteElementByIDs() func(ctx *gin.Context) {
@@ -50,7 +51,7 @@ func (s *productHandler) DeleteElementByIDs() func(ctx *gin.Context) {
 			return
 		}
 
-		err = s.productUC.DeleteElementByIDs(newCtx, uint(productID), input.DescriptionsIDs, input.ImagesIDs)
+		err = s.productUC.DeleteElementByIDs(newCtx, uint(productID), input.DescriptionsIDs, input.ImagesIDs, input.OptionIDs)
 		if err != nil {
 			cc.ResponseError(err)
 			return

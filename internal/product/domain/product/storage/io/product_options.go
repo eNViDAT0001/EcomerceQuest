@@ -4,8 +4,8 @@ type ProductIdentifyForm struct {
 	ProductID uint
 }
 type ProductOptionUpdateForm struct {
-	ID     uint                     `json:"id"`
-	Option ProductOptionUpdateInput `json:"option"`
+	ID     uint                    `json:"id"`
+	Option ProductOptionCreateForm `json:"option"`
 }
 type ProductOptionUpdateInput struct {
 	Name     string `json:"name"`
@@ -15,8 +15,8 @@ type ProductOptionUpdateInput struct {
 type ProductOptionCreateForm struct {
 	ID              uint
 	ProductID       uint
-	SpecificationID uint
-	Name            string
-	Price           int
-	Quantity        int
+	SpecificationID uint   `json:"specification_id"`
+	Name            string `json:"name"`
+	Price           int    `json:"price"`
+	Quantity        int    `json:"quantity"`
 }

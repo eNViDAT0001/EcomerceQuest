@@ -37,5 +37,5 @@ type Storage interface {
 
 	DeleteProductByIDs(ctx context.Context, IDs []uint) error
 	DeleteProductByID(ctx context.Context, ID uint) error
-	DeleteElementByIDs(ctx context.Context, ID uint, descriptionsIDs []uint, mediaIDs []uint) error
+	DeleteElementByIDs(ctx context.Context, ID uint, descriptionsIDs []uint, mediaIDs []uint, optionsIDs []uint) error
 }

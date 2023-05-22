@@ -26,6 +26,11 @@ func init() {
 }
 
 func main() {
+	startServer()
+}
+func startServer() {
+	defer startServer()
+
 	r := gin.Default()
 	config := cors.DefaultConfig()
 	config.AllowAllOrigins = true
