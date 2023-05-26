@@ -67,6 +67,10 @@ func (s *chatHandler) GetByID() func(ctx *gin.Context) {
 		}
 		chatRoom, err := s.chatUC.GetByID(newCtx, uint(fromUserID), uint(toID))
 		if err != nil {
+			if err == gorm.ErrRecordNotFound {
+				cc.NotFound(err)
+				return
+			}
 			cc.ResponseError(err)
 			return
 		}
