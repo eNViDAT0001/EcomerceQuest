@@ -45,7 +45,7 @@ func (s *adminHandler) GetAdminReport() func(ctx *gin.Context) {
 		}
 		var totalRevenue float64
 		err = db.Model(entities4.Order{}).
-			Select("SUM(total)").
+			Select("IF(SUM(total) IS NULL, 0, SUM(total)) as total").
 			Where("status = ?", entities4.DeliveredOrder).
 			Scan(&totalRevenue).Error
 		if err != nil {
