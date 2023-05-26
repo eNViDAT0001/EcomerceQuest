@@ -91,6 +91,7 @@ func router(r *gin.Engine) {
 			authAminGroup.GET("", allHandler.providerHandler.ListProvider())
 			authUserGroup.GET("/user/:user_id", allHandler.providerHandler.ListProviderByUserID())
 			providerGroup.GET("/:provider_id", allHandler.providerHandler.GetProviderByID())
+			providerGroup.GET("/report/user/:user_id", allHandler.adminHandler.GetShopReportPreview())
 			authGroup.GET("/:provider_id/user/:user_id", allHandler.providerHandler.GetProviderFullDetailByID())
 			authUserGroup.POST("/user/:user_id", allHandler.providerHandler.CreateProvider())
 			authGroup.PATCH("/:provider_id/user/:user_id", allHandler.providerHandler.UpdateProvider())
