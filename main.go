@@ -26,10 +26,15 @@ func init() {
 }
 
 func main() {
-	startServer()
+	//go startGRPCServer()
+	startHttpServer()
 }
-func startServer() {
-	defer startServer()
+func startGRPCServer() {
+	defer startGRPCServer()
+
+}
+func startHttpServer() {
+	defer startHttpServer()
 
 	r := gin.Default()
 	config := cors.DefaultConfig()

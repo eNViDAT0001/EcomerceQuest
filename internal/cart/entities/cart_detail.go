@@ -3,12 +3,12 @@ package entities
 import "gorm.io/datatypes"
 
 type CartDetail struct {
-	ID         uint           `gorm:"column:id" json:"id"`
-	ProviderID uint           `gorm:"column:provider_id" json:"provider_id"`
-	UserID     uint           `gorm:"column:user_id" json:"user_id"`
-	Name       string         `gorm:"column:name" json:"name"`
-	ImagePath  string         `gorm:"column:image_path" json:"image_path"`
-	Items      datatypes.JSON `gorm:"column:items" json:"items"`
+	ID                 uint           `gorm:"column:id" json:"id"`
+	ProviderID         uint           `gorm:"column:provider_id" json:"provider_id"`
+	ProviderName       string         `gorm:"column:name" json:"provider_name"`
+	ProviderImagePath  string         `gorm:"column:image_path" json:"provider_image_path"`
+	ProviderDistrictID uint           `gorm:"column:district_id" json:"provider_district_id"`
+	Items              datatypes.JSON `gorm:"column:items" json:"items"`
 }
 
 func (CartDetail) WithFields() []string {

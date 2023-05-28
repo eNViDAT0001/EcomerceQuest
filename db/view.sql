@@ -27,6 +27,13 @@ SELECT
     Cart.user_id,
     Provider.name,
     Provider.image_path,
+    Provider.province,
+    Provider.district,
+    Provider.ward,
+    Provider.province_id,
+    Provider.district_id,
+    Provider.ward_code,
+    Provider.street,
     IF(COUNT(CartItem.id) = 0, NULL,
        JSON_ARRAYAGG(
                JSON_OBJECT(
@@ -44,7 +51,7 @@ SELECT
                        'width', Product.width,
                        'media_path', FirstProductMediaList.media_path))) AS items
 FROM Cart
-         JOIN Provider ON Provider.id = Cart.provider_id
+         JOIN Provider ON Provider.id = Cart.provider_id AND Provider.deleted_at IS NULL
          JOIN CartItem ON CartItem.cart_id = Cart.id
          JOIN Product ON Product.id = CartItem.product_id
          LEFT JOIN ProductOption ON CartItem.product_option_id = ProductOption.id

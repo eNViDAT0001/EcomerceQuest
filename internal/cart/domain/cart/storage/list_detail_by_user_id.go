@@ -12,7 +12,9 @@ import (
 func (c cartStorage) ListCartByUserID(ctx context.Context, userID uint, filter paging.ParamsInput) ([]entities.CartDetail, error) {
 	result := make([]entities.CartDetail, 0)
 	db := wrap_gorm.GetDB()
-	query := db.Table(entities.CartDetail{}.TableName()).Where("user_id = ?", userID)
+	query := db.
+		Model(entities.CartDetail{}).
+		Where("user_id = ?", userID)
 
 	paging_query.SetPagingQuery(&filter, entities.CartDetail{}.TableName(), query)
 

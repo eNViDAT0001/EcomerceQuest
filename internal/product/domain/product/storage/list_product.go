@@ -8,11 +8,16 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 )
 
-func (s productStorage) ListProduct(ctx context.Context, input io.ListProductInput) ([]entities.Product, error) {
-	result := make([]entities.Product, 0)
+func (s productStorage) ListProduct(ctx context.Context, input io.ListProductInput) ([]io.ProductWithQuantities, error) {
+	result := make([]io.ProductWithQuantities, 0)
 	db := wrap_gorm.GetDB()
 
-	query := db.Model(entities.Product{})
+	query := db.Model(entities.Product{}).
+		Select("Product.*, IF(COUNT(ProductOption.id) = 0, NULL, JSON_ARRAYAGG(JSON_OBJECT('name', ProductOption.name, 'quantity', ProductOption.quantity))) AS options").
+		Joins("LEFT JOIN ProductOption on Product.id = ProductOption.product_id").
+		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
+		Where("ProductOption.deleted_at IS NULL").
+		Group("Product.id")
 
 	paging_query.SetPagingQuery(&input.Paging, entities.Product{}.TableName(), query)
 

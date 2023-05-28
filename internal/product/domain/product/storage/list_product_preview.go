@@ -32,6 +32,7 @@ func (s productStorage) ListProductsPreview(ctx context.Context, input io.ListPr
 				"ROUND(AVG(Comment.rating),0) AS rating").
 		Joins("LEFT JOIN ProductMedia ON ProductMedia.product_id = Product.id").
 		Joins("LEFT JOIN Comment ON Comment.product_id = Product.id").
+		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
 		Where("Product.deleted_at IS NULL").
 		Group("Product.id")
 

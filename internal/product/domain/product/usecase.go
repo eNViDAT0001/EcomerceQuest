@@ -10,7 +10,7 @@ import (
 
 type UseCase interface {
 	ListProductsPreview(ctx context.Context, input io.ListProductInput) (items []io.ProductPreviewItem, total int64, err error)
-	ListProduct(ctx context.Context, input io.ListProductInput) (items []entities.Product, total int64, err error)
+	ListProduct(ctx context.Context, input io.ListProductInput) (items []io.ProductWithQuantities, total int64, err error)
 	ListProductPreviewByBannerID(ctx context.Context, input io.ListProductInput) (items []io.ProductPreviewItem, total int64, err error)
 	ListProductPreviewNotInBannerID(ctx context.Context, input io.ListProductInput) (items []io.ProductPreviewItem, total int64, err error)
 

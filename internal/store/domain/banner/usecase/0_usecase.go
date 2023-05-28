@@ -5,7 +5,6 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product"
 	ioProductSto "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage/io"
-	productEntities "github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
@@ -77,7 +76,7 @@ func (u bannerUseCase) ListProductPreviewByBannerID(ctx context.Context, bannerI
 	return products, total, err
 }
 
-func (u bannerUseCase) ListProductByBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []productEntities.Product, total int64, err error) {
+func (u bannerUseCase) ListProductByBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []ioProductSto.ProductWithQuantities, total int64, err error) {
 	productIDs, err := u.bannerSto.ProductIDsByBannerID(ctx, bannerID)
 	if err != nil {
 		return nil, 0, err
@@ -123,7 +122,7 @@ func (u bannerUseCase) ListProductPreviewNotInBannerID(ctx context.Context, bann
 
 	return products, total, err
 }
-func (u bannerUseCase) ListProductNotINBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []productEntities.Product, total int64, err error) {
+func (u bannerUseCase) ListProductNotINBannerID(ctx context.Context, bannerID uint, filter paging.ParamsInput) (products []ioProductSto.ProductWithQuantities, total int64, err error) {
 	productIDs, err := u.bannerSto.ProductIDsByNotInBannerID(ctx, bannerID)
 	if err != nil {
 		return nil, 0, err

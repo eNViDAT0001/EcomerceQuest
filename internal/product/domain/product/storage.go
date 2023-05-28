@@ -11,7 +11,7 @@ type Storage interface {
 	ListCountProductsPreview(ctx context.Context, input io.ListProductInput) (total int64, err error)
 
 	ListCountProduct(ctx context.Context, input io.ListProductInput) (total int64, err error)
-	ListProduct(ctx context.Context, input io.ListProductInput) ([]entities.Product, error)
+	ListProduct(ctx context.Context, input io.ListProductInput) ([]io.ProductWithQuantities, error)
 
 	ListProductMediaByProductID(ctx context.Context, productID uint) ([]entities.ProductMedia, error)
 
