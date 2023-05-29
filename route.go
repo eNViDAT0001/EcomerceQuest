@@ -1,6 +1,7 @@
 package main
 
 import (
+	grpc2 "github.com/eNViDAT0001/Thesis/Backend/delivery/grpc"
 	"github.com/eNViDAT0001/Thesis/Backend/socket"
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
@@ -19,6 +20,18 @@ func router(r *gin.Engine) {
 	// Validate Admin's Token: allHandler.jwtHandler.VerifyAdminToken()
 	v1 := r.Group("/api/v1")
 	{
+		v1.GET("/ping", func(c *gin.Context) {
+			response, err := grpc2.AddComment()
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"message": err.Error(),
+				})
+				return
+			}
+			c.JSON(http.StatusOK, gin.H{
+				"message": response,
+			})
+		})
 		adminGroup := v1.Group("/admin")
 		{
 			adminGroup.GET("/report", allHandler.adminHandler.GetAdminReport())
