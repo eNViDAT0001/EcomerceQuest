@@ -23,9 +23,6 @@ func (s productStorage) ListCountProductsPreview(ctx context.Context, input io.L
 		return 0, err
 	}
 
-	if err != nil {
-		return 0, err
-	}
 	paging_query.SetCountListPagingQuery(&input.Paging, entities.Product{}.TableName(), query)
 
 	if len(input.ProductIDs) > 0 {

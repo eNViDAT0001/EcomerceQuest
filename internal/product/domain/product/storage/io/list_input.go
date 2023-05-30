@@ -12,6 +12,11 @@ type ListProductInput struct {
 	BannerID    uint
 	Paging      paging.ParamsInput
 }
+type ListRecommendedProductInput struct {
+	RecommendedProductIDs []uint
+	Count                 int
+	Paging                paging.ParamsInput
+}
 type ProductWithQuantities struct {
 	entities.Product
 	Options datatypes.JSON `json:"options"`

@@ -1,7 +1,6 @@
 package main
 
 import (
-	grpc2 "github.com/eNViDAT0001/Thesis/Backend/delivery/grpc"
 	"github.com/eNViDAT0001/Thesis/Backend/socket"
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
@@ -21,15 +20,8 @@ func router(r *gin.Engine) {
 	v1 := r.Group("/api/v1")
 	{
 		v1.GET("/ping", func(c *gin.Context) {
-			response, err := grpc2.AddComment()
-			if err != nil {
-				c.JSON(http.StatusInternalServerError, gin.H{
-					"message": err.Error(),
-				})
-				return
-			}
 			c.JSON(http.StatusOK, gin.H{
-				"message": response,
+				"message": "pong",
 			})
 		})
 		adminGroup := v1.Group("/admin")
@@ -188,6 +180,7 @@ func router(r *gin.Engine) {
 			productGroup.GET("/:product_id/media", allHandler.productHandler.GetProductMediaByProductID())
 			productGroup.GET("/:product_id/specification", allHandler.productHandler.GetSpecificationTreeByProductID())
 			productGroup.GET("/preview", allHandler.productHandler.ListProductsPreview())
+			productGroup.GET("/recommend/user/:user_id", allHandler.productHandler.ListRecommendedProductsPreview())
 			productGroup.GET("/category/:category_id/preview", allHandler.productHandler.ListProductPreviewWithCategoryID())
 			productGroup.GET("/category/:category_id", allHandler.productHandler.ListProductWithCategoryID())
 			productGroup.GET("/banner/:banner_id/preview", allHandler.productHandler.ListProductPreviewWithBannerID())

@@ -58,4 +58,28 @@ FROM Cart
          LEFT JOIN FirstProductMediaList ON FirstProductMediaList.id = Product.id
 WHERE Cart.deleted_at IS NULL AND CartItem.deleted_at IS NULL
 GROUP BY Cart.id
-
+//////////////////////////
+CREATE VIEW ProductPreview AS
+SELECT Product.id,
+       Product.provider_id,
+       Product.category_id,
+       Product.user_id,
+       Product.name,
+       Product.price,
+       Product.discount,
+       Product.short_descriptions,
+       Product.height,
+       Product.weight,
+       Product.width,
+       Product.length,
+       IF(COUNT(ProductMedia.id) = 0, NULL,
+          JSON_ARRAYAGG(JSON_OBJECT(
+                  'publicID', ProductMedia.public_id,
+                  'mediaPath', ProductMedia.media_path,
+                  'type', ProductMedia.media_type))) AS media,
+       ROUND(AVG(Comment.rating),0) AS rating
+FROM `Product`
+         LEFT JOIN ProductMedia ON ProductMedia.product_id = Product.id
+         LEFT JOIN `Comment` ON `Comment`.product_id = Product.id
+         JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL
+WHERE Product.deleted_at IS NULL GROUP BY `Product`.`id`

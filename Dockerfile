@@ -11,3 +11,5 @@ COPY config /app/main/config
 
 EXPOSE 8082:8082
 CMD ["./main"]
+
+

@@ -10,6 +10,9 @@ type Storage interface {
 	ListProductsPreview(ctx context.Context, input io.ListProductInput) ([]io.ProductPreviewItem, error)
 	ListCountProductsPreview(ctx context.Context, input io.ListProductInput) (total int64, err error)
 
+	ListRecommendedProductsPreview(ctx context.Context, input io.ListRecommendedProductInput) ([]entities.ProductPreview, error)
+	ListCountRecommenderProductsPreview(ctx context.Context, input io.ListRecommendedProductInput) (total int, err error)
+
 	ListCountProduct(ctx context.Context, input io.ListProductInput) (total int64, err error)
 	ListProduct(ctx context.Context, input io.ListProductInput) ([]io.ProductWithQuantities, error)
 
