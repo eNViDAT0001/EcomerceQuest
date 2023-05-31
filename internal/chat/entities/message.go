@@ -15,7 +15,7 @@ func (Message) WithFields() []string {
 	return []string{"seen", "user_id", "to_user_id"}
 }
 func (Message) SearchFields() []string {
-	return []string{"description"}
+	return []string{"description", "name"}
 }
 func (Message) SortFields() []string {
 	return []string{"id", "created_at"}

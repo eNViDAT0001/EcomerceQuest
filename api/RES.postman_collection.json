@@ -2155,6 +2155,51 @@
 							"response": []
 						},
 						{
+							"name": "Reports by UserID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{providerV1Path}}/:provider_id",
+									"host": [
+										"{{providerV1Path}}"
+									],
+									"path": [
+										":provider_id"
+									],
+									"variable": [
+										{
+											"key": "provider_id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Full Detail",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -2231,7 +2276,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Addd\",\r\n    \"image_path\": \"https://res.cloudinary.com/damzcas3k/image/upload/v1671291124/Product/cyydihkdpdhdv7ktlq5e.png\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Addd\",\r\n    \"image_path\": \"https://res.cloudinary.com/damzcas3k/image/upload/v1671291124/Product/cyydihkdpdhdv7ktlq5e.png\",\r\n    \"province_id\": 202,\r\n    \"district_id\": 3695,\r\n    \"ward_code\": \"90767\",\r\n    \"province\": \"Hồ Chí Minh\",\r\n    \"district\": \"Thành Phố Thủ Đức\",\r\n    \"ward\": \"Phường Bình Trưng Tây\",\r\n    \"street\": \"09 Nguyễn Chí Thanh\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5767,6 +5812,93 @@
 					"response": []
 				},
 				{
+					"name": "List Recommend Preview",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productV1Path}}/recommend/user/:user_id?marker=0&limit=2",
+							"host": [
+								"{{productV1Path}}"
+							],
+							"path": [
+								"recommend",
+								"user",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "marker",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "provider_id_4",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "name_Pdf",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "List Media",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -6731,15 +6863,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{chatsV1Path}}/channels/user_a/:from_user_id/user_b/:to_user_id",
+							"raw": "{{chatsV1Path}}/channels/from/:from_user_id/to/:to_user_id",
 							"host": [
 								"{{chatsV1Path}}"
 							],
 							"path": [
 								"channels",
-								"user_a",
+								"from",
 								":from_user_id",
-								"user_b",
+								"to",
 								":to_user_id"
 							],
 							"query": [
@@ -6757,11 +6889,11 @@
 							"variable": [
 								{
 									"key": "from_user_id",
-									"value": null
+									"value": "1"
 								},
 								{
 									"key": "to_user_id",
-									"value": null
+									"value": "25"
 								}
 							]
 						}
@@ -7282,6 +7414,84 @@
 		},
 		{
 			"name": "Payment Detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "d7515382-ec14-11ed-a967-deea53ba3605",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"district_id\": 3695\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://online-gateway.ghn.vn/shiip/public-api/master-data/ward",
+					"protocol": "https",
+					"host": [
+						"online-gateway",
+						"ghn",
+						"vn"
+					],
+					"path": [
+						"shiip",
+						"public-api",
+						"master-data",
+						"ward"
+					],
+					"query": [
+						{
+							"key": "cursor",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "field",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Detail Copy",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},

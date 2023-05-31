@@ -8,11 +8,6 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 )
 
-// 1. Get all recommended products (rp)
-// 2. Compare len(rp) with total products
-// 3. If len(rp) < total products, get random products
-// 4. If len(rp) > total products, left get recommended products
-// 5. If len(rp) > total products and left < 0 get random products
 func (s productStorage) ListRecommendedProductsPreview(ctx context.Context, input io.ListRecommendedProductInput) ([]entities.ProductPreview, error) {
 	result := make([]entities.ProductPreview, 0)
 	db := wrap_gorm.GetDB()
@@ -32,7 +27,7 @@ func (s productStorage) ListRecommendedProductsPreview(ctx context.Context, inpu
 	}
 	var totalRecommendedProduct = int(count)
 
-	// Nếu có marker trong khoảng recommend
+	// If marker in range
 	require := input.Paging.Marker * input.Paging.Limit
 	if require <= totalRecommendedProduct {
 		query := db.Table(entities.ProductPreview{}.TableName()).Where("id IN ?", input.RecommendedProductIDs)
@@ -45,7 +40,7 @@ func (s productStorage) ListRecommendedProductsPreview(ctx context.Context, inpu
 		return result, err
 	}
 
-	// Nếu marker ở giữa Recommended và Chưa đc recommend
+	// If marker reach the end of recommended product
 	left := require - totalRecommendedProduct
 	if left < input.Paging.Limit {
 		query := db.Table(entities.ProductPreview{}.TableName()).Where("id IN ?", input.RecommendedProductIDs)
@@ -73,8 +68,7 @@ func (s productStorage) ListRecommendedProductsPreview(ctx context.Context, inpu
 		return append(result, unRecommended...), err
 	}
 
-	// Nếu có marker tại khúc và Chưa đc recommend
-
+	// If marker reach out of recommended product
 	recommendPages := totalRecommendedProduct / input.Paging.Limit
 	if totalRecommendedProduct%input.Paging.Limit != 0 {
 		recommendPages++

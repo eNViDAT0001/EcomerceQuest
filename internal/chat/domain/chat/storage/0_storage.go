@@ -18,11 +18,32 @@ type chatStorage struct {
 func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) ([]io.ChatRoom, error) {
 	chatRooms := make([]io.ChatRoom, 0)
 	db := wrap_gorm.GetDB()
+
+	var tempStorage *string
+	idsByName := make([]uint, 0)
+	fields := filter.Filter.GetSearch()
+	if fields != nil {
+		val, ok := (*fields)["name"]
+		if ok {
+			tempStorage = &val
+			ids, err := s.ListMessageIDsByName(ctx, val)
+			if err != nil {
+				return nil, err
+			}
+			idsByName = ids
+			delete(*fields, "name")
+		}
+	}
+
 	query := db.Model(entities.ChatRoom{}).
 		Select("ChatRoom.id, Message.from_user_id, Message.to_user_id, Message.content, Message.seen, Message.type, Message.created_at").
 		Joins("JOIN Message ON Message.chat_room_id = ChatRoom.id").
 		Where("Message.id = (SELECT MAX(Message.id) FROM Message WHERE Message.chat_room_id = ChatRoom.id) AND (Message.from_user_id = ? OR Message.to_user_id = ?) AND Message.from_user_id IN (SELECT UserMessage.id as from_user_id From UserMessage) AND Message.to_user_id IN (SELECT UserMessage.id as to_user_id From UserMessage) AND Message.deleted_at IS NULL AND `ChatRoom`.`deleted_at` IS NULL", userID, userID)
 	paging_query.SetPagingQuery(&filter, entities.Message{}.TableName(), query)
+
+	if len(idsByName) > 0 {
+		query = query.Where("Message.id IN (?)", idsByName)
+	}
 
 	err := query.Order("Message.id DESC").Scan(&chatRooms).Error
 	if err != nil {
@@ -59,10 +80,28 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 			chatRooms[i].Avatar = *channelUser.Avatar
 		}
 	}
+	fields = filter.Filter.GetSearch()
+	if tempStorage != nil && fields != nil {
+		(*fields)["name"] = *tempStorage
+	}
 
 	return chatRooms, nil
 }
 
+func (s *chatStorage) ListMessageIDsByName(ctx context.Context, name string) ([]uint, error) {
+	result := make([]uint, 0)
+	db := wrap_gorm.GetDB()
+	err := db.Model(entities.Message{}).
+		Joins("JOIN `User` ON `User`.`id` = Message.from_user_id OR `User`.`id` = Message.to_user_id").
+		Where("User.name LIKE ?", "%"+name+"%").
+		Find(&result).
+		Error
+
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
 func (s *chatStorage) ListMessageByChannel(ctx context.Context, userID uint, toID uint, filter *paging.ParamsInput) ([]entities.Message, error) {
 	result := make([]entities.Message, 0)
 	db := wrap_gorm.GetDB()
@@ -82,10 +121,31 @@ func (s *chatStorage) ListMessageByChannel(ctx context.Context, userID uint, toI
 
 func (s *chatStorage) CountListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) (int64, error) {
 	db := wrap_gorm.GetDB()
+
+	var tempStorage *string
+	idsByName := make([]uint, 0)
+	fields := filter.Filter.GetSearch()
+	if fields != nil {
+		val, ok := (*fields)["name"]
+		if ok {
+			tempStorage = &val
+			ids, err := s.ListMessageIDsByName(ctx, val)
+			if err != nil {
+				return 0, err
+			}
+			idsByName = ids
+			delete(*fields, "name")
+		}
+	}
+
 	var chatRooms []ChatRoomFk
 	query := db.Model(entities.Message{}).
 		Select("DISTINCT Message.from_user_id, Message.to_user_id").
 		Where("from_user_id = ? OR to_user_id = ?", userID, userID)
+
+	if len(idsByName) > 0 {
+		query = query.Where("Message.id IN (?)", idsByName)
+	}
 
 	paging_query.SetCountListPagingQuery(&filter, entities.Message{}.TableName(), query)
 
@@ -116,6 +176,12 @@ func (s *chatStorage) CountListChannel(ctx context.Context, userID uint, filter 
 	for _, toUserIDs := range fromUserIDsStorage {
 		count += int64(len(toUserIDs))
 	}
+
+	fields = filter.Filter.GetSearch()
+	if tempStorage != nil && fields != nil {
+		(*fields)["name"] = *tempStorage
+	}
+
 	return count, nil
 }
 
