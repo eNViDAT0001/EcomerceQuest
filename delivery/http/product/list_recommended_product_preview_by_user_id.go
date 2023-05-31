@@ -2,7 +2,6 @@ package product
 
 import (
 	"context"
-	"fmt"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/grpc/grpc_base"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_query"
@@ -30,6 +29,7 @@ func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context)
 
 		userID, err := strconv.Atoi(cc.Param("user_id"))
 		if err != nil || userID == 0 {
+			(*paginator.Filter.GetSort())["rating"] = "DESC"
 			inputRepo := io.ListProductInput{
 				Paging: paginator,
 			}
@@ -56,7 +56,25 @@ func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context)
 			productIDs, err := grpc_base.GetServices().RecommenderService.
 				LisRecommendedProductIDsByUserID(newCtx, &proto.RecommendReq{UserId: int32(userID)})
 			if err != nil {
-				fmt.Println(err)
+				(*paginator.Filter.GetSort())["rating"] = "DESC"
+				inputRepo := io.ListProductInput{
+					Paging: paginator,
+				}
+				products, total, err := s.productUC.ListProductsPreview(newCtx, inputRepo)
+				if err != nil {
+					if err == gorm.ErrRecordNotFound {
+						cc.NoContent(err)
+						return
+					}
+					cc.ResponseError(err)
+					return
+				}
+
+				paginator.Total = int(total)
+				if paginator.Type == paging.CursorPaging && len(products) > 0 {
+					paginator.Marker = int(products[len(products)-1].ID)
+				}
+				cc.OkPaging(paginator, products)
 				return
 			}
 			userStorage[uint(userID)] = productIDs

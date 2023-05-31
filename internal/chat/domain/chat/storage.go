@@ -14,7 +14,7 @@ type Storage interface {
 	Delete(ctx context.Context, id uint, userID uint) error
 	List(ctx context.Context, input io.ListMessageInput) ([]entities.Message, error)
 	CountList(ctx context.Context, input io.ListMessageInput) (int64, error)
-	ListMessageIDsByName(ctx context.Context, name string) ([]uint, error)
+	ListMessageIDsByName(ctx context.Context, name string, userID uint) ([]uint, error)
 	ListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) ([]io.ChatRoom, error)
 	CountListChannel(ctx context.Context, userID uint, filter paging.ParamsInput) (int64, error)
 	GetByID(ctx context.Context, fromUserID uint, toUserID uint) (entities.ChatRoom, error)

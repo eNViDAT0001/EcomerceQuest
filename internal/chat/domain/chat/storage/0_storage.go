@@ -26,7 +26,7 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 		val, ok := (*fields)["name"]
 		if ok {
 			tempStorage = &val
-			ids, err := s.ListMessageIDsByName(ctx, val)
+			ids, err := s.ListMessageIDsByName(ctx, val, userID)
 			if err != nil {
 				return nil, err
 			}
@@ -42,7 +42,7 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 	paging_query.SetPagingQuery(&filter, entities.Message{}.TableName(), query)
 
 	if idsByName != nil {
-		query = query.Where("Message.id IN (?)", idsByName)
+		query = query.Where("ChatRoom.id IN (?)", idsByName)
 	}
 
 	err := query.Order("Message.id DESC").Scan(&chatRooms).Error
@@ -88,12 +88,14 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 	return chatRooms, nil
 }
 
-func (s *chatStorage) ListMessageIDsByName(ctx context.Context, name string) ([]uint, error) {
+func (s *chatStorage) ListMessageIDsByName(ctx context.Context, name string, userID uint) ([]uint, error) {
 	result := make([]uint, 0)
 	db := wrap_gorm.GetDB()
 	err := db.Model(entities.Message{}).
-		Joins("JOIN `User` ON `User`.`id` = Message.from_user_id OR `User`.`id` = Message.to_user_id").
-		Where("User.name LIKE ?", "%"+name+"%").
+		Select("DISTINCT(Message.chat_room_id)").
+		Joins("JOIN `User` ON `User`.`id` = Message.to_user_id").
+		Where("`User`.`name` LIKE ?", "%"+ name + "%").
+		Where("Message.to_user_id != ?", userID).
 		Find(&result).
 		Error
 
@@ -129,7 +131,7 @@ func (s *chatStorage) CountListChannel(ctx context.Context, userID uint, filter 
 		val, ok := (*fields)["name"]
 		if ok {
 			tempStorage = &val
-			ids, err := s.ListMessageIDsByName(ctx, val)
+			ids, err := s.ListMessageIDsByName(ctx, val, userID)
 			if err != nil {
 				return 0, err
 			}
@@ -144,7 +146,7 @@ func (s *chatStorage) CountListChannel(ctx context.Context, userID uint, filter 
 		Where("from_user_id = ? OR to_user_id = ?", userID, userID)
 
 	if idsByName != nil {
-		query = query.Where("Message.id IN (?)", idsByName)
+		query = query.Where("Message.chat_room_id IN (?)", idsByName)
 	}
 
 	paging_query.SetCountListPagingQuery(&filter, entities.Message{}.TableName(), query)
