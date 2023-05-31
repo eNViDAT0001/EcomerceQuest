@@ -6,7 +6,7 @@ import (
 )
 
 type GRPCService interface {
-	LisRecommendedProductIDsByUserID(ctx context.Context, req *proto.RecommentReq) ([]uint, error)
+	LisRecommendedProductIDsByUserID(ctx context.Context, req *proto.RecommendReq) ([]uint, error)
 	AddComment(ctx context.Context, req *proto.CommentReq) (*proto.NonQueryResponse, error)
 }
 type recommenderService struct {

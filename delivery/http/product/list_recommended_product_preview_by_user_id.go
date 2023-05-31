@@ -53,7 +53,7 @@ func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context)
 		recommendedIDs, ok := userStorage[uint(userID)]
 		if paginator.Marker < 1 || !ok {
 			productIDs, err := grpc_base.GetServices().RecommenderService.
-				LisRecommendedProductIDsByUserID(newCtx, &proto.RecommentReq{UserId: int32(userID)})
+				LisRecommendedProductIDsByUserID(newCtx, &proto.RecommendReq{UserId: int32(userID)})
 			userStorage[uint(userID)] = productIDs
 
 			inputRepo := io.ListRecommendedProductInput{

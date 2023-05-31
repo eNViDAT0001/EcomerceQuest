@@ -5,7 +5,7 @@ import (
 	proto "github.com/eNViDAT0001/Thesis/Backend/thesis_proto"
 )
 
-func (r recommenderService) LisRecommendedProductIDsByUserID(ctx context.Context, req *proto.RecommentReq) ([]uint, error) {
+func (r recommenderService) LisRecommendedProductIDsByUserID(ctx context.Context, req *proto.RecommendReq) ([]uint, error) {
 	conn, client, err := GRPCClient()
 	if err != nil {
 		return nil, err
