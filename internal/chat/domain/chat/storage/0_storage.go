@@ -20,7 +20,7 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 	db := wrap_gorm.GetDB()
 
 	var tempStorage *string
-	idsByName := make([]uint, 0)
+	var idsByName []uint
 	fields := filter.Filter.GetSearch()
 	if fields != nil {
 		val, ok := (*fields)["name"]
@@ -41,7 +41,7 @@ func (s *chatStorage) ListChannel(ctx context.Context, userID uint, filter pagin
 		Where("Message.id = (SELECT MAX(Message.id) FROM Message WHERE Message.chat_room_id = ChatRoom.id) AND (Message.from_user_id = ? OR Message.to_user_id = ?) AND Message.from_user_id IN (SELECT UserMessage.id as from_user_id From UserMessage) AND Message.to_user_id IN (SELECT UserMessage.id as to_user_id From UserMessage) AND Message.deleted_at IS NULL AND `ChatRoom`.`deleted_at` IS NULL", userID, userID)
 	paging_query.SetPagingQuery(&filter, entities.Message{}.TableName(), query)
 
-	if len(idsByName) > 0 {
+	if idsByName != nil {
 		query = query.Where("Message.id IN (?)", idsByName)
 	}
 
@@ -123,7 +123,7 @@ func (s *chatStorage) CountListChannel(ctx context.Context, userID uint, filter 
 	db := wrap_gorm.GetDB()
 
 	var tempStorage *string
-	idsByName := make([]uint, 0)
+	var idsByName []uint
 	fields := filter.Filter.GetSearch()
 	if fields != nil {
 		val, ok := (*fields)["name"]
@@ -143,7 +143,7 @@ func (s *chatStorage) CountListChannel(ctx context.Context, userID uint, filter 
 		Select("DISTINCT Message.from_user_id, Message.to_user_id").
 		Where("from_user_id = ? OR to_user_id = ?", userID, userID)
 
-	if len(idsByName) > 0 {
+	if idsByName != nil {
 		query = query.Where("Message.id IN (?)", idsByName)
 	}
 
