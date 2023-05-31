@@ -2,6 +2,7 @@ package product
 
 import (
 	"context"
+	"fmt"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/grpc/grpc_base"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_query"
@@ -54,6 +55,10 @@ func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context)
 		if paginator.Marker < 1 || !ok {
 			productIDs, err := grpc_base.GetServices().RecommenderService.
 				LisRecommendedProductIDsByUserID(newCtx, &proto.RecommendReq{UserId: int32(userID)})
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
 			userStorage[uint(userID)] = productIDs
 
 			inputRepo := io.ListRecommendedProductInput{
