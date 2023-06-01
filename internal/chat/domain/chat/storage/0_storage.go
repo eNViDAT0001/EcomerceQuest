@@ -93,9 +93,9 @@ func (s *chatStorage) ListMessageIDsByName(ctx context.Context, name string, use
 	db := wrap_gorm.GetDB()
 	err := db.Model(entities.Message{}).
 		Select("DISTINCT(Message.chat_room_id)").
-		Joins("JOIN `User` ON `User`.`id` = Message.to_user_id").
+		Joins("JOIN `User` ON `User`.`id` = Message.from_user_id").
 		Where("`User`.`name` LIKE ?", "%"+ name + "%").
-		Where("Message.to_user_id != ?", userID).
+		Where("Message.to_user_id = ?", userID).
 		Find(&result).
 		Error
 
