@@ -2,14 +2,15 @@ package comment
 
 import (
 	"context"
+	"strconv"
+
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/grpc/grpc_base"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/comment/convert"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/comment/io"
+	"github.com/eNViDAT0001/Thesis/Backend/external/event_background"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	proto "github.com/eNViDAT0001/Thesis/Backend/thesis_proto"
 	"github.com/gin-gonic/gin"
-	"log"
-	"strconv"
 )
 
 func (s commentHandler) CreateComment() func(ctx *gin.Context) {
@@ -41,14 +42,17 @@ func (s commentHandler) CreateComment() func(ctx *gin.Context) {
 			return
 		}
 
-		_, err = grpc_base.GetServices().RecommenderService.AddComment(newCtx, &proto.CommentReq{
-			UserId:    int32(userID),
-			ProductId: int32(productID),
-			Rating:    int32(input.Rating),
-		})
-		if err != nil {
-			log.Printf("Error while adding comment to recommender service: %v", err)
-		}
+		event_background.AddBackgroundJobs(false, event_background.NewJob(func(ctx context.Context) error {
+			_, err = grpc_base.GetServices().RecommenderService.AddComment(newCtx, &proto.CommentReq{
+				UserId:    int32(userID),
+				ProductId: int32(productID),
+				Rating:    int32(input.Rating),
+			})
+
+			return err
+		}))
+
+
 		result := map[string]interface{}{
 			"CommentID": commentID,
 		}

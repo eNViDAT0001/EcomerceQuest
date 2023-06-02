@@ -17,23 +17,25 @@ func (s *smtpUseCase) ResendEmails(ctx context.Context, status string) (err erro
 		return err
 	}
 	for _, email := range emails {
-		toEmails := make([]string, 0)
-		bcc := make([]string, 0)
-		cc := make([]string, 0)
-		attachFiles := make([]string, 0)
-		for _, to := range strings.Split(email.ToEmails, ",") {
-			toEmails = append(toEmails, to)
+
+
+		toEmails := strings.Split(email.ToEmails, ",")
+		if len(toEmails) == 1 && toEmails[0] == "" {
+			toEmails = nil
+		}
+		bcc := strings.Split(email.Bcc, ",")
+		if len(bcc) == 1 && bcc[0] == "" {
+			bcc = nil
+		}
+		cc := strings.Split(email.Cc, ",")
+		if len(cc) == 1 && cc[0] == "" {
+			cc = nil
+		}
+		attachFiles := strings.Split(email.AttachFiles, ",")
+		if len(attachFiles) == 1 && attachFiles[0] == "" {
+			attachFiles = nil
 		}
 
-		for _, to := range strings.Split(email.Bcc, ",") {
-			bcc = append(toEmails, to)
-		}
-		for _, to := range strings.Split(email.Cc, ",") {
-			cc = append(toEmails, to)
-		}
-		for _, to := range strings.Split(email.AttachFiles, ",") {
-			attachFiles = append(toEmails, to)
-		}
 		emailForm := io.EmailForm{
 			ID:          email.ID,
 			Subject:     email.Subject,
