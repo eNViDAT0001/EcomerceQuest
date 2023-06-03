@@ -12,6 +12,7 @@ import (
 	orderHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order"
 	orderItemsHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
 	paymentHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/payment"
+	requestContactHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/request_contact"
 	smtpHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
 
 	adminPKG "github.com/eNViDAT0001/Thesis/Backend/internal/admin"
@@ -22,6 +23,10 @@ import (
 	smtpPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
 	smtpStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
 	smtpUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
+
+	requestContactPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact"
+	requestContactStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact/storage"
+	requestContactUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact/usecase"
 
 	notificationPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification"
 	notificationStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
@@ -176,6 +181,10 @@ var IteratorCollection = wire.NewSet(
 	smtpUCPKG.NewSmtpUseCase,
 	smtpStoPKG.NewSmtpStorage,
 
+	requestContactHttpHandlerPKG.NewRequestContactHandler,
+	requestContactUCPKG.NewRequestContactUseCase,
+	requestContactStoPKG.NewRequestContactStorage,
+
 	chatHttpHandlerPKG.NewChatHandler,
 	chatUCPKG.NewChatUseCase,
 	chatStoPKG.NewChatStorage,
@@ -208,6 +217,7 @@ type HandlerCollection struct {
 	notificationHandler notificationPKG.HttpHandler
 	paymentHandler      paymentPKG.HttpHandler
 	adminHandler        adminPKG.HttpHandler
+	requestHandler      requestContactPKG.HttpHandler
 }
 
 func NewHandlerCollection(
@@ -231,6 +241,7 @@ func NewHandlerCollection(
 	notificationHandler notificationPKG.HttpHandler,
 	paymentHandler paymentPKG.HttpHandler,
 	adminHandler adminPKG.HttpHandler,
+	requestHandler requestContactPKG.HttpHandler,
 
 ) *HandlerCollection {
 	return &HandlerCollection{
@@ -254,5 +265,6 @@ func NewHandlerCollection(
 		notificationHandler: notificationHandler,
 		paymentHandler:      paymentHandler,
 		adminHandler:        adminHandler,
+		requestHandler:      requestHandler,
 	}
 }

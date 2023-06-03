@@ -26,13 +26,9 @@ func init() {
 }
 
 func main() {
-	//go startGRPCServer()
 	startHttpServer()
 }
-func startGRPCServer() {
-	defer startGRPCServer()
 
-}
 func startHttpServer() {
 	defer startHttpServer()
 

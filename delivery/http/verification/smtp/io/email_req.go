@@ -6,6 +6,9 @@ type EmailReq struct {
 
 	Subject      string `json:"subject"`
 	Descriptions string `json:"descriptions" binding:"required"`
+
+	AttachedFiles string `json:"attached_files"`
+	Type          string `json:"type"`
 }
 type SendEmailReq struct {
 	Name  string `json:"name" `

@@ -27,6 +27,9 @@ func router(r *gin.Engine) {
 		adminGroup := v1.Group("/admin")
 		{
 			adminGroup.GET("/report", allHandler.adminHandler.GetAdminReport())
+			adminGroup.GET("/requests", allHandler.requestHandler.ListRequest())
+			adminGroup.PATCH("/requests/:request_id", allHandler.requestHandler.UpdateRequest())
+			adminGroup.DELETE("/requests/:request_id", allHandler.requestHandler.DeleteRequest())
 		}
 		chatGroup := v1.Group("/chats")
 		{

@@ -26,6 +26,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/provider"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/user"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/jwt"
+	smtp2 "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/request_contact"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
 	storage3 "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address/storage"
 	usecase3 "github.com/eNViDAT0001/Thesis/Backend/internal/address/domain/address/usecase"
@@ -34,17 +35,17 @@ import (
 	usecase12 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart/usecase"
 	storage12 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart_item/storage"
 	usecase13 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart_item/usecase"
-	storage17 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
+	storage18 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
 	usecase18 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/usecase"
 	storage7 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/storage"
 	usecase9 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/usecase"
-	storage16 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
+	storage17 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
 	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/usecase"
 	storage14 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage"
 	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
 	storage13 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
 	usecase17 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
-	storage18 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/storage"
+	storage19 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/storage"
 	usecase19 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/usecase"
 	storage10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
 	usecase10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/usecase"
@@ -62,6 +63,8 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/usecase"
 	storage2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
 	usecase2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
+	storage16 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact/storage"
+	usecase20 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact/usecase"
 	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
 	usecase14 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
 )
@@ -74,8 +77,8 @@ func initHandlerCollection() *HandlerCollection {
 	jwtStorage := storage2.NewJwtStorage()
 	jwtUseCase := usecase2.NewJwtUseCase(userStorage, jwtStorage)
 	httpHandler := user.NewUserHandler(useCase, jwtUseCase)
-	storage19 := storage3.NewAddressStorage()
-	userUseCase := usecase3.NewAddressUseCase(storage19)
+	storage20 := storage3.NewAddressStorage()
+	userUseCase := usecase3.NewAddressUseCase(storage20)
 	userHttpHandler := address.NewAddressHandler(userUseCase)
 	categoryStorage := storage4.NewCategoryStorage()
 	categoryUseCase := usecase4.NewCategoryUseCase(categoryStorage)
@@ -110,22 +113,25 @@ func initHandlerCollection() *HandlerCollection {
 	order_itemStorage := storage13.NewOrderItemStorage()
 	orderStorage := storage14.NewOrderStorage(order_itemStorage)
 	smtpStorage := storage15.NewSmtpStorage()
-	smtpUseCase := usecase14.NewSmtpUseCase(smtpStorage)
-	notificationStorage := storage16.NewNotificationStorage()
+	request_contactStorage := storage16.NewRequestContactStorage()
+	smtpUseCase := usecase14.NewSmtpUseCase(smtpStorage, request_contactStorage)
+	notificationStorage := storage17.NewNotificationStorage()
 	notificationUseCase := usecase15.NewNotificationUseCase(notificationStorage)
 	orderUseCase := usecase16.NewOrderUseCase(orderStorage, userStorage, smtpUseCase, notificationUseCase)
 	orderHttpHandler := order.NewOrderHandler(orderUseCase, smtpUseCase, useCase, notificationUseCase)
 	order_itemUseCase := usecase17.NewOrderItemUseCase(order_itemStorage)
 	order_itemHttpHandler := order_items.NewOrderItemHandler(order_itemUseCase)
 	smtpHttpHandler := smtp.NewSmtpHandler(jwtUseCase, useCase, smtpUseCase)
-	chatStorage := storage17.NewChatStorage(userStorage)
+	chatStorage := storage18.NewChatStorage(userStorage)
 	chatUseCase := usecase18.NewChatUseCase(chatStorage)
 	chatHttpHandler := chat.NewChatHandler(chatUseCase)
 	notificationHttpHandler := chat2.NewNotificationHandler(notificationUseCase)
-	paymentStorage := storage18.NewPaymentStorage()
+	paymentStorage := storage19.NewPaymentStorage()
 	paymentUseCase := usecase19.NewPaymentUseCase(paymentStorage)
 	paymentHttpHandler := order_items2.NewPaymentHandler(paymentUseCase)
 	adminHttpHandler := admin.NewAdminHandler()
-	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler, adminHttpHandler)
+	request_contactUseCase := usecase20.NewRequestContactUseCase(request_contactStorage, notificationUseCase)
+	request_contactHttpHandler := smtp2.NewRequestContactHandler(request_contactUseCase)
+	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler, adminHttpHandler, request_contactHttpHandler)
 	return handlerCollection
 }

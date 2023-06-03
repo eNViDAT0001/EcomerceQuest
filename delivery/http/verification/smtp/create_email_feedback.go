@@ -5,6 +5,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp/convert"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp/io"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
+	io2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact/storage/io"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,8 +25,15 @@ func (s *smtpHandler) CreateEmailFeedback() func(*gin.Context) {
 			cc.ResponseError(err)
 			return
 		}
+		requestContact := io2.CreateRequestContact{
+			Subject:       input.Subject,
+			Content:       input.Descriptions,
+			AttachedFile:  input.AttachedFiles,
+			Type:          input.Type,
+			Seen:          false,
+		}
 
-		id, err := s.smtpUC.CreateEmail(newCtx, inputUC)
+		id, err := s.smtpUC.CreateEmail(newCtx, inputUC, requestContact)
 		if err != nil {
 			cc.ResponseError(err)
 			return

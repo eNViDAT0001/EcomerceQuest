@@ -2,13 +2,15 @@ package usecase
 
 import (
 	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage/io"
 	"strings"
 )
 
 type smtpUseCase struct {
-	smtpStorage smtp.Storage
+	smtpStorage    smtp.Storage
+	requestStorage request_contact.Storage
 }
 
 func (s *smtpUseCase) ResendEmails(ctx context.Context, status string) (err error) {
@@ -17,7 +19,6 @@ func (s *smtpUseCase) ResendEmails(ctx context.Context, status string) (err erro
 		return err
 	}
 	for _, email := range emails {
-
 
 		toEmails := strings.Split(email.ToEmails, ",")
 		if len(toEmails) == 1 && toEmails[0] == "" {
@@ -53,9 +54,12 @@ func (s *smtpUseCase) ResendEmails(ctx context.Context, status string) (err erro
 	return nil
 }
 
-func NewSmtpUseCase(smtpStorage smtp.Storage,
+func NewSmtpUseCase(
+	smtpStorage smtp.Storage,
+	requestStorage request_contact.Storage,
 ) smtp.UseCase {
 	return &smtpUseCase{
-		smtpStorage: smtpStorage,
+		smtpStorage:    smtpStorage,
+		requestStorage: requestStorage,
 	}
 }
