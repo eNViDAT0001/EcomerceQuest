@@ -12,7 +12,7 @@ type RequestContact struct {
 }
 
 func (c RequestContact) WithFields() []string {
-	return []string{"id"}
+	return []string{"id", "type"}
 }
 
 func (c RequestContact) SearchFields() []string {
