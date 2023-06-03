@@ -429,7 +429,7 @@
 							"response": []
 						},
 						{
-							"name": "Feedback",
+							"name": "Contact",
 							"event": [
 								{
 									"listen": "test",
@@ -548,54 +548,6 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"email\": \"eNViDXT\",\n    \"name\": \"Nguyen Van A\",\n    \"subject\": \"Title\",\n    \"descriptions\": \"I lớp du chịch chịch\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{smtpV1Path}}/feedback",
-									"host": [
-										"{{smtpV1Path}}"
-									],
-									"path": [
-										"feedback"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "List Feedback",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", () => {",
-											"    const resJson = pm.response.json();",
-											"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
-											"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
-											"    console.log(pm.variables.get(\"access_token\"));",
-											"    console.log(pm.variables.get(\"refresh_token\"));",
-											"    pm.expect(pm.response.code).to.eql(200);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {},
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\": \"eNViDXT\",\n    \"password\": \"admin\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -7379,14 +7331,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{chatsV1Path}}/channels/users/:user_id",
+							"raw": "{{adminV1Path}}/report",
 							"host": [
-								"{{chatsV1Path}}"
+								"{{adminV1Path}}"
 							],
 							"path": [
-								"channels",
-								"users",
-								":user_id"
+								"report"
 							],
 							"query": [
 								{
@@ -7399,10 +7349,206 @@
 									"value": "2",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adminV1Path}}/requests",
+							"host": [
+								"{{adminV1Path}}"
+							],
+							"path": [
+								"requests"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "cursor",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"description": "id, type",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "name_Pdf",
+									"description": "id, subject, content, attached_file, type, seen",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"description": "id, seen",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "request",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"seen\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adminV1Path}}/requests/:request:_id",
+							"host": [
+								"{{adminV1Path}}"
+							],
+							"path": [
+								"requests",
+								":request:_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
 							],
 							"variable": [
 								{
-									"key": "user_id",
+									"key": "request:_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "request",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"eNViDAT\",\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": true,\r\n    \"email\": \"ngvidat@gmail.com\",\r\n    \"Phone\": \"0775702201\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adminV1Path}}/requests/:request:_id",
+							"host": [
+								"{{adminV1Path}}"
+							],
+							"path": [
+								"requests",
+								":request:_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "request:_id",
 									"value": "1"
 								}
 							]
