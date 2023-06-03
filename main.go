@@ -33,9 +33,7 @@ func startHttpServer() {
 	defer startHttpServer()
 
 	r := gin.Default()
-	config := cors.DefaultConfig()
-	config.AllowAllOrigins = true
-	r.Use(cors.New(config))
+	r.Use(cors.Default())
 
 	router(r)
 
