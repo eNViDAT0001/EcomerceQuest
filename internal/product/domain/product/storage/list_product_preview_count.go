@@ -18,6 +18,10 @@ func (s productStorage) ListCountProductsPreview(ctx context.Context, input io.L
 		Where("Product.deleted_at IS NULL").
 		Group("Product.id")
 
+	err = DoDummyRatingSort(input, query)
+	if err != nil {
+		return 0, err
+	}
 	err = DoDummyRatingFilter(input, query)
 	if err != nil {
 		return 0, err
@@ -37,5 +41,6 @@ func (s productStorage) ListCountProductsPreview(ctx context.Context, input io.L
 		return 0, err
 	}
 	RemoveDummyFilter(input)
+	RemoveDummySort(input)
 	return total, nil
 }

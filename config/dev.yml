@@ -12,6 +12,9 @@ DB_PASSWORD: admin
 RECOMMENDER:
   HOST: 127.0.0.1
   PORT: 9180
+REDIS:
+  HOST: localhost
+  PORT: 6379
 FE:
   DOMAIN: localhost
   URL: http://localhost:3000

@@ -26,7 +26,7 @@ func (Product) SearchFields() []string {
 	return []string{"name", "price", "id"}
 }
 func (Product) SortFields() []string {
-	return []string{"name", "discount", "price", "created_at", "provider_id", "user_id", "category_id", "id", "height", "weight", "length", "width"}
+	return []string{"name", "discount", "price", "created_at", "provider_id", "user_id", "category_id", "id", "height", "weight", "length", "width", "rating"}
 }
 func (Product) TableName() string {
 	return "Product"

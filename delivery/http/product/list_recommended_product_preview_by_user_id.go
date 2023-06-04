@@ -2,7 +2,9 @@ package product
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/grpc/grpc_base"
+	"github.com/eNViDAT0001/Thesis/Backend/external/cache"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_query"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
@@ -11,10 +13,9 @@ import (
 	proto "github.com/eNViDAT0001/Thesis/Backend/thesis_proto"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+	"log"
 	"strconv"
 )
-
-var userStorage = map[uint][]uint{}
 
 func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context) {
 	return func(c *gin.Context) {
@@ -29,7 +30,11 @@ func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context)
 
 		userID, err := strconv.Atoi(cc.Param("user_id"))
 		if err != nil || userID == 0 {
+			if paginator.Filter.GetSort() == nil {
+				paginator.Filter = paginator.Filter.CloneWithSort([]string{"rating_DESC"})
+			}
 			(*paginator.Filter.GetSort())["rating"] = "DESC"
+
 			inputRepo := io.ListProductInput{
 				Paging: paginator,
 			}
@@ -51,12 +56,17 @@ func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context)
 			return
 		}
 
-		recommendedIDs, ok := userStorage[uint(userID)]
+		recommendedIDs, ok := getRecommendedIDs(newCtx, uint(userID))
+
 		if paginator.Marker < 1 || !ok {
 			productIDs, err := grpc_base.GetServices().RecommenderService.
 				LisRecommendedProductIDsByUserID(newCtx, &proto.RecommendReq{UserId: int32(userID)})
 			if err != nil {
+				if paginator.Filter.GetSort() == nil {
+					paginator.Filter = paginator.Filter.CloneWithSort([]string{"rating_DESC"})
+				}
 				(*paginator.Filter.GetSort())["rating"] = "DESC"
+
 				inputRepo := io.ListProductInput{
 					Paging: paginator,
 				}
@@ -77,7 +87,7 @@ func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context)
 				cc.OkPaging(paginator, products)
 				return
 			}
-			userStorage[uint(userID)] = productIDs
+			saveRecommendedIDs(newCtx, uint(userID), productIDs)
 
 			inputRepo := io.ListRecommendedProductInput{
 				RecommendedProductIDs: productIDs,
@@ -121,5 +131,27 @@ func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context)
 		}
 		cc.OkPaging(paginator, products)
 
+	}
+}
+
+func getRecommendedIDs(ctx context.Context, id uint) (productIDs []uint, exist bool) {
+	client := cache.GetRedis()
+	val, err := client.Get(ctx, "recommended_"+strconv.Itoa(int(id)))
+	if err != nil {
+		log.Println(err)
+		return nil, false
+	}
+	if err = json.Unmarshal([]byte(val), &productIDs); err != nil {
+		log.Println(err)
+		return nil, false
+	}
+	return productIDs, true
+}
+
+func saveRecommendedIDs(ctx context.Context, id uint, recommendedIDs []uint) {
+	client := cache.GetRedis()
+	err := client.SetDefault(ctx, "recommended_"+strconv.Itoa(int(id)), recommendedIDs)
+	if err != nil {
+		log.Println(err)
 	}
 }

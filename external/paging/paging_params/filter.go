@@ -9,6 +9,8 @@ type FilterList interface {
 	GetFields() *map[string]string
 	GetSearch() *map[string]string
 	GetSort() *map[string]string
+
+	CloneWithSort([]string) FilterList
 }
 type FilterBuilder interface {
 	WithSorts([]string) FilterBuilder
@@ -40,6 +42,13 @@ func (f *filterList) WithSorts(input []string) FilterBuilder {
 }
 func (f *filterList) Build() FilterList {
 	return f
+}
+func (f *filterList) CloneWithSort(input []string) FilterList {
+	return &filterList{
+		Search: f.Search,
+		Fields: f.Fields,
+		Sort:   convertParamsArrayToMap(input),
+	}
 }
 func NewFilterBuilder() FilterBuilder {
 	return &filterList{}

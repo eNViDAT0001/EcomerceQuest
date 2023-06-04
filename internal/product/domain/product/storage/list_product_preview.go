@@ -35,8 +35,11 @@ func (s productStorage) ListProductsPreview(ctx context.Context, input io.ListPr
 		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
 		Where("Product.deleted_at IS NULL").
 		Group("Product.id")
-
-	err := DoDummyRatingFilter(input, query) // This is the DummyLine
+	err := DoDummyRatingSort(input, query) // This is the DummyLine
+	if err != nil {
+		return nil, err
+	}
+	err = DoDummyRatingFilter(input, query) // This is the DummyLine
 	if err != nil {
 		return nil, err
 	}
@@ -54,6 +57,7 @@ func (s productStorage) ListProductsPreview(ctx context.Context, input io.ListPr
 		return nil, err
 	}
 	RemoveDummyFilter(input) // This is the DummyLine
+	RemoveDummySort(input)   // This is the DummyLine
 	return result, nil
 }
 
@@ -82,5 +86,35 @@ func RemoveDummyFilter(input io.ListProductInput) {
 	fields := input.Paging.Filter.GetFields()
 	if tempStorage != nil && fields != nil {
 		(*fields)["rating"] = *tempStorage
+	}
+}
+
+var tempRatingStorage *string
+
+func DoDummyRatingSort(input io.ListProductInput, query *gorm.DB) error {
+	fields := input.Paging.Filter.GetSort()
+	if fields == nil {
+		return nil
+	}
+
+	val, ok := (*fields)["rating"]
+	if !ok {
+		return nil
+	}
+	tempRatingStorage = &val
+
+	if val == "ASC" {
+		query = query.Order("AVG(`Comment`.`rating`) ASC")
+		delete(*fields, "rating")
+		return nil
+	}
+	query = query.Order("AVG(`Comment`.`rating`) DESC")
+	delete(*fields, "rating")
+	return nil
+}
+func RemoveDummySort(input io.ListProductInput) {
+	fields := input.Paging.Filter.GetSort()
+	if tempRatingStorage != nil && fields != nil {
+		(*fields)["rating"] = *tempRatingStorage
 	}
 }
