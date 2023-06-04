@@ -10,20 +10,18 @@ import (
 	"sync"
 )
 
-var storage *productStorage
+var instance *productStorage
 
 type productStorage struct {
-	mu      sync.Mutex
-	storage map[uint]int
+	mu sync.Mutex
 }
 
 func GetQuantityStore() *productStorage {
-	if storage != nil {
-		return storage
+	if instance != nil {
+		return instance
 	}
 
-	store := map[uint]int{}
-	return &productStorage{storage: store}
+	return &productStorage{}
 }
 
 func (fRedis *productStorage) Minus(ctx context.Context, id uint, quantity int) (ok bool, err error) {
@@ -72,7 +70,6 @@ func (fRedis *productStorage) Add(ctx context.Context, id uint, quantity int) {
 }
 
 func (fRedis *productStorage) Reduce(ctx context.Context, store map[uint]int) (okela bool, invalidKey uint) {
-
 	storage := map[uint]int{}
 	for k, v := range store {
 		ok, err := fRedis.Minus(ctx, k, v)

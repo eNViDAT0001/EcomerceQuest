@@ -18,7 +18,7 @@ WITH cte AS (
    WHERE Product.deleted_at IS NULL AND ProductMedia.media_type = 'IMAGE'
 )
  SELECT * FROM cte WHERE rn = 1
-)
+);
 //
 CREATE VIEW CartDetailView AS
 SELECT
@@ -57,7 +57,7 @@ FROM Cart
          LEFT JOIN ProductOption ON CartItem.product_option_id = ProductOption.id
          LEFT JOIN FirstProductMediaList ON FirstProductMediaList.id = Product.id
 WHERE Cart.deleted_at IS NULL AND CartItem.deleted_at IS NULL
-GROUP BY Cart.id
+GROUP BY Cart.id;
 //////////////////////////
 CREATE VIEW ProductPreview AS
 SELECT Product.id,
@@ -82,4 +82,4 @@ FROM `Product`
          LEFT JOIN ProductMedia ON ProductMedia.product_id = Product.id
          LEFT JOIN `Comment` ON `Comment`.product_id = Product.id
          JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL
-WHERE Product.deleted_at IS NULL GROUP BY `Product`.`id`
+WHERE Product.deleted_at IS NULL GROUP BY `Product`.`id`;
