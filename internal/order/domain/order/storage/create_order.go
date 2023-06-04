@@ -86,7 +86,7 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 
 		store[v.ProductOptionID] += v.Quantity
 	}
-	ok, invalidKey := quantityStore.Reduce(store)
+	ok, invalidKey := quantityStore.Reduce(ctx, store)
 
 	for invalidKey != 0 {
 		var option entities2.ProductOption
@@ -97,8 +97,8 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 			return nil, err
 		}
 
-		quantityStore.Add(invalidKey, option.Quantity)
-		ok, invalidKey = quantityStore.Reduce(store)
+		quantityStore.Add(ctx, invalidKey, option.Quantity)
+		ok, invalidKey = quantityStore.Reduce(ctx, store)
 	}
 
 	if !ok {
@@ -113,7 +113,7 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 			Error
 		if err != nil {
 			query.Rollback()
-			quantityStore.Restore(store)
+			quantityStore.Restore(ctx, store)
 			return nil, err
 		}
 	}
@@ -121,7 +121,7 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 	err = query.Table(entities.OrderItem{}.TableName()).Create(&items).Error
 	if err != nil {
 		query.Rollback()
-		quantityStore.Restore(store)
+		quantityStore.Restore(ctx, store)
 		return nil, err
 	}
 

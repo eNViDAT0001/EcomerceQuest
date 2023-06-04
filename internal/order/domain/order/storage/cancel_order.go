@@ -31,7 +31,7 @@ func (s orderStorage) CancelOrder(ctx context.Context, orderID uint) error {
 			return err
 		}
 
-		quantityStore.Add(v.ProductOptionID, v.Quantity)
+		quantityStore.Add(ctx, v.ProductOptionID, v.Quantity)
 	}
 	return nil
 }

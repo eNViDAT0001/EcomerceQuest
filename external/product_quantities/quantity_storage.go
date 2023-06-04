@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/eNViDAT0001/Thesis/Backend/external/cache"
+	"github.com/redis/go-redis/v9"
 	"log"
 	"sync"
 )
@@ -25,11 +26,14 @@ func GetQuantityStore() *productStorage {
 	return &productStorage{storage: store}
 }
 
-func (fRedis *productStorage) Minus(id uint, quantity int) (ok bool, err error) {
+func (fRedis *productStorage) Minus(ctx context.Context, id uint, quantity int) (ok bool, err error) {
 	fRedis.mu.Lock()
 	defer fRedis.mu.Unlock()
 
-	value, err := cache.GetRedis().Get(context.Background(), fmt.Sprintf("store_%d", id))
+	value, err := cache.GetRedis().Get(ctx, fmt.Sprintf("store_%d", id))
+	if err == redis.Nil {
+		return false, nil
+	}
 	if err != nil {
 		log.Println(err)
 		return false, err
@@ -41,21 +45,18 @@ func (fRedis *productStorage) Minus(id uint, quantity int) (ok bool, err error) 
 	if err != nil {
 		return false, err
 	}
-	if savedQuantity == 0 {
-		return false, nil
-	}
 
 	if savedQuantity < quantity {
 		return false, fmt.Errorf("not enough quantity")
 	}
-	cache.GetRedis().SetDefault(context.Background(), fmt.Sprintf("store_%d", id), savedQuantity-quantity)
+	cache.GetRedis().SetDefault(ctx, fmt.Sprintf("store_%d", id), savedQuantity-quantity)
 	return true, nil
 }
-func (fRedis *productStorage) Add(id uint, quantity int) {
+func (fRedis *productStorage) Add(ctx context.Context, id uint, quantity int) {
 	fRedis.mu.Lock()
 	defer fRedis.mu.Unlock()
 
-	value, err := cache.GetRedis().Get(context.Background(), fmt.Sprintf("store_%d", id))
+	value, err := cache.GetRedis().Get(ctx, fmt.Sprintf("store_%d", id))
 	if err != nil {
 		if err != nil {
 			log.Println(err)
@@ -64,24 +65,24 @@ func (fRedis *productStorage) Add(id uint, quantity int) {
 	}
 	var savedQuantity int
 	err = json.Unmarshal([]byte(value), &savedQuantity)
-	err = cache.GetRedis().SetDefault(context.Background(), fmt.Sprintf("store_%d", id), savedQuantity+quantity)
+	err = cache.GetRedis().SetDefault(ctx, fmt.Sprintf("store_%d", id), savedQuantity+quantity)
 	if err != nil {
 		log.Println(err)
 	}
 }
 
-func (fRedis *productStorage) Reduce(store map[uint]int) (okela bool, invalidKey uint) {
+func (fRedis *productStorage) Reduce(ctx context.Context, store map[uint]int) (okela bool, invalidKey uint) {
 
 	storage := map[uint]int{}
 	for k, v := range store {
-		ok, err := fRedis.Minus(k, v)
+		ok, err := fRedis.Minus(ctx, k, v)
 		if err != nil {
-			fRedis.Restore(storage)
+			fRedis.Restore(ctx, storage)
 			return false, 0
 		}
 
 		if !ok {
-			fRedis.Restore(storage)
+			fRedis.Restore(ctx, storage)
 			return false, k
 		}
 		storage[k] = v
@@ -90,8 +91,8 @@ func (fRedis *productStorage) Reduce(store map[uint]int) (okela bool, invalidKey
 	return true, 0
 }
 
-func (fRedis *productStorage) Restore(store map[uint]int) {
+func (fRedis *productStorage) Restore(ctx context.Context, store map[uint]int) {
 	for k, v := range store {
-		fRedis.Add(k, v)
+		fRedis.Add(ctx, k, v)
 	}
 }
