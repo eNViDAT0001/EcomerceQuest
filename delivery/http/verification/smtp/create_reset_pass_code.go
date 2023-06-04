@@ -1,22 +1,29 @@
 package smtp
 
 import (
-	"errors"
 	"fmt"
+	"github.com/eNViDAT0001/Thesis/Backend/external/cache"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage/io"
 	"github.com/gin-gonic/gin"
+	"github.com/redis/go-redis/v9"
 	"golang.org/x/net/context"
+	"log"
+	"time"
 )
 
-var tokens = make(map[string]string)
+func UseToken(ctx context.Context, token string) bool {
+	_, err := cache.GetRedis().Get(ctx, "token_"+token)
+	if err == redis.Nil {
+		err = cache.GetRedis().Set(ctx, "token_"+token, true, 5*time.Minute)
+		if err != nil {
+			log.Printf("Error when set token to redis: %v", err)
+		}
 
-func UseToken(token string) error {
-	if _, ok := tokens[token]; !ok {
-		return errors.New("token not found")
+		return true
 	}
-	delete(tokens, token)
-	return nil
+
+	return false
 }
 func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 	return func(c *gin.Context) {
@@ -46,7 +53,6 @@ func (s *smtpHandler) CreateResetPassCode() func(*gin.Context) {
 		result := map[string]interface{}{
 			"token": token,
 		}
-		tokens[token] = code
 		cc.Ok(result)
 
 	}

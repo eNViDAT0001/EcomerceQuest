@@ -38,8 +38,8 @@ func (s userHandler) ResetPassword() func(*gin.Context) {
 			return
 		}
 
-		err = smtp.UseToken(input.Token)
-		if err != nil {
+		ok := smtp.UseToken(newCtx, input.Token)
+		if !ok {
 			cc.ResponseError(request.NewUnauthorizedError("Code", input.Code, "Code not found"))
 			return
 		}

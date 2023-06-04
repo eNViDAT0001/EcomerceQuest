@@ -195,7 +195,7 @@ func GetOrderSuccessTemplate(url string, order entities.Order) string {
 
                                           <tr>
                                             <td style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;" colspan="2" align="left">Total</td>
-                                            <td style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;" align="right">` + fmt.Sprint(float64(order.Total)/((100-float64(order.Discount))/100.0)) + `$</td>
+                                            <td style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;" align="right">` + fmt.Sprintf("%.0f", float64(order.Total)/((100-float64(order.Discount))/100.0)) + `$</td>
                                           </tr>
                                           <tr>
                                             <td style="color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;" colspan="2" align="left">Discount</td>
