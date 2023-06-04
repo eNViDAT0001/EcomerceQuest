@@ -135,8 +135,7 @@ func (s *productHandler) ListRecommendedProductsPreview() func(ctx *gin.Context)
 }
 
 func getRecommendedIDs(ctx context.Context, id uint) (productIDs []uint, exist bool) {
-	client := cache.GetRedis()
-	val, err := client.Get(ctx, "recommended_"+strconv.Itoa(int(id)))
+	val, err := cache.GetRedis().Get(ctx, "recommended_"+strconv.Itoa(int(id)))
 	if err != nil {
 		log.Println(err)
 		return nil, false
@@ -149,8 +148,7 @@ func getRecommendedIDs(ctx context.Context, id uint) (productIDs []uint, exist b
 }
 
 func saveRecommendedIDs(ctx context.Context, id uint, recommendedIDs []uint) {
-	client := cache.GetRedis()
-	err := client.SetDefault(ctx, "recommended_"+strconv.Itoa(int(id)), recommendedIDs)
+	err := cache.GetRedis().SetDefault(ctx, "recommended_"+strconv.Itoa(int(id)), recommendedIDs)
 	if err != nil {
 		log.Println(err)
 	}

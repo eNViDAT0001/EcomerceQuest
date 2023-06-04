@@ -2,7 +2,7 @@ package storage
 
 import (
 	"context"
-	"github.com/eNViDAT0001/Thesis/Backend/external/fake_redis"
+	"github.com/eNViDAT0001/Thesis/Backend/external/product_quantities"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
 	entities2 "github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
@@ -21,7 +21,7 @@ func (s orderStorage) CancelOrder(ctx context.Context, orderID uint) error {
 		return err
 	}
 
-	quantityStore := fake_redis.GetQuantityStore()
+	quantityStore := product_quantities.GetQuantityStore()
 	for _, v := range items {
 		err = db.Table(entities2.ProductOption{}.TableName()).
 			Where("id = ?", v.ProductOptionID).

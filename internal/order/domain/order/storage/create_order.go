@@ -3,7 +3,7 @@ package storage
 import (
 	"context"
 	"fmt"
-	"github.com/eNViDAT0001/Thesis/Backend/external/fake_redis"
+	"github.com/eNViDAT0001/Thesis/Backend/external/product_quantities"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	entities3 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/entities"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage/io"
@@ -72,7 +72,7 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 		return nil, err
 	}
 
-	quantityStore := fake_redis.GetQuantityStore()
+	quantityStore := product_quantities.GetQuantityStore()
 	store := map[uint]int{}
 
 	//TODO: Fix right now

@@ -9,20 +9,15 @@ import (
 	"time"
 )
 
-var redisCacheInstance Cache
 var v = wrap_viper.GetViper()
 
 func GetRedis() Cache {
-	if redisCacheInstance == nil {
-		host := v.GetString("REDIS.HOST")
-		port := v.GetString("REDIS.PORT")
-		db := v.GetInt("REDIS.DB")
-		password := v.GetString("REDIS.PASSWORD")
+	host := v.GetString("REDIS.HOST")
+	port := v.GetString("REDIS.PORT")
+	db := v.GetInt("REDIS.DB")
+	password := v.GetString("REDIS.PASSWORD")
 
-		redisCacheInstance = NewRedisCache(fmt.Sprintf("%s:%s", host, port), db, password)
-	}
-
-	return redisCacheInstance
+	return NewRedisCache(fmt.Sprintf("%s:%s", host, port), db, password)
 }
 
 type redisCache struct {
@@ -40,6 +35,8 @@ func (r *redisCache) SetDefault(ctx context.Context, key string, value interface
 }
 
 func (r *redisCache) Set(ctx context.Context, key string, value interface{}, expired time.Duration) error {
+	defer r.close()
+
 	js, err := json.Marshal(value)
 	if err != nil {
 		return err
@@ -50,8 +47,12 @@ func (r *redisCache) Set(ctx context.Context, key string, value interface{}, exp
 }
 
 func (r redisCache) Get(ctx context.Context, key string) (string, error) {
+	defer r.close()
 	val, err := r.db.Get(ctx, key).Result()
 	return val, err
+}
+func (r redisCache) close() {
+	r.db.Close()
 }
 
 func NewRedisCache(host string, db int, password string) Cache {
