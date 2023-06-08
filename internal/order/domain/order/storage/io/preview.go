@@ -22,3 +22,20 @@ type OrderPreview struct {
 	Items     datatypes.JSON       `json:"items"`
 	CreatedAt time.Time            `json:"created_at"`
 }
+type OrderFullDetail struct {
+	ID        uint                 `json:"id"`
+	Name      string               `json:"name"`
+	Gender    *bool                `json:"gender"`
+	Phone     string               `json:"phone"`
+	Province  string               `json:"province"`
+	District  string               `json:"district"`
+	Ward      string               `json:"ward"`
+	Street    string               `json:"street"`
+	Quantity  int                  `json:"quantity"`
+	Total     int                  `json:"total"`
+	Discount  int                  `json:"discount"`
+	Status    entities.OrderStatus `json:"status"`
+	Items     []entities.OrderItem `json:"items"`
+	Payment   *entities.Payment    `json:"payment"`
+	CreatedAt time.Time            `json:"created_at"`
+}

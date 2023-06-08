@@ -32,7 +32,7 @@ func (s *productHandler) ListProductPreviewWithCategoryID() func(ctx *gin.Contex
 		categoryIDs := make([]uint, 0)
 		if categoryID != 0 {
 			categories, err := s.categoryUC.GetCategoryChildrenByCategoryID(newCtx, uint(categoryID))
-			if err != nil {
+			if err != nil && err != gorm.ErrRecordNotFound {
 				cc.NoContent(err)
 				return
 			}

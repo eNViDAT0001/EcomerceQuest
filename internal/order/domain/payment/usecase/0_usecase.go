@@ -18,6 +18,9 @@ func (u *paymentUseCase) CreatePayment(ctx context.Context, input io.CreatePayme
 func (u *paymentUseCase) GetPaymentByID(ctx context.Context, paymentID string) (entities.Payment, error) {
 	return u.paymentSto.GetPaymentByID(ctx, paymentID)
 }
+func (u *paymentUseCase) GetPaymentByOrderID(ctx context.Context, orderID string) (entities.Payment, error) {
+	return u.paymentSto.GetPaymentByOrderID(ctx, orderID)
+}
 
 func NewPaymentUseCase(paymentSto payment.Storage) payment.UseCase {
 	return &paymentUseCase{paymentSto: paymentSto}

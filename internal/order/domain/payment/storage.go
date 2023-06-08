@@ -9,4 +9,5 @@ import (
 type Storage interface {
 	CreatePayment(ctx context.Context, input io.CreatePaymentForm) (io.CreatePaymentForm, error)
 	GetPaymentByID(ctx context.Context, paymentID string) (entities.Payment, error)
+	GetPaymentByOrderID(ctx context.Context, paymentID string) (entities.Payment, error)
 }

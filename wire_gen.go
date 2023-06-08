@@ -35,18 +35,18 @@ import (
 	usecase12 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart/usecase"
 	storage12 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart_item/storage"
 	usecase13 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart_item/usecase"
-	storage18 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
-	usecase18 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/usecase"
+	storage19 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
+	usecase19 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/usecase"
 	storage7 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/storage"
 	usecase9 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/usecase"
-	storage17 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
-	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/usecase"
+	storage18 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
+	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/usecase"
 	storage14 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage"
-	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
+	usecase17 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
 	storage13 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
-	usecase17 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
-	storage19 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/storage"
-	usecase19 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/usecase"
+	usecase18 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
+	storage17 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/storage"
+	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/usecase"
 	storage10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
 	usecase10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/usecase"
 	storage6 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage"
@@ -115,19 +115,19 @@ func initHandlerCollection() *HandlerCollection {
 	smtpStorage := storage15.NewSmtpStorage()
 	request_contactStorage := storage16.NewRequestContactStorage()
 	smtpUseCase := usecase14.NewSmtpUseCase(smtpStorage, request_contactStorage)
-	notificationStorage := storage17.NewNotificationStorage()
-	notificationUseCase := usecase15.NewNotificationUseCase(notificationStorage)
-	orderUseCase := usecase16.NewOrderUseCase(orderStorage, userStorage, smtpUseCase, notificationUseCase)
+	paymentStorage := storage17.NewPaymentStorage()
+	paymentUseCase := usecase15.NewPaymentUseCase(paymentStorage)
+	notificationStorage := storage18.NewNotificationStorage()
+	notificationUseCase := usecase16.NewNotificationUseCase(notificationStorage)
+	orderUseCase := usecase17.NewOrderUseCase(orderStorage, userStorage, smtpUseCase, paymentUseCase, order_itemStorage, notificationUseCase)
 	orderHttpHandler := order.NewOrderHandler(orderUseCase, smtpUseCase, useCase, notificationUseCase)
-	order_itemUseCase := usecase17.NewOrderItemUseCase(order_itemStorage)
+	order_itemUseCase := usecase18.NewOrderItemUseCase(order_itemStorage)
 	order_itemHttpHandler := order_items.NewOrderItemHandler(order_itemUseCase)
 	smtpHttpHandler := smtp.NewSmtpHandler(jwtUseCase, useCase, smtpUseCase)
-	chatStorage := storage18.NewChatStorage(userStorage)
-	chatUseCase := usecase18.NewChatUseCase(chatStorage)
+	chatStorage := storage19.NewChatStorage(userStorage)
+	chatUseCase := usecase19.NewChatUseCase(chatStorage)
 	chatHttpHandler := chat.NewChatHandler(chatUseCase)
 	notificationHttpHandler := chat2.NewNotificationHandler(notificationUseCase)
-	paymentStorage := storage19.NewPaymentStorage()
-	paymentUseCase := usecase19.NewPaymentUseCase(paymentStorage)
 	paymentHttpHandler := order_items2.NewPaymentHandler(paymentUseCase)
 	adminHttpHandler := admin.NewAdminHandler()
 	request_contactUseCase := usecase20.NewRequestContactUseCase(request_contactStorage, notificationUseCase)

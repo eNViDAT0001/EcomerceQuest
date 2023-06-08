@@ -21,6 +21,7 @@ type UseCase interface {
 	ListInvalidOrder(ctx context.Context) (unPayOrders []entities.Order, unConfirmedOrders []entities.Order, err error)
 
 	GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error)
+	GetFullDetailByOrderID(ctx context.Context, orderID uint) (io.OrderFullDetail, error)
 
 	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error)
 
@@ -32,7 +33,5 @@ type UseCase interface {
 	DeleteOrder(ctx context.Context, orderID uint) error
 	DeleteOrders(ctx context.Context, ids []uint) error
 
-	GetOrderReportByProviderID(ctx context.Context, providerID uint) (report io.OrderReport, err error)
-	GetOrderReportByUserID(ctx context.Context, userID uint) (report io.OrderReport, err error)
 	VerifyDeliveredOrder(ctx context.Context, orderID uint, userID uint) error
 }

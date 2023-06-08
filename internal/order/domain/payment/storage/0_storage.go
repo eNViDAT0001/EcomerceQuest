@@ -18,6 +18,16 @@ func (s *paymentStorage) GetPaymentByID(ctx context.Context, paymentID string) (
 
 	return result, err
 }
+func (s *paymentStorage) GetPaymentByOrderID(ctx context.Context, orderID string) (entities.Payment, error) {
+	result := entities.Payment{}
+	db := wrap_gorm.GetDB()
+	err := db.Model(&entities.Payment{}).
+		Joins("`Order` ON `Order`.payment_id = Payment.id").
+		Where("`Order`.`id` = ?", orderID).
+		First(&result).Error
+
+	return result, err
+}
 
 func (s *paymentStorage) CreatePayment(ctx context.Context, input io.CreatePaymentForm) (io.CreatePaymentForm, error) {
 	db := wrap_gorm.GetDB()

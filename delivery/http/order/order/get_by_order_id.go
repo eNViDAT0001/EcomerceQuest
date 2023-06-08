@@ -18,7 +18,7 @@ func (s *orderHandler) GetByOrderID() func(ctx *gin.Context) {
 			return
 		}
 
-		result, err := s.orderUC.GetByOrderID(newCtx, uint(orderID))
+		result, err := s.orderUC.GetFullDetailByOrderID(newCtx, uint(orderID))
 		if err != nil {
 			cc.ResponseError(err)
 			return

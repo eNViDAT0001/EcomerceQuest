@@ -6,6 +6,8 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage/io"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
@@ -13,10 +15,51 @@ import (
 )
 
 type orderUseCase struct {
-	orderSto order.Storage
-	userSto  user.Storage
-	smtpUC   smtp.UseCase
-	notify   notification.UseCase
+	orderSto   order.Storage
+	userSto    user.Storage
+	smtpUC     smtp.UseCase
+	paymentUC  payment.UseCase
+	orderItems order_item.Storage
+	notify     notification.UseCase
+}
+
+func (u *orderUseCase) GetFullDetailByOrderID(ctx context.Context, orderID uint) (io.OrderFullDetail, error) {
+
+	ordered, err := u.orderSto.GetByOrderID(ctx, orderID)
+	if err != nil {
+		return io.OrderFullDetail{}, err
+	}
+
+	orderItems, err := u.orderItems.ListByOrderID(ctx, orderID)
+	if err != nil {
+		return io.OrderFullDetail{}, err
+	}
+
+	result := io.OrderFullDetail{
+		ID:        orderID,
+		Name:      ordered.Name,
+		Gender:    ordered.Gender,
+		Phone:     ordered.Phone,
+		Province:  ordered.Province,
+		District:  ordered.District,
+		Ward:      ordered.Ward,
+		Street:    ordered.Street,
+		Quantity:  ordered.Quantity,
+		Total:     ordered.Total,
+		Discount:  ordered.Discount,
+		Status:    ordered.Status,
+		Items:     orderItems,
+		CreatedAt: ordered.CreatedAt,
+	}
+
+	if ordered.PaymentID != nil {
+		paymentInfo, err := u.paymentUC.GetPaymentByOrderID(ctx, *ordered.PaymentID)
+		if err != nil {
+			return io.OrderFullDetail{}, err
+		}
+		result.Payment = &paymentInfo
+	}
+	return result, nil
 }
 
 func (u *orderUseCase) DeleteOrders(ctx context.Context, ids []uint) error {
@@ -50,16 +93,6 @@ func (u *orderUseCase) VerifyDeliveredOrder(ctx context.Context, orderID uint, u
 
 func (u *orderUseCase) UpdateDeliveredOrderStatus(ctx context.Context, orderID uint, image string) error {
 	return u.orderSto.UpdateDeliveredOrderStatus(ctx, orderID, image)
-}
-
-func (u *orderUseCase) GetOrderReportByProviderID(ctx context.Context, providerID uint) (report io.OrderReport, err error) {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (u *orderUseCase) GetOrderReportByUserID(ctx context.Context, userID uint) (report io.OrderReport, err error) {
-	//TODO implement me
-	panic("implement me")
 }
 
 func (u *orderUseCase) ListByUserID(ctx context.Context, userID uint, input paging.ParamsInput) (orders []entities.Order, total int64, err error) {
@@ -173,6 +206,18 @@ func (u *orderUseCase) DeleteOrder(ctx context.Context, orderID uint) error {
 	return u.orderSto.DeleteOrder(ctx, orderID)
 }
 
-func NewOrderUseCase(orderSto order.Storage, userSto user.Storage, smtpUC smtp.UseCase, notify notification.UseCase) order.UseCase {
-	return &orderUseCase{orderSto: orderSto, userSto: userSto, smtpUC: smtpUC, notify: notify}
+func NewOrderUseCase(
+	orderSto order.Storage,
+	userSto user.Storage,
+	smtpUC smtp.UseCase,
+	paymentUC payment.UseCase,
+	orderItems order_item.Storage,
+	notify notification.UseCase) order.UseCase {
+	return &orderUseCase{
+		orderSto:   orderSto,
+		userSto:    userSto,
+		smtpUC:     smtpUC,
+		paymentUC:  paymentUC,
+		orderItems: orderItems,
+		notify:     notify}
 }

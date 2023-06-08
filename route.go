@@ -256,6 +256,7 @@ func router(r *gin.Engine) {
 
 			orderGroup.GET("/:order_id/items", allHandler.orderItemHandler.ListByOrderID())
 			orderGroup.GET("/user/:user_id", allHandler.orderHandler.ListByUserID())
+			orderGroup.GET("/:order_id", allHandler.orderHandler.GetByOrderID())
 			orderGroup.GET("/user/:user_id/preview", allHandler.orderHandler.ListPreviewByUserID())
 			orderAdminGroup.GET("/admin/:user_id", allHandler.orderHandler.List())
 			orderAdminGroup.GET("/admin/:user_id/preview", allHandler.orderHandler.ListPreview())
