@@ -75,7 +75,6 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 	quantityStore := product_quantities.GetQuantityStore()
 	store := map[uint]int{}
 
-	//TODO: Fix right now
 	for i, v := range items {
 		for _, createdOrder := range orders {
 			if v.ProviderID == items[i].ProviderID {

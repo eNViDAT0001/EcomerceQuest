@@ -55,10 +55,8 @@ func (fRedis *productStorage) Add(ctx context.Context, id uint, quantity int) {
 	defer fRedis.mu.Unlock()
 
 	value, err := cache.GetRedis().Get(ctx, fmt.Sprintf("store_%d", id))
-	if err != nil {
-		if err != nil {
-			log.Println(err)
-		}
+	if err != nil && err != redis.Nil {
+		log.Println(err)
 		return
 	}
 	var savedQuantity int
