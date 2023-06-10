@@ -9,18 +9,20 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/provider"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp"
 	"gorm.io/gorm"
 )
 
 type orderUseCase struct {
-	orderSto   order.Storage
-	userSto    user.Storage
-	smtpUC     smtp.UseCase
-	paymentUC  payment.UseCase
-	orderItems order_item.Storage
-	notify     notification.UseCase
+	orderSto    order.Storage
+	userSto     user.Storage
+	smtpUC      smtp.UseCase
+	paymentUC   payment.UseCase
+	orderItems  order_item.Storage
+	notify      notification.UseCase
+	providerSto provider.Storage
 }
 
 func (u *orderUseCase) GetFullDetailByOrderID(ctx context.Context, orderID uint) (io.OrderFullDetail, error) {
@@ -212,12 +214,14 @@ func NewOrderUseCase(
 	smtpUC smtp.UseCase,
 	paymentUC payment.UseCase,
 	orderItems order_item.Storage,
+	providerSto provider.Storage,
 	notify notification.UseCase) order.UseCase {
 	return &orderUseCase{
-		orderSto:   orderSto,
-		userSto:    userSto,
-		smtpUC:     smtpUC,
-		paymentUC:  paymentUC,
-		orderItems: orderItems,
-		notify:     notify}
+		orderSto:    orderSto,
+		userSto:     userSto,
+		smtpUC:      smtpUC,
+		paymentUC:   paymentUC,
+		orderItems:  orderItems,
+		providerSto: providerSto,
+		notify:      notify}
 }

@@ -24,24 +24,14 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 	for _, createdOrder := range createdOrders {
 		providerIDs = append(providerIDs, createdOrder.ProviderID)
 	}
-	users, err := u.userSto.GetListByProviderID(ctx, providerIDs)
-	if err != nil {
-		return createdOrders, err
-	}
 
 	buyer, err := u.userSto.GetUserDetailByID(ctx, order.UserID)
 	if err != nil {
 		return createdOrders, err
 	}
 
-	for _, user := range users {
-		createdOrder := io.CreateOrderForm{}
-		for _, v := range createdOrders {
-			if v.UserID == user.ID {
-				createdOrder = v
-				break
-			}
-		}
+	for _, createdOrder := range createdOrders {
+		providerOwner, err := u.userSto.GetDetailByProviderID(ctx, createdOrder.ProviderID)
 
 		orderBody := entities.Order{
 			SoftDeleteModel: wrap_gorm.SoftDeleteModel{
@@ -62,9 +52,9 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 		}
 		///
 		email := smtpIO.EmailForm{
-			Subject:     fmt.Sprintf("New order from %s", createdOrder.Name),
+			Subject:     fmt.Sprintf("New order from %s", buyer.Name),
 			Content:     html_template.GetOrderTemplate(orderBody),
-			To:          []string{*user.Email},
+			To:          []string{*providerOwner.Email},
 			Cc:          nil,
 			Bcc:         nil,
 			AttachFiles: nil,
@@ -73,8 +63,8 @@ func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm
 
 		newNotification := notifyIO.NotificationInput{
 			ID:      0,
-			UserID:  user.ID,
-			Content: "You have a new order from user: " + *user.Name,
+			UserID:  providerOwner.ID,
+			Content: "You have a new order from user: " + *buyer.Name,
 			Seen:    &unSeen,
 			URL:     "/brand-detail/order/" + strconv.Itoa(int(orderBody.ID)),
 			Image:   "http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png",

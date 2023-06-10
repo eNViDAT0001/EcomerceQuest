@@ -17,3 +17,16 @@ func (u userStorage) GetListByProviderID(ctx context.Context, IDs []uint) ([]ent
 
 	return result, err
 }
+func (u userStorage) GetDetailByProviderID(ctx context.Context, id uint) (entities.User, error) {
+	result := entities.User{}
+	db := wrap_gorm.GetDB()
+
+	err := db.Model(entities.User{}).
+		Joins("JOIN Provider ON Provider.user_id = User.id").
+		Where("Provider.id = ?", id).
+		First(&result).
+		Group("User.id").
+		Error
+
+	return result, err
+}
