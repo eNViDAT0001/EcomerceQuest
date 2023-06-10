@@ -14,7 +14,7 @@ type Comment struct {
 }
 
 func (Comment) WithFields() []string {
-	return []string{"rating", "description"}
+	return []string{"rating", "description", "id", "user_id"}
 }
 func (Comment) SearchFields() []string {
 	return []string{"description"}
