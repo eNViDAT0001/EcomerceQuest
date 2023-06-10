@@ -34,6 +34,7 @@ type OrderFullDetail struct {
 	Quantity  int                  `json:"quantity"`
 	Total     int                  `json:"total"`
 	Discount  int                  `json:"discount"`
+	COD       bool                 `json:"cod"`
 	Status    entities.OrderStatus `json:"status"`
 	Items     []entities.OrderItem `json:"items"`
 	Payment   *entities.Payment    `json:"payment"`

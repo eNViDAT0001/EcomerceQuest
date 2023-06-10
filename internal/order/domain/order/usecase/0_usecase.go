@@ -48,6 +48,7 @@ func (u *orderUseCase) GetFullDetailByOrderID(ctx context.Context, orderID uint)
 		Street:    ordered.Street,
 		Quantity:  ordered.Quantity,
 		Total:     ordered.Total,
+		COD:       *ordered.COD,
 		Discount:  ordered.Discount,
 		Status:    ordered.Status,
 		Items:     orderItems,
