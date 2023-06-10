@@ -53,7 +53,7 @@ func (u *orderUseCase) GetFullDetailByOrderID(ctx context.Context, orderID uint)
 	}
 
 	if ordered.PaymentID != nil {
-		paymentInfo, err := u.paymentUC.GetPaymentByOrderID(ctx, *ordered.PaymentID)
+		paymentInfo, err := u.paymentUC.GetPaymentByID(ctx, *ordered.PaymentID)
 		if err != nil {
 			return io.OrderFullDetail{}, err
 		}
