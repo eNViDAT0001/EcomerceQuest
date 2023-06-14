@@ -58,9 +58,7 @@ func (r redisCache) close() {
 func NewRedisCache(host string, db int, password string) Cache {
 	return &redisCache{
 		db: redis.NewClient(&redis.Options{
-			Addr:     host,
-			Password: password,
-			DB:       db,
+			Addr: host,
 		}),
 	}
 }
