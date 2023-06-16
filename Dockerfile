@@ -1,16 +1,14 @@
 #build stage
 FROM golang:alpine AS builder
-RUN apk add --no-cache git
-WORKDIR /go/src/app
+WORKDIR /app
 COPY . .
-RUN go get -d -v ./...
-RUN go build -o /go/bin/app -v ./...
+RUN go build -o main .
 
-#final stage
+#Run stage
 FROM alpine:latest
-RUN apk --no-cache add ca-certificates
-COPY --from=builder /go/bin/app /app
-COPY config /go/bin/app/config
-ENTRYPOINT /app
-LABEL Name=server Version=0.0.1
+WORKDIR /app/main
+COPY --from=builder /app/main .
+COPY config /app/main/config
+
 EXPOSE 8082
+CMD ["./main"]

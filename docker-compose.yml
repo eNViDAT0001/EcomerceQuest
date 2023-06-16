@@ -10,9 +10,10 @@ services:
     depends_on:
       - db
       - cache
+      - recommender
     restart: always
-    networks:
-      - server
+    environment:
+      - STATE=PRO
   db:
     container_name: db
     image: 'mysql:8.0.31-debian'
@@ -38,7 +39,6 @@ services:
       PMA_HOST: db
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
-
     restart: always
     ports:
       - "3333:80"
@@ -49,6 +49,13 @@ services:
     restart: always
     ports:
       - '6379:6379'
+
+  recommender:
+    container_name: recommender
+    image: teabreak/recommender_service:latest
+    restart: always
+    ports:
+      - '9180:9180'
 
 volumes:
   dbdata:

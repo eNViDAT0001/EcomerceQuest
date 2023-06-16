@@ -13,7 +13,7 @@ func init() {
 	viper = wrap_viper.GetViper()
 	state := viper.Get("STATE")
 	if state == "PRO" {
-		viper.LoadConfigFile("./config/", "prod")
+		viper.LoadConfigFile("./config/", "pro")
 	} else {
 		state = "DEVELOPMENT"
 		viper.LoadConfigFile("./config/", "dev")
