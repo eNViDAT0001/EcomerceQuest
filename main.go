@@ -12,10 +12,8 @@ var viper *wrap_viper.WrapViper
 func init() {
 	viper = wrap_viper.GetViper()
 	state := viper.Get("STATE")
-	if state == "PRODUCTION" {
+	if state == "PRO" {
 		viper.LoadConfigFile("./config/", "prod")
-	} else if state == "STAGING" {
-		viper.LoadConfigFile("./config/", "staging")
 	} else {
 		state = "DEVELOPMENT"
 		viper.LoadConfigFile("./config/", "dev")
@@ -36,7 +34,6 @@ func startHttpServer() {
 	r.Use(cors.Default())
 
 	router(r)
-
 	port := viper.GetInt("PORT")
 	if err := r.Run(fmt.Sprintf(`:%v`, port)); err != nil {
 		panic(err)

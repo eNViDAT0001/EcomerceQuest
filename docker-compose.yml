@@ -1,5 +1,18 @@
 version: '3.9'
 services:
+  server:
+    container_name: server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db
+      - cache
+    restart: always
+    networks:
+      - server
   db:
     container_name: db
     image: 'mysql:8.0.31-debian'
