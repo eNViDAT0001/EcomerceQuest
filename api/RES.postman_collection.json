@@ -237,7 +237,7 @@
 										{
 											"key": "files",
 											"type": "file",
-											"src": "/C:/Users/Admin/OneDrive - Trường ĐH CNTT - University of Information Technology/Máy tính/avatar.jpg"
+											"src": "/C:/Users/Admin/Downloads/category_tree.csv"
 										}
 									]
 								},
@@ -363,7 +363,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"user_id\": 1,\n    \"code\": \"823884\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ndmlkYXRAZ21haWwuY29tIn0.6eL8XfseUE4BQEdJo1dyFjYRw0e-X1jMy1WzGngBK-g\"\n}",
+									"raw": "{\n    \"user_id\": 1,\n    \"code\": \"991283\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ndmlkYXRAZ21haWwuY29tIn0.9oSG_wHU9iKmRBUoM0RVXqhVl3onfziH-JUsqQAG1f0\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -456,7 +456,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"eNViDXT\",\n    \"name\": \"Nguyen Van A\",\n    \"subject\": \"Title\",\n    \"descriptions\": \"I lớp du chịch chịch\"\n}",
+									"raw": "{\n    \"email\": \"eNViDXT\",\n    \"name\": \"Nguyen Van A\",\n    \"subject\": \"Title\",\n    \"descriptions\": \"I lớp du chịch chịch\",\n    \"attached_files\": \"fghdfghdfgh\",\n    \"type\": \"SHOP\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -815,7 +815,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"eNViDAT\",\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"gender\": true,\r\n    \"email\": \"ngvidat@gmail.com\",\r\n    \"Phone\": \"0775702201\"\r\n}",
+							"raw": "{\r\n    \"type\": \"0775702201\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1069,7 +1069,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": \"656025\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ndmlkYXRAZ21haWwuY29tIn0.0IiErD7T2RUi_EL0iqd3LPJG7u5yHGF0o5h2RgJ6H8I\",\r\n    \"new_password\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"code\": \"605587\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ndmlkYXRAZ21haWwuY29tIn0.ns9qKjK5sb9j4ixaflgmpzSl1WQ8HgqTdnw3EhsOye8\",\r\n    \"new_password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1686,7 +1686,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"district_id\": 1542\r\n}",
+							"raw": "{\r\n    \"district_id\": 1444\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1770,7 +1770,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"shop_id\": 4074093,\r\n    \"from_district\": 3695,\r\n    \"to_district\": 2090\r\n\r\n}",
+							"raw": "{\r\n    \"shop_id\": 4074093,\r\n    \"from_district\": 2047,\r\n    \"to_district\": 3695\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1854,7 +1854,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"service_id\":53321,\r\n    \"insurance_value\":500000,\r\n    \"coupon\": null,\r\n    \"from_district_id\":1542,\r\n    \"to_district_id\":1444,\r\n    \"to_ward_code\":\"20314\",\r\n    \"height\":15,\r\n    \"length\":15,\r\n    \"weight\":1000,\r\n    \"width\":15\r\n}",
+							"raw": "{\r\n    \"service_id\":53320,\r\n    \"insurance_value\":500000,\r\n    \"coupon\": null,\r\n    \"from_district_id\":3695,\r\n    \"to_district_id\":1444,\r\n    \"to_ward_code\":\"90795\",\r\n    \"height\":15,\r\n    \"length\":15,\r\n    \"weight\":1000,\r\n    \"width\":15\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2134,17 +2134,19 @@
 									}
 								},
 								"url": {
-									"raw": "{{providerV1Path}}/:provider_id",
+									"raw": "{{providerV1Path}}/report/user/:user_id",
 									"host": [
 										"{{providerV1Path}}"
 									],
 									"path": [
-										":provider_id"
+										"report",
+										"user",
+										":user_id"
 									],
 									"variable": [
 										{
-											"key": "provider_id",
-											"value": "3"
+											"key": "user_id",
+											"value": "1"
 										}
 									]
 								}
@@ -2292,7 +2294,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"image_path\": \"xx\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Nguyễn Văn Đạt\",\r\n    \"image_path\": \"xx\",\r\n    \"province_id\": 202,\r\n    \"district_id\": 3695,\r\n    \"ward_code\": \"90767\",\r\n    \"province\": \"Hồ Chí Minh\",\r\n    \"district\": \"Thành Phố Thủ Đức\",\r\n    \"ward\": \"Phường Bình Trưng Tây\",\r\n    \"street\": \"09 Nguyễn Chí Thanh\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2627,7 +2629,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"category_parent_id\": 3,\r\n    \"name\": \"Men's Fashion\",\r\n    \"image_path\": \"https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg\"\r\n}",
+									"raw": "{\r\n    \"category_parent_id\": 0,\r\n    \"name\": \"Men's Fashion\",\r\n    \"image_path\": \"https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2690,7 +2692,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"category_parent_id\": 2,\r\n    \"name\": \"{{$ran}}\",\r\n    \"image_path\": \"https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg\"\r\n}",
+									"raw": "{\r\n    \"category_parent_id\": 1,\r\n    \"name\": \"{{$ran}}\",\r\n    \"image_path\": \"https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3454,7 +3456,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{commentV1Path}}/product/:product_id?sorts[]=id_DESC",
+							"raw": "{{commentV1Path}}/product/:product_id?fields[]=user_id_4&fields[]=gender_0&sorts[]=id_DESC",
 							"host": [
 								"{{commentV1Path}}"
 							],
@@ -3487,13 +3489,11 @@
 								},
 								{
 									"key": "fields[]",
-									"value": "phone_0775702201",
-									"disabled": true
+									"value": "user_id_4"
 								},
 								{
 									"key": "fields[]",
-									"value": "gender_0",
-									"disabled": true
+									"value": "gender_0"
 								},
 								{
 									"key": "search[]",
@@ -3518,7 +3518,7 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": "1"
+									"value": null
 								}
 							]
 						}
@@ -3624,11 +3624,11 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": "1"
+									"value": "15"
 								},
 								{
 									"key": "user_id",
-									"value": "1"
+									"value": "27"
 								}
 							]
 						}
@@ -4188,6 +4188,51 @@
 					"response": []
 				},
 				{
+					"name": "Detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderV1Path}}/:order_id",
+							"host": [
+								"{{orderV1Path}}"
+							],
+							"path": [
+								":order_id"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "112"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "List",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -4734,7 +4779,7 @@
 							"variable": [
 								{
 									"key": "order_id",
-									"value": "2"
+									"value": "112"
 								}
 							]
 						}
@@ -5297,7 +5342,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{productV1Path}}",
+							"raw": "{{productV1Path}}?search[]=id_12",
 							"host": [
 								"{{productV1Path}}"
 							],
@@ -5329,8 +5374,7 @@
 								},
 								{
 									"key": "search[]",
-									"value": "",
-									"disabled": true
+									"value": "id_12"
 								},
 								{
 									"key": "search[]",
@@ -5613,7 +5657,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{productV1Path}}/banner/:banner_id/preview/no",
+							"raw": "{{productV1Path}}/banner/:banner_id/preview/no?sorts[]=id_DESC",
 							"host": [
 								"{{productV1Path}}"
 							],
@@ -5661,8 +5705,7 @@
 								},
 								{
 									"key": "sorts[]",
-									"value": "",
-									"disabled": true
+									"value": "id_DESC"
 								},
 								{
 									"key": "sorts[]",
@@ -5673,7 +5716,7 @@
 							"variable": [
 								{
 									"key": "banner_id",
-									"value": "2"
+									"value": null
 								}
 							]
 						}
@@ -5708,7 +5751,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{productV1Path}}/preview?marker=1&limit=8&fields[]=provider_id_4",
+							"raw": "{{productV1Path}}/preview?sorts[]=rating_ASC",
 							"host": [
 								"{{productV1Path}}"
 							],
@@ -5723,11 +5766,13 @@
 								},
 								{
 									"key": "marker",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "limit",
-									"value": "8"
+									"value": "8",
+									"disabled": true
 								},
 								{
 									"key": "fields[]",
@@ -5736,7 +5781,8 @@
 								},
 								{
 									"key": "fields[]",
-									"value": "provider_id_4"
+									"value": "provider_id_4",
+									"disabled": true
 								},
 								{
 									"key": "search[]",
@@ -5750,8 +5796,7 @@
 								},
 								{
 									"key": "sorts[]",
-									"value": "",
-									"disabled": true
+									"value": "rating_ASC"
 								},
 								{
 									"key": "sorts[]",
@@ -5791,7 +5836,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{productV1Path}}/recommend/user/:user_id?marker=0&limit=2",
+							"raw": "{{productV1Path}}/recommend/user/:user_id?marker=0",
 							"host": [
 								"{{productV1Path}}"
 							],
@@ -5807,7 +5852,8 @@
 								},
 								{
 									"key": "limit",
-									"value": "2"
+									"value": "2",
+									"disabled": true
 								},
 								{
 									"key": "fields[]",
@@ -5843,7 +5889,7 @@
 							"variable": [
 								{
 									"key": "user_id",
-									"value": "1"
+									"value": "7"
 								}
 							]
 						}
@@ -6392,7 +6438,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5,\r\n    \"short_descriptions\": \"ádasdasdasdsad\",\r\n    \"height\": 100,\r\n    \"weight\": 100,\r\n    \"length\": 100,\r\n    \"width\": 100,\r\n    \"options\": [\r\n        {\r\n            \"id\": 1,\r\n            \"option\": {\r\n                \"specification_id\": 0,\r\n                \"name\": \"Him\",\r\n                \"price\": 20000,\r\n                \"quantity\": 100\r\n            }\r\n        }\r\n\r\n    ],\r\n    \"media\": [\r\n        {\r\n            \"id\": 0,\r\n            \"media\": {\r\n                \"media_path\": \"ádfdsf\"\r\n            }\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"id\": 1,\r\n            \"description\": {\r\n                \"name\": \"zxc\",\r\n                \"public_id\": \"asdasd\",\r\n                \"descriptions_path\": \"ád\"\r\n            }\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"category_id\": 1,\r\n    \"name\": \"HighLight\",\r\n    \"price\": 100000,\r\n    \"discount\": 5,\r\n    \"short_descriptions\": \"ádasdasdasdsad\",\r\n    \"height\": 100,\r\n    \"weight\": 100,\r\n    \"length\": 100,\r\n    \"width\": 100,\r\n    \"options\": [\r\n        {\r\n            \"id\": 1,\r\n            \"option\": {\r\n                \"specification_id\": 1,\r\n                \"name\": \"Him\",\r\n                \"price\": 20000,\r\n                \"quantity\": 100\r\n            }\r\n        }\r\n\r\n    ],\r\n    \"media\": [\r\n        {\r\n            \"id\": 0,\r\n            \"media\": {\r\n                \"media_path\": \"ádfdsf\"\r\n            }\r\n        }\r\n    ],\r\n    \"descriptions\": [\r\n        {\r\n            \"id\": 1,\r\n            \"description\": {\r\n                \"name\": \"zxc\",\r\n                \"public_id\": \"asdasd\",\r\n                \"descriptions_path\": \"ád\"\r\n            }\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -6756,7 +6802,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{chatsV1Path}}/channels/users/:user_id",
+							"raw": "{{chatsV1Path}}/channels/users/:user_id?search[]=name_Đạt",
 							"host": [
 								"{{chatsV1Path}}"
 							],
@@ -6775,6 +6821,10 @@
 									"key": "limit",
 									"value": "2",
 									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "name_Đạt"
 								}
 							],
 							"variable": [
@@ -6980,7 +7030,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"chat_room_id\": 0, //Nếu không có thì sẽ tự động tạo chat room mới\n    \"from_user_id\": 30,\n    \"to_user_id\": 1,\n    \"content\": \"sadasd\",\n    \"seen\": false,\n    \"type\": \"TEXT\"\n}\n\n",
+							"raw": "{\n    \"chat_room_id\": 18, //Nếu không có thì sẽ tự động tạo chat room mới\n    \"from_user_id\": 29,\n    \"to_user_id\": 1,\n    \"content\": \"sadasd\",\n    \"seen\": false,\n    \"type\": \"TEXT\"\n}\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -7024,7 +7074,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"chat_room_id\": 0, //Nếu không có thì sẽ tự động tạo chat room mới\n    \"from_user_id\": 30,\n    \"to_user_id\": 1,\n    \"content\": \"sadasd\",\n    \"seen\": false,\n    \"type\": \"TEXT\"\n}\n\n",
+							"raw": "\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -7046,15 +7096,15 @@
 							"variable": [
 								{
 									"key": "message_id",
-									"value": null
+									"value": "1"
 								},
 								{
 									"key": "user_id",
-									"value": null
+									"value": "1"
 								},
 								{
 									"key": "to_id",
-									"value": null
+									"value": "1"
 								}
 							]
 						}
@@ -7592,18 +7642,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://online-gateway.ghn.vn/shiip/public-api/master-data/ward",
-					"protocol": "https",
+					"raw": "{{host}}{{v1}}/ping",
 					"host": [
-						"online-gateway",
-						"ghn",
-						"vn"
+						"{{host}}{{v1}}"
 					],
 					"path": [
-						"shiip",
-						"public-api",
-						"master-data",
-						"ward"
+						"ping"
 					],
 					"query": [
 						{

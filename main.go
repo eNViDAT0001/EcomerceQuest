@@ -18,9 +18,13 @@ func init() {
 		state = "DEVELOPMENT"
 		viper.LoadConfigFile("./config/", "dev")
 	}
+	migrateAtStart()
 	gin.SetMode(gin.ReleaseMode)
 
 	fmt.Println("STATE:", state)
+}
+func migrateAtStart() {
+
 }
 
 func main() {

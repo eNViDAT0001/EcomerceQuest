@@ -7,3 +7,5 @@ pull:
 	git pull
 	git pull origin main --recurse-submodules
 	git submodule update --recursive --remote
+
+migrateUp:
