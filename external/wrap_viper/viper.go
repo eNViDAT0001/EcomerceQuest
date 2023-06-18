@@ -35,6 +35,7 @@ func (v *WrapViper) LoadConfigFile(path string, filenameWithoutExtension string)
 func (v *WrapViper) setDefaultValue() {
 	v.SetDefault("PORT", DEFAULT_PORT)
 	v.SetDefault("VERSION", "0.0.0")
+	v.SetDefault("FE.URL", "localhost:3000")
 }
 
 const (

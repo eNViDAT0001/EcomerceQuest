@@ -8,7 +8,7 @@ SELECT User.*
 FROM User
          JOIN Message ON Message.from_user_id = User.id
 WHERE User.deleted_at IS NULL;
-//
+--------------------------------------------------------------
 CREATE VIEW FirstProductMediaList AS
 (
 WITH cte AS (
@@ -19,7 +19,7 @@ WITH cte AS (
 )
  SELECT * FROM cte WHERE rn = 1
 );
-//
+--------------------------------------------------------------
 CREATE VIEW CartDetailView AS
 SELECT
     Cart.id,
@@ -58,7 +58,7 @@ FROM Cart
          LEFT JOIN FirstProductMediaList ON FirstProductMediaList.id = Product.id
 WHERE Cart.deleted_at IS NULL AND CartItem.deleted_at IS NULL
 GROUP BY Cart.id;
-//////////////////////////
+--------------------------------------------------------------
 CREATE VIEW ProductPreview AS
 SELECT Product.id,
        Product.provider_id,

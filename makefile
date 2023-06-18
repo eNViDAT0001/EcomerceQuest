@@ -1,5 +1,6 @@
-init_module:
+init:
 	git submodule update --init --recursive
+	docker compose up -d
 
 pull:
 	git fetch --all
