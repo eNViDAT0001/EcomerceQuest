@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: web-deployment
+
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        component: thesis-backend
+    spec:
+      containers:
+        - name: thesis-backend-container
+          image: teabreak/thesis-ecomerce:latest
+          ports:
+          - containerPort: 8082
+          env:
+            - name: STATE
+              value: PRO
+  selector:
+    matchLabels:
+      component: thesis-backend

@@ -12,10 +12,13 @@ var viper *wrap_viper.WrapViper
 func init() {
 	viper = wrap_viper.GetViper()
 	state := viper.Get("STATE")
-	if state == "PRO" {
+	switch state {
+	case "PRO":
 		viper.LoadConfigFile("./config/", "pro")
-	} else {
-		state = "DEVELOPMENT"
+	case "SUT":
+		viper.LoadConfigFile("./config/", "sut")
+	default:
+		state = "DEV"
 		viper.LoadConfigFile("./config/", "dev")
 	}
 	migrateAtStart()

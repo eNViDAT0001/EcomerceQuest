@@ -20,7 +20,7 @@ REDIS:
 
 FE:
   DOMAIN: localhost
-  URL: http://localhost:3000
+  URL: https://microservices-ecommerce-system.netlify.app
 CLOUDINARY:
   NAME: damzcas3k
   API_KEY: 332611833886276

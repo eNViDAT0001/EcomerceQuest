@@ -13,7 +13,7 @@ services:
       - recommender
     restart: always
     environment:
-      - STATE=PRO
+      - STATE=SUT
   db:
     container_name: db
     image: 'mysql:8.0.31-debian'

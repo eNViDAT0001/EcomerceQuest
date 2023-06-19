@@ -2,18 +2,18 @@ PORT: 8082
 
 VERSION: v0.5.0 # must follow pattern vXX.XX.XX for auto tag in CI
 
-DB_HOST: mysql-service
+DB_HOST: db
 DB_PORT: 3306
 DB_NAME: ecommerce_db
 DB_USER: admin
 DB_PASSWORD: admin
 
 RECOMMENDER:
-  HOST: recommender-service
+  HOST: recommender
   PORT: 9180
 
 REDIS:
-  HOST: redis-service
+  HOST: cache
   PORT: 6379
   PASSWORD: ""
   DB: 0
