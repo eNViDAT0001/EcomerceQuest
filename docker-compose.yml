@@ -56,6 +56,12 @@ services:
     restart: always
     ports:
       - '9180:9180'
+  web:
+    container_name: web
+    image: teabreak/thessis-web:latest
+    restart: always
+    ports:
+      - '3000:3000'
 
 volumes:
   dbdata:

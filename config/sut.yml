@@ -19,8 +19,8 @@ REDIS:
   DB: 0
 
 FE:
-  DOMAIN: localhost
-  URL: http://localhost:3000
+  HOST: web
+  PORT: 3000
 
 CLOUDINARY:
   NAME: damzcas3k

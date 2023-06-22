@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: db-host-deployment
+
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        component: db-host
+    spec:
+      containers:
+        - name: db-host-container
+          image: phpmyadmin/phpmyadmin
+          ports:
+          - containerPort: 3333
+          env:
+            - name: PMA_HOST
+              value: mysql-service
+            - name: PMA_PORT
+              value: "3306"
+            - name: PMA_USER
+              value: admin
+            - name: PMA_PASSWORD
+              value: admin
+            - name: PMA_ARBITRARY
+              value: "1"
+
+  selector:
+    matchLabels:
+      component: db-host

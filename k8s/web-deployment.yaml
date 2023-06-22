@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: web-deployment
+  name: ecommerce-deployment
 
 spec:
   replicas: 3
   template:
     metadata:
       labels:
-        component: thesis-backend
+        component: ecommerce-service
     spec:
       containers:
-        - name: thesis-backend-container
+        - name: ecommerce-container
           image: teabreak/thesis-ecomerce:latest
           ports:
           - containerPort: 8082
@@ -21,4 +21,4 @@ spec:
               value: PRO
   selector:
     matchLabels:
-      component: thesis-backend
+      component: ecommerce-service

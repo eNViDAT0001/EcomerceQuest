@@ -19,6 +19,8 @@ import (
 	"time"
 )
 
+var viper = wrap_viper.GetViper()
+
 func (a *appAccessionHandler) CallbackGoogleSSO() func(*gin.Context) {
 	return func(c *gin.Context) {
 		cc := request.FromContext(c)
@@ -86,13 +88,13 @@ func (a *appAccessionHandler) CallbackGoogleSSO() func(*gin.Context) {
 			return
 		}
 		vp := wrap_viper.GetViper()
-		feDomain := vp.GetString("FE.DOMAIN")
+		feDomain := vp.GetString("FE.HOST")
 		c.SetCookie("user_id", strconv.Itoa(int(user.ID)), 3600, "/", feDomain, false, false)
 		c.SetCookie("access_token", token.AccessToken, 3600, "/", feDomain, false, false)
 		c.SetCookie("access_token_expiry", strconv.FormatInt(token.AccessTokenExpiry, 10), 3600, "/", feDomain, false, false)
 		c.SetCookie("refresh_token", token.RefreshToken, 3600, "/", feDomain, false, false)
 		c.SetCookie("refresh_token_expiry", strconv.FormatInt(token.RefreshTokenExpiry, 10), 3600, "/", feDomain, false, false)
-		cc.Redirect(http.StatusFound, "http://localhost:3000")
+		cc.Redirect(http.StatusFound, fmt.Sprintf("http://%s:%s", viper.GetString("FE.HOST"), viper.GetString("FE.PORT")))
 	}
 }
 func getGoogleUserData(state, code string) (io.GoogleProfile, error) {

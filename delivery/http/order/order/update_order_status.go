@@ -8,6 +8,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/event_background"
 	"github.com/eNViDAT0001/Thesis/Backend/external/html_template"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
+	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_viper"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
 	smtpIO "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage/io"
@@ -17,6 +18,8 @@ import (
 	"log"
 	"strconv"
 )
+
+var viper = wrap_viper.GetViper()
 
 func (s *orderHandler) UpdateOrderStatus() func(ctx *gin.Context) {
 	return func(c *gin.Context) {
@@ -69,7 +72,7 @@ func (s *orderHandler) UpdateOrderStatus() func(ctx *gin.Context) {
 					UserID:  user.ID,
 					Content: "Your order has arrived",
 					Seen:    &seen,
-					URL:     fmt.Sprintf(`localhost:3000/user/order/%d`, orderID),
+					URL:     fmt.Sprintf(`%s:%s/user/order/%d`, viper.GetString("FE.HOST"), viper.GetString("FE.PORT"), orderID),
 					Image:   "http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png",
 				})
 

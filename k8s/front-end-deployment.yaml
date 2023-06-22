@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: front-end-deployment
+  name: web-deployment
 
 spec:
   replicas: 3
   template:
     metadata:
       labels:
-        component: front-end
+        component: web-service
     spec:
       containers:
-        - name: front-end-container
+        - name: web-container
           image: teabreak/thesis-ecomerce:latest
           ports:
           - containerPort: 3000
@@ -21,4 +21,4 @@ spec:
               value: PRO
   selector:
     matchLabels:
-      component: front-end
+      component: web-service
