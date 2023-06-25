@@ -38,10 +38,7 @@ spec:
             - name: MYSQL_DB
               value: ecommerce_db
             - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: admin
-                  key: MYSQL_PASSWORD
+              value: admin
 
 
 

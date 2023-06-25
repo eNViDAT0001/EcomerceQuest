@@ -7,30 +7,29 @@ metadata:
 
 spec:
   rules:
-    - host: web.thesis.com
-      http:
-        paths:
-          - path: /web
-            pathType: Prefix
-            backend:
-              service:
-                name: web-service
-                port:
-                  number: 3000
-          - path: /db
-            pathType: Prefix
-            backend:
-              service:
-                name: db-host-service
-                port:
-                  number: 3333
-          - path: /server
-            pathType: Prefix
-            backend:
-              service:
-                name: ecommerce-service
-                port:
-                  number: 8082
+      - http:
+          paths:
+            - path: /web
+              pathType: Prefix
+              backend:
+                service:
+                  name: web-service
+                  port:
+                    number: 3000
+            - path: /db
+              pathType: Prefix
+              backend:
+                service:
+                  name: db-host-service
+                  port:
+                    number: 3333
+            - path: /server
+              pathType: Prefix
+              backend:
+                service:
+                  name: ecommerce-service
+                  port:
+                    number: 8082
 
 
 
