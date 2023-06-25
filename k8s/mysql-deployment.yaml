@@ -39,6 +39,8 @@ spec:
               value: ecommerce_db
             - name: MYSQL_PASSWORD
               value: admin
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
 
 
 
