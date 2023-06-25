@@ -21,6 +21,5 @@ spec:
       containers:
         - name: recommender
           image: teabreak/recommender_service:latest
-      ports:
-        - port: 3306
-          targetPort: 3306
+          ports:
+            - containerPort: 9180
