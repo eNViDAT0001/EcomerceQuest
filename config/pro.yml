@@ -19,7 +19,7 @@ REDIS:
   DB: 0
 
 FE:
-  HOST: front-end
+  HOST: web-service
   PORT: 3000
 
 CLOUDINARY:

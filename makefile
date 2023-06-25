@@ -9,5 +9,5 @@ pull:
 	git submodule update --recursive --remote
 
 docker:
-	docker compose build teabreak/thesis-ecomerce .
+	docker build -t teabreak/thesis-ecomerce .
 	docker push teabreak/thesis-ecomerce

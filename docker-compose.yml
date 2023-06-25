@@ -11,6 +11,7 @@ services:
       - db
       - cache
       - recommender
+      - web
     restart: always
     environment:
       - STATE=SUT
@@ -62,6 +63,8 @@ services:
     restart: always
     ports:
       - '3000:3000'
+    environment:
+      - STATE=sut
 
 volumes:
   dbdata:
