@@ -18,7 +18,7 @@ spec:
           - containerPort: 3000
           env:
             - name: STATE
-              value: PRO
+              value: 'PRO'
   selector:
     matchLabels:
       component: web-service
