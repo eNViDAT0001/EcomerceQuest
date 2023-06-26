@@ -29,7 +29,7 @@ spec:
 
           volumeMounts:
             - name: mysql-storage
-              mountPath: /var/lib/mysql/data
+              mountPath: /var/lib/mysql
               subPath: mysql
 
           env:
