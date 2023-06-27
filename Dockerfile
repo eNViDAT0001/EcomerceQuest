@@ -9,6 +9,7 @@ FROM alpine:latest
 WORKDIR /app/main
 COPY --from=builder /app/main .
 COPY config /app/main/config
+COPY db /app/main/db
 
 EXPOSE 8082
 CMD ["./main"]
