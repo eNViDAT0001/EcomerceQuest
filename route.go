@@ -24,6 +24,11 @@ func router(r *gin.Engine) {
 				"message": "pong",
 			})
 		})
+		v1.GET("/", func(c *gin.Context) {
+			c.JSON(http.StatusOK, gin.H{
+				"message": "Hi there",
+			})
+		})
 		adminGroup := v1.Group("/admin")
 		{
 			adminGroup.GET("/report", allHandler.adminHandler.GetAdminReport())
