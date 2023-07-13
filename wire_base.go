@@ -12,6 +12,7 @@ import (
 	orderHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order"
 	orderItemsHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
 	paymentHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/payment"
+	dummyRedisPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/redis"
 	requestContactHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/request_contact"
 	smtpHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/verification/smtp"
 
@@ -193,6 +194,8 @@ var IteratorCollection = wire.NewSet(
 	notificationUCPKG.NewNotificationUseCase,
 	notificationStoPKG.NewNotificationStorage,
 
+	dummyRedisPKG.NewRedisHandler,
+
 	NewHandlerCollection,
 )
 
@@ -218,6 +221,7 @@ type HandlerCollection struct {
 	paymentHandler      paymentPKG.HttpHandler
 	adminHandler        adminPKG.HttpHandler
 	requestHandler      requestContactPKG.HttpHandler
+	dummyRedisHandler   dummyRedisPKG.DummyRedisHandler
 }
 
 func NewHandlerCollection(
@@ -242,6 +246,7 @@ func NewHandlerCollection(
 	paymentHandler paymentPKG.HttpHandler,
 	adminHandler adminPKG.HttpHandler,
 	requestHandler requestContactPKG.HttpHandler,
+	dummyRedisHandler dummyRedisPKG.DummyRedisHandler,
 
 ) *HandlerCollection {
 	return &HandlerCollection{
@@ -266,5 +271,6 @@ func NewHandlerCollection(
 		paymentHandler:      paymentHandler,
 		adminHandler:        adminHandler,
 		requestHandler:      requestHandler,
+		dummyRedisHandler:   dummyRedisHandler,
 	}
 }

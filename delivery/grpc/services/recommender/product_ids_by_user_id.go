@@ -20,5 +20,6 @@ func (r recommenderService) LisRecommendedProductIDsByUserID(ctx context.Context
 	for _, i := range result.ProductId {
 		productIDs = append(productIDs, uint(i))
 	}
+
 	return productIDs, err
 }

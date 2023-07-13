@@ -38,13 +38,9 @@ var (
 	ErrEventNotSupported = errors.New("this event type is not supported")
 )
 
-// Manager is used to hold references to all Clients Registered, and Broadcasting etc
 type Manager struct {
 	Clients map[string]io.Client
-	// Using a syncMutex here to be able to lcok state before editing clients
-	// Could also use Channels to block
 	sync.RWMutex
-	// handlers are functions that are used to handle Events
 	Handlers map[string]io.EventHandler
 }
 type ClientStorage struct {

@@ -9,7 +9,7 @@ DB_USER: admin
 DB_PASSWORD: admin
 
 RECOMMENDER:
-  HOST: 127.0.0.1
+  HOST: localhost
   PORT: 9180
 
 REDIS:
@@ -21,6 +21,7 @@ REDIS:
 FE:
   HOST: localhost
   PORT: 3000
+
 CLOUDINARY:
   NAME: damzcas3k
   API_KEY: 332611833886276

@@ -29,6 +29,11 @@ func router(r *gin.Engine) {
 				"message": "Hi there",
 			})
 		})
+		v1.GET("/recommender", allHandler.productHandler.ListRecommendedProductsIds())
+
+		v1.GET("/redis", allHandler.dummyRedisHandler.Get())
+		v1.POST("/redis", allHandler.dummyRedisHandler.Set())
+
 		adminGroup := v1.Group("/admin")
 		{
 			adminGroup.GET("/report", allHandler.adminHandler.GetAdminReport())

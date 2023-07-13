@@ -9,6 +9,7 @@ type HttpHandler interface {
 	ListProduct() func(ctx *gin.Context)
 	ListProductPreviewWithCategoryID() func(ctx *gin.Context)
 	ListRecommendedProductsPreview() func(ctx *gin.Context)
+	ListRecommendedProductsIds() func(ctx *gin.Context)
 	ListProductWithCategoryID() func(ctx *gin.Context)
 	ListProductPreviewWithBannerID() func(ctx *gin.Context)
 	ListProductPreviewNotInBannerID() func(ctx *gin.Context)

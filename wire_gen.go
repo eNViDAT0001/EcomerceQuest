@@ -20,6 +20,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
 	order_items2 "github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/payment"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/product"
+	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/redis"
 	banner2 "github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/banner"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/category"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/favorite"
@@ -132,6 +133,7 @@ func initHandlerCollection() *HandlerCollection {
 	adminHttpHandler := admin.NewAdminHandler()
 	request_contactUseCase := usecase20.NewRequestContactUseCase(request_contactStorage, notificationUseCase)
 	request_contactHttpHandler := smtp2.NewRequestContactHandler(request_contactUseCase)
-	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler, adminHttpHandler, request_contactHttpHandler)
+	dummyRedisHandler := redis.NewRedisHandler()
+	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler, adminHttpHandler, request_contactHttpHandler, dummyRedisHandler)
 	return handlerCollection
 }
