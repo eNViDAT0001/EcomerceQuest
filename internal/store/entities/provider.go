@@ -28,7 +28,7 @@ func (Provider) SortFields() []string {
 	return []string{"name", "id"}
 }
 func (Provider) CompareFields() []string {
-	return []string{}
+	return []string{"created_at_>=", "created_at_<="}
 }
 func (Provider) TableName() string {
 	return "Provider"

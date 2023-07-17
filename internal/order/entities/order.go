@@ -42,7 +42,7 @@ func (Order) TableName() string {
 	return "Order"
 }
 func (Order) CompareFields() []string {
-	return []string{}
+	return []string{"created_at_>=", "created_at_<="}
 }
 
 type OrderStatus string
