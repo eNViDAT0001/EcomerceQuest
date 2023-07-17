@@ -23,7 +23,7 @@ func router(r *gin.Engine) {
 			"message": "Hi there",
 		})
 	})
-	
+
 	v1 := r.Group("/api/v1")
 	{
 		v1.GET("/ping", func(c *gin.Context) {
@@ -46,7 +46,7 @@ func router(r *gin.Engine) {
 			adminGroup.GET("/report", allHandler.adminHandler.GetAdminReport())
 			adminGroup.GET("/report/products", allHandler.productHandler.ListProductReport())
 			adminGroup.GET("/report/orders", allHandler.orderHandler.ListReport())
-			adminGroup.GET("/report/shops", allHandler.providerHandler.ListProviderReport())
+			adminGroup.GET("/report/providers", allHandler.providerHandler.ListProviderReport())
 			adminGroup.GET("/requests", allHandler.requestHandler.ListRequest())
 			adminGroup.PATCH("/requests/:request_id", allHandler.requestHandler.UpdateRequest())
 			adminGroup.DELETE("/requests/:request_id", allHandler.requestHandler.DeleteRequest())
