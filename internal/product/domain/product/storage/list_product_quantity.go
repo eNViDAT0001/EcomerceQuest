@@ -13,9 +13,8 @@ func (s productStorage) ListProductQuantity(ctx context.Context, input io.ListPr
 	db := wrap_gorm.GetDB()
 
 	query := db.Model(entities.Product{}).
-		Select("CAST(Product.created_at AS date) as date, SUM(ProductOption.quantity) AS quantity").
+		Select("CAST(Product.created_at as date) as date, SUM(ProductOption.quantity) AS quantity").
 		Joins("LEFT JOIN ProductOption on Product.id = ProductOption.product_id").
-		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
 		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
 		Where("ProductOption.deleted_at IS NULL").
 		Group("CAST(Product.created_at AS date)")

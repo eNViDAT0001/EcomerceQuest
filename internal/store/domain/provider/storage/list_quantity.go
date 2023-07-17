@@ -13,7 +13,7 @@ func (s providerStorage) ListProviderQuantity(ctx context.Context, filter paging
 	result := make([]io.ProviderQuantity, 0)
 	db := wrap_gorm.GetDB()
 	query := db.Model(entities.Provider{}).
-		Select("(created_at AS date) as date, COUNT(id) as quantity").
+		Select("CAST(Provider.created_at AS date) as date, COUNT(id) as quantity").
 		Group("CAST(created_at AS date)")
 	paging_query.SetPagingQuery(&filter, entities.Provider{}.TableName(), query)
 	err := query.Find(&result).Error
