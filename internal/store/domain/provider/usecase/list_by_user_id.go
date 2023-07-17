@@ -12,9 +12,11 @@ func (u providerUseCase) ListProviderByUserID(ctx context.Context, userID uint, 
 	if err != nil {
 		return nil, 0, err
 	}
+
 	if total == 0 {
 		return nil, 0, gorm.ErrRecordNotFound
 	}
+	
 	providers, err = u.providerSto.ListProviderByUserID(ctx, userID, filter)
 	if err != nil {
 		return nil, 0, err

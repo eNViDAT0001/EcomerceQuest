@@ -12,4 +12,5 @@ type HttpHandler interface {
 	DeleteProviderByID() func(*gin.Context)
 	ListProviderByUserID() func(*gin.Context)
 	ListProvider() func(*gin.Context)
+	ListProviderReport() func(*gin.Context)
 }

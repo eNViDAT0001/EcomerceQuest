@@ -23,6 +23,9 @@ type Storage interface {
 	ListPreviewByProviderID(ctx context.Context, providerID uint, input paging.ParamsInput) ([]io.OrderPreview, error)
 	CountPreviewByProviderID(ctx context.Context, providerID uint, input paging.ParamsInput) (total int64, err error)
 
+	ListQuantity(ctx context.Context, input paging.ParamsInput) ([]io.OrderReportQuantity, error)
+	ListQuantityCount(ctx context.Context, input paging.ParamsInput) (int64, error)
+
 	CountList(ctx context.Context, input paging.ParamsInput) (total int64, err error)
 	List(ctx context.Context, input paging.ParamsInput) ([]entities.Order, error)
 	CountPreview(ctx context.Context, input paging.ParamsInput) (total int64, err error)

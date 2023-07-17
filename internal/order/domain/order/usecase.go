@@ -20,6 +20,8 @@ type UseCase interface {
 
 	ListInvalidOrder(ctx context.Context) (unPayOrders []entities.Order, unConfirmedOrders []entities.Order, err error)
 
+	ListOrderReport(ctx context.Context, input paging.ParamsInput) (orders []io.OrderReportQuantity, total int64, err error)
+	
 	GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error)
 	GetFullDetailByOrderID(ctx context.Context, orderID uint) (io.OrderFullDetail, error)
 

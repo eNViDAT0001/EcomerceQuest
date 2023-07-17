@@ -12,6 +12,7 @@ const (
 )
 const (
 	DefaultSize = 20
+	InfinitySize = 1000
 )
 
 type Paging interface {

@@ -18,6 +18,9 @@ type Storage interface {
 
 	ListProductMediaByProductID(ctx context.Context, productID uint) ([]entities.ProductMedia, error)
 
+	ListProductQuantity(ctx context.Context, input io.ListProductInput) ([]io.ProductQuantity, error)
+	ListCountProductQuantity(ctx context.Context, input io.ListProductInput) (total int64, err error)
+	
 	GetProductSpecificationRoofByProductID(ctx context.Context, productID uint) ([]entities.ProductSpecification, error)
 	GetRoofSpecificationByProductID(ctx context.Context, productID uint, specID *uint) (entities.ProductSpecification, error)
 	GetSpecificationByID(ctx context.Context, id uint) (entities.ProductSpecification, error)

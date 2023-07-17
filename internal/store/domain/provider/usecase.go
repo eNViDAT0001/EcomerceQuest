@@ -14,5 +14,6 @@ type UseCase interface {
 	DeleteProviderByIDs(ctx context.Context, providerID []uint) error
 	ListProviderByUserID(ctx context.Context, userID uint, filter paging.ParamsInput) (providers []entities.Provider, total int64, err error)
 	ListProvider(ctx context.Context, filter paging.ParamsInput) (providers []entities.Provider, total int64, err error)
+	ListProviderQuantity(ctx context.Context, filter paging.ParamsInput) (providers []io.ProviderQuantity, total int64, err error)
 	GetProviderFullDetailByID(ctx context.Context, providerID uint) (io.ProviderFullDetail, error)
 }

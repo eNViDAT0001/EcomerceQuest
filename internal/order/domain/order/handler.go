@@ -13,6 +13,8 @@ type HttpHandler interface {
 	List() func(ctx *gin.Context)
 	ListPreview() func(ctx *gin.Context)
 
+	ListReport() func(ctx *gin.Context)
+
 	GetByOrderID() func(ctx *gin.Context)
 
 	CreateOrder() func(ctx *gin.Context)

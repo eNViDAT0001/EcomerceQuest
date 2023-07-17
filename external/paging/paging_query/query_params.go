@@ -36,7 +36,7 @@ func GetPagingParams(cc *gin.Context, filter paging_params.EntityFilter) (pagina
 
 func SetCountListPagingQuery(input *paging.ParamsInput, tableName string, query *gorm.DB) {
 
-	if input.Type == paging.CursorPaging {
+	if input.Type == paging.CursorPaging && !input.Infinity{
 		sort := ">"
 		queryString := ""
 		if input.Filter.GetSort() != nil {

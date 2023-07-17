@@ -113,7 +113,21 @@ func (u *orderUseCase) ListByUserID(ctx context.Context, userID uint, input pagi
 
 	return orders, total, err
 }
+func (u *orderUseCase) ListOrderReport(ctx context.Context, input paging.ParamsInput) (orders []io.OrderReportQuantity, total int64, err error) {
+	total, err = u.orderSto.ListQuantityCount(ctx, input)
+	if err != nil {
+		return nil, 0, err
+	}
+	if total == 0 {
+		return nil, 0, gorm.ErrRecordNotFound
+	}
+	orders, err = u.orderSto.ListQuantity(ctx, input)
+	if err != nil {
+		return nil, 0, err
+	}
 
+	return orders, total, err
+}
 func (u *orderUseCase) ListPreviewByUserID(ctx context.Context, userID uint, input paging.ParamsInput) (orders []io.OrderPreview, total int64, err error) {
 	total, err = u.orderSto.CountPreviewByUserID(ctx, userID, input)
 	if err != nil {
