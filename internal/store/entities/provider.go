@@ -27,6 +27,9 @@ func (Provider) SearchFields() []string {
 func (Provider) SortFields() []string {
 	return []string{"name", "id"}
 }
+func (Provider) CompareFields() []string {
+	return []string{}
+}
 func (Provider) TableName() string {
 	return "Provider"
 }

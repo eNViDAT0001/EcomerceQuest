@@ -17,6 +17,13 @@ func router(r *gin.Engine) {
 	// Validate Token: allHandler.jwtHandler.VerifyToken()
 	// Validate User's Token: allHandler.jwtHandler.VerifyUserToken()
 	// Validate Admin's Token: allHandler.jwtHandler.VerifyAdminToken()
+
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Hi there",
+		})
+	})
+	
 	v1 := r.Group("/api/v1")
 	{
 		v1.GET("/ping", func(c *gin.Context) {

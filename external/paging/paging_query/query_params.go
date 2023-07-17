@@ -7,6 +7,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+	"strings"
 )
 
 func GetPagingParams(cc *gin.Context, filter paging_params.EntityFilter) (paginator paging.ParamsInput, err error) {
@@ -17,11 +18,13 @@ func GetPagingParams(cc *gin.Context, filter paging_params.EntityFilter) (pagina
 	search := cc.QueryArray("search[]")
 	fields := cc.QueryArray("fields[]")
 	sort := cc.QueryArray("sorts[]")
+	compare := cc.QueryArray("compare[]")
 
 	paginator.Filter = paging_params.NewFilterBuilder().
 		WithSearch(search).
 		WithFields(fields).
 		WithSorts(sort).
+		WithCompare(compare).
 		Build()
 
 	inValidField, val := paging_params.ValidateFilter(paginator.Filter, filter)
@@ -76,6 +79,15 @@ func SetCountListPagingQuery(input *paging.ParamsInput, tableName string, query 
 			query = query.Order(fmt.Sprintf(`%s.%s %s`, tableName, k, sort))
 		}
 	}
+
+	if input.Filter.GetCompare() != nil {
+		for k, v := range *input.Filter.GetCompare() {
+			convertToValue := strings.Split(k, "_")
+			column := convertToValue[0]
+			condition := convertToValue[1]
+			query = query.Where(fmt.Sprintf("`%s`.`%s` %s ?", tableName, column, condition), v)
+		}
+	}
 }
 func SetPagingQuery(input *paging.ParamsInput, tableName string, query *gorm.DB) {
 
@@ -128,6 +140,15 @@ func SetPagingQuery(input *paging.ParamsInput, tableName string, query *gorm.DB)
 				sort = v
 			}
 			query = query.Order(fmt.Sprintf(`%s.%s %s`, tableName, k, sort))
+		}
+	}
+
+	if input.Filter.GetCompare() != nil {
+		for k, v := range *input.Filter.GetCompare() {
+			convertToValue := strings.Split(k, "_")
+			column := convertToValue[0]
+			condition := convertToValue[1]
+			query = query.Where(fmt.Sprintf("`%s`.`%s` %s ?", tableName, column, condition), v)
 		}
 	}
 }

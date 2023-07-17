@@ -21,7 +21,9 @@ func (Notification) SearchFields() []string {
 func (Notification) SortFields() []string {
 	return []string{"created_at", "id"}
 }
-
+func (Notification) CompareFields() []string {
+	return []string{}
+}
 func (Notification) TableName() string {
 	return "Notification"
 }

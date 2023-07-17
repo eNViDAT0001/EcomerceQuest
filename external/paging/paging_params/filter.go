@@ -1,14 +1,16 @@
 package paging_params
 
 type filterList struct {
-	Fields *map[string]string
-	Search *map[string]string
-	Sort   *map[string]string
+	Fields  *map[string]string
+	Search  *map[string]string
+	Sort    *map[string]string
+	Compare *map[string]string
 }
 type FilterList interface {
 	GetFields() *map[string]string
 	GetSearch() *map[string]string
 	GetSort() *map[string]string
+	GetCompare() *map[string]string
 
 	CloneWithSort([]string) FilterList
 	CloneWithField([]string) FilterList
@@ -17,6 +19,7 @@ type FilterBuilder interface {
 	WithSorts([]string) FilterBuilder
 	WithSearch([]string) FilterBuilder
 	WithFields([]string) FilterBuilder
+	WithCompare([]string) FilterBuilder
 	Build() FilterList
 }
 
@@ -29,6 +32,9 @@ func (f *filterList) GetSearch() *map[string]string {
 func (f *filterList) GetSort() *map[string]string {
 	return f.Sort
 }
+func (f *filterList) GetCompare() *map[string]string {
+	return f.Compare
+}
 func (f *filterList) WithFields(input []string) FilterBuilder {
 	f.Fields = convertParamsArrayToMap(input)
 	return f
@@ -39,6 +45,10 @@ func (f *filterList) WithSearch(input []string) FilterBuilder {
 }
 func (f *filterList) WithSorts(input []string) FilterBuilder {
 	f.Sort = convertParamsArrayToMap(input)
+	return f
+}
+func (f *filterList) WithCompare(input []string) FilterBuilder {
+	f.Compare = convertParamsArrayToMap(input)
 	return f
 }
 func (f *filterList) Build() FilterList {

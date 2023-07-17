@@ -31,7 +31,9 @@ func (User) SortFields() []string {
 func (User) TableName() string {
 	return "User"
 }
-
+func (User) CompareFields() []string {
+	return []string{}
+}
 func (u User) HashPassword(plainPassword string) (string, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(plainPassword), bcrypt.MinCost)
 	if err != nil {

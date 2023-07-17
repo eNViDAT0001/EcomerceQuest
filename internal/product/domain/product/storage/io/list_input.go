@@ -21,3 +21,7 @@ type ProductWithQuantities struct {
 	entities.Product
 	Options datatypes.JSON `json:"options"`
 }
+type ProductQuantity struct {
+	Quantity int    `gorm:"quantity" json:"quantity"`
+	Date     string `gorm:"date" json:"date"`
+}

@@ -25,6 +25,9 @@ func (Payment) SearchFields() []string {
 func (Payment) SortFields() []string {
 	return []string{}
 }
+func (Payment) CompareFields() []string {
+	return []string{}
+}
 func (Payment) TableName() string {
 	return "Payment"
 }

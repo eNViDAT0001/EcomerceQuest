@@ -20,7 +20,9 @@ func (CartDetail) SearchFields() []string {
 func (CartDetail) SortFields() []string {
 	return []string{"provider_id", "user_id", "id"}
 }
-
+func (CartDetail) CompareFields() []string {
+	return []string{}
+}
 func (CartDetail) TableName() string {
 	return "CartDetailView"
 }

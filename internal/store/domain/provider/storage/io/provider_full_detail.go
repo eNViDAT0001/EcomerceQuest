@@ -9,3 +9,7 @@ type ProviderFullDetail struct {
 	AverageComment uint8             `json:"average_comment"`
 	TotalComment   int64             `json:"total_comment"`
 }
+type ProviderQuantity struct {
+	Date     string `gorm:"date" json:"date"`
+	Quantity int64  `gorm:"quantity" json:"quantity"`
+}

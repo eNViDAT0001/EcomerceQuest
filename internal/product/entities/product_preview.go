@@ -28,6 +28,9 @@ func (ProductPreview) SearchFields() []string {
 func (ProductPreview) SortFields() []string {
 	return []string{"name", "discount", "price", "created_at", "provider_id", "user_id", "category_id", "id", "height", "weight", "length", "width"}
 }
+func (ProductPreview) CompareFields() []string {
+	return []string{}
+}
 func (ProductPreview) TableName() string {
 	return "ProductPreview"
 }

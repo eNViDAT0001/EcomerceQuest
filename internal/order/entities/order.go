@@ -41,6 +41,9 @@ func (Order) SortFields() []string {
 func (Order) TableName() string {
 	return "Order"
 }
+func (Order) CompareFields() []string {
+	return []string{}
+}
 
 type OrderStatus string
 

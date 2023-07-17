@@ -22,7 +22,9 @@ func (c RequestContact) SearchFields() []string {
 func (c RequestContact) SortFields() []string {
 	return []string{"id", "seen"}
 }
-
+func (RequestContact) CompareFields() []string {
+	return []string{}
+}
 func (RequestContact) TableName() string {
 	return "RequestContact"
 }

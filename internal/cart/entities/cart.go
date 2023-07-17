@@ -17,6 +17,9 @@ func (Cart) SearchFields() []string {
 func (Cart) SortFields() []string {
 	return []string{"provider_id", "user_id", "id"}
 }
+func (Cart) CompareFields() []string {
+	return []string{}
+}
 
 func (Cart) TableName() string {
 	return "Cart"

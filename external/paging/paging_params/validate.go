@@ -1,9 +1,12 @@
 package paging_params
 
+import "strings"
+
 type EntityFilter interface {
 	WithFields() []string
 	SearchFields() []string
 	SortFields() []string
+	CompareFields() []string
 }
 
 func ValidateFilter(fields FilterList, filter EntityFilter) (inValidKey string, value string) {
@@ -22,6 +25,12 @@ func ValidateFilter(fields FilterList, filter EntityFilter) (inValidKey string, 
 
 	sortFields := filter.SortFields()
 	inValidKey, value = validateFilter(fields.GetSort(), sortFields...)
+	if len(inValidKey) > 0 {
+		return inValidKey, value
+	}
+
+	compareFields := filter.CompareFields()
+	inValidKey, value = validateCompare(fields.GetCompare(), compareFields...)
 	if len(inValidKey) > 0 {
 		return inValidKey, value
 	}
@@ -52,4 +61,59 @@ func validateFilter(filter *map[string]string, fields ...string) (inValidKey str
 	}
 
 	return "", ""
+}
+
+func validateCompare(filter *map[string]string, fields ...string) (inValidKey string, value string) {
+	if filter == nil {
+		return "", ""
+	}
+
+	inValid := true
+	for key, val := range *filter {
+		column, condition := GetColumnAndCondition(key)
+		if len(column) < 1 || len(condition) < 1 {
+			return key, val
+		}
+
+		for _, v := range fields {
+			convertToValidValue := strings.Split(v, "_")
+			validColumn := convertToValidValue[0]
+			validCondition := convertToValidValue[1]
+
+			if column == validColumn && condition == validCondition {
+				inValid = false
+				break
+			}
+
+			inValidKey = key
+			value = val
+		}
+
+		if inValid {
+			return inValidKey, value
+		}
+	}
+
+	return "", ""
+}
+func GetColumnAndCondition(v string) (string, string) {
+	var column string
+	var condition string
+
+	index := len(v) - 1
+	for index >= 0 {
+		if v[index] == '_' {
+			break
+		}
+		index--
+	}
+
+	if index == -1 {
+		return "", ""
+	}
+
+	column = v[:index]
+	condition = v[index+1:]
+
+	return column, condition
 }

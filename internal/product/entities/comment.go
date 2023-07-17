@@ -22,7 +22,9 @@ func (Comment) SearchFields() []string {
 func (Comment) SortFields() []string {
 	return []string{"rating", "description", "id"}
 }
-
+func (Comment) CompareFields() []string {
+	return []string{}
+}
 func (Comment) TableName() string {
 	return "Comment"
 }

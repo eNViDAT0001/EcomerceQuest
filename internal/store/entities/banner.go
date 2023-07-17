@@ -24,6 +24,9 @@ func (Banner) SearchFields() []string {
 func (Banner) SortFields() []string {
 	return []string{"discount", "collection", "end_time", "id"}
 }
+func (Banner) CompareFields() []string {
+	return []string{}
+}
 func (Banner) TableName() string {
 	return "Banner"
 }

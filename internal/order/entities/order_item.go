@@ -27,6 +27,9 @@ func (OrderItem) SearchFields() []string {
 func (OrderItem) SortFields() []string {
 	return []string{"order_id", "category_id", "product_id", "product_option_id", "id"}
 }
+func (OrderItem) CompareFields() []string {
+	return []string{}
+}
 func (OrderItem) TableName() string {
 	return "OrderItem"
 }

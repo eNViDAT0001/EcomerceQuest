@@ -28,6 +28,9 @@ func (Product) SearchFields() []string {
 func (Product) SortFields() []string {
 	return []string{"name", "discount", "price", "created_at", "provider_id", "user_id", "category_id", "id", "height", "weight", "length", "width", "rating"}
 }
+func (Product) CompareFields() []string {
+	return []string{"price_>=", "price_<="}
+}
 func (Product) TableName() string {
 	return "Product"
 }

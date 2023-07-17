@@ -15,7 +15,9 @@ func (ChatRoom) SearchFields() []string {
 func (ChatRoom) SortFields() []string {
 	return []string{}
 }
-
+func (ChatRoom) CompareFields() []string {
+	return []string{}
+}
 func (ChatRoom) TableName() string {
 	return "ChatRoom"
 }
