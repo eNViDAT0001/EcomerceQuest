@@ -162,6 +162,8 @@ func router(r *gin.Engine) {
 			commentGroup.GET("product/:product_id", allHandler.commentHandler.ListCommentByProductID())
 			commentGroup.GET("/:comment_id", allHandler.commentHandler.GetCommentDetailByID())
 			authGroup.POST("/product/:product_id/user/:user_id", allHandler.commentHandler.CreateComment())
+			commentGroup.POST("/:comment_id", allHandler.commentHandler.RecoverByID())
+			commentGroup.DELETE("/:comment_id", allHandler.commentHandler.DeleteByID())
 		}
 		userGroup := v1.Group("/users")
 		{
@@ -320,6 +322,7 @@ func router(r *gin.Engine) {
 			log.Fatal(err)
 		}
 	})
+
 	c.Start()
 
 }

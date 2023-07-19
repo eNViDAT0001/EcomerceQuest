@@ -7,6 +7,23 @@ import (
 	"gorm.io/gorm"
 )
 
+func (u *commentUseCase) ListComment(ctx context.Context, filter paging.ParamsInput) (comments []ioSto.CommentDetail, total int64, err error) {
+	total, err = u.commentSto.CountListComment(ctx, filter)
+	if err != nil {
+		return nil, 0, err
+	}
+	if total == 0 {
+		return nil, 0, gorm.ErrRecordNotFound
+	}
+	comments, err = u.commentSto.ListComment(ctx, filter)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return comments, total, err
+}
+
+
 func (u *commentUseCase) ListCommentByProductID(ctx context.Context, productID uint, filter paging.ParamsInput) (comments []ioSto.CommentDetail, total int64, err error) {
 	total, err = u.commentSto.CountListCommentByProductID(ctx, productID, filter)
 	if err != nil {

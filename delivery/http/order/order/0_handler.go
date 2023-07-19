@@ -43,6 +43,7 @@ func (s *orderHandler) RemoveInvalidOrder() error {
 		err = s.orderUC.UpdateOrder(ctx, v.ID, io.UpdateOrderForm{
 			VerifyDelivered: &delivered,
 		})
+		
 		if err != nil {
 			return err
 		}
