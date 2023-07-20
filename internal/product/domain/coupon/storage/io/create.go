@@ -1,6 +1,6 @@
 package io
 
-type BannerCreateForm struct {
+type CouponCreateForm struct {
 	ID        uint
 	ProductID uint
 	UserID    uint

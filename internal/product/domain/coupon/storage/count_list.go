@@ -5,20 +5,20 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_query"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 )
 
-func (b couponStorage) CountListBanner(ctx context.Context, filter paging.ParamsInput, bannerID uint) (total int64, err error) {
+func (b couponStorage) CountListCoupon(ctx context.Context, filter paging.ParamsInput, couponID uint) (total int64, err error) {
 	var count int64
 
 	db := wrap_gorm.GetDB()
 
-	query := db.Model(entities.Banner{})
+	query := db.Model(entities.Coupon{})
 
-	paging_query.SetCountListPagingQuery(&filter, entities.Banner{}.TableName(), query)
+	paging_query.SetCountListPagingQuery(&filter, entities.Coupon{}.TableName(), query)
 
-	if bannerID > 0 {
-		query = query.Where("id = ?", bannerID)
+	if couponID > 0 {
+		query = query.Where("id = ?", couponID)
 	}
 
 	err = query.Count(&count).Error
