@@ -3,17 +3,18 @@ package storage
 import (
 	"context"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 )
 
-func (b couponStorage) CreateCoupon(ctx context.Context, input CouponCreateForm, productIDs []uint) (BannerID uint, err error) {
+func (b couponStorage) CreateCoupon(ctx context.Context, input io.CouponCreateForm, productIDs []uint) (CouponID uint, err error) {
 	db := wrap_gorm.GetDB()
-	err = db.Table(entities.Banner{}.TableName()).Create(&input).Error
+	err = db.Table(entities.Coupon{}.TableName()).Create(&input).Error
 	if err != nil {
 		return 0, err
 	}
 
-	productStorage := make([]entities.Coupon, 0)
+	productStorage := make([]entities.Pr, 0)
 	for _, id := range productIDs {
 		couponDetail := entities.CouponDetail{
 			CouponID:  input.ID,

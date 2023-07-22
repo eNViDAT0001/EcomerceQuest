@@ -17,7 +17,7 @@ func (Coupon) WithFields() []string {
 	return []string{"product_id", "user_id"}
 }
 func (Coupon) SearchFields() []string {
-	return []string{"Name", "percent", "Fixed"}
+	return []string{"Name", "percent", "fixed"}
 }
 func (Coupon) SortFields() []string {
 	return []string{"percent", "Fixed", "id"}

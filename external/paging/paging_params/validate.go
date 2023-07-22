@@ -1,7 +1,5 @@
 package paging_params
 
-import "strings"
-
 type EntityFilter interface {
 	WithFields() []string
 	SearchFields() []string
@@ -69,24 +67,17 @@ func validateCompare(filter *map[string]string, fields ...string) (inValidKey st
 	}
 
 	inValid := true
-	for key, val := range *filter {
-		column, condition := GetColumnAndCondition(key)
-		if len(column) < 1 || len(condition) < 1 {
-			return key, val
-		}
-
+	for key, _ := range *filter {
 		for _, v := range fields {
-			convertToValidValue := strings.Split(v, "_")
-			validColumn := convertToValidValue[0]
-			validCondition := convertToValidValue[1]
-
-			if column == validColumn && condition == validCondition {
+			if key == v {
 				inValid = false
 				break
 			}
 
-			inValidKey = key
-			value = val
+			column, condition := GetColumnAndCondition(key)
+
+			inValidKey = column
+			value = condition
 		}
 
 		if inValid {
@@ -96,6 +87,7 @@ func validateCompare(filter *map[string]string, fields ...string) (inValidKey st
 
 	return "", ""
 }
+
 func GetColumnAndCondition(v string) (string, string) {
 	var column string
 	var condition string

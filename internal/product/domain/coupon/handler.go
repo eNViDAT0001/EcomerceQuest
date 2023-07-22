@@ -15,4 +15,6 @@ type HttpHandler interface {
 	ListProductPreviewByCouponID() func(*gin.Context)
 	ListProductNotInCouponID() func(*gin.Context)
 	ListProductPreviewNotInCouponID() func(*gin.Context)
+
+	ValidateCouponByProductIDs() func(*gin.Context)
 }

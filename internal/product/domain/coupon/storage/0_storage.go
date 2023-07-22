@@ -1,10 +1,10 @@
 package storage
 
-import "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon"
+import Coupon "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon"
 
 type couponStorage struct {
 }
 
-func NewCouponStorage() coupon.Storage {
+func NewCouponStorage() Coupon.Storage {
 	return &couponStorage{}
 }

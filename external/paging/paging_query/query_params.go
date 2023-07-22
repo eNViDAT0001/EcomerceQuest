@@ -7,7 +7,6 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"strings"
 )
 
 func GetPagingParams(cc *gin.Context, filter paging_params.EntityFilter) (paginator paging.ParamsInput, err error) {
@@ -82,9 +81,7 @@ func SetCountListPagingQuery(input *paging.ParamsInput, tableName string, query 
 
 	if input.Filter.GetCompare() != nil {
 		for k, v := range *input.Filter.GetCompare() {
-			convertToValue := strings.Split(k, "_")
-			column := convertToValue[0]
-			condition := convertToValue[1]
+			column, condition := GetColumnAndCondition(k)
 			query = query.Where(fmt.Sprintf("`%s`.`%s` %s ?", tableName, column, condition), v)
 		}
 	}
@@ -92,7 +89,7 @@ func SetCountListPagingQuery(input *paging.ParamsInput, tableName string, query 
 func SetPagingQuery(input *paging.ParamsInput, tableName string, query *gorm.DB) {
 
 	query = query.Limit(input.PerPage())
-	if input.Type == paging.CursorPaging && !input.Infinity{
+	if input.Type == paging.CursorPaging && !input.Infinity {
 		sort := ">"
 		queryString := ""
 		if input.Filter.GetSort() != nil {
@@ -145,10 +142,30 @@ func SetPagingQuery(input *paging.ParamsInput, tableName string, query *gorm.DB)
 
 	if input.Filter.GetCompare() != nil {
 		for k, v := range *input.Filter.GetCompare() {
-			convertToValue := strings.Split(k, "_")
-			column := convertToValue[0]
-			condition := convertToValue[1]
+			column, condition := GetColumnAndCondition(k)
 			query = query.Where(fmt.Sprintf("`%s`.`%s` %s ?", tableName, column, condition), v)
 		}
 	}
+}
+
+func GetColumnAndCondition(v string) (string, string) {
+	var column string
+	var condition string
+
+	index := len(v) - 1
+	for index >= 0 {
+		if v[index] == '_' {
+			break
+		}
+		index--
+	}
+
+	if index == -1 {
+		return "", ""
+	}
+
+	column = v[:index]
+	condition = v[index+1:]
+
+	return column, condition
 }

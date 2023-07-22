@@ -17,6 +17,7 @@ require (
 	github.com/redis/go-redis/v9 v9.0.5
 	github.com/roylee0704/gron v0.0.0-20160621042432-e78485adab46
 	github.com/spf13/viper v1.16.0
+	github.com/twilio/twilio-go v1.10.0
 	golang.org/x/crypto v0.10.0
 	golang.org/x/net v0.11.0
 	golang.org/x/oauth2 v0.7.0
@@ -39,6 +40,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/goccy/go-json v0.9.11 // indirect
+	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/schema v1.2.0 // indirect
@@ -56,6 +58,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.8 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rogpeppe/go-internal v1.10.0 // indirect
 	github.com/spf13/afero v1.9.5 // indirect
 	github.com/spf13/cast v1.5.1 // indirect
