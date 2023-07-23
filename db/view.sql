@@ -54,6 +54,7 @@ FROM Cart
          JOIN Provider ON Provider.id = Cart.provider_id AND Provider.deleted_at IS NULL
          JOIN CartItem ON CartItem.cart_id = Cart.id
          JOIN Product ON Product.id = CartItem.product_id
+         JOIN Category ON Category.id = Product.category_id AND Category.deleted_at IS NULL
          LEFT JOIN ProductOption ON CartItem.product_option_id = ProductOption.id
          LEFT JOIN FirstProductMediaList ON FirstProductMediaList.id = Product.id
 WHERE Cart.deleted_at IS NULL AND CartItem.deleted_at IS NULL
@@ -82,4 +83,5 @@ FROM `Product`
          LEFT JOIN ProductMedia ON ProductMedia.product_id = Product.id
          LEFT JOIN `Comment` ON `Comment`.product_id = Product.id
          JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL
+         JOIN Category ON Product.category_id = Category.id AND Category.deleted_at IS NULL
 WHERE Product.deleted_at IS NULL GROUP BY `Product`.`id`;

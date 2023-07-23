@@ -16,6 +16,7 @@ func (s productStorage) ListProduct(ctx context.Context, input io.ListProductInp
 		Select("Product.*, IF(COUNT(ProductOption.id) = 0, NULL, JSON_ARRAYAGG(JSON_OBJECT('name', ProductOption.name, 'quantity', ProductOption.quantity))) AS options").
 		Joins("LEFT JOIN ProductOption on Product.id = ProductOption.product_id").
 		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
+		Joins("JOIN Category ON Product.category_id = Category.id AND Category.deleted_at IS NULL").
 		Where("ProductOption.deleted_at IS NULL").
 		Group("Product.id")
 

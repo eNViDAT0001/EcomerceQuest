@@ -5,17 +5,17 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging/paging_query"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 )
 
-func (b couponStorage) ListBanner(ctx context.Context, filter paging.ParamsInput) ([]entities.Banner, error) {
-	result := make([]entities.Banner, 0)
+func (b couponStorage) ListCoupon(ctx context.Context, filter paging.ParamsInput) ([]entities.Coupon, error) {
+	result := make([]entities.Coupon, 0)
 
 	db := wrap_gorm.GetDB()
 
-	query := db.Model(entities.Banner{})
+	query := db.Model(entities.Coupon{})
 
-	paging_query.SetPagingQuery(&filter, entities.Banner{}.TableName(), query)
+	paging_query.SetPagingQuery(&filter, entities.Coupon{}.TableName(), query)
 
 	err := query.Find(&result).Error
 	if err != nil {

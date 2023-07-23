@@ -14,6 +14,7 @@ func (s productStorage) ListCountProductQuantity(ctx context.Context, input io.L
 
 	query := db.Model(entities.Product{}).
 		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
+		Joins("JOIN Category ON Product.category_id = Category.id AND Category.deleted_at IS NULL").
 		Group("CAST(Product.created_at AS date)")
 
 	paging_query.SetCountListPagingQuery(&input.Paging, entities.Product{}.TableName(), query)

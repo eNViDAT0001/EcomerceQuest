@@ -15,6 +15,7 @@ func (s productStorage) ListCountProductsPreview(ctx context.Context, input io.L
 		Joins("LEFT JOIN ProductMedia ON ProductMedia.product_id = Product.id").
 		Joins("LEFT JOIN Comment ON Comment.product_id = Product.id").
 		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
+		Joins("JOIN Category ON Product.category_id = Category.id AND Category.deleted_at IS NULL").
 		Where("Product.deleted_at IS NULL").
 		Group("Product.id")
 

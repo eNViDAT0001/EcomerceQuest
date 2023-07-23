@@ -60,7 +60,8 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 	err = query.Table(entities3.CartItem{}.TableName()).
 		Where("id IN ?", cartItemsIDs).
 		Where("user_id = ?", order.UserID).
-		Delete(&entities3.CartItem{}).Error
+		Delete(&entities3.CartItem{}).
+		Error
 	if err != nil {
 		query.Rollback()
 		return nil, err

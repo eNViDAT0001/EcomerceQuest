@@ -14,4 +14,10 @@ type Storage interface {
 	GetCategoryChildrenTreeWithCategoryID(ctx context.Context, categoryID uint) ([]entities.Category, error)
 	GetCategoryParentsTreeWithCategoryID(ctx context.Context, categoryID uint) ([]entities.Category, error)
 	GetCategoryRoofTree(ctx context.Context) ([]entities.Category, error)
+
+	DeleteCategoryByID(ctx context.Context, categoryID uint, parentID *uint) error
+	DeleteCategoryNodeByID(ctx context.Context, categoryID uint, input *ioSto.CategoryForm) error
+
+	RecoverCategoryByID(ctx context.Context, categoryID uint) error
+	RecoverCategoryNodeByID(ctx context.Context, categoryID uint) error
 }

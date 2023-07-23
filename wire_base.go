@@ -34,6 +34,7 @@ import (
 	notificationUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/usecase"
 
 	commentHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/comment"
+	couponHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/coupon"
 	productHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/product"
 	bannerHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/banner"
 	categoryHttpHandlerPKG "github.com/eNViDAT0001/Thesis/Backend/delivery/http/store/category"
@@ -91,6 +92,10 @@ import (
 	productStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage"
 	productUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/usecase"
 
+	couponPKG "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon"
+	couponStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage"
+	couponUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/usecase"
+
 	commentPKG "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment"
 	commentStoPKG "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
 	commentUCPKG "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/usecase"
@@ -133,6 +138,10 @@ var IteratorCollection = wire.NewSet(
 	productHttpHandlerPKG.NewProductHandler,
 	productUCPKG.NewProductUseCase,
 	productStoPKG.NewProductStorage,
+
+	couponHttpHandlerPKG.NewBannerHandler,
+	couponUCPKG.NewCouponUseCase,
+	couponStoPKG.NewCouponStorage,
 
 	commentHttpHandlerPKG.NewCommentHandler,
 	commentUCPKG.NewCommentUseCase,
@@ -221,6 +230,7 @@ type HandlerCollection struct {
 	paymentHandler      paymentPKG.HttpHandler
 	adminHandler        adminPKG.HttpHandler
 	requestHandler      requestContactPKG.HttpHandler
+	couponHandler       couponPKG.HttpHandler
 	dummyRedisHandler   dummyRedisPKG.DummyRedisHandler
 }
 
@@ -247,7 +257,7 @@ func NewHandlerCollection(
 	adminHandler adminPKG.HttpHandler,
 	requestHandler requestContactPKG.HttpHandler,
 	dummyRedisHandler dummyRedisPKG.DummyRedisHandler,
-
+	couponHandler couponPKG.HttpHandler,
 ) *HandlerCollection {
 	return &HandlerCollection{
 		userHandler:         userHandler,
@@ -272,5 +282,6 @@ func NewHandlerCollection(
 		adminHandler:        adminHandler,
 		requestHandler:      requestHandler,
 		dummyRedisHandler:   dummyRedisHandler,
+		couponHandler:       couponHandler,
 	}
 }

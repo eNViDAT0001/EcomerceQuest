@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Jun 18, 2023 at 09:52 AM
+-- Generation Time: Jul 23, 2023 at 08:29 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.17
 
@@ -28,21 +28,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Address` (
-                           `id` bigint UNSIGNED NOT NULL,
-                           `user_id` bigint UNSIGNED NOT NULL,
-                           `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `gender` tinyint(1) NOT NULL DEFAULT '0',
-                           `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `district` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `ward` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `province_id` int DEFAULT NULL,
-                           `district_id` int DEFAULT NULL,
-                           `ward_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                           `street` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` tinyint(1) NOT NULL DEFAULT '0',
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `district` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ward` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province_id` int DEFAULT NULL,
+  `district_id` int DEFAULT NULL,
+  `ward_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `street` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -50,16 +50,16 @@ CREATE TABLE `Address` (
 --
 
 INSERT INTO `Address` (`id`, `user_id`, `name`, `gender`, `phone`, `province`, `district`, `ward`, `province_id`, `district_id`, `ward_code`, `street`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                                                                                      (10, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-06 14:37:47', '2023-05-06 14:37:47', NULL),
-                                                                                                                                                                                                      (11, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-10 13:15:40', '2023-05-10 13:15:40', NULL),
-                                                                                                                                                                                                      (12, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:19:11', '2023-05-19 16:19:11', NULL),
-                                                                                                                                                                                                      (13, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:22:17', '2023-05-19 16:22:17', NULL),
-                                                                                                                                                                                                      (14, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:23:06', '2023-05-19 16:23:06', NULL),
-                                                                                                                                                                                                      (15, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:25:13', '2023-05-19 16:25:13', NULL),
-                                                                                                                                                                                                      (16, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:27:41', '2023-05-19 16:27:41', NULL),
-                                                                                                                                                                                                      (17, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:31:21', '2023-05-19 16:31:21', NULL),
-                                                                                                                                                                                                      (18, 44, 'Lê Yến Nhi', 0, '0945958952', 'Sơn La', 'Huyện Mường La', 'Xã Ngọc Chiến', 266, 3230, '140314', 'KTX KHU A', '2023-06-09 14:15:39', '2023-06-09 14:15:39', NULL),
-                                                                                                                                                                                                      (19, 40, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 263, 1977, '130511', 'weqweqweqw', '2023-06-10 06:24:07', '2023-06-10 06:24:07', NULL);
+(10, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-06 14:37:47', '2023-05-06 14:37:47', NULL),
+(11, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-10 13:15:40', '2023-05-10 13:15:40', NULL),
+(12, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:19:11', '2023-05-19 16:19:11', NULL),
+(13, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:22:17', '2023-05-19 16:22:17', NULL),
+(14, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:23:06', '2023-05-19 16:23:06', NULL),
+(15, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:25:13', '2023-05-19 16:25:13', NULL),
+(16, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:27:41', '2023-05-19 16:27:41', NULL),
+(17, 1, 'Nguyễn Văn Đạt', 0, '0987654321', 'Hồ Chí Minh', 'Thành Phố Thủ Đức', 'Phường Bình Trưng Tây', 202, 3695, '90767', '09 Nguyễn Chí Thanh', '2023-05-19 16:31:21', '2023-05-19 16:31:21', NULL),
+(18, 44, 'Lê Yến Nhi', 0, '0945958952', 'Sơn La', 'Huyện Mường La', 'Xã Ngọc Chiến', 266, 3230, '140314', 'KTX KHU A', '2023-06-09 14:15:39', '2023-06-09 14:15:39', NULL),
+(19, 40, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 263, 1977, '130511', 'weqweqweqw', '2023-06-10 06:24:07', '2023-06-10 06:24:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -68,16 +68,16 @@ INSERT INTO `Address` (`id`, `user_id`, `name`, `gender`, `phone`, `province`, `
 --
 
 CREATE TABLE `Banner` (
-                          `id` bigint UNSIGNED NOT NULL,
-                          `user_id` bigint UNSIGNED NOT NULL,
-                          `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                          `collection` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                          `discount` int NOT NULL,
-                          `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                          `end_time` date NOT NULL,
-                          `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                          `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                          `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `collection` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount` int NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `end_time` date NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -85,12 +85,12 @@ CREATE TABLE `Banner` (
 --
 
 INSERT INTO `Banner` (`id`, `user_id`, `title`, `collection`, `discount`, `image`, `end_time`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                             (7, 43, 'Máy tinh mới nhất đã ra mắt', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686476392/Product/hy4m4w63stgo9hfaz4x4.jpg', '2023-09-08', '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
-                                                                                                                                             (8, 43, 'Thời trang phụ nữ ra mắt', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686374997/Product/wxgtqh6bqjj90dolot5l.jpg', '2023-08-19', '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
-                                                                                                                                             (9, 43, 'Fashin nam', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375069/Product/jfhmrzggce6muxhznwxu.jpg', '2023-09-02', '2023-06-10 05:31:29', '2023-06-10 05:31:29', NULL),
-                                                                                                                                             (10, 43, 'Trang sức cho các cặp đôi', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375173/Product/jinriyzub1zoucdkph2q.jpg', '2023-07-28', '2023-06-10 05:33:12', '2023-06-10 05:33:12', NULL),
-                                                                                                                                             (11, 43, 'Đồng hồ cho phái mạnh', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375240/Product/niwnqhpthetr43uon2d5.jpg', '2023-09-01', '2023-06-10 05:34:18', '2023-06-10 05:34:18', NULL),
-                                                                                                                                             (12, 43, 'Nội thất cho gia đình bạn', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375327/Product/dpzjpbgoskbfhdibjfn3.png', '2023-09-16', '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL);
+(7, 43, 'Máy tinh mới nhất đã ra mắt', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686476392/Product/hy4m4w63stgo9hfaz4x4.jpg', '2023-09-08', '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
+(8, 43, 'Thời trang phụ nữ ra mắt', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686374997/Product/wxgtqh6bqjj90dolot5l.jpg', '2023-08-19', '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
+(9, 43, 'Fashin nam', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375069/Product/jfhmrzggce6muxhznwxu.jpg', '2023-09-02', '2023-06-10 05:31:29', '2023-06-10 05:31:29', NULL),
+(10, 43, 'Trang sức cho các cặp đôi', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375173/Product/jinriyzub1zoucdkph2q.jpg', '2023-07-28', '2023-06-10 05:33:12', '2023-06-10 05:33:12', NULL),
+(11, 43, 'Đồng hồ cho phái mạnh', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375240/Product/niwnqhpthetr43uon2d5.jpg', '2023-09-01', '2023-06-10 05:34:18', '2023-06-10 05:34:18', NULL),
+(12, 43, 'Nội thất cho gia đình bạn', '', 10, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375327/Product/dpzjpbgoskbfhdibjfn3.png', '2023-09-16', '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -99,11 +99,11 @@ INSERT INTO `Banner` (`id`, `user_id`, `title`, `collection`, `discount`, `image
 --
 
 CREATE TABLE `BannerDetail` (
-                                `banner_id` bigint UNSIGNED NOT NULL,
-                                `product_id` bigint UNSIGNED NOT NULL,
-                                `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                `deleted_at` datetime DEFAULT NULL
+  `banner_id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -111,45 +111,45 @@ CREATE TABLE `BannerDetail` (
 --
 
 INSERT INTO `BannerDetail` (`banner_id`, `product_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                     (7, 50, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
-                                                                                                     (7, 51, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
-                                                                                                     (7, 52, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
-                                                                                                     (7, 53, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
-                                                                                                     (7, 54, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
-                                                                                                     (7, 55, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
-                                                                                                     (7, 56, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
-                                                                                                     (7, 57, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
-                                                                                                     (7, 58, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
-                                                                                                     (7, 59, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
-                                                                                                     (7, 60, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
-                                                                                                     (7, 61, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
-                                                                                                     (7, 62, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
-                                                                                                     (8, 63, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
-                                                                                                     (8, 64, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
-                                                                                                     (8, 65, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
-                                                                                                     (8, 66, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
-                                                                                                     (8, 67, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
-                                                                                                     (8, 68, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
-                                                                                                     (9, 63, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
-                                                                                                     (9, 64, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
-                                                                                                     (9, 65, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
-                                                                                                     (9, 66, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
-                                                                                                     (9, 67, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
-                                                                                                     (9, 68, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
-                                                                                                     (9, 69, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
-                                                                                                     (9, 70, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
-                                                                                                     (10, 72, '2023-06-10 05:33:13', '2023-06-10 05:33:13', NULL),
-                                                                                                     (10, 73, '2023-06-10 05:33:13', '2023-06-10 05:33:13', NULL),
-                                                                                                     (10, 74, '2023-06-10 05:33:13', '2023-06-10 05:33:13', NULL),
-                                                                                                     (11, 75, '2023-06-10 05:34:19', '2023-06-10 05:34:19', NULL),
-                                                                                                     (11, 76, '2023-06-10 05:34:19', '2023-06-10 05:34:19', NULL),
-                                                                                                     (11, 77, '2023-06-10 05:34:19', '2023-06-10 05:34:19', NULL),
-                                                                                                     (11, 78, '2023-06-10 05:34:19', '2023-06-10 05:34:19', NULL),
-                                                                                                     (12, 79, '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL),
-                                                                                                     (12, 80, '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL),
-                                                                                                     (12, 81, '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL),
-                                                                                                     (12, 82, '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL),
-                                                                                                     (7, 63, '2023-06-11 12:17:09', '2023-06-11 12:17:09', NULL);
+(7, 50, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
+(7, 51, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
+(7, 52, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
+(7, 53, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
+(7, 54, '2023-06-10 05:24:22', '2023-06-10 05:24:22', NULL),
+(7, 55, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
+(7, 56, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
+(7, 57, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
+(7, 58, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
+(7, 59, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
+(7, 60, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
+(7, 61, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
+(7, 62, '2023-06-10 05:24:51', '2023-06-10 05:24:51', NULL),
+(8, 63, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
+(8, 64, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
+(8, 65, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
+(8, 66, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
+(8, 67, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
+(8, 68, '2023-06-10 05:26:11', '2023-06-10 05:26:11', NULL),
+(9, 63, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
+(9, 64, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
+(9, 65, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
+(9, 66, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
+(9, 67, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
+(9, 68, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
+(9, 69, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
+(9, 70, '2023-06-10 05:31:30', '2023-06-10 05:31:30', NULL),
+(10, 72, '2023-06-10 05:33:13', '2023-06-10 05:33:13', NULL),
+(10, 73, '2023-06-10 05:33:13', '2023-06-10 05:33:13', NULL),
+(10, 74, '2023-06-10 05:33:13', '2023-06-10 05:33:13', NULL),
+(11, 75, '2023-06-10 05:34:19', '2023-06-10 05:34:19', NULL),
+(11, 76, '2023-06-10 05:34:19', '2023-06-10 05:34:19', NULL),
+(11, 77, '2023-06-10 05:34:19', '2023-06-10 05:34:19', NULL),
+(11, 78, '2023-06-10 05:34:19', '2023-06-10 05:34:19', NULL),
+(12, 79, '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL),
+(12, 80, '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL),
+(12, 81, '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL),
+(12, 82, '2023-06-10 05:35:41', '2023-06-10 05:35:41', NULL),
+(7, 63, '2023-06-11 12:17:09', '2023-06-11 12:17:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -158,12 +158,12 @@ INSERT INTO `BannerDetail` (`banner_id`, `product_id`, `created_at`, `updated_at
 --
 
 CREATE TABLE `Cart` (
-                        `id` bigint UNSIGNED NOT NULL,
-                        `provider_id` bigint UNSIGNED NOT NULL,
-                        `user_id` bigint UNSIGNED NOT NULL,
-                        `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                        `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                        `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `provider_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -171,13 +171,13 @@ CREATE TABLE `Cart` (
 --
 
 INSERT INTO `Cart` (`id`, `provider_id`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                  (9, 21, 1, '2023-06-09 05:39:28', '2023-06-09 05:39:28', NULL),
-                                                                                                  (10, 21, 44, '2023-06-09 14:14:55', '2023-06-09 14:14:55', NULL),
-                                                                                                  (11, 21, 40, '2023-06-10 06:23:39', '2023-06-10 06:23:39', NULL),
-                                                                                                  (12, 22, 40, '2023-06-10 08:15:41', '2023-06-10 08:15:41', NULL),
-                                                                                                  (13, 25, 40, '2023-06-10 14:23:08', '2023-06-10 14:23:08', NULL),
-                                                                                                  (14, 26, 40, '2023-06-10 14:23:31', '2023-06-10 14:23:31', NULL),
-                                                                                                  (15, 27, 40, '2023-06-10 14:23:53', '2023-06-10 14:23:53', NULL);
+(9, 21, 1, '2023-06-09 05:39:28', '2023-06-09 05:39:28', NULL),
+(10, 21, 44, '2023-06-09 14:14:55', '2023-06-09 14:14:55', NULL),
+(11, 21, 40, '2023-06-10 06:23:39', '2023-06-10 06:23:39', NULL),
+(12, 22, 40, '2023-06-10 08:15:41', '2023-06-10 08:15:41', NULL),
+(13, 25, 40, '2023-06-10 14:23:08', '2023-06-10 14:23:08', NULL),
+(14, 26, 40, '2023-06-10 14:23:31', '2023-06-10 14:23:31', NULL),
+(15, 27, 40, '2023-06-10 14:23:53', '2023-06-10 14:23:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -186,15 +186,15 @@ INSERT INTO `Cart` (`id`, `provider_id`, `user_id`, `created_at`, `updated_at`, 
 --
 
 CREATE TABLE `CartItem` (
-                            `id` bigint UNSIGNED NOT NULL,
-                            `cart_id` bigint UNSIGNED NOT NULL,
-                            `user_id` bigint UNSIGNED NOT NULL,
-                            `product_id` bigint UNSIGNED NOT NULL,
-                            `product_option_id` bigint UNSIGNED NOT NULL,
-                            `quantity` int UNSIGNED NOT NULL,
-                            `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                            `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                            `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `cart_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `product_option_id` bigint UNSIGNED NOT NULL,
+  `quantity` int UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -202,21 +202,21 @@ CREATE TABLE `CartItem` (
 --
 
 INSERT INTO `CartItem` (`id`, `cart_id`, `user_id`, `product_id`, `product_option_id`, `quantity`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                                 (30, 10, 44, 47, 136, 5, '2023-06-09 14:14:55', '2023-06-09 14:14:55', NULL),
-                                                                                                                                                 (31, 11, 40, 48, 140, 2, '2023-06-10 06:23:39', '2023-06-10 06:23:39', '2023-06-10 06:30:06'),
-                                                                                                                                                 (32, 12, 40, 52, 152, 2, '2023-06-10 08:15:41', '2023-06-10 08:15:41', '2023-06-10 08:16:04'),
-                                                                                                                                                 (33, 11, 40, 48, 140, 2, '2023-06-10 08:43:35', '2023-06-10 08:43:35', '2023-06-10 08:43:47'),
-                                                                                                                                                 (34, 11, 40, 48, 140, 1, '2023-06-10 08:46:40', '2023-06-10 08:46:40', '2023-06-10 08:47:48'),
-                                                                                                                                                 (35, 13, 40, 63, 174, 1, '2023-06-10 14:23:08', '2023-06-10 14:23:08', NULL),
-                                                                                                                                                 (36, 13, 40, 64, 176, 1, '2023-06-10 14:23:15', '2023-06-10 14:23:15', NULL),
-                                                                                                                                                 (37, 13, 40, 65, 178, 1, '2023-06-10 14:23:23', '2023-06-10 14:23:23', NULL),
-                                                                                                                                                 (38, 14, 40, 66, 181, 1, '2023-06-10 14:23:31', '2023-06-10 14:23:31', NULL),
-                                                                                                                                                 (39, 14, 40, 67, 185, 1, '2023-06-10 14:23:39', '2023-06-10 14:23:39', NULL),
-                                                                                                                                                 (40, 14, 40, 68, 189, 1, '2023-06-10 14:23:45', '2023-06-10 14:23:45', NULL),
-                                                                                                                                                 (41, 15, 40, 69, 190, 1, '2023-06-10 14:23:53', '2023-06-10 14:23:53', NULL),
-                                                                                                                                                 (42, 15, 40, 70, 191, 1, '2023-06-10 14:24:01', '2023-06-10 14:24:01', NULL),
-                                                                                                                                                 (43, 15, 40, 71, 197, 1, '2023-06-10 14:24:19', '2023-06-10 14:24:19', NULL),
-                                                                                                                                                 (44, 11, 40, 47, 136, 2, '2023-06-11 12:14:17', '2023-06-11 12:14:17', '2023-06-11 12:15:13');
+(30, 10, 44, 47, 136, 5, '2023-06-09 14:14:55', '2023-06-09 14:14:55', NULL),
+(31, 11, 40, 48, 140, 2, '2023-06-10 06:23:39', '2023-06-10 06:23:39', '2023-06-10 06:30:06'),
+(32, 12, 40, 52, 152, 2, '2023-06-10 08:15:41', '2023-06-10 08:15:41', '2023-06-10 08:16:04'),
+(33, 11, 40, 48, 140, 2, '2023-06-10 08:43:35', '2023-06-10 08:43:35', '2023-06-10 08:43:47'),
+(34, 11, 40, 48, 140, 1, '2023-06-10 08:46:40', '2023-06-10 08:46:40', '2023-06-10 08:47:48'),
+(35, 13, 40, 63, 174, 1, '2023-06-10 14:23:08', '2023-06-10 14:23:08', NULL),
+(36, 13, 40, 64, 176, 1, '2023-06-10 14:23:15', '2023-06-10 14:23:15', NULL),
+(37, 13, 40, 65, 178, 1, '2023-06-10 14:23:23', '2023-06-10 14:23:23', NULL),
+(38, 14, 40, 66, 181, 1, '2023-06-10 14:23:31', '2023-06-10 14:23:31', NULL),
+(39, 14, 40, 67, 185, 1, '2023-06-10 14:23:39', '2023-06-10 14:23:39', NULL),
+(40, 14, 40, 68, 189, 1, '2023-06-10 14:23:45', '2023-06-10 14:23:45', NULL),
+(41, 15, 40, 69, 190, 1, '2023-06-10 14:23:53', '2023-06-10 14:23:53', NULL),
+(42, 15, 40, 70, 191, 1, '2023-06-10 14:24:01', '2023-06-10 14:24:01', NULL),
+(43, 15, 40, 71, 197, 1, '2023-06-10 14:24:19', '2023-06-10 14:24:19', NULL),
+(44, 11, 40, 47, 136, 2, '2023-06-11 12:14:17', '2023-06-11 12:14:17', '2023-06-11 12:15:13');
 
 -- --------------------------------------------------------
 
@@ -225,13 +225,13 @@ INSERT INTO `CartItem` (`id`, `cart_id`, `user_id`, `product_id`, `product_optio
 --
 
 CREATE TABLE `Category` (
-                            `id` bigint UNSIGNED NOT NULL,
-                            `category_parent_id` bigint UNSIGNED DEFAULT NULL,
-                            `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                            `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'https://www.englishclub.com/images/vocabulary/food/fish-seafood/fish-seafood.jpg',
-                            `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                            `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                            `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `category_parent_id` bigint UNSIGNED DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'https://www.englishclub.com/images/vocabulary/food/fish-seafood/fish-seafood.jpg',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -239,27 +239,27 @@ CREATE TABLE `Category` (
 --
 
 INSERT INTO `Category` (`id`, `category_parent_id`, `name`, `image_path`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                        (1, NULL, 'Computers', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686127602/Product/wqbxggo4by7lnuufqxyp.png', '2023-06-07 08:49:43', '2023-06-07 08:49:43', NULL),
-                                                                                                                        (3, NULL, 'Fashion', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686127909/Product/mw4ej0gijuwyddcwwedy.png', '2023-06-07 08:52:23', '2023-06-07 08:52:23', NULL),
-                                                                                                                        (4, NULL, 'Furniture', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686127983/Product/hz89ultnnsy35qusrszn.png', '2023-06-07 08:53:32', '2023-06-07 08:53:32', NULL),
-                                                                                                                        (5, NULL, 'Books', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128129/Product/vs6ucdoo9eben6ptj0vr.png', '2023-06-07 08:55:40', '2023-06-07 08:55:40', NULL),
-                                                                                                                        (48, NULL, 'Cell Phones', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128321/Product/wdn9xqv0gdcmc21mq6tq.png', '2023-06-07 09:00:15', '2023-06-07 09:00:15', NULL),
-                                                                                                                        (49, 1, 'Mouses', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128471/Product/afzh1kf1kc9yak6l6ryv.jpg', '2023-06-07 09:01:11', '2023-06-07 09:01:11', NULL),
-                                                                                                                        (50, 1, 'Earphones', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128506/Product/htdivd5hsnszjxeygvti.png', '2023-06-07 09:01:47', '2023-06-07 09:01:47', NULL),
-                                                                                                                        (51, 1, 'Key boards', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128615/Product/jotlnqkaekrqqq2lebhl.png', '2023-06-07 09:03:42', '2023-06-07 09:03:42', NULL),
-                                                                                                                        (52, 51, 'Mechanical keyboards', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150360/Product/fesnpidtkunrdwe9pv89.png', '2023-06-07 15:06:02', '2023-06-07 15:06:02', NULL),
-                                                                                                                        (53, 51, 'Wireless keyboards', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150437/Product/ov52g2dsxm9uywer5le9.png', '2023-06-07 15:07:18', '2023-06-07 15:07:18', NULL),
-                                                                                                                        (54, 50, 'Wired headphones', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150587/Product/pnxadlxm31tmfpgyvkey.png', '2023-06-07 15:09:51', '2023-06-07 15:09:51', NULL),
-                                                                                                                        (55, 50, 'Airpod', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150643/Product/crzwoknwjrcknvavmito.jpg', '2023-06-07 15:10:44', '2023-06-07 15:10:44', NULL),
-                                                                                                                        (56, 3, 'Hat', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686299441/Product/eb3rk4xqlfa6iabfplx8.png', '2023-06-09 08:30:40', '2023-06-09 08:30:40', NULL),
-                                                                                                                        (57, 3, 'Clothes', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686299484/Product/zme4qxm6xtxzyzng2mnr.jpg', '2023-06-09 08:31:33', '2023-06-09 08:31:33', NULL),
-                                                                                                                        (58, 57, 'Shirts', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686299537/Product/zgc9cprpjsyfzbwrgv4a.png', '2023-06-09 08:32:20', '2023-06-09 08:32:20', NULL),
-                                                                                                                        (59, 57, 'Pants', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686300156/Product/lihbgpru8g6bmy2osrbo.png', '2023-06-09 08:40:30', '2023-06-09 08:40:30', NULL),
-                                                                                                                        (60, 3, 'Accessories', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686300232/Product/bho6ttacspdprk3cc8v4.jpg', '2023-06-09 08:43:53', '2023-06-09 08:43:53', NULL),
-                                                                                                                        (61, 60, 'Jewelry', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686300305/Product/aurxyk3gk62yrhttw8un.jpg', '2023-06-09 08:45:08', '2023-06-09 08:45:08', NULL),
-                                                                                                                        (62, 60, 'Watches', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686300382/Product/w6xqqm1hvbww4z0vs04t.png', '2023-06-09 08:46:26', '2023-06-09 08:46:26', NULL),
-                                                                                                                        (65, 48, 'Device', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686376602/Product/vjt4ka2gmya6ix3hcdhw.png', '2023-06-10 05:56:41', '2023-06-10 05:56:41', NULL),
-                                                                                                                        (66, 5, 'Sách về ngữ văn', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686485897/Product/tsnzndddnnznqzef61ca.jpg', '2023-06-11 12:18:24', '2023-06-11 12:18:24', NULL);
+(1, NULL, 'Computers', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686127602/Product/wqbxggo4by7lnuufqxyp.png', '2023-06-07 08:49:43', '2023-06-07 08:49:43', NULL),
+(3, NULL, 'Fashion', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686127909/Product/mw4ej0gijuwyddcwwedy.png', '2023-06-07 08:52:23', '2023-06-07 08:52:23', NULL),
+(4, NULL, 'Furniture', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686127983/Product/hz89ultnnsy35qusrszn.png', '2023-06-07 08:53:32', '2023-06-07 08:53:32', NULL),
+(5, NULL, 'Books', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128129/Product/vs6ucdoo9eben6ptj0vr.png', '2023-06-07 08:55:40', '2023-06-07 08:55:40', NULL),
+(48, NULL, 'Cell Phones', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128321/Product/wdn9xqv0gdcmc21mq6tq.png', '2023-06-07 09:00:15', '2023-06-07 09:00:15', NULL),
+(49, 1, 'Mouses', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128471/Product/afzh1kf1kc9yak6l6ryv.jpg', '2023-06-07 09:01:11', '2023-06-07 09:01:11', NULL),
+(50, 1, 'Earphones', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128506/Product/htdivd5hsnszjxeygvti.png', '2023-06-07 09:01:47', '2023-06-07 09:01:47', NULL),
+(51, 1, 'Key boards', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686128615/Product/jotlnqkaekrqqq2lebhl.png', '2023-06-07 09:03:42', '2023-06-07 09:03:42', NULL),
+(52, 51, 'Mechanical keyboards', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150360/Product/fesnpidtkunrdwe9pv89.png', '2023-06-07 15:06:02', '2023-06-07 15:06:02', NULL),
+(53, 51, 'Wireless keyboards', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150437/Product/ov52g2dsxm9uywer5le9.png', '2023-06-07 15:07:18', '2023-06-07 15:07:18', NULL),
+(54, 50, 'Wired headphones', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150587/Product/pnxadlxm31tmfpgyvkey.png', '2023-06-07 15:09:51', '2023-06-07 15:09:51', NULL),
+(55, 50, 'Airpod', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150643/Product/crzwoknwjrcknvavmito.jpg', '2023-06-07 15:10:44', '2023-06-07 15:10:44', NULL),
+(56, 3, 'Hat', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686299441/Product/eb3rk4xqlfa6iabfplx8.png', '2023-06-09 08:30:40', '2023-06-09 08:30:40', NULL),
+(57, 3, 'Clothes', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686299484/Product/zme4qxm6xtxzyzng2mnr.jpg', '2023-06-09 08:31:33', '2023-06-09 08:31:33', NULL),
+(58, 57, 'Shirts', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686299537/Product/zgc9cprpjsyfzbwrgv4a.png', '2023-06-09 08:32:20', '2023-06-09 08:32:20', NULL),
+(59, 57, 'Pants', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686300156/Product/lihbgpru8g6bmy2osrbo.png', '2023-06-09 08:40:30', '2023-06-09 08:40:30', NULL),
+(60, 3, 'Accessories', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686300232/Product/bho6ttacspdprk3cc8v4.jpg', '2023-06-09 08:43:53', '2023-06-09 08:43:53', NULL),
+(61, 60, 'Jewelry', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686300305/Product/aurxyk3gk62yrhttw8un.jpg', '2023-06-09 08:45:08', '2023-06-09 08:45:08', NULL),
+(62, 60, 'Watches', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686300382/Product/w6xqqm1hvbww4z0vs04t.png', '2023-06-09 08:46:26', '2023-06-09 08:46:26', NULL),
+(65, 48, 'Device', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686376602/Product/vjt4ka2gmya6ix3hcdhw.png', '2023-06-10 05:56:41', '2023-06-10 05:56:41', NULL),
+(66, 5, 'Sách về ngữ văn', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686485897/Product/tsnzndddnnznqzef61ca.jpg', '2023-06-11 12:18:24', '2023-06-11 12:18:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -268,10 +268,10 @@ INSERT INTO `Category` (`id`, `category_parent_id`, `name`, `image_path`, `creat
 --
 
 CREATE TABLE `ChatRoom` (
-                            `id` bigint UNSIGNED NOT NULL,
-                            `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                            `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                            `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -279,9 +279,9 @@ CREATE TABLE `ChatRoom` (
 --
 
 INSERT INTO `ChatRoom` (`id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                            (19, '2023-06-09 05:33:21', '2023-06-09 05:33:21', NULL),
-                                                                            (20, '2023-06-10 13:49:07', '2023-06-10 13:49:07', NULL),
-                                                                            (21, '2023-06-11 12:21:29', '2023-06-11 12:21:29', NULL);
+(19, '2023-06-09 05:33:21', '2023-06-09 05:33:21', NULL),
+(20, '2023-06-10 13:49:07', '2023-06-10 13:49:07', NULL),
+(21, '2023-06-11 12:21:29', '2023-06-11 12:21:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -290,14 +290,14 @@ INSERT INTO `ChatRoom` (`id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 --
 
 CREATE TABLE `Comment` (
-                           `id` bigint UNSIGNED NOT NULL,
-                           `product_id` bigint UNSIGNED NOT NULL,
-                           `user_id` bigint UNSIGNED NOT NULL,
-                           `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `rating` int NOT NULL,
-                           `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -305,42 +305,42 @@ CREATE TABLE `Comment` (
 --
 
 INSERT INTO `Comment` (`id`, `product_id`, `user_id`, `description`, `rating`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                             (31, 48, 40, 'Khá đẹp', 4, '2023-06-10 13:17:02', '2023-06-10 13:17:02', NULL),
-                                                                                                                             (32, 47, 40, 'Sản phẩm tốt đấy, hơi thiếu 1 số cái', 3, '2023-06-16 05:17:19', '2023-06-16 05:17:19', NULL),
-                                                                                                                             (34, 52, 40, 'okela', 3, '2023-06-16 05:18:57', '2023-06-16 05:18:57', NULL),
-                                                                                                                             (35, 49, 41, 'okela', 2, '2023-06-16 05:19:31', '2023-06-16 05:19:31', NULL),
-                                                                                                                             (36, 54, 41, 'Rất tốt, very well', 5, '2023-06-16 05:20:20', '2023-06-16 05:20:20', NULL),
-                                                                                                                             (37, 55, 41, 'Rất tốt, very well ahihi, nhưng có 1 số lỗi', 4, '2023-06-16 05:20:34', '2023-06-16 05:20:34', NULL),
-                                                                                                                             (38, 61, 41, 'nan nì mô', 3, '2023-06-16 05:21:07', '2023-06-16 05:21:07', NULL),
-                                                                                                                             (39, 63, 41, 'nan nì mô', 4, '2023-06-16 05:21:22', '2023-06-16 05:21:22', NULL),
-                                                                                                                             (40, 49, 42, 'Khá tốt', 2, '2023-06-16 05:21:58', '2023-06-16 05:21:58', NULL),
-                                                                                                                             (41, 54, 42, 'Khá tốt', 5, '2023-06-16 05:22:17', '2023-06-16 05:22:17', NULL),
-                                                                                                                             (42, 55, 42, 'khá ok, ổn phết', 4, '2023-06-16 05:22:54', '2023-06-16 05:22:54', NULL),
-                                                                                                                             (43, 70, 42, 'Sản phẩm này có chút lỗi', 2, '2023-06-16 05:23:27', '2023-06-16 05:23:27', NULL),
-                                                                                                                             (44, 71, 42, 'Sản phẩm này có chút lỗi', 2, '2023-06-16 05:23:31', '2023-06-16 05:23:31', NULL),
-                                                                                                                             (45, 77, 43, 'okela', 3, '2023-06-16 05:24:44', '2023-06-16 05:24:44', NULL),
-                                                                                                                             (46, 78, 43, 'okela', 4, '2023-06-16 05:24:54', '2023-06-16 05:24:54', NULL),
-                                                                                                                             (47, 85, 42, 'không có j nổi bật', 1, '2023-06-16 05:25:53', '2023-06-16 05:25:53', NULL),
-                                                                                                                             (48, 86, 42, 'sản phẩm cực kì tuyệt vời', 4, '2023-06-16 05:26:11', '2023-06-16 05:26:11', NULL),
-                                                                                                                             (49, 87, 42, 'Không có j nổi bật lắm', 3, '2023-06-16 05:26:30', '2023-06-16 05:26:30', NULL),
-                                                                                                                             (50, 67, 1, 'Sản phẩm này được chấp nhận', 4, '2023-06-16 05:27:10', '2023-06-16 05:27:10', NULL),
-                                                                                                                             (51, 68, 1, 'Sản phẩm này khó chấp nhận', 3, '2023-06-16 05:27:24', '2023-06-16 05:27:24', NULL),
-                                                                                                                             (52, 70, 1, 'Okela, tốt', 5, '2023-06-16 05:27:44', '2023-06-16 05:27:44', NULL),
-                                                                                                                             (53, 70, 43, 'Okela, tốt', 5, '2023-06-16 05:27:57', '2023-06-16 05:27:57', NULL),
-                                                                                                                             (54, 70, 41, 'Sản phẩm này dởm quá', 3, '2023-06-16 05:28:45', '2023-06-16 05:28:45', NULL),
-                                                                                                                             (55, 71, 41, 'Sản phẩm này dởm quá', 3, '2023-06-16 05:28:51', '2023-06-16 05:28:51', NULL),
-                                                                                                                             (56, 47, 42, 'Oke, máy tính này tốt nè', 4, '2023-06-16 05:29:33', '2023-06-16 05:29:33', NULL),
-                                                                                                                             (57, 52, 42, 'Oke, máy tính này tốt nè', 4, '2023-06-16 05:29:41', '2023-06-16 05:29:41', NULL),
-                                                                                                                             (58, 77, 43, 'Omoshiroi desuneee', 4, '2023-06-16 05:30:23', '2023-06-16 05:30:23', NULL),
-                                                                                                                             (59, 87, 44, 'Điện thoại mới mua mà hỏng, không chấp nhận được', 3, '2023-06-16 05:31:40', '2023-06-16 05:31:40', NULL),
-                                                                                                                             (60, 86, 44, 'sách đầy đủ đấy, giảm giá cũng cao nữa', 4, '2023-06-16 05:31:57', '2023-06-16 05:31:57', NULL),
-                                                                                                                             (61, 85, 44, 'Sách ok nè', 5, '2023-06-16 05:32:29', '2023-06-16 05:32:29', NULL),
-                                                                                                                             (62, 85, 43, 'Sách ok đc', 5, '2023-06-16 05:33:35', '2023-06-16 05:33:35', NULL),
-                                                                                                                             (63, 86, 43, 'Sách không ổn lắm ', 3, '2023-06-16 05:33:50', '2023-06-16 05:33:50', NULL),
-                                                                                                                             (64, 66, 44, 'Ok, đc nè', 5, '2023-06-16 05:34:21', '2023-06-16 05:34:21', NULL),
-                                                                                                                             (65, 65, 44, 'Qúa đẹp, vé rì gút', 5, '2023-06-16 05:34:34', '2023-06-16 05:34:34', NULL),
-                                                                                                                             (66, 63, 1, 'Sản phẩm này đc duyệt', 3, '2023-06-16 05:35:04', '2023-06-16 05:35:04', NULL),
-                                                                                                                             (67, 62, 1, 'Sản phẩm này đc duyệt', 5, '2023-06-16 05:35:11', '2023-06-16 05:35:11', NULL);
+(31, 48, 40, 'Khá đẹp', 4, '2023-06-10 13:17:02', '2023-06-10 13:17:02', NULL),
+(32, 47, 40, 'Sản phẩm tốt đấy, hơi thiếu 1 số cái', 3, '2023-06-16 05:17:19', '2023-06-16 05:17:19', NULL),
+(34, 52, 40, 'okela', 3, '2023-06-16 05:18:57', '2023-06-16 05:18:57', NULL),
+(35, 49, 41, 'okela', 2, '2023-06-16 05:19:31', '2023-06-16 05:19:31', NULL),
+(36, 54, 41, 'Rất tốt, very well', 5, '2023-06-16 05:20:20', '2023-06-16 05:20:20', NULL),
+(37, 55, 41, 'Rất tốt, very well ahihi, nhưng có 1 số lỗi', 4, '2023-06-16 05:20:34', '2023-06-16 05:20:34', NULL),
+(38, 61, 41, 'nan nì mô', 3, '2023-06-16 05:21:07', '2023-06-16 05:21:07', NULL),
+(39, 63, 41, 'nan nì mô', 4, '2023-06-16 05:21:22', '2023-06-16 05:21:22', NULL),
+(40, 49, 42, 'Khá tốt', 2, '2023-06-16 05:21:58', '2023-06-16 05:21:58', NULL),
+(41, 54, 42, 'Khá tốt', 5, '2023-06-16 05:22:17', '2023-06-16 05:22:17', NULL),
+(42, 55, 42, 'khá ok, ổn phết', 4, '2023-06-16 05:22:54', '2023-06-16 05:22:54', NULL),
+(43, 70, 42, 'Sản phẩm này có chút lỗi', 2, '2023-06-16 05:23:27', '2023-06-16 05:23:27', NULL),
+(44, 71, 42, 'Sản phẩm này có chút lỗi', 2, '2023-06-16 05:23:31', '2023-06-16 05:23:31', NULL),
+(45, 77, 43, 'okela', 3, '2023-06-16 05:24:44', '2023-06-16 05:24:44', NULL),
+(46, 78, 43, 'okela', 4, '2023-06-16 05:24:54', '2023-06-16 05:24:54', NULL),
+(47, 85, 42, 'không có j nổi bật', 1, '2023-06-16 05:25:53', '2023-06-16 05:25:53', NULL),
+(48, 86, 42, 'sản phẩm cực kì tuyệt vời', 4, '2023-06-16 05:26:11', '2023-06-16 05:26:11', NULL),
+(49, 87, 42, 'Không có j nổi bật lắm', 3, '2023-06-16 05:26:30', '2023-06-16 05:26:30', NULL),
+(50, 67, 1, 'Sản phẩm này được chấp nhận', 4, '2023-06-16 05:27:10', '2023-06-16 05:27:10', NULL),
+(51, 68, 1, 'Sản phẩm này khó chấp nhận', 3, '2023-06-16 05:27:24', '2023-06-16 05:27:24', NULL),
+(52, 70, 1, 'Okela, tốt', 5, '2023-06-16 05:27:44', '2023-06-16 05:27:44', NULL),
+(53, 70, 43, 'Okela, tốt', 5, '2023-06-16 05:27:57', '2023-06-16 05:27:57', NULL),
+(54, 70, 41, 'Sản phẩm này dởm quá', 3, '2023-06-16 05:28:45', '2023-06-16 05:28:45', NULL),
+(55, 71, 41, 'Sản phẩm này dởm quá', 3, '2023-06-16 05:28:51', '2023-06-16 05:28:51', NULL),
+(56, 47, 42, 'Oke, máy tính này tốt nè', 4, '2023-06-16 05:29:33', '2023-06-16 05:29:33', NULL),
+(57, 52, 42, 'Oke, máy tính này tốt nè', 4, '2023-06-16 05:29:41', '2023-06-16 05:29:41', NULL),
+(58, 77, 43, 'Omoshiroi desuneee', 4, '2023-06-16 05:30:23', '2023-06-16 05:30:23', NULL),
+(59, 87, 44, 'Điện thoại mới mua mà hỏng, không chấp nhận được', 3, '2023-06-16 05:31:40', '2023-06-16 05:31:40', NULL),
+(60, 86, 44, 'sách đầy đủ đấy, giảm giá cũng cao nữa', 4, '2023-06-16 05:31:57', '2023-06-16 05:31:57', NULL),
+(61, 85, 44, 'Sách ok nè', 5, '2023-06-16 05:32:29', '2023-06-16 05:32:29', NULL),
+(62, 85, 43, 'Sách ok đc', 5, '2023-06-16 05:33:35', '2023-06-16 05:33:35', NULL),
+(63, 86, 43, 'Sách không ổn lắm ', 3, '2023-06-16 05:33:50', '2023-06-16 05:33:50', NULL),
+(64, 66, 44, 'Ok, đc nè', 5, '2023-06-16 05:34:21', '2023-06-16 05:34:21', NULL),
+(65, 65, 44, 'Qúa đẹp, vé rì gút', 5, '2023-06-16 05:34:34', '2023-06-16 05:34:34', NULL),
+(66, 63, 1, 'Sản phẩm này đc duyệt', 3, '2023-06-16 05:35:04', '2023-06-16 05:35:04', NULL),
+(67, 62, 1, 'Sản phẩm này đc duyệt', 5, '2023-06-16 05:35:11', '2023-06-16 05:35:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -349,15 +349,69 @@ INSERT INTO `Comment` (`id`, `product_id`, `user_id`, `description`, `rating`, `
 --
 
 CREATE TABLE `CommentMedia` (
-                                `id` bigint UNSIGNED NOT NULL,
-                                `comment_id` bigint UNSIGNED NOT NULL,
-                                `public_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                `media_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                `media_type` enum('IMAGE','VIDEO') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `comment_id` bigint UNSIGNED NOT NULL,
+  `public_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `media_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `media_type` enum('IMAGE','VIDEO') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Coupon`
+--
+
+CREATE TABLE `Coupon` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `percent` int NOT NULL,
+  `fixed` float NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `Coupon`
+--
+
+INSERT INTO `Coupon` (`id`, `user_id`, `code`, `percent`, `fixed`, `created_at`, `updated_at`) VALUES
+(4, 1, 'Highly Recommend', 10, 3000, '2023-07-23 07:23:13', '2023-07-23 07:23:13'),
+(5, 1, 'Highly Recommend', 10, 3000, '2023-07-23 07:46:28', '2023-07-23 07:46:28'),
+(6, 1, 'Highly Recommend', 10, 3000, '2023-07-23 08:00:28', '2023-07-23 08:00:28'),
+(7, 1, 'Highly Recommend', 10, 3000, '2023-07-23 08:00:44', '2023-07-23 08:00:44'),
+(8, 1, 'Highly Recommend', 10, 3000, '2023-07-23 08:01:04', '2023-07-23 08:01:04'),
+(9, 1, 'Highly Recommend', 10, 3000, '2023-07-23 08:02:25', '2023-07-23 08:02:25'),
+(10, 1, 'Highly Recommend', 10, 3000, '2023-07-23 08:03:06', '2023-07-23 08:03:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CouponDetail`
+--
+
+CREATE TABLE `CouponDetail` (
+  `id` bigint NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `coupon_id` bigint UNSIGNED NOT NULL,
+  `total` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `CouponDetail`
+--
+
+INSERT INTO `CouponDetail` (`id`, `product_id`, `coupon_id`, `total`, `created_at`, `updated_at`) VALUES
+(6, 47, 10, 2, '2023-07-23 08:03:06', '2023-07-23 08:03:06'),
+(22, 47, 4, 2, '2023-07-23 08:17:07', '2023-07-23 08:17:07'),
+(23, 47, 4, 2, '2023-07-23 08:18:22', '2023-07-23 08:18:22'),
+(24, 47, 4, 2, '2023-07-23 08:19:33', '2023-07-23 08:19:33');
 
 -- --------------------------------------------------------
 
@@ -366,13 +420,13 @@ CREATE TABLE `CommentMedia` (
 --
 
 CREATE TABLE `Email` (
-                         `id` bigint NOT NULL,
-                         `name` varchar(255) NOT NULL,
-                         `email` varchar(255) NOT NULL,
-                         `subject` varchar(255) NOT NULL,
-                         `descriptions` varchar(255) NOT NULL,
-                         `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                         `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` bigint NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `descriptions` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -382,16 +436,16 @@ CREATE TABLE `Email` (
 --
 
 CREATE TABLE `Message` (
-                           `id` bigint UNSIGNED NOT NULL,
-                           `chat_room_id` bigint UNSIGNED NOT NULL,
-                           `from_user_id` bigint UNSIGNED NOT NULL,
-                           `to_user_id` bigint UNSIGNED NOT NULL,
-                           `content` varchar(255) NOT NULL,
-                           `seen` tinyint(1) NOT NULL DEFAULT '0',
-                           `type` enum('TEXT','MEDIA') NOT NULL,
-                           `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `chat_room_id` bigint UNSIGNED NOT NULL,
+  `from_user_id` bigint UNSIGNED NOT NULL,
+  `to_user_id` bigint UNSIGNED NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `seen` tinyint(1) NOT NULL DEFAULT '0',
+  `type` enum('TEXT','MEDIA') NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -399,15 +453,15 @@ CREATE TABLE `Message` (
 --
 
 INSERT INTO `Message` (`id`, `chat_room_id`, `from_user_id`, `to_user_id`, `content`, `seen`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                                    (2, 19, 41, 1, 'Chào bạn, bạn có gì thắc mắc về sản phẩm của shop Computers ạ?', 0, 'TEXT', '2023-06-09 05:33:20', '2023-06-09 05:33:20', NULL),
-                                                                                                                                                    (3, 19, 41, 1, 'ok', 0, 'TEXT', '2023-06-09 05:37:17', '2023-06-09 05:37:17', NULL),
-                                                                                                                                                    (4, 19, 1, 41, 'heyyy u', 0, 'TEXT', '2023-06-09 05:42:38', '2023-06-09 05:42:38', NULL),
-                                                                                                                                                    (5, 20, 41, 40, 'Chào bạn, bạn có gì thắc mắc về sản phẩm của shop Computers ạ?', 1, 'TEXT', '2023-06-10 13:49:07', '2023-06-10 18:31:56', NULL),
-                                                                                                                                                    (6, 20, 41, 40, 'Chào bạn, bạn có gì thắc mắc về sản phẩm của shop Computers ạ?', 1, 'TEXT', '2023-06-10 13:49:47', '2023-06-10 18:31:56', NULL),
-                                                                                                                                                    (7, 20, 40, 41, 'khanhsd0901', 0, 'TEXT', '2023-06-11 09:14:43', '2023-06-11 09:14:43', NULL),
-                                                                                                                                                    (8, 20, 41, 40, 'sadasd', 1, 'TEXT', '2023-06-11 09:16:25', '2023-06-11 09:16:38', NULL),
-                                                                                                                                                    (9, 21, 43, 40, 'Chào bạn, bạn có gì thắc mắc về sản phẩm của shop Sách lập trình ạ?', 1, 'TEXT', '2023-06-11 12:21:28', '2023-06-11 12:21:33', NULL),
-                                                                                                                                                    (10, 21, 40, 43, 'Chào bạn', 0, 'TEXT', '2023-06-11 12:21:48', '2023-06-11 12:21:48', NULL);
+(2, 19, 41, 1, 'Chào bạn, bạn có gì thắc mắc về sản phẩm của shop Computers ạ?', 0, 'TEXT', '2023-06-09 05:33:20', '2023-06-09 05:33:20', NULL),
+(3, 19, 41, 1, 'ok', 0, 'TEXT', '2023-06-09 05:37:17', '2023-06-09 05:37:17', NULL),
+(4, 19, 1, 41, 'heyyy u', 0, 'TEXT', '2023-06-09 05:42:38', '2023-06-09 05:42:38', NULL),
+(5, 20, 41, 40, 'Chào bạn, bạn có gì thắc mắc về sản phẩm của shop Computers ạ?', 1, 'TEXT', '2023-06-10 13:49:07', '2023-06-10 18:31:56', NULL),
+(6, 20, 41, 40, 'Chào bạn, bạn có gì thắc mắc về sản phẩm của shop Computers ạ?', 1, 'TEXT', '2023-06-10 13:49:47', '2023-06-10 18:31:56', NULL),
+(7, 20, 40, 41, 'khanhsd0901', 0, 'TEXT', '2023-06-11 09:14:43', '2023-06-11 09:14:43', NULL),
+(8, 20, 41, 40, 'sadasd', 1, 'TEXT', '2023-06-11 09:16:25', '2023-06-11 09:16:38', NULL),
+(9, 21, 43, 40, 'Chào bạn, bạn có gì thắc mắc về sản phẩm của shop Sách lập trình ạ?', 1, 'TEXT', '2023-06-11 12:21:28', '2023-06-11 12:21:33', NULL),
+(10, 21, 40, 43, 'Chào bạn', 0, 'TEXT', '2023-06-11 12:21:48', '2023-06-11 12:21:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -416,16 +470,16 @@ INSERT INTO `Message` (`id`, `chat_room_id`, `from_user_id`, `to_user_id`, `cont
 --
 
 CREATE TABLE `Notification` (
-                                `id` bigint UNSIGNED NOT NULL,
-                                `user_id` bigint UNSIGNED NOT NULL,
-                                `title` varchar(255) NOT NULL,
-                                `content` varchar(255) NOT NULL,
-                                `seen` tinyint(1) NOT NULL DEFAULT '0',
-                                `url` varchar(255) NOT NULL,
-                                `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-                                `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `seen` tinyint(1) NOT NULL DEFAULT '0',
+  `url` varchar(255) NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -433,8 +487,8 @@ CREATE TABLE `Notification` (
 --
 
 INSERT INTO `Notification` (`id`, `user_id`, `title`, `content`, `seen`, `url`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                       (1, 41, '', 'You have a new order from user: Lê Quốc Khanh', 0, '/brand-detail/order/170', 'http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png', '2023-06-11 12:15:13', '2023-06-11 12:15:13', NULL),
-                                                                                                                                       (2, 40, '', 'Create order successfully', 0, '/user/order/170', 'http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png', '2023-06-11 12:15:13', '2023-06-11 12:15:13', NULL);
+(1, 41, '', 'You have a new order from user: Lê Quốc Khanh', 0, '/brand-detail/order/170', 'http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png', '2023-06-11 12:15:13', '2023-06-11 12:15:13', NULL),
+(2, 40, '', 'Create order successfully', 0, '/user/order/170', 'http://res.cloudinary.com/damzcas3k/image/upload/v1684051785/Product/itl4m7o3jsmtqb2mhtt1.png', '2023-06-11 12:15:13', '2023-06-11 12:15:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -443,30 +497,30 @@ INSERT INTO `Notification` (`id`, `user_id`, `title`, `content`, `seen`, `url`, 
 --
 
 CREATE TABLE `Order` (
-                         `id` bigint UNSIGNED NOT NULL,
-                         `user_id` bigint UNSIGNED NOT NULL,
-                         `provider_id` bigint UNSIGNED NOT NULL,
-                         `payment_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                         `payment_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                         `cod` tinyint(1) NOT NULL DEFAULT '0',
-                         `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                         `gender` tinyint(1) NOT NULL DEFAULT '1',
-                         `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                         `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                         `district` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                         `ward` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                         `street` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                         `quantity` int NOT NULL,
-                         `total` bigint NOT NULL,
-                         `discount` int NOT NULL DEFAULT '0',
-                         `status` enum('WAITING','CONFIRMED','DELIVERING','DELIVERED','CANCEL') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'WAITING',
-                         `status_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                         `delivered_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                         `verify_delivered` tinyint(1) NOT NULL DEFAULT '0',
-                         `delivered_date` datetime DEFAULT NULL,
-                         `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                         `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                         `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `provider_id` bigint UNSIGNED NOT NULL,
+  `payment_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cod` tinyint(1) NOT NULL DEFAULT '0',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` tinyint(1) NOT NULL DEFAULT '1',
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `district` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ward` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int NOT NULL,
+  `total` bigint NOT NULL,
+  `discount` int NOT NULL DEFAULT '0',
+  `status` enum('WAITING','CONFIRMED','DELIVERING','DELIVERED','CANCEL') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'WAITING',
+  `status_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `delivered_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verify_delivered` tinyint(1) NOT NULL DEFAULT '0',
+  `delivered_date` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -474,15 +528,15 @@ CREATE TABLE `Order` (
 --
 
 INSERT INTO `Order` (`id`, `user_id`, `provider_id`, `payment_id`, `payment_url`, `cod`, `name`, `gender`, `phone`, `province`, `district`, `ward`, `street`, `quantity`, `total`, `discount`, `status`, `status_description`, `delivered_image`, `verify_delivered`, `delivered_date`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                                                                                                                                                                                                                      (162, 40, 22, '5GG30047ES957520D', 'https://api.sandbox.paypal.com/v2/checkout/orders/5GG30047ES957520D', 0, 'Đạt', 0, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 2, 2136000, 10, 'WAITING', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:16:04', '2023-06-10 08:16:04', NULL),
-                                                                                                                                                                                                                                                                                                                                      (163, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 2, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:43:47', '2023-06-11 10:11:23', NULL),
-                                                                                                                                                                                                                                                                                                                                      (164, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:47:48', '2023-06-11 10:11:23', NULL),
-                                                                                                                                                                                                                                                                                                                                      (165, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:52:01', '2023-06-11 10:11:23', NULL),
-                                                                                                                                                                                                                                                                                                                                      (166, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:52:15', '2023-06-11 10:11:23', NULL),
-                                                                                                                                                                                                                                                                                                                                      (167, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:55:22', '2023-06-11 10:11:23', NULL),
-                                                                                                                                                                                                                                                                                                                                      (168, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:56:16', '2023-06-11 10:11:23', NULL),
-                                                                                                                                                                                                                                                                                                                                      (169, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 09:02:43', '2023-06-11 10:11:23', NULL),
-                                                                                                                                                                                                                                                                                                                                      (170, 40, 21, '70983967Y6332571L', 'https://api.sandbox.paypal.com/v2/checkout/orders/70983967Y6332571L', 0, 'Đạt', 0, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 2, 6885000, 10, 'WAITING', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-11 12:15:13', '2023-06-11 12:15:13', NULL);
+(162, 40, 22, '5GG30047ES957520D', 'https://api.sandbox.paypal.com/v2/checkout/orders/5GG30047ES957520D', 0, 'Đạt', 0, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 2, 2136000, 10, 'WAITING', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:16:04', '2023-06-10 08:16:04', NULL),
+(163, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 2, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:43:47', '2023-06-11 10:11:23', NULL),
+(164, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:47:48', '2023-06-11 10:11:23', NULL),
+(165, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:52:01', '2023-06-11 10:11:23', NULL),
+(166, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:52:15', '2023-06-11 10:11:23', NULL),
+(167, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:55:22', '2023-06-11 10:11:23', NULL),
+(168, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 08:56:16', '2023-06-11 10:11:23', NULL),
+(169, 40, 21, NULL, NULL, 1, 'Lee Quoc Khanh', 1, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 1, 5480000, 10, 'CANCEL', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-10 09:02:43', '2023-06-11 10:11:23', NULL),
+(170, 40, 21, '70983967Y6332571L', 'https://api.sandbox.paypal.com/v2/checkout/orders/70983967Y6332571L', 0, 'Đạt', 0, '0945958952', 'Yên Bái', 'Huyện Mù Cang Chải', 'Xã Mồ Dề', 'weqweqweqw', 2, 6885000, 10, 'WAITING', 'Provider Will call you soon', NULL, 0, NULL, '2023-06-11 12:15:13', '2023-06-11 12:15:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -491,20 +545,20 @@ INSERT INTO `Order` (`id`, `user_id`, `provider_id`, `payment_id`, `payment_url`
 --
 
 CREATE TABLE `OrderItem` (
-                             `id` bigint UNSIGNED NOT NULL,
-                             `order_id` bigint UNSIGNED DEFAULT NULL,
-                             `product_id` bigint UNSIGNED DEFAULT NULL,
-                             `product_option_id` bigint UNSIGNED DEFAULT NULL,
-                             `provider_id` bigint UNSIGNED NOT NULL DEFAULT '1',
-                             `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                             `price` bigint UNSIGNED NOT NULL,
-                             `option` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                             `quantity` int UNSIGNED NOT NULL,
-                             `discount` int UNSIGNED NOT NULL DEFAULT '0',
-                             `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                             `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                             `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                             `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `order_id` bigint UNSIGNED DEFAULT NULL,
+  `product_id` bigint UNSIGNED DEFAULT NULL,
+  `product_option_id` bigint UNSIGNED DEFAULT NULL,
+  `provider_id` bigint UNSIGNED NOT NULL DEFAULT '1',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` bigint UNSIGNED NOT NULL,
+  `option` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int UNSIGNED NOT NULL,
+  `discount` int UNSIGNED NOT NULL DEFAULT '0',
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -512,14 +566,14 @@ CREATE TABLE `OrderItem` (
 --
 
 INSERT INTO `OrderItem` (`id`, `order_id`, `product_id`, `product_option_id`, `provider_id`, `name`, `price`, `option`, `quantity`, `discount`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                                                                                       (41, 162, 52, 152, 22, 'Chuột không dây Logitech MX Anywhere 3', 2670000, 'Hồng', 2, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149213/Product/ybrefvxuwc6q3qlxacpp.png', '2023-06-10 08:16:04', '2023-06-10 08:16:04', NULL),
-                                                                                                                                                                                                       (42, 163, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 2, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:43:46', '2023-06-10 08:43:46', NULL),
-                                                                                                                                                                                                       (43, 164, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:47:47', '2023-06-10 08:47:47', NULL),
-                                                                                                                                                                                                       (44, 165, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:52:01', '2023-06-10 08:52:01', NULL),
-                                                                                                                                                                                                       (45, 166, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:52:15', '2023-06-10 08:52:15', NULL),
-                                                                                                                                                                                                       (46, 167, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:55:22', '2023-06-10 08:55:22', NULL),
-                                                                                                                                                                                                       (47, 168, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:56:16', '2023-06-10 08:56:16', NULL),
-                                                                                                                                                                                                       (48, 169, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 09:02:42', '2023-06-10 09:02:42', NULL);
+(41, 162, 52, 152, 22, 'Chuột không dây Logitech MX Anywhere 3', 2670000, 'Hồng', 2, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149213/Product/ybrefvxuwc6q3qlxacpp.png', '2023-06-10 08:16:04', '2023-06-10 08:16:04', NULL),
+(42, 163, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 2, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:43:46', '2023-06-10 08:43:46', NULL),
+(43, 164, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:47:47', '2023-06-10 08:47:47', NULL),
+(44, 165, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:52:01', '2023-06-10 08:52:01', NULL),
+(45, 166, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:52:15', '2023-06-10 08:52:15', NULL),
+(46, 167, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:55:22', '2023-06-10 08:55:22', NULL),
+(47, 168, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 08:56:16', '2023-06-10 08:56:16', NULL),
+(48, 169, 48, 140, 21, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6850000, '8G ', 1, 20, 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', '2023-06-10 09:02:42', '2023-06-10 09:02:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -528,14 +582,14 @@ INSERT INTO `OrderItem` (`id`, `order_id`, `product_id`, `product_option_id`, `p
 --
 
 CREATE TABLE `Payment` (
-                           `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `status` tinyint(1) NOT NULL DEFAULT '0',
-                           `account_id` varchar(255) NOT NULL,
-                           `email` varchar(255) NOT NULL,
-                           `name` varchar(255) NOT NULL,
-                           `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `deleted_at` datetime DEFAULT NULL
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `account_id` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -543,14 +597,14 @@ CREATE TABLE `Payment` (
 --
 
 INSERT INTO `Payment` (`id`, `status`, `account_id`, `email`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                    ('ád', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-10 23:54:35', '2023-05-10 23:54:35', NULL),
-                                                                                                                    ('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-10 23:55:34', '2023-05-10 23:55:34', NULL),
-                                                                                                                    ('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-19 16:23:14', '2023-05-19 16:23:14', NULL),
-                                                                                                                    ('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-19 16:25:21', '2023-05-19 16:25:21', NULL),
-                                                                                                                    ('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-19 16:27:49', '2023-05-19 16:27:49', NULL),
-                                                                                                                    ('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-19 16:31:29', '2023-05-19 16:31:29', NULL),
-                                                                                                                    ('5GG30047ES957520D', 1, 'S8C44595M66EL', 'khanhsd0901@gmail.com', 'John Doe', '2023-06-10 08:16:04', '2023-06-10 08:16:04', NULL),
-                                                                                                                    ('70983967Y6332571L', 1, 'S8C44595M66EL', 'khanhsd0901@gmail.com', 'John Doe', '2023-06-11 12:15:13', '2023-06-11 12:15:13', NULL);
+('ád', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-10 23:54:35', '2023-05-10 23:54:35', NULL),
+('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-10 23:55:34', '2023-05-10 23:55:34', NULL),
+('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-19 16:23:14', '2023-05-19 16:23:14', NULL),
+('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-19 16:25:21', '2023-05-19 16:25:21', NULL),
+('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-19 16:27:49', '2023-05-19 16:27:49', NULL),
+('abc', 1, '2', 'abc@gmail.com', 'Nguyễn Văn A', '2023-05-19 16:31:29', '2023-05-19 16:31:29', NULL),
+('5GG30047ES957520D', 1, 'S8C44595M66EL', 'khanhsd0901@gmail.com', 'John Doe', '2023-06-10 08:16:04', '2023-06-10 08:16:04', NULL),
+('70983967Y6332571L', 1, 'S8C44595M66EL', 'khanhsd0901@gmail.com', 'John Doe', '2023-06-11 12:15:13', '2023-06-11 12:15:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -559,21 +613,21 @@ INSERT INTO `Payment` (`id`, `status`, `account_id`, `email`, `name`, `created_a
 --
 
 CREATE TABLE `Product` (
-                           `id` bigint UNSIGNED NOT NULL,
-                           `provider_id` bigint UNSIGNED NOT NULL DEFAULT '1',
-                           `category_id` bigint UNSIGNED NOT NULL,
-                           `user_id` bigint UNSIGNED DEFAULT NULL,
-                           `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `price` bigint NOT NULL,
-                           `discount` int DEFAULT NULL,
-                           `short_descriptions` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                           `length` int NOT NULL,
-                           `height` int NOT NULL,
-                           `weight` int NOT NULL,
-                           `width` int NOT NULL,
-                           `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                           `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `provider_id` bigint UNSIGNED NOT NULL DEFAULT '1',
+  `category_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` bigint NOT NULL,
+  `discount` int DEFAULT NULL,
+  `short_descriptions` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `length` int NOT NULL,
+  `height` int NOT NULL,
+  `weight` int NOT NULL,
+  `width` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -581,47 +635,47 @@ CREATE TABLE `Product` (
 --
 
 INSERT INTO `Product` (`id`, `provider_id`, `category_id`, `user_id`, `name`, `price`, `discount`, `short_descriptions`, `length`, `height`, `weight`, `width`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                                                                                              (47, 21, 1, 41, 'BỘ MÁY TÍNH CHƠI GAME I5 - N05', 7350000, 10, 'Case VSP V216 RGB đem đến một tổng thể vô cùng hoàn hảo. sản phẩm này còn giúp cho mọi không gian trưng bày trở nên thẩm mỹ hơn bao giờ hết', 10, 10, 20, 30, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                                                                                                              (48, 21, 1, 41, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6550000, 20, 'Với cấu hình trên, ta thấy được máy sở hữu bộ vi xử lý I3 có xung nhịp tối đa lên đến 3.60Ghz, cực kì mạnh mẽ với mọi tác vụ, cộng với số nhân luồng tương đối cao với 4 nhân 4 luồng, mọi tác vụ đa nhiệm đều được xử lí nhanh, mượt mà.', 20, 30, 20, 20, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
-                                                                                                                                                                                                              (49, 21, 1, 41, 'BỘ PC HP 280 G2 MT', 1950000, 20, 'Máy được bảo quản và sử dụng kỹ nên còn mới từ 85', 10, 20, 30, 30, '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
-                                                                                                                                                                                                              (50, 21, 1, 41, 'MÁY TÍNH THẾ HỆ 12 I5-12F', 14700000, 20, 'Con chip Intel Core I5 - 12400F xung nhịp lên đến 4.4GHz ...', 40, 30, 40, 50, '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
-                                                                                                                                                                                                              (51, 22, 49, 41, 'Chuột Apple Magic Mouse 2021 MK2E3 | Chính hãng Apple Việt Nam', 2990000, 40, 'Hàng chính hãng Apple Việt Nam, Mới', 30, 20, 30, 50, '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
-                                                                                                                                                                                                              (52, 22, 49, 41, 'Chuột không dây Logitech MX Anywhere 3', 2650000, 20, 'Chuột, Đầu thu USB Unifying, Dây để sạc lại (USB-C tới USB-A)', 5, 2, 2, 20, '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
-                                                                                                                                                                                                              (53, 22, 49, 41, 'Chuột chơi game không dây Logitech G703 LIGHTSPEED', 1790000, 20, 'Mới, đầy đủ phụ kiện từ nhà sản xuất', 5, 2, 20, 3, '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
-                                                                                                                                                                                                              (54, 22, 49, 41, 'Chuột không dây Logitech MX Anywhere 3 For Mac', 1290000, 5, 'Mới, đầy đủ phụ kiện từ nhà sản xuất', 5, 2, 3, 4, '2023-06-07 15:02:34', '2023-06-07 15:02:34', NULL),
-                                                                                                                                                                                                              (55, 23, 52, 41, 'Bàn Phím Giả Cơ E-Dra EK701 RGB Gaming (Đen)', 309000, 20, 'Bàn phím có khả năng chống nước, chống lửa, chống bám bụi, chống giật điện.', 20, 20, 20, 30, '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
-                                                                                                                                                                                                              (56, 23, 53, 41, 'Bàn Phím Gập Không Dây Mipow Miffy Mini Slim-Fold MPC-003', 2000000, 15, 'Gọi 1800-6601 để được tư vấn mua hàng (Miễn phí)', 10, 10, 10, 20, '2023-06-08 08:47:40', '2023-06-08 08:47:40', NULL),
-                                                                                                                                                                                                              (57, 23, 53, 41, 'Bàn phím không dây Apple iPad 10.2 & Air 3 10.5 Smart Keyboard', 3990000, 20, 'Gõ trên một bàn phím thật thoải mái khi bạn cần. Hoặc gập lại để tạo thành vỏ bảo vệ mỏng và nhẹ cho iPad', 10, 10, 10, 20, '2023-06-08 08:50:39', '2023-06-08 08:50:39', NULL),
-                                                                                                                                                                                                              (58, 23, 52, 41, 'Bàn phím giả cơ có dây Zadez G-852K', 600000, 10, 'Gọi 1800-6601 để được tư vấn mua hàng (Miễn phí)', 10, 10, 20, 20, '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
-                                                                                                                                                                                                              (59, 24, 54, 41, 'Tai nghe HiFiMan HE-R9 wired version', 8490000, 10, 'Thị trường âm thanh lại một lần nữa trở nên sôi động với sự xuất hiện của tai nghe HiFiMan HE-R9', 30, 20, 20, 40, '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
-                                                                                                                                                                                                              (60, 24, 54, 41, 'Tai nghe Sennheiser Momentum 4 Wireless', 8490000, 10, 'Mẫu tai nghe không dây chống ồn thế hệ mới nhất của Sennheiser vừa mới được trình làng sau ba năm ra mắt M3W', 20, 10, 30, 30, '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
-                                                                                                                                                                                                              (61, 24, 55, 41, 'Tai nghe Bluetooth Apple AirPods 2 VN/A', 2650000, 10, 'Hàng chính hãng Apple Việt Nam, Mới', 10, 10, 10, 10, '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
-                                                                                                                                                                                                              (62, 24, 55, 41, 'Airpods 1/2 Raptic Trek Case', 6000000, 50, 'Hộp đựng tai nghe Airpods 1/2 Raptic Trek Case sang trọng, bảo vệ tai nghe toàn diện', 20, 20, 20, 30, '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
-                                                                                                                                                                                                              (63, 25, 56, 42, 'Nón đẹp', 50000, 10, 'Xã Phước Kiển, Huyện Nhà Bè, Tp Hồ Chí Minh', 10, 10, 10, 20, '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
-                                                                                                                                                                                                              (64, 25, 56, 42, 'PKTT Nón The Day’s Eye 17', 128000, 20, 'SALE 20% trong 3 ngày đầu tiên mở bán đầu 09-10-11/6/2023', 10, 10, 20, 20, '2023-06-09 09:05:48', '2023-06-09 09:05:48', NULL),
-                                                                                                                                                                                                              (65, 25, 56, 42, 'PKTT Nón Y Nguyên Bản Ver13', 200000, 10, 'Mã số: 0021821', 10, 10, 20, 20, '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
-                                                                                                                                                                                                              (66, 26, 58, 42, 'Áo Cuban Collar Shirt Coolwaves - màu Xanh Navy', 200000, 10, 'Bộ áo ra mắt năm nay', 10, 10, 10, 10, '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
-                                                                                                                                                                                                              (67, 26, 58, 42, 'Áo thun Cotton Summer Coolwaves', 300000, 10, 'Hotline 1900.27.27.37 hỗ trợ từ 8h30 - 22h mỗi ngày', 10, 10, 20, 20, '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
-                                                                                                                                                                                                              (68, 26, 58, 42, 'Áo thun Cotton Summer Coolwaves Graphic', 250000, 10, 'Đến tận nơi nhận hàng trả, hoàn tiền trong 24h', 10, 10, 20, 20, '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
-                                                                                                                                                                                                              (69, 27, 59, 42, 'Coolmate x Copper Denim | Quần Jeans OG Slim', 1000000, 10, '60 ngày đổi trả vì bất kỳ lý do gì', 10, 10, 10, 10, '2023-06-09 09:29:51', '2023-06-09 09:29:51', NULL),
-                                                                                                                                                                                                              (70, 27, 59, 42, 'Quần Jeans Clean Denim dáng Slimfit S3', 599000, 20, '', 10, 10, 10, 10, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                                                                                              (71, 27, 59, 42, '[Upto50%] Quần Jeans Clean Denim dáng Slimfit', 2000000, 50, 'Đổi trả cực dễ chỉ cần số điện thoại', 10, 10, 10, 10, '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
-                                                                                                                                                                                                              (72, 28, 61, 42, 'Nhẫn đôi bạc nhẫn cặp bạc đẹp ND0269', 550000, 10, 'Giới thiệu sản phẩm nhẫn đôi bạc nhẫn cặp bạc đính đá ND0269', 10, 10, 20, 20, '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
-                                                                                                                                                                                                              (73, 28, 61, 42, 'Nhẫn đôi bạc nhẫn cặp bạc King Queen ND0325', 450000, 10, 'Bảo hành miễn phí trọn đời đánh bóng làm mới hoặc rơi đá', 10, 10, 10, 10, '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
-                                                                                                                                                                                                              (74, 28, 61, 42, 'Nhẫn đôi bạc nhẫn cặp bạc đẹp giá rẻ ND0092', 600000, 20, 'Kiểu dáng trẻ trung thời trang', 10, 10, 10, 10, '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                                                                                                              (75, 29, 62, 44, 'Daniel Wellington Dapper ST Maves Couple 34mm/38mm', 3699000, 10, 'Daniel Wellington luôn được lựa chọn như một thương hiệu đồng hồ couple nổi tiếng, đồng hồ đeo tay với vẻ đẹp đơn giản, sang trọng và đầy tính lãng mạn của DW sẽ giúp các cặp đôi luôn cảm nhận được tình yêu của người yêu mình.', 20, 10, 20, 10, '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
-                                                                                                                                                                                                              (76, 29, 62, 44, 'Daniel Wellington Classic Black Sheffield vs Petite Ashfield Couple 40mm/32mm', 9000000, 45, 'Combo Đồng Hồ Cặp Đôi Daniel Wellington Classic Black Sheffield', 10, 10, 10, 10, '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
-                                                                                                                                                                                                              (77, 29, 62, 44, 'Đồng Hồ Casio MTP-1374D-1AVDF Nam Quartz', 3177000, 10, 'Với thiết kế mặt số tròn lớn, màu đen chắc chắn, các kim chỉ và vạch số được phủ lớp phản quang nổi bật', 10, 10, 10, 10, '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
-                                                                                                                                                                                                              (78, 29, 62, 44, 'ĐỒNG HỒ NAM SAINT HONORE HAUSSMAN 889070 1NBAN', 23764000, 10, 'Liên hệ Hotline/Zalo: 0938 102 101 để được tư vấn miễn phí 24/7', 10, 10, 10, 10, '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
-                                                                                                                                                                                                              (79, 30, 4, 44, 'Tủ lạnh LG Side by side Instaview Door-in-door và ngăn lấy nước ngoài UV nano 635L màu bạc GR-X257JS', 12000000, 10, 'Công nghệ InstaView Door-in-Door™ cải tiến tăng 25% diện tích mặt kính', 10, 10, 10, 20, '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
-                                                                                                                                                                                                              (80, 30, 4, 44, 'Tủ lạnh Sharp Inverter 180 lít SJ-X196E-DSS', 5000000, 10, 'Giảm 3% tối đa 90.000đ khi thanh toán qua VNPay (áp dụng tại cửa hàng Nguyễn Kim)', 20, 10, 20, 10, '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
-                                                                                                                                                                                                              (81, 31, 4, 44, 'Bộ Sofa Ý Arcadia', 45000000, 40, 'Sự đột phá trong thiết kế không chỉ nằm trong khối hình của sofa', 20, 10, 20, 10, '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
-                                                                                                                                                                                                              (82, 31, 4, 44, 'Bàn Cafe Mặt Đá TA-724A-B-C', 9800000, 10, 'Bàn sofa cao cấp Santiago sở hữu thiết kế bo góc chỉn chu, nhẹ nhàng và tối giản', 20, 10, 20, 20, '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
-                                                                                                                                                                                                              (83, 32, 5, 43, 'Combo Giáo Trình Kỹ Thuật Lập Trình C Căn Bản Và Nâng Cao + Giáo Trình C++ Và Lập Trình Hướng Đối Tượng (2 quyển)', 100000, 10, 'Bạn hãy nhập địa chỉ nhận hàng để được dự báo thời gian & chi phí giao hàng chính xác nhất.', 10, 10, 10, 10, '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
-                                                                                                                                                                                                              (84, 32, 5, 43, 'Giáo Trình Ngôn Ngữ Lập Trình C++', 40000, 5, 'Bạn hãy nhập địa chỉ nhận hàng để được dự báo thời gian & chi phí giao hàng chính xác nhất.', 20, 10, 20, 20, '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
-                                                                                                                                                                                                              (85, 32, 66, 43, 'C# Dành Cho Người Bắt Đầu', 60000, 5, 'Bạn hãy nhập địa chỉ nhận hàng để được dự báo thời gian & chi phí giao hàng chính xác nhất.', 10, 10, 10, 10, '2023-06-10 05:45:12', '2023-06-10 05:45:12', NULL),
-                                                                                                                                                                                                              (86, 32, 5, 43, 'Lập Trình Điều Khiển Arduino Từ Cơ Bản Đến Nâng Cao', 142400, 10, 'Bạn hãy nhập địa chỉ nhận hàng để được dự báo thời gian & chi phí giao hàng chính xác nhất.', 10, 10, 20, 20, '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
-                                                                                                                                                                                                              (87, 33, 65, 40, 'iPhone 13 256GB - Like New', 13000000, 10, '✔️ Giảm trực tiếp 40%, tối đa 600.000 VNĐ khi mở thẻ TP Bank EVO - (Xem chi tiết)', 10, 10, 10, 10, '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL);
+(47, 21, 1, 41, 'BỘ MÁY TÍNH CHƠI GAME I5 - N05', 7350000, 10, 'Case VSP V216 RGB đem đến một tổng thể vô cùng hoàn hảo. sản phẩm này còn giúp cho mọi không gian trưng bày trở nên thẩm mỹ hơn bao giờ hết', 10, 10, 20, 30, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(48, 21, 1, 41, 'BỘ MÁY TÍNH ĐỂ BÀN TL-06', 6550000, 20, 'Với cấu hình trên, ta thấy được máy sở hữu bộ vi xử lý I3 có xung nhịp tối đa lên đến 3.60Ghz, cực kì mạnh mẽ với mọi tác vụ, cộng với số nhân luồng tương đối cao với 4 nhân 4 luồng, mọi tác vụ đa nhiệm đều được xử lí nhanh, mượt mà.', 20, 30, 20, 20, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
+(49, 21, 1, 41, 'BỘ PC HP 280 G2 MT', 1950000, 20, 'Máy được bảo quản và sử dụng kỹ nên còn mới từ 85', 10, 20, 30, 30, '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
+(50, 21, 1, 41, 'MÁY TÍNH THẾ HỆ 12 I5-12F', 14700000, 20, 'Con chip Intel Core I5 - 12400F xung nhịp lên đến 4.4GHz ...', 40, 30, 40, 50, '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
+(51, 22, 49, 41, 'Chuột Apple Magic Mouse 2021 MK2E3 | Chính hãng Apple Việt Nam', 2990000, 40, 'Hàng chính hãng Apple Việt Nam, Mới', 30, 20, 30, 50, '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
+(52, 22, 49, 41, 'Chuột không dây Logitech MX Anywhere 3', 2650000, 20, 'Chuột, Đầu thu USB Unifying, Dây để sạc lại (USB-C tới USB-A)', 5, 2, 2, 20, '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
+(53, 22, 49, 41, 'Chuột chơi game không dây Logitech G703 LIGHTSPEED', 1790000, 20, 'Mới, đầy đủ phụ kiện từ nhà sản xuất', 5, 2, 20, 3, '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
+(54, 22, 49, 41, 'Chuột không dây Logitech MX Anywhere 3 For Mac', 1290000, 5, 'Mới, đầy đủ phụ kiện từ nhà sản xuất', 5, 2, 3, 4, '2023-06-07 15:02:34', '2023-06-07 15:02:34', NULL),
+(55, 23, 52, 41, 'Bàn Phím Giả Cơ E-Dra EK701 RGB Gaming (Đen)', 309000, 20, 'Bàn phím có khả năng chống nước, chống lửa, chống bám bụi, chống giật điện.', 20, 20, 20, 30, '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
+(56, 23, 53, 41, 'Bàn Phím Gập Không Dây Mipow Miffy Mini Slim-Fold MPC-003', 2000000, 15, 'Gọi 1800-6601 để được tư vấn mua hàng (Miễn phí)', 10, 10, 10, 20, '2023-06-08 08:47:40', '2023-06-08 08:47:40', NULL),
+(57, 23, 53, 41, 'Bàn phím không dây Apple iPad 10.2 & Air 3 10.5 Smart Keyboard', 3990000, 20, 'Gõ trên một bàn phím thật thoải mái khi bạn cần. Hoặc gập lại để tạo thành vỏ bảo vệ mỏng và nhẹ cho iPad', 10, 10, 10, 20, '2023-06-08 08:50:39', '2023-06-08 08:50:39', NULL),
+(58, 23, 52, 41, 'Bàn phím giả cơ có dây Zadez G-852K', 600000, 10, 'Gọi 1800-6601 để được tư vấn mua hàng (Miễn phí)', 10, 10, 20, 20, '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
+(59, 24, 54, 41, 'Tai nghe HiFiMan HE-R9 wired version', 8490000, 10, 'Thị trường âm thanh lại một lần nữa trở nên sôi động với sự xuất hiện của tai nghe HiFiMan HE-R9', 30, 20, 20, 40, '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
+(60, 24, 54, 41, 'Tai nghe Sennheiser Momentum 4 Wireless', 8490000, 10, 'Mẫu tai nghe không dây chống ồn thế hệ mới nhất của Sennheiser vừa mới được trình làng sau ba năm ra mắt M3W', 20, 10, 30, 30, '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
+(61, 24, 55, 41, 'Tai nghe Bluetooth Apple AirPods 2 VN/A', 2650000, 10, 'Hàng chính hãng Apple Việt Nam, Mới', 10, 10, 10, 10, '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
+(62, 24, 55, 41, 'Airpods 1/2 Raptic Trek Case', 6000000, 50, 'Hộp đựng tai nghe Airpods 1/2 Raptic Trek Case sang trọng, bảo vệ tai nghe toàn diện', 20, 20, 20, 30, '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
+(63, 25, 56, 42, 'Nón đẹp', 50000, 10, 'Xã Phước Kiển, Huyện Nhà Bè, Tp Hồ Chí Minh', 10, 10, 10, 20, '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
+(64, 25, 56, 42, 'PKTT Nón The Day’s Eye 17', 128000, 20, 'SALE 20% trong 3 ngày đầu tiên mở bán đầu 09-10-11/6/2023', 10, 10, 20, 20, '2023-06-09 09:05:48', '2023-06-09 09:05:48', NULL),
+(65, 25, 56, 42, 'PKTT Nón Y Nguyên Bản Ver13', 200000, 10, 'Mã số: 0021821', 10, 10, 20, 20, '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
+(66, 26, 58, 42, 'Áo Cuban Collar Shirt Coolwaves - màu Xanh Navy', 200000, 10, 'Bộ áo ra mắt năm nay', 10, 10, 10, 10, '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
+(67, 26, 58, 42, 'Áo thun Cotton Summer Coolwaves', 300000, 10, 'Hotline 1900.27.27.37 hỗ trợ từ 8h30 - 22h mỗi ngày', 10, 10, 20, 20, '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
+(68, 26, 58, 42, 'Áo thun Cotton Summer Coolwaves Graphic', 250000, 10, 'Đến tận nơi nhận hàng trả, hoàn tiền trong 24h', 10, 10, 20, 20, '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
+(69, 27, 59, 42, 'Coolmate x Copper Denim | Quần Jeans OG Slim', 1000000, 10, '60 ngày đổi trả vì bất kỳ lý do gì', 10, 10, 10, 10, '2023-06-09 09:29:51', '2023-06-09 09:29:51', NULL),
+(70, 27, 59, 42, 'Quần Jeans Clean Denim dáng Slimfit S3', 599000, 20, '', 10, 10, 10, 10, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(71, 27, 59, 42, '[Upto50%] Quần Jeans Clean Denim dáng Slimfit', 2000000, 50, 'Đổi trả cực dễ chỉ cần số điện thoại', 10, 10, 10, 10, '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
+(72, 28, 61, 42, 'Nhẫn đôi bạc nhẫn cặp bạc đẹp ND0269', 550000, 10, 'Giới thiệu sản phẩm nhẫn đôi bạc nhẫn cặp bạc đính đá ND0269', 10, 10, 20, 20, '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
+(73, 28, 61, 42, 'Nhẫn đôi bạc nhẫn cặp bạc King Queen ND0325', 450000, 10, 'Bảo hành miễn phí trọn đời đánh bóng làm mới hoặc rơi đá', 10, 10, 10, 10, '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
+(74, 28, 61, 42, 'Nhẫn đôi bạc nhẫn cặp bạc đẹp giá rẻ ND0092', 600000, 20, 'Kiểu dáng trẻ trung thời trang', 10, 10, 10, 10, '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(75, 29, 62, 44, 'Daniel Wellington Dapper ST Maves Couple 34mm/38mm', 3699000, 10, 'Daniel Wellington luôn được lựa chọn như một thương hiệu đồng hồ couple nổi tiếng, đồng hồ đeo tay với vẻ đẹp đơn giản, sang trọng và đầy tính lãng mạn của DW sẽ giúp các cặp đôi luôn cảm nhận được tình yêu của người yêu mình.', 20, 10, 20, 10, '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
+(76, 29, 62, 44, 'Daniel Wellington Classic Black Sheffield vs Petite Ashfield Couple 40mm/32mm', 9000000, 45, 'Combo Đồng Hồ Cặp Đôi Daniel Wellington Classic Black Sheffield', 10, 10, 10, 10, '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
+(77, 29, 62, 44, 'Đồng Hồ Casio MTP-1374D-1AVDF Nam Quartz', 3177000, 10, 'Với thiết kế mặt số tròn lớn, màu đen chắc chắn, các kim chỉ và vạch số được phủ lớp phản quang nổi bật', 10, 10, 10, 10, '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
+(78, 29, 62, 44, 'ĐỒNG HỒ NAM SAINT HONORE HAUSSMAN 889070 1NBAN', 23764000, 10, 'Liên hệ Hotline/Zalo: 0938 102 101 để được tư vấn miễn phí 24/7', 10, 10, 10, 10, '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
+(79, 30, 4, 44, 'Tủ lạnh LG Side by side Instaview Door-in-door và ngăn lấy nước ngoài UV nano 635L màu bạc GR-X257JS', 12000000, 10, 'Công nghệ InstaView Door-in-Door™ cải tiến tăng 25% diện tích mặt kính', 10, 10, 10, 20, '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
+(80, 30, 4, 44, 'Tủ lạnh Sharp Inverter 180 lít SJ-X196E-DSS', 5000000, 10, 'Giảm 3% tối đa 90.000đ khi thanh toán qua VNPay (áp dụng tại cửa hàng Nguyễn Kim)', 20, 10, 20, 10, '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
+(81, 31, 4, 44, 'Bộ Sofa Ý Arcadia', 45000000, 40, 'Sự đột phá trong thiết kế không chỉ nằm trong khối hình của sofa', 20, 10, 20, 10, '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
+(82, 31, 4, 44, 'Bàn Cafe Mặt Đá TA-724A-B-C', 9800000, 10, 'Bàn sofa cao cấp Santiago sở hữu thiết kế bo góc chỉn chu, nhẹ nhàng và tối giản', 20, 10, 20, 20, '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
+(83, 32, 5, 43, 'Combo Giáo Trình Kỹ Thuật Lập Trình C Căn Bản Và Nâng Cao + Giáo Trình C++ Và Lập Trình Hướng Đối Tượng (2 quyển)', 100000, 10, 'Bạn hãy nhập địa chỉ nhận hàng để được dự báo thời gian & chi phí giao hàng chính xác nhất.', 10, 10, 10, 10, '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
+(84, 32, 5, 43, 'Giáo Trình Ngôn Ngữ Lập Trình C++', 40000, 5, 'Bạn hãy nhập địa chỉ nhận hàng để được dự báo thời gian & chi phí giao hàng chính xác nhất.', 20, 10, 20, 20, '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
+(85, 32, 66, 43, 'C# Dành Cho Người Bắt Đầu', 60000, 5, 'Bạn hãy nhập địa chỉ nhận hàng để được dự báo thời gian & chi phí giao hàng chính xác nhất.', 10, 10, 10, 10, '2023-06-10 05:45:12', '2023-06-10 05:45:12', NULL),
+(86, 32, 5, 43, 'Lập Trình Điều Khiển Arduino Từ Cơ Bản Đến Nâng Cao', 142400, 10, 'Bạn hãy nhập địa chỉ nhận hàng để được dự báo thời gian & chi phí giao hàng chính xác nhất.', 10, 10, 20, 20, '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
+(87, 33, 65, 40, 'iPhone 13 256GB - Like New', 13000000, 10, '✔️ Giảm trực tiếp 40%, tối đa 600.000 VNĐ khi mở thẻ TP Bank EVO - (Xem chi tiết)', 10, 10, 10, 10, '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -630,14 +684,14 @@ INSERT INTO `Product` (`id`, `provider_id`, `category_id`, `user_id`, `name`, `p
 --
 
 CREATE TABLE `ProductDescriptions` (
-                                       `id` bigint NOT NULL,
-                                       `product_id` bigint UNSIGNED NOT NULL,
-                                       `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                       `public_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                       `descriptions_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                       `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                       `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                       `deleted_at` datetime DEFAULT NULL
+  `id` bigint NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `public_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descriptions_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -645,55 +699,55 @@ CREATE TABLE `ProductDescriptions` (
 --
 
 INSERT INTO `ProductDescriptions` (`id`, `product_id`, `name`, `public_id`, `descriptions_path`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                               (29, 47, 'THÔNG SỐ CẤU HÌNH', 'Product/zzkyxlw0eavlu9frnkfp', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686147320/Product/zzkyxlw0eavlu9frnkfp', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                                               (30, 48, '', 'Product/xvn6kxnxokwgsbtnaz9u', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686147898/Product/xvn6kxnxokwgsbtnaz9u', '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
-                                                                                                                                               (31, 49, 'Thông tin sản phẩm', 'Product/zcbbert2eih1evh2701e', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686148145/Product/zcbbert2eih1evh2701e', '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
-                                                                                                                                               (32, 50, 'Giới thiệu sản phẩm', 'Product/zfp1fvtowuk9ylp0dpfl', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686148490/Product/zfp1fvtowuk9ylp0dpfl', '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
-                                                                                                                                               (33, 51, 'Ưu đãi', 'Product/cluthgceu3qivybnolda', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686150967/Product/cluthgceu3qivybnolda', '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
-                                                                                                                                               (34, 52, 'Ưu đãi', 'Product/skenby1uxggromyxlmkg', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149448/Product/skenby1uxggromyxlmkg', '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
-                                                                                                                                               (35, 52, 'Thông tin sản phẩm', 'Product/phtireyv18c9c6sxfynm', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149448/Product/phtireyv18c9c6sxfynm', '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
-                                                                                                                                               (36, 53, 'Ưu đãi', 'Product/a3be7gtohxq5t9sryrkv', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149780/Product/a3be7gtohxq5t9sryrkv', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
-                                                                                                                                               (37, 53, 'Giới thiệu sản phẩm', 'Product/btc8docyjis9tmnafgkt', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149780/Product/btc8docyjis9tmnafgkt', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
-                                                                                                                                               (38, 53, 'Đặc điểm nổi bật', 'Product/ek6jphbybimxgzyn07n5', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149780/Product/ek6jphbybimxgzyn07n5', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
-                                                                                                                                               (39, 54, 'Ưu đãi', 'Product/wtvwhtftr3xzfe3lcnhc', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686150158/Product/wtvwhtftr3xzfe3lcnhc', '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
-                                                                                                                                               (40, 54, 'Giới thiệu sản phẩm', 'Product/jyupyrbquxztnbhzhbaw', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686150158/Product/jyupyrbquxztnbhzhbaw', '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
-                                                                                                                                               (41, 55, 'Thông số kĩ thuật', 'Product/aniezmtu1ibze2vsbh5r', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686150912/Product/aniezmtu1ibze2vsbh5r', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
-                                                                                                                                               (42, 56, 'Thông số kĩ thuật', 'Product/ygoaeudiidrblri0daex', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301136/Product/ygoaeudiidrblri0daex', '2023-06-08 08:47:40', '2023-06-08 08:47:40', NULL),
-                                                                                                                                               (43, 57, 'Về sản phẩm', 'Product/fwz3vb2waiia3lgrn9rw', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301116/Product/fwz3vb2waiia3lgrn9rw', '2023-06-08 08:50:39', '2023-06-08 08:50:39', NULL),
-                                                                                                                                               (44, 58, 'Đặc điểm nổi bật', 'Product/iolqqq2xypw55w7gru8k', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686214436/Product/iolqqq2xypw55w7gru8k', '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
-                                                                                                                                               (45, 59, 'Thông số kỹ thuật', 'Product/pxptmamkwaftpjj7fsrd', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686214968/Product/pxptmamkwaftpjj7fsrd', '2023-06-08 09:02:46', '2023-06-08 09:02:46', NULL),
-                                                                                                                                               (46, 60, 'Giới thiệu', 'Product/z1hnvxnrgrela4cy1yam', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686215378/Product/z1hnvxnrgrela4cy1yam', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
-                                                                                                                                               (47, 61, 'Về sản phẩm', 'Product/qnxtvyhtibpys2xsiixl', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686227186/Product/qnxtvyhtibpys2xsiixl', '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
-                                                                                                                                               (48, 62, 'Về sản phẩm', 'Product/ynzz6etnu3sodruqplz4', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686227368/Product/ynzz6etnu3sodruqplz4', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
-                                                                                                                                               (49, 63, 'Tóm tắt', 'Product/ws3wkhsfrmuy1iuvu5r9', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301421/Product/ws3wkhsfrmuy1iuvu5r9', '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
-                                                                                                                                               (50, 64, 'Về sản phẩm', 'Product/hcwo414go3mkwvzp7qhd', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301551/Product/hcwo414go3mkwvzp7qhd', '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
-                                                                                                                                               (51, 65, 'Về sản phẩm', 'Product/ckjjdmqo52zfx1i5ktil', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301760/Product/ckjjdmqo52zfx1i5ktil', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
-                                                                                                                                               (52, 66, 'Về sản phẩm của chúng tôi', 'Product/oxnzqfmgkhygyjnt681r', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686302093/Product/oxnzqfmgkhygyjnt681r', '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
-                                                                                                                                               (53, 67, 'Chi tiết sản phẩm', 'Product/bmszho798vdnbzzsp0nd', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686302345/Product/bmszho798vdnbzzsp0nd', '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
-                                                                                                                                               (54, 68, 'Chi tiết sản phẩm', 'Product/mhlghhncvvvbr3powpon', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686302509/Product/mhlghhncvvvbr3powpon', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
-                                                                                                                                               (55, 69, 'Chi tiết sản phẩm', 'Product/vgw0bispjtmisl4flhry', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686304355/Product/vgw0bispjtmisl4flhry', '2023-06-09 09:29:51', '2023-06-09 09:29:51', NULL),
-                                                                                                                                               (56, 70, 'Chi tiết sản phẩm', 'Product/ex1kd1owkaktlxjjlohl', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686304663/Product/ex1kd1owkaktlxjjlohl', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                               (57, 71, 'Chi tiết sản phẩm', 'Product/y8jhnfxt6r42t6nptniw', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686304909/Product/y8jhnfxt6r42t6nptniw', '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
-                                                                                                                                               (58, 72, 'Chi tiết sản phẩm', 'Product/xnwh1emghaxartgyhygs', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305148/Product/xnwh1emghaxartgyhygs', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
-                                                                                                                                               (59, 73, 'Về sản phẩm', 'Product/qtrlnxse184nn09ziog2', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305332/Product/qtrlnxse184nn09ziog2', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
-                                                                                                                                               (60, 73, 'Ưu đãi', 'Product/n2gmx2htmd8iyuig9n8h', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305333/Product/n2gmx2htmd8iyuig9n8h', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
-                                                                                                                                               (61, 74, 'Ưu đãi', 'Product/imz2onljup0eersprzzu', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305537/Product/imz2onljup0eersprzzu', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                                               (62, 74, 'Về sản phẩm', 'Product/sltmfy8dqxayltt9mdtn', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305536/Product/sltmfy8dqxayltt9mdtn', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                                               (63, 74, 'Hộp đựng sản phẩm đi kèm', 'Product/rrnjhfrwlwaftwjnanth', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305537/Product/rrnjhfrwlwaftwjnanth', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                                               (64, 75, 'Về sản phẩm', 'Product/dhkoeytc0ls6ko33vv4t', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686306132/Product/dhkoeytc0ls6ko33vv4t', '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
-                                                                                                                                               (65, 76, 'Về sản phẩm', 'Product/iauf1l3vt7kuzmdkyk9f', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686306265/Product/iauf1l3vt7kuzmdkyk9f', '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
-                                                                                                                                               (66, 77, 'Về sản phẩm', 'Product/uj8lnhbgt7gfr82fm1hn', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686306446/Product/uj8lnhbgt7gfr82fm1hn', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
-                                                                                                                                               (67, 78, 'Về sản phẩm', 'Product/wzjuu945gwk7qjnmrhne', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686306723/Product/wzjuu945gwk7qjnmrhne', '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
-                                                                                                                                               (68, 79, 'Về sản phẩm', 'Product/wthhjnsbz5b7vv3r6zmw', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686373738/Product/wthhjnsbz5b7vv3r6zmw', '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
-                                                                                                                                               (69, 80, 'Về sảnphaamr', 'Product/iwy2fznonnp5slh9wuaj', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686373916/Product/iwy2fznonnp5slh9wuaj', '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
-                                                                                                                                               (70, 81, 'Về sản phẩm', 'Product/tm1rxmp2wcddg8fmvzri', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686374122/Product/tm1rxmp2wcddg8fmvzri', '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
-                                                                                                                                               (71, 82, 'Visit out Showrooms', 'Product/vjxdq9jjpv8xcnhst01c', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686374337/Product/vjxdq9jjpv8xcnhst01c', '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
-                                                                                                                                               (72, 83, 'Mô Tả Sản Phẩm', 'Product/e5hw623fcp6dljmsc3qe', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686375732/Product/e5hw623fcp6dljmsc3qe', '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
-                                                                                                                                               (73, 84, 'Mô Tả Sản Phẩm', 'Product/htyh41apl7npuhkzdoyr', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686375820/Product/htyh41apl7npuhkzdoyr', '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
-                                                                                                                                               (74, 85, 'Mô Tả Sản Phẩm', 'Product/oipan2lvvhdw5tnqopse', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686486031/Product/oipan2lvvhdw5tnqopse', '2023-06-10 05:45:12', '2023-06-10 05:45:12', NULL),
-                                                                                                                                               (75, 86, 'Mô Tả Sản Phẩm', 'Product/j8hghanlbtaoheus7nzl', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686376052/Product/j8hghanlbtaoheus7nzl', '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
-                                                                                                                                               (76, 87, 'Giới thiệu sản phẩm', 'Product/v6vpqzmzpxqxgax5gqdo', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686376741/Product/v6vpqzmzpxqxgax5gqdo', '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL),
-                                                                                                                                               (77, 85, 'Description về sách ngữ văn', 'Product/inhtxpjvo6aiv9t3le79', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686486031/Product/inhtxpjvo6aiv9t3le79', '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL);
+(29, 47, 'THÔNG SỐ CẤU HÌNH', 'Product/zzkyxlw0eavlu9frnkfp', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686147320/Product/zzkyxlw0eavlu9frnkfp', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(30, 48, '', 'Product/xvn6kxnxokwgsbtnaz9u', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686147898/Product/xvn6kxnxokwgsbtnaz9u', '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
+(31, 49, 'Thông tin sản phẩm', 'Product/zcbbert2eih1evh2701e', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686148145/Product/zcbbert2eih1evh2701e', '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
+(32, 50, 'Giới thiệu sản phẩm', 'Product/zfp1fvtowuk9ylp0dpfl', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686148490/Product/zfp1fvtowuk9ylp0dpfl', '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
+(33, 51, 'Ưu đãi', 'Product/cluthgceu3qivybnolda', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686150967/Product/cluthgceu3qivybnolda', '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
+(34, 52, 'Ưu đãi', 'Product/skenby1uxggromyxlmkg', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149448/Product/skenby1uxggromyxlmkg', '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
+(35, 52, 'Thông tin sản phẩm', 'Product/phtireyv18c9c6sxfynm', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149448/Product/phtireyv18c9c6sxfynm', '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
+(36, 53, 'Ưu đãi', 'Product/a3be7gtohxq5t9sryrkv', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149780/Product/a3be7gtohxq5t9sryrkv', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
+(37, 53, 'Giới thiệu sản phẩm', 'Product/btc8docyjis9tmnafgkt', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149780/Product/btc8docyjis9tmnafgkt', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
+(38, 53, 'Đặc điểm nổi bật', 'Product/ek6jphbybimxgzyn07n5', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686149780/Product/ek6jphbybimxgzyn07n5', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
+(39, 54, 'Ưu đãi', 'Product/wtvwhtftr3xzfe3lcnhc', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686150158/Product/wtvwhtftr3xzfe3lcnhc', '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
+(40, 54, 'Giới thiệu sản phẩm', 'Product/jyupyrbquxztnbhzhbaw', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686150158/Product/jyupyrbquxztnbhzhbaw', '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
+(41, 55, 'Thông số kĩ thuật', 'Product/aniezmtu1ibze2vsbh5r', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686150912/Product/aniezmtu1ibze2vsbh5r', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
+(42, 56, 'Thông số kĩ thuật', 'Product/ygoaeudiidrblri0daex', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301136/Product/ygoaeudiidrblri0daex', '2023-06-08 08:47:40', '2023-06-08 08:47:40', NULL),
+(43, 57, 'Về sản phẩm', 'Product/fwz3vb2waiia3lgrn9rw', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301116/Product/fwz3vb2waiia3lgrn9rw', '2023-06-08 08:50:39', '2023-06-08 08:50:39', NULL),
+(44, 58, 'Đặc điểm nổi bật', 'Product/iolqqq2xypw55w7gru8k', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686214436/Product/iolqqq2xypw55w7gru8k', '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
+(45, 59, 'Thông số kỹ thuật', 'Product/pxptmamkwaftpjj7fsrd', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686214968/Product/pxptmamkwaftpjj7fsrd', '2023-06-08 09:02:46', '2023-06-08 09:02:46', NULL),
+(46, 60, 'Giới thiệu', 'Product/z1hnvxnrgrela4cy1yam', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686215378/Product/z1hnvxnrgrela4cy1yam', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
+(47, 61, 'Về sản phẩm', 'Product/qnxtvyhtibpys2xsiixl', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686227186/Product/qnxtvyhtibpys2xsiixl', '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
+(48, 62, 'Về sản phẩm', 'Product/ynzz6etnu3sodruqplz4', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686227368/Product/ynzz6etnu3sodruqplz4', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
+(49, 63, 'Tóm tắt', 'Product/ws3wkhsfrmuy1iuvu5r9', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301421/Product/ws3wkhsfrmuy1iuvu5r9', '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
+(50, 64, 'Về sản phẩm', 'Product/hcwo414go3mkwvzp7qhd', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301551/Product/hcwo414go3mkwvzp7qhd', '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
+(51, 65, 'Về sản phẩm', 'Product/ckjjdmqo52zfx1i5ktil', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686301760/Product/ckjjdmqo52zfx1i5ktil', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
+(52, 66, 'Về sản phẩm của chúng tôi', 'Product/oxnzqfmgkhygyjnt681r', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686302093/Product/oxnzqfmgkhygyjnt681r', '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
+(53, 67, 'Chi tiết sản phẩm', 'Product/bmszho798vdnbzzsp0nd', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686302345/Product/bmszho798vdnbzzsp0nd', '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
+(54, 68, 'Chi tiết sản phẩm', 'Product/mhlghhncvvvbr3powpon', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686302509/Product/mhlghhncvvvbr3powpon', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
+(55, 69, 'Chi tiết sản phẩm', 'Product/vgw0bispjtmisl4flhry', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686304355/Product/vgw0bispjtmisl4flhry', '2023-06-09 09:29:51', '2023-06-09 09:29:51', NULL),
+(56, 70, 'Chi tiết sản phẩm', 'Product/ex1kd1owkaktlxjjlohl', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686304663/Product/ex1kd1owkaktlxjjlohl', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(57, 71, 'Chi tiết sản phẩm', 'Product/y8jhnfxt6r42t6nptniw', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686304909/Product/y8jhnfxt6r42t6nptniw', '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
+(58, 72, 'Chi tiết sản phẩm', 'Product/xnwh1emghaxartgyhygs', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305148/Product/xnwh1emghaxartgyhygs', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
+(59, 73, 'Về sản phẩm', 'Product/qtrlnxse184nn09ziog2', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305332/Product/qtrlnxse184nn09ziog2', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
+(60, 73, 'Ưu đãi', 'Product/n2gmx2htmd8iyuig9n8h', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305333/Product/n2gmx2htmd8iyuig9n8h', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
+(61, 74, 'Ưu đãi', 'Product/imz2onljup0eersprzzu', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305537/Product/imz2onljup0eersprzzu', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(62, 74, 'Về sản phẩm', 'Product/sltmfy8dqxayltt9mdtn', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305536/Product/sltmfy8dqxayltt9mdtn', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(63, 74, 'Hộp đựng sản phẩm đi kèm', 'Product/rrnjhfrwlwaftwjnanth', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686305537/Product/rrnjhfrwlwaftwjnanth', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(64, 75, 'Về sản phẩm', 'Product/dhkoeytc0ls6ko33vv4t', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686306132/Product/dhkoeytc0ls6ko33vv4t', '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
+(65, 76, 'Về sản phẩm', 'Product/iauf1l3vt7kuzmdkyk9f', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686306265/Product/iauf1l3vt7kuzmdkyk9f', '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
+(66, 77, 'Về sản phẩm', 'Product/uj8lnhbgt7gfr82fm1hn', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686306446/Product/uj8lnhbgt7gfr82fm1hn', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
+(67, 78, 'Về sản phẩm', 'Product/wzjuu945gwk7qjnmrhne', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686306723/Product/wzjuu945gwk7qjnmrhne', '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
+(68, 79, 'Về sản phẩm', 'Product/wthhjnsbz5b7vv3r6zmw', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686373738/Product/wthhjnsbz5b7vv3r6zmw', '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
+(69, 80, 'Về sảnphaamr', 'Product/iwy2fznonnp5slh9wuaj', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686373916/Product/iwy2fznonnp5slh9wuaj', '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
+(70, 81, 'Về sản phẩm', 'Product/tm1rxmp2wcddg8fmvzri', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686374122/Product/tm1rxmp2wcddg8fmvzri', '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
+(71, 82, 'Visit out Showrooms', 'Product/vjxdq9jjpv8xcnhst01c', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686374337/Product/vjxdq9jjpv8xcnhst01c', '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
+(72, 83, 'Mô Tả Sản Phẩm', 'Product/e5hw623fcp6dljmsc3qe', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686375732/Product/e5hw623fcp6dljmsc3qe', '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
+(73, 84, 'Mô Tả Sản Phẩm', 'Product/htyh41apl7npuhkzdoyr', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686375820/Product/htyh41apl7npuhkzdoyr', '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
+(74, 85, 'Mô Tả Sản Phẩm', 'Product/oipan2lvvhdw5tnqopse', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686486031/Product/oipan2lvvhdw5tnqopse', '2023-06-10 05:45:12', '2023-06-10 05:45:12', NULL),
+(75, 86, 'Mô Tả Sản Phẩm', 'Product/j8hghanlbtaoheus7nzl', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686376052/Product/j8hghanlbtaoheus7nzl', '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
+(76, 87, 'Giới thiệu sản phẩm', 'Product/v6vpqzmzpxqxgax5gqdo', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686376741/Product/v6vpqzmzpxqxgax5gqdo', '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL),
+(77, 85, 'Description về sách ngữ văn', 'Product/inhtxpjvo6aiv9t3le79', 'http://res.cloudinary.com/damzcas3k/raw/upload/v1686486031/Product/inhtxpjvo6aiv9t3le79', '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -702,14 +756,14 @@ INSERT INTO `ProductDescriptions` (`id`, `product_id`, `name`, `public_id`, `des
 --
 
 CREATE TABLE `ProductMedia` (
-                                `id` bigint UNSIGNED NOT NULL,
-                                `product_id` bigint UNSIGNED NOT NULL,
-                                `public_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '""',
-                                `media_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                `media_type` enum('IMAGE_FULL','IMAGE_ITEM','VIDEO','IMAGE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `public_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '""',
+  `media_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `media_type` enum('IMAGE_FULL','IMAGE_ITEM','VIDEO','IMAGE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -717,93 +771,93 @@ CREATE TABLE `ProductMedia` (
 --
 
 INSERT INTO `ProductMedia` (`id`, `product_id`, `public_id`, `media_path`, `media_type`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                       (46, 47, 'Product/nuoacim57pi1j7cri86e', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686146877/Product/nuoacim57pi1j7cri86e.jpg', 'IMAGE', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                                       (47, 47, 'Product/szp3uolnlusfuplrqyai', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686146899/Product/szp3uolnlusfuplrqyai.jpg', 'IMAGE', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                                       (48, 47, 'Product/exbpfieuuxlhj80yyop2', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686146903/Product/exbpfieuuxlhj80yyop2.jpg', 'IMAGE', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                                       (49, 48, 'Product/jpwhyg9zuduq6lyipuse', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147653/Product/jpwhyg9zuduq6lyipuse.jpg', 'IMAGE', '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
-                                                                                                                                       (50, 48, 'Product/b8tummtygdlnf2wvdfzz', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', 'IMAGE', '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
-                                                                                                                                       (51, 49, 'Product/zu0svoq4ufxv2zunlijk', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686148002/Product/zu0svoq4ufxv2zunlijk.jpg', 'IMAGE', '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
-                                                                                                                                       (52, 50, 'Product/k5pbgv6atyzjy5dkpwm3', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686148402/Product/k5pbgv6atyzjy5dkpwm3.jpg', 'IMAGE', '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
-                                                                                                                                       (53, 51, 'Product/gvk4z2wxmf4pfv1tdzg7', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686148949/Product/gvk4z2wxmf4pfv1tdzg7.png', 'IMAGE', '2023-06-07 14:43:24', '2023-06-07 15:16:04', NULL),
-                                                                                                                                       (54, 52, 'Product/ybrefvxuwc6q3qlxacpp', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149213/Product/ybrefvxuwc6q3qlxacpp.png', 'IMAGE', '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
-                                                                                                                                       (55, 53, 'Product/mglh2kekiftmivp7iet5', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149523/Product/mglh2kekiftmivp7iet5.png', 'IMAGE', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
-                                                                                                                                       (56, 54, 'Product/v2zxno9kkwdmu3rgbkyh', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149971/Product/v2zxno9kkwdmu3rgbkyh.png', 'IMAGE', '2023-06-07 15:02:34', '2023-06-07 15:02:34', NULL),
-                                                                                                                                       (57, 54, 'Product/q8zvl9jzi8y0gcyyaql7', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149976/Product/q8zvl9jzi8y0gcyyaql7.png', 'IMAGE', '2023-06-07 15:02:34', '2023-06-07 15:02:34', NULL),
-                                                                                                                                       (58, 54, 'Product/m4vbk6twnnzyqepdjn7a', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149980/Product/m4vbk6twnnzyqepdjn7a.png', 'IMAGE', '2023-06-07 15:02:34', '2023-06-07 15:02:34', NULL),
-                                                                                                                                       (59, 55, 'Product/saoeazukbstziuevwmzs', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150827/Product/saoeazukbstziuevwmzs.png', 'IMAGE', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
-                                                                                                                                       (60, 55, 'Product/e5lgpjxzzxkmhev3nxqf', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150829/Product/e5lgpjxzzxkmhev3nxqf.png', 'IMAGE', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
-                                                                                                                                       (61, 55, 'Product/qra3x1jwq7huzxnurxpt', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150832/Product/qra3x1jwq7huzxnurxpt.png', 'IMAGE', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
-                                                                                                                                       (62, 56, 'Product/wbdftnkhxyvqvdzgytw1', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686213994/Product/wbdftnkhxyvqvdzgytw1.jpg', 'IMAGE', '2023-06-08 08:47:40', '2023-06-09 08:58:54', NULL),
-                                                                                                                                       (63, 56, 'Product/kaeletgcwsntj7yiupas', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686213998/Product/kaeletgcwsntj7yiupas.jpg', 'IMAGE', '2023-06-08 08:47:40', '2023-06-09 08:58:54', NULL),
-                                                                                                                                       (64, 56, 'Product/sqk2ota5pirtko4mt86z', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214003/Product/sqk2ota5pirtko4mt86z.jpg', 'IMAGE', '2023-06-08 08:47:40', '2023-06-09 08:58:54', NULL),
-                                                                                                                                       (65, 57, 'Product/qfwvfvswhoru4jrxez2o', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214179/Product/qfwvfvswhoru4jrxez2o.jpg', 'IMAGE', '2023-06-08 08:50:39', '2023-06-09 08:58:34', NULL),
-                                                                                                                                       (66, 57, 'Product/jbte0gwxgdk9cn2rpnti', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214185/Product/jbte0gwxgdk9cn2rpnti.jpg', 'IMAGE', '2023-06-08 08:50:39', '2023-06-09 08:58:34', NULL),
-                                                                                                                                       (67, 57, 'Product/b6qe7urbbpqvbyiunqu8', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214190/Product/b6qe7urbbpqvbyiunqu8.jpg', 'IMAGE', '2023-06-08 08:50:39', '2023-06-09 08:58:34', NULL),
-                                                                                                                                       (68, 57, 'Product/yuz3v33a13aulfywzke1', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214195/Product/yuz3v33a13aulfywzke1.jpg', 'IMAGE', '2023-06-08 08:50:39', '2023-06-09 08:58:34', NULL),
-                                                                                                                                       (69, 58, 'Product/zsotktaevixofdtuhwel', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214373/Product/zsotktaevixofdtuhwel.jpg', 'IMAGE', '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
-                                                                                                                                       (70, 58, 'Product/w6w3xhe8dtxsrum1a1jv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214380/Product/w6w3xhe8dtxsrum1a1jv.jpg', 'IMAGE', '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
-                                                                                                                                       (71, 59, 'Product/mxb6ujtqdn4vaxjc2vj5', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214700/Product/mxb6ujtqdn4vaxjc2vj5.jpg', 'IMAGE', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
-                                                                                                                                       (72, 59, 'Product/uvjjayqf80jrzyqus8x3', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214705/Product/uvjjayqf80jrzyqus8x3.jpg', 'IMAGE', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
-                                                                                                                                       (73, 59, 'Product/mqfzstjsqiminalwmwkb', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214709/Product/mqfzstjsqiminalwmwkb.jpg', 'IMAGE', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
-                                                                                                                                       (74, 59, 'Product/tnrlkt1fg4zfgp00cg8a', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214714/Product/tnrlkt1fg4zfgp00cg8a.jpg', 'IMAGE', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
-                                                                                                                                       (75, 60, 'Product/iydmh0rsjfpaemfpydcv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686215280/Product/iydmh0rsjfpaemfpydcv.jpg', 'IMAGE', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
-                                                                                                                                       (76, 60, 'Product/pbrdwz8nernbjx8q9bru', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686215285/Product/pbrdwz8nernbjx8q9bru.jpg', 'IMAGE', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
-                                                                                                                                       (77, 60, 'Product/xndbf3nllyoogvnrtwab', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686215289/Product/xndbf3nllyoogvnrtwab.jpg', 'IMAGE', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
-                                                                                                                                       (78, 60, 'Product/m2fzux1zr2yb7lyhun1g', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686215306/Product/m2fzux1zr2yb7lyhun1g.jpg', 'IMAGE', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
-                                                                                                                                       (79, 61, 'Product/pkgobhmun3ohx4wi8h9k', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227183/Product/yaboszmqspr3lvgesjtx.png', 'IMAGE', '2023-06-08 12:26:05', '2023-06-08 12:26:24', NULL),
-                                                                                                                                       (80, 61, 'Product/epwrtzvca80u91morqop', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227044/Product/epwrtzvca80u91morqop.png', 'IMAGE', '2023-06-08 12:26:05', '2023-06-08 12:26:24', NULL),
-                                                                                                                                       (81, 62, 'Product/cienmva8gotdpatbfkgr', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227309/Product/cienmva8gotdpatbfkgr.png', 'IMAGE', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
-                                                                                                                                       (82, 62, 'Product/k3bybvg6k5csk0ae9hvw', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227313/Product/k3bybvg6k5csk0ae9hvw.png', 'IMAGE', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
-                                                                                                                                       (83, 62, 'Product/zvkguapucmmmwz6r6y6z', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227316/Product/zvkguapucmmmwz6r6y6z.png', 'IMAGE', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
-                                                                                                                                       (84, 63, 'Product/ne5t5gthjd8uvztv5o9m', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686299177/Product/ne5t5gthjd8uvztv5o9m.jpg', 'IMAGE', '2023-06-09 08:28:12', '2023-06-09 09:03:38', NULL),
-                                                                                                                                       (85, 64, 'Product/rbjqg0pvhcsph41inybd', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301497/Product/rbjqg0pvhcsph41inybd.jpg', 'IMAGE', '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
-                                                                                                                                       (86, 64, 'Product/qlp57pce6xldo7sla8mk', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301506/Product/qlp57pce6xldo7sla8mk.jpg', 'IMAGE', '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
-                                                                                                                                       (87, 65, 'Product/xufgsmpqc4nzuc083qmg', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301671/Product/xufgsmpqc4nzuc083qmg.jpg', 'IMAGE', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
-                                                                                                                                       (88, 65, 'Product/j2ffyzihitcoybogadjo', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301674/Product/j2ffyzihitcoybogadjo.jpg', 'IMAGE', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
-                                                                                                                                       (89, 65, 'Product/nqusgqr46iohqlxoi8sx', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301677/Product/nqusgqr46iohqlxoi8sx.jpg', 'IMAGE', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
-                                                                                                                                       (90, 66, 'Product/fjiujf3sagkfnzmxkoma', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301945/Product/fjiujf3sagkfnzmxkoma.png', 'IMAGE', '2023-06-09 09:14:16', '2023-06-09 09:14:51', NULL),
-                                                                                                                                       (91, 66, 'Product/hzlg3f4mnn9svd7elsfv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301949/Product/hzlg3f4mnn9svd7elsfv.png', 'IMAGE', '2023-06-09 09:14:16', '2023-06-09 09:14:51', NULL),
-                                                                                                                                       (92, 67, 'Product/qnhionbgnokxyoqxotub', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302197/Product/qnhionbgnokxyoqxotub.png', 'IMAGE', '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
-                                                                                                                                       (93, 68, 'Product/mneihqbtaataqitvmiq7', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302417/Product/mneihqbtaataqitvmiq7.jpg', 'IMAGE', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
-                                                                                                                                       (94, 68, 'Product/jfyxk0t9impfwx2dpfpd', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302421/Product/jfyxk0t9impfwx2dpfpd.jpg', 'IMAGE', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
-                                                                                                                                       (95, 68, 'Product/m4gvmbhdpyulovkoifqs', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302425/Product/m4gvmbhdpyulovkoifqs.jpg', 'IMAGE', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
-                                                                                                                                       (96, 69, 'Product/f8enxgodsbdapht2qrgw', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302875/Product/f8enxgodsbdapht2qrgw.png', 'IMAGE', '2023-06-09 09:29:51', '2023-06-09 09:52:32', NULL),
-                                                                                                                                       (97, 69, 'Product/czmxloehdhk08bvuxy10', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302893/Product/czmxloehdhk08bvuxy10.jpg', 'IMAGE', '2023-06-09 09:29:51', '2023-06-09 09:51:47', '2023-06-09 09:52:10'),
-                                                                                                                                       (98, 69, '', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304351/Product/cobllhxvwaoqer8l0w9m.jpg', 'IMAGE', '2023-06-09 09:52:32', '2023-06-09 09:52:32', NULL),
-                                                                                                                                       (99, 70, 'Product/aj9dgdzefjoqqapokd88', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304581/Product/aj9dgdzefjoqqapokd88.jpg', 'IMAGE', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                       (100, 70, 'Product/n1rg3e7d43f5lgngddcy', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304584/Product/n1rg3e7d43f5lgngddcy.jpg', 'IMAGE', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                       (101, 70, 'Product/pgmztukule3rflszxwje', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304590/Product/pgmztukule3rflszxwje.jpg', 'IMAGE', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                       (102, 71, 'Product/jqfasfw9dnjinvpedkom', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304815/Product/jqfasfw9dnjinvpedkom.png', 'IMAGE', '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
-                                                                                                                                       (103, 71, 'Product/jawshxk9lmrksufpykpx', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304819/Product/jawshxk9lmrksufpykpx.png', 'IMAGE', '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
-                                                                                                                                       (104, 72, 'Product/kei4ivessx6ivs7hqxep', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305015/Product/kei4ivessx6ivs7hqxep.jpg', 'IMAGE', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
-                                                                                                                                       (105, 72, 'Product/i1ldtoitfunvwbycblzz', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305021/Product/i1ldtoitfunvwbycblzz.jpg', 'IMAGE', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
-                                                                                                                                       (106, 72, 'Product/s2tlgwgfm3uodg6txnvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305024/Product/s2tlgwgfm3uodg6txnvv.jpg', 'IMAGE', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
-                                                                                                                                       (107, 73, 'Product/gsgzh3979mbyloynl608', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305240/Product/gsgzh3979mbyloynl608.jpg', 'IMAGE', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
-                                                                                                                                       (108, 73, 'Product/yfbe7f72vps3eyxggn3q', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305244/Product/yfbe7f72vps3eyxggn3q.jpg', 'IMAGE', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
-                                                                                                                                       (109, 73, 'Product/fh85ylldwd6r8ukern1z', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305247/Product/fh85ylldwd6r8ukern1z.jpg', 'IMAGE', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
-                                                                                                                                       (110, 74, 'Product/jkzi3bbvvppjymmslhwu', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305433/Product/jkzi3bbvvppjymmslhwu.jpg', 'IMAGE', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                                       (111, 74, 'Product/fbzr8pfv3zl2lkbuk4mc', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305436/Product/fbzr8pfv3zl2lkbuk4mc.jpg', 'IMAGE', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                                       (112, 74, 'Product/vi9runrlei1ujqnwgi0s', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305440/Product/vi9runrlei1ujqnwgi0s.jpg', 'IMAGE', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                                       (113, 75, 'Product/xprwxnwrfnyxlwhwxqwh', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306060/Product/xprwxnwrfnyxlwhwxqwh.png', 'IMAGE', '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
-                                                                                                                                       (114, 75, 'Product/fs1fialfdgpvnhovhwnv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306063/Product/fs1fialfdgpvnhovhwnv.png', 'IMAGE', '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
-                                                                                                                                       (115, 76, 'Product/olv962sghjynvvgitnog', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306232/Product/olv962sghjynvvgitnog.png', 'IMAGE', '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
-                                                                                                                                       (116, 77, 'Product/qkpkrbezgljgx1l1m2aj', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306373/Product/qkpkrbezgljgx1l1m2aj.jpg', 'IMAGE', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
-                                                                                                                                       (117, 77, 'Product/oltbdkabhlhtlmjn5gn1', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306377/Product/oltbdkabhlhtlmjn5gn1.jpg', 'IMAGE', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
-                                                                                                                                       (118, 77, 'Product/cjhpfr4uwa0wdn5maymw', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306380/Product/cjhpfr4uwa0wdn5maymw.jpg', 'IMAGE', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
-                                                                                                                                       (119, 78, 'Product/i4mgkrwh8ksqhguqeme3', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306703/Product/i4mgkrwh8ksqhguqeme3.png', 'IMAGE', '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
-                                                                                                                                       (120, 79, 'Product/kuf38z2jsclhvefipewv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686373649/Product/kuf38z2jsclhvefipewv.png', 'IMAGE', '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
-                                                                                                                                       (121, 80, 'Product/n9zxxgq8ildipsncwjqu', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686373809/Product/n9zxxgq8ildipsncwjqu.png', 'IMAGE', '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
-                                                                                                                                       (122, 80, 'Product/wflgubctza9jqomogwkd', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686373812/Product/wflgubctza9jqomogwkd.png', 'IMAGE', '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
-                                                                                                                                       (124, 81, 'Product/niyttrlqsnhmj5k7yjzr', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686374057/Product/niyttrlqsnhmj5k7yjzr.png', 'IMAGE', '2023-06-10 05:15:03', '2023-06-10 05:15:19', NULL),
-                                                                                                                                       (125, 82, 'Product/csomx0ewcihpjsow3j1f', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686374246/Product/csomx0ewcihpjsow3j1f.png', 'IMAGE', '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
-                                                                                                                                       (126, 82, 'Product/edzof9dtns45jyj9blpo', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686374293/Product/edzof9dtns45jyj9blpo.png', 'IMAGE', '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
-                                                                                                                                       (127, 83, 'Product/mqppneeptrfpuwze4hrx', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375684/Product/mqppneeptrfpuwze4hrx.png', 'IMAGE', '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
-                                                                                                                                       (128, 84, 'Product/ujegdc95wrmxii4ndbhc', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375791/Product/ujegdc95wrmxii4ndbhc.png', 'IMAGE', '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
-                                                                                                                                       (129, 85, 'Product/qvpmlyd64jpdgqi8egdt', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375865/Product/qvpmlyd64jpdgqi8egdt.png', 'IMAGE', '2023-06-10 05:45:12', '2023-06-11 12:20:27', NULL),
-                                                                                                                                       (130, 86, 'Product/om5font5fr5ulcuq3gip', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686376013/Product/om5font5fr5ulcuq3gip.png', 'IMAGE', '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
-                                                                                                                                       (131, 87, 'Product/aoylpzlvka0xzjqawk9v', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686376678/Product/aoylpzlvka0xzjqawk9v.jpg', 'IMAGE', '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL),
-                                                                                                                                       (132, 85, '', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686485977/Product/cpthgb2rxwm2vn3b6uwd.png', 'IMAGE', '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL),
-                                                                                                                                       (133, 85, '', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686485982/Product/xwakyxkq5fehxyvhrlkx.jpg', 'IMAGE', '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL);
+(46, 47, 'Product/nuoacim57pi1j7cri86e', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686146877/Product/nuoacim57pi1j7cri86e.jpg', 'IMAGE', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(47, 47, 'Product/szp3uolnlusfuplrqyai', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686146899/Product/szp3uolnlusfuplrqyai.jpg', 'IMAGE', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(48, 47, 'Product/exbpfieuuxlhj80yyop2', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686146903/Product/exbpfieuuxlhj80yyop2.jpg', 'IMAGE', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(49, 48, 'Product/jpwhyg9zuduq6lyipuse', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147653/Product/jpwhyg9zuduq6lyipuse.jpg', 'IMAGE', '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
+(50, 48, 'Product/b8tummtygdlnf2wvdfzz', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686147658/Product/b8tummtygdlnf2wvdfzz.jpg', 'IMAGE', '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
+(51, 49, 'Product/zu0svoq4ufxv2zunlijk', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686148002/Product/zu0svoq4ufxv2zunlijk.jpg', 'IMAGE', '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
+(52, 50, 'Product/k5pbgv6atyzjy5dkpwm3', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686148402/Product/k5pbgv6atyzjy5dkpwm3.jpg', 'IMAGE', '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
+(53, 51, 'Product/gvk4z2wxmf4pfv1tdzg7', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686148949/Product/gvk4z2wxmf4pfv1tdzg7.png', 'IMAGE', '2023-06-07 14:43:24', '2023-06-07 15:16:04', NULL),
+(54, 52, 'Product/ybrefvxuwc6q3qlxacpp', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149213/Product/ybrefvxuwc6q3qlxacpp.png', 'IMAGE', '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
+(55, 53, 'Product/mglh2kekiftmivp7iet5', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149523/Product/mglh2kekiftmivp7iet5.png', 'IMAGE', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
+(56, 54, 'Product/v2zxno9kkwdmu3rgbkyh', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149971/Product/v2zxno9kkwdmu3rgbkyh.png', 'IMAGE', '2023-06-07 15:02:34', '2023-06-07 15:02:34', NULL),
+(57, 54, 'Product/q8zvl9jzi8y0gcyyaql7', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149976/Product/q8zvl9jzi8y0gcyyaql7.png', 'IMAGE', '2023-06-07 15:02:34', '2023-06-07 15:02:34', NULL),
+(58, 54, 'Product/m4vbk6twnnzyqepdjn7a', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686149980/Product/m4vbk6twnnzyqepdjn7a.png', 'IMAGE', '2023-06-07 15:02:34', '2023-06-07 15:02:34', NULL),
+(59, 55, 'Product/saoeazukbstziuevwmzs', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150827/Product/saoeazukbstziuevwmzs.png', 'IMAGE', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
+(60, 55, 'Product/e5lgpjxzzxkmhev3nxqf', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150829/Product/e5lgpjxzzxkmhev3nxqf.png', 'IMAGE', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
+(61, 55, 'Product/qra3x1jwq7huzxnurxpt', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686150832/Product/qra3x1jwq7huzxnurxpt.png', 'IMAGE', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
+(62, 56, 'Product/wbdftnkhxyvqvdzgytw1', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686213994/Product/wbdftnkhxyvqvdzgytw1.jpg', 'IMAGE', '2023-06-08 08:47:40', '2023-06-09 08:58:54', NULL),
+(63, 56, 'Product/kaeletgcwsntj7yiupas', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686213998/Product/kaeletgcwsntj7yiupas.jpg', 'IMAGE', '2023-06-08 08:47:40', '2023-06-09 08:58:54', NULL),
+(64, 56, 'Product/sqk2ota5pirtko4mt86z', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214003/Product/sqk2ota5pirtko4mt86z.jpg', 'IMAGE', '2023-06-08 08:47:40', '2023-06-09 08:58:54', NULL),
+(65, 57, 'Product/qfwvfvswhoru4jrxez2o', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214179/Product/qfwvfvswhoru4jrxez2o.jpg', 'IMAGE', '2023-06-08 08:50:39', '2023-06-09 08:58:34', NULL),
+(66, 57, 'Product/jbte0gwxgdk9cn2rpnti', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214185/Product/jbte0gwxgdk9cn2rpnti.jpg', 'IMAGE', '2023-06-08 08:50:39', '2023-06-09 08:58:34', NULL),
+(67, 57, 'Product/b6qe7urbbpqvbyiunqu8', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214190/Product/b6qe7urbbpqvbyiunqu8.jpg', 'IMAGE', '2023-06-08 08:50:39', '2023-06-09 08:58:34', NULL),
+(68, 57, 'Product/yuz3v33a13aulfywzke1', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214195/Product/yuz3v33a13aulfywzke1.jpg', 'IMAGE', '2023-06-08 08:50:39', '2023-06-09 08:58:34', NULL),
+(69, 58, 'Product/zsotktaevixofdtuhwel', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214373/Product/zsotktaevixofdtuhwel.jpg', 'IMAGE', '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
+(70, 58, 'Product/w6w3xhe8dtxsrum1a1jv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214380/Product/w6w3xhe8dtxsrum1a1jv.jpg', 'IMAGE', '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
+(71, 59, 'Product/mxb6ujtqdn4vaxjc2vj5', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214700/Product/mxb6ujtqdn4vaxjc2vj5.jpg', 'IMAGE', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
+(72, 59, 'Product/uvjjayqf80jrzyqus8x3', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214705/Product/uvjjayqf80jrzyqus8x3.jpg', 'IMAGE', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
+(73, 59, 'Product/mqfzstjsqiminalwmwkb', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214709/Product/mqfzstjsqiminalwmwkb.jpg', 'IMAGE', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
+(74, 59, 'Product/tnrlkt1fg4zfgp00cg8a', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686214714/Product/tnrlkt1fg4zfgp00cg8a.jpg', 'IMAGE', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
+(75, 60, 'Product/iydmh0rsjfpaemfpydcv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686215280/Product/iydmh0rsjfpaemfpydcv.jpg', 'IMAGE', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
+(76, 60, 'Product/pbrdwz8nernbjx8q9bru', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686215285/Product/pbrdwz8nernbjx8q9bru.jpg', 'IMAGE', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
+(77, 60, 'Product/xndbf3nllyoogvnrtwab', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686215289/Product/xndbf3nllyoogvnrtwab.jpg', 'IMAGE', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
+(78, 60, 'Product/m2fzux1zr2yb7lyhun1g', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686215306/Product/m2fzux1zr2yb7lyhun1g.jpg', 'IMAGE', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
+(79, 61, 'Product/pkgobhmun3ohx4wi8h9k', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227183/Product/yaboszmqspr3lvgesjtx.png', 'IMAGE', '2023-06-08 12:26:05', '2023-06-08 12:26:24', NULL),
+(80, 61, 'Product/epwrtzvca80u91morqop', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227044/Product/epwrtzvca80u91morqop.png', 'IMAGE', '2023-06-08 12:26:05', '2023-06-08 12:26:24', NULL),
+(81, 62, 'Product/cienmva8gotdpatbfkgr', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227309/Product/cienmva8gotdpatbfkgr.png', 'IMAGE', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
+(82, 62, 'Product/k3bybvg6k5csk0ae9hvw', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227313/Product/k3bybvg6k5csk0ae9hvw.png', 'IMAGE', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
+(83, 62, 'Product/zvkguapucmmmwz6r6y6z', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686227316/Product/zvkguapucmmmwz6r6y6z.png', 'IMAGE', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
+(84, 63, 'Product/ne5t5gthjd8uvztv5o9m', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686299177/Product/ne5t5gthjd8uvztv5o9m.jpg', 'IMAGE', '2023-06-09 08:28:12', '2023-06-09 09:03:38', NULL),
+(85, 64, 'Product/rbjqg0pvhcsph41inybd', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301497/Product/rbjqg0pvhcsph41inybd.jpg', 'IMAGE', '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
+(86, 64, 'Product/qlp57pce6xldo7sla8mk', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301506/Product/qlp57pce6xldo7sla8mk.jpg', 'IMAGE', '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
+(87, 65, 'Product/xufgsmpqc4nzuc083qmg', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301671/Product/xufgsmpqc4nzuc083qmg.jpg', 'IMAGE', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
+(88, 65, 'Product/j2ffyzihitcoybogadjo', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301674/Product/j2ffyzihitcoybogadjo.jpg', 'IMAGE', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
+(89, 65, 'Product/nqusgqr46iohqlxoi8sx', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301677/Product/nqusgqr46iohqlxoi8sx.jpg', 'IMAGE', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
+(90, 66, 'Product/fjiujf3sagkfnzmxkoma', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301945/Product/fjiujf3sagkfnzmxkoma.png', 'IMAGE', '2023-06-09 09:14:16', '2023-06-09 09:14:51', NULL),
+(91, 66, 'Product/hzlg3f4mnn9svd7elsfv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686301949/Product/hzlg3f4mnn9svd7elsfv.png', 'IMAGE', '2023-06-09 09:14:16', '2023-06-09 09:14:51', NULL),
+(92, 67, 'Product/qnhionbgnokxyoqxotub', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302197/Product/qnhionbgnokxyoqxotub.png', 'IMAGE', '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
+(93, 68, 'Product/mneihqbtaataqitvmiq7', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302417/Product/mneihqbtaataqitvmiq7.jpg', 'IMAGE', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
+(94, 68, 'Product/jfyxk0t9impfwx2dpfpd', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302421/Product/jfyxk0t9impfwx2dpfpd.jpg', 'IMAGE', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
+(95, 68, 'Product/m4gvmbhdpyulovkoifqs', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302425/Product/m4gvmbhdpyulovkoifqs.jpg', 'IMAGE', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
+(96, 69, 'Product/f8enxgodsbdapht2qrgw', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302875/Product/f8enxgodsbdapht2qrgw.png', 'IMAGE', '2023-06-09 09:29:51', '2023-06-09 09:52:32', NULL),
+(97, 69, 'Product/czmxloehdhk08bvuxy10', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686302893/Product/czmxloehdhk08bvuxy10.jpg', 'IMAGE', '2023-06-09 09:29:51', '2023-06-09 09:51:47', '2023-06-09 09:52:10'),
+(98, 69, '', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304351/Product/cobllhxvwaoqer8l0w9m.jpg', 'IMAGE', '2023-06-09 09:52:32', '2023-06-09 09:52:32', NULL),
+(99, 70, 'Product/aj9dgdzefjoqqapokd88', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304581/Product/aj9dgdzefjoqqapokd88.jpg', 'IMAGE', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(100, 70, 'Product/n1rg3e7d43f5lgngddcy', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304584/Product/n1rg3e7d43f5lgngddcy.jpg', 'IMAGE', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(101, 70, 'Product/pgmztukule3rflszxwje', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304590/Product/pgmztukule3rflszxwje.jpg', 'IMAGE', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(102, 71, 'Product/jqfasfw9dnjinvpedkom', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304815/Product/jqfasfw9dnjinvpedkom.png', 'IMAGE', '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
+(103, 71, 'Product/jawshxk9lmrksufpykpx', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686304819/Product/jawshxk9lmrksufpykpx.png', 'IMAGE', '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
+(104, 72, 'Product/kei4ivessx6ivs7hqxep', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305015/Product/kei4ivessx6ivs7hqxep.jpg', 'IMAGE', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
+(105, 72, 'Product/i1ldtoitfunvwbycblzz', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305021/Product/i1ldtoitfunvwbycblzz.jpg', 'IMAGE', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
+(106, 72, 'Product/s2tlgwgfm3uodg6txnvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305024/Product/s2tlgwgfm3uodg6txnvv.jpg', 'IMAGE', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
+(107, 73, 'Product/gsgzh3979mbyloynl608', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305240/Product/gsgzh3979mbyloynl608.jpg', 'IMAGE', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
+(108, 73, 'Product/yfbe7f72vps3eyxggn3q', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305244/Product/yfbe7f72vps3eyxggn3q.jpg', 'IMAGE', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
+(109, 73, 'Product/fh85ylldwd6r8ukern1z', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305247/Product/fh85ylldwd6r8ukern1z.jpg', 'IMAGE', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
+(110, 74, 'Product/jkzi3bbvvppjymmslhwu', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305433/Product/jkzi3bbvvppjymmslhwu.jpg', 'IMAGE', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(111, 74, 'Product/fbzr8pfv3zl2lkbuk4mc', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305436/Product/fbzr8pfv3zl2lkbuk4mc.jpg', 'IMAGE', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(112, 74, 'Product/vi9runrlei1ujqnwgi0s', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686305440/Product/vi9runrlei1ujqnwgi0s.jpg', 'IMAGE', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(113, 75, 'Product/xprwxnwrfnyxlwhwxqwh', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306060/Product/xprwxnwrfnyxlwhwxqwh.png', 'IMAGE', '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
+(114, 75, 'Product/fs1fialfdgpvnhovhwnv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306063/Product/fs1fialfdgpvnhovhwnv.png', 'IMAGE', '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
+(115, 76, 'Product/olv962sghjynvvgitnog', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306232/Product/olv962sghjynvvgitnog.png', 'IMAGE', '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
+(116, 77, 'Product/qkpkrbezgljgx1l1m2aj', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306373/Product/qkpkrbezgljgx1l1m2aj.jpg', 'IMAGE', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
+(117, 77, 'Product/oltbdkabhlhtlmjn5gn1', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306377/Product/oltbdkabhlhtlmjn5gn1.jpg', 'IMAGE', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
+(118, 77, 'Product/cjhpfr4uwa0wdn5maymw', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306380/Product/cjhpfr4uwa0wdn5maymw.jpg', 'IMAGE', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
+(119, 78, 'Product/i4mgkrwh8ksqhguqeme3', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686306703/Product/i4mgkrwh8ksqhguqeme3.png', 'IMAGE', '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
+(120, 79, 'Product/kuf38z2jsclhvefipewv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686373649/Product/kuf38z2jsclhvefipewv.png', 'IMAGE', '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
+(121, 80, 'Product/n9zxxgq8ildipsncwjqu', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686373809/Product/n9zxxgq8ildipsncwjqu.png', 'IMAGE', '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
+(122, 80, 'Product/wflgubctza9jqomogwkd', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686373812/Product/wflgubctza9jqomogwkd.png', 'IMAGE', '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
+(124, 81, 'Product/niyttrlqsnhmj5k7yjzr', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686374057/Product/niyttrlqsnhmj5k7yjzr.png', 'IMAGE', '2023-06-10 05:15:03', '2023-06-10 05:15:19', NULL),
+(125, 82, 'Product/csomx0ewcihpjsow3j1f', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686374246/Product/csomx0ewcihpjsow3j1f.png', 'IMAGE', '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
+(126, 82, 'Product/edzof9dtns45jyj9blpo', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686374293/Product/edzof9dtns45jyj9blpo.png', 'IMAGE', '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
+(127, 83, 'Product/mqppneeptrfpuwze4hrx', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375684/Product/mqppneeptrfpuwze4hrx.png', 'IMAGE', '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
+(128, 84, 'Product/ujegdc95wrmxii4ndbhc', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375791/Product/ujegdc95wrmxii4ndbhc.png', 'IMAGE', '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
+(129, 85, 'Product/qvpmlyd64jpdgqi8egdt', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686375865/Product/qvpmlyd64jpdgqi8egdt.png', 'IMAGE', '2023-06-10 05:45:12', '2023-06-11 12:20:27', NULL),
+(130, 86, 'Product/om5font5fr5ulcuq3gip', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686376013/Product/om5font5fr5ulcuq3gip.png', 'IMAGE', '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
+(131, 87, 'Product/aoylpzlvka0xzjqawk9v', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686376678/Product/aoylpzlvka0xzjqawk9v.jpg', 'IMAGE', '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL),
+(132, 85, '', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686485977/Product/cpthgb2rxwm2vn3b6uwd.png', 'IMAGE', '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL),
+(133, 85, '', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686485982/Product/xwakyxkq5fehxyvhrlkx.jpg', 'IMAGE', '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -812,15 +866,15 @@ INSERT INTO `ProductMedia` (`id`, `product_id`, `public_id`, `media_path`, `medi
 --
 
 CREATE TABLE `ProductOption` (
-                                 `id` bigint UNSIGNED NOT NULL,
-                                 `product_id` bigint UNSIGNED NOT NULL,
-                                 `specification_id` bigint UNSIGNED NOT NULL,
-                                 `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                 `price` int NOT NULL,
-                                 `quantity` int NOT NULL,
-                                 `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                 `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                 `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `specification_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` int NOT NULL,
+  `quantity` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -828,97 +882,97 @@ CREATE TABLE `ProductOption` (
 --
 
 INSERT INTO `ProductOption` (`id`, `product_id`, `specification_id`, `name`, `price`, `quantity`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                                (136, 47, 58, '8G (Most sold)', 300000, 98, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                                                (137, 47, 58, '16G', 1000000, 100, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                                                (138, 47, 58, '32G', 2000000, 100, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                                                (139, 47, 58, '40G (Best Option)', 3000000, 100, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                                                (140, 48, 59, '8G ', 300000, 96, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
-                                                                                                                                                (141, 48, 59, '16G (Most sold)', 1000000, 100, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
-                                                                                                                                                (142, 48, 59, '32G', 2000000, 100, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
-                                                                                                                                                (143, 48, 59, '40G (Best Option)', 3000000, 100, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
-                                                                                                                                                (144, 49, 60, '4G ', 300000, 100, '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
-                                                                                                                                                (145, 49, 60, '8G ', 400000, 100, '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
-                                                                                                                                                (146, 49, 60, '16G', 500000, 100, '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
-                                                                                                                                                (147, 50, 61, '8G (Most sold)', 300000, 100, '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
-                                                                                                                                                (148, 50, 61, '16G', 1000000, 100, '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
-                                                                                                                                                (149, 50, 61, '32G (Best Option)', 3000000, 100, '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
-                                                                                                                                                (150, 51, 62, 'Magic Mouse 2022 Đen', 400000, 100, '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
-                                                                                                                                                (151, 51, 62, 'Magic Mouse 2021 Bạc', 50000, 100, '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
-                                                                                                                                                (152, 52, 63, 'Hồng', 20000, 98, '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
-                                                                                                                                                (153, 52, 63, 'Xám bạc', 20000, 100, '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
-                                                                                                                                                (154, 52, 63, 'Đen', 20000, 100, '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
-                                                                                                                                                (155, 53, 64, 'Đen', 10000, 100, '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
-                                                                                                                                                (156, 54, 65, 'Đen', 10000, 100, '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
-                                                                                                                                                (157, 54, 65, 'Hồng', 10000, 100, '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
-                                                                                                                                                (158, 54, 65, 'Xám', 10000, 100, '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
-                                                                                                                                                (159, 55, 66, 'Đen', 10000, 100, '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
-                                                                                                                                                (160, 56, 67, 'Vàng', 200000, 100, '2023-06-08 08:47:40', '2023-06-08 08:47:40', NULL),
-                                                                                                                                                (161, 57, 68, 'X', 20000, 100, '2023-06-08 08:50:39', '2023-06-08 08:50:39', NULL),
-                                                                                                                                                (162, 58, 69, 'Có dây', 10000, 100, '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
-                                                                                                                                                (163, 58, 69, 'Không dây', 100000, 100, '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
-                                                                                                                                                (164, 59, 70, 'Đen', 10000, 100, '2023-06-08 09:02:46', '2023-06-08 09:02:46', NULL),
-                                                                                                                                                (165, 59, 70, 'Đỏ', 10000, 100, '2023-06-08 09:02:46', '2023-06-08 09:02:46', NULL),
-                                                                                                                                                (166, 60, 71, 'Đen', 20000, 100, '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
-                                                                                                                                                (167, 60, 71, 'Trắng', 10000, 100, '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
-                                                                                                                                                (168, 61, 72, 'Airpots Pro 2022', 1000000, 100, '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
-                                                                                                                                                (169, 61, 72, 'Airpots Pro 2021', 500000, 100, '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
-                                                                                                                                                (170, 61, 72, 'Airpots 3 Mag Safe', 500000, 100, '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
-                                                                                                                                                (171, 62, 73, 'Đen', 200000, 100, '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
-                                                                                                                                                (172, 62, 73, 'Xám/xanh', 200000, 100, '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
-                                                                                                                                                (173, 62, 73, 'Bạc', 200000, 100, '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
-                                                                                                                                                (174, 63, 74, 'Nhỏ', 10000, 100, '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
-                                                                                                                                                (175, 63, 74, 'Lớn', 11000, 100, '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
-                                                                                                                                                (176, 64, 75, 'Đen', 20000, 100, '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
-                                                                                                                                                (177, 64, 75, 'Trắng', 20000, 100, '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
-                                                                                                                                                (178, 65, 76, 'Xanh', 10000, 100, '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
-                                                                                                                                                (179, 65, 76, 'Đen', 10000, 100, '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
-                                                                                                                                                (180, 65, 76, 'Trắng', 10000, 100, '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
-                                                                                                                                                (181, 66, 77, 'X', 20000, 100, '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
-                                                                                                                                                (182, 66, 77, 'XL', 21000, 100, '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
-                                                                                                                                                (183, 66, 77, 'XXL', 22000, 100, '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
-                                                                                                                                                (184, 67, 78, 'Xanh đậm', 10000, 100, '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
-                                                                                                                                                (185, 67, 78, 'Đen', 10000, 100, '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
-                                                                                                                                                (186, 67, 78, 'Trắng', 10000, 100, '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
-                                                                                                                                                (187, 68, 79, 'Đen', 10000, 100, '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
-                                                                                                                                                (188, 68, 79, 'Xanh đậm', 10000, 100, '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
-                                                                                                                                                (189, 68, 79, 'Trắng', 10000, 100, '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
-                                                                                                                                                (190, 69, 80, 'Xanh đậm', 10000, 100, '2023-06-09 09:29:51', '2023-06-09 09:29:51', NULL),
-                                                                                                                                                (191, 70, 81, '29', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                                (192, 70, 81, '30', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                                (193, 70, 81, '31', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                                (194, 70, 81, '32', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                                (195, 70, 81, '33', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                                                (196, 71, 82, '31', 10000, 100, '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
-                                                                                                                                                (197, 71, 82, '32', 10000, 100, '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
-                                                                                                                                                (198, 72, 83, '10', 10000, 100, '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
-                                                                                                                                                (199, 72, 83, '11', 10000, 100, '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
-                                                                                                                                                (200, 73, 84, '8', 10000, 100, '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
-                                                                                                                                                (201, 73, 84, '9', 10000, 100, '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
-                                                                                                                                                (202, 74, 85, '11', 10000, 100, '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                                                (203, 74, 85, '12', 10000, 100, '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                                                (204, 75, 86, '34MM', 10000, 100, '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
-                                                                                                                                                (205, 75, 86, '38MM', 10000, 100, '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
-                                                                                                                                                (206, 76, 87, '30', 10000, 100, '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
-                                                                                                                                                (207, 76, 87, '40', 10000, 100, '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
-                                                                                                                                                (208, 77, 88, '25MM', 20000, 100, '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
-                                                                                                                                                (209, 77, 88, '30MM', 20000, 100, '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
-                                                                                                                                                (210, 77, 88, '35MM', 30000, 100, '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
-                                                                                                                                                (211, 78, 89, '30MM', 10000, 100, '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
-                                                                                                                                                (212, 79, 90, 'Đen', 1000000, 100, '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
-                                                                                                                                                (213, 79, 90, 'Trắng ', 1000000, 100, '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
-                                                                                                                                                (214, 80, 91, 'Đen', 1000000, 100, '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
-                                                                                                                                                (215, 81, 92, 'Cho 2 người', 200000, 100, '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
-                                                                                                                                                (216, 81, 92, 'Cho 3 người', 500000, 100, '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
-                                                                                                                                                (217, 82, 93, 'Trắng', 1000000, 100, '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
-                                                                                                                                                (218, 83, 94, 'Tập 1', 10000, 100, '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
-                                                                                                                                                (219, 83, 94, 'Tập 2', 10000, 100, '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
-                                                                                                                                                (220, 84, 95, 'Mới nhất', 10000, 100, '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
-                                                                                                                                                (221, 85, 96, 'Mới nhất', 10000, 100, '2023-06-10 05:45:12', '2023-06-10 05:45:12', NULL),
-                                                                                                                                                (222, 86, 97, 'Mới nhất', 10000, 100, '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
-                                                                                                                                                (223, 87, 98, 'Hồng', 10000, 100, '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL),
-                                                                                                                                                (224, 87, 98, 'Đen', 10000, 100, '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL),
-                                                                                                                                                (225, 85, 96, 'Lớp 6', 20000, 200, '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL),
-                                                                                                                                                (226, 85, 96, 'Lớp 12', 10000, 100, '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL);
+(136, 47, 58, '8G (Most sold)', 300000, 98, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(137, 47, 58, '16G', 1000000, 100, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(138, 47, 58, '32G', 2000000, 100, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(139, 47, 58, '40G (Best Option)', 3000000, 100, '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(140, 48, 59, '8G ', 300000, 96, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
+(141, 48, 59, '16G (Most sold)', 1000000, 100, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
+(142, 48, 59, '32G', 2000000, 100, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
+(143, 48, 59, '40G (Best Option)', 3000000, 100, '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
+(144, 49, 60, '4G ', 300000, 100, '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
+(145, 49, 60, '8G ', 400000, 100, '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
+(146, 49, 60, '16G', 500000, 100, '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
+(147, 50, 61, '8G (Most sold)', 300000, 100, '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
+(148, 50, 61, '16G', 1000000, 100, '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
+(149, 50, 61, '32G (Best Option)', 3000000, 100, '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
+(150, 51, 62, 'Magic Mouse 2022 Đen', 400000, 100, '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
+(151, 51, 62, 'Magic Mouse 2021 Bạc', 50000, 100, '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
+(152, 52, 63, 'Hồng', 20000, 98, '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
+(153, 52, 63, 'Xám bạc', 20000, 100, '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
+(154, 52, 63, 'Đen', 20000, 100, '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
+(155, 53, 64, 'Đen', 10000, 100, '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
+(156, 54, 65, 'Đen', 10000, 100, '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
+(157, 54, 65, 'Hồng', 10000, 100, '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
+(158, 54, 65, 'Xám', 10000, 100, '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
+(159, 55, 66, 'Đen', 10000, 100, '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
+(160, 56, 67, 'Vàng', 200000, 100, '2023-06-08 08:47:40', '2023-06-08 08:47:40', NULL),
+(161, 57, 68, 'X', 20000, 100, '2023-06-08 08:50:39', '2023-06-08 08:50:39', NULL),
+(162, 58, 69, 'Có dây', 10000, 100, '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
+(163, 58, 69, 'Không dây', 100000, 100, '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
+(164, 59, 70, 'Đen', 10000, 100, '2023-06-08 09:02:46', '2023-06-08 09:02:46', NULL),
+(165, 59, 70, 'Đỏ', 10000, 100, '2023-06-08 09:02:46', '2023-06-08 09:02:46', NULL),
+(166, 60, 71, 'Đen', 20000, 100, '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
+(167, 60, 71, 'Trắng', 10000, 100, '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
+(168, 61, 72, 'Airpots Pro 2022', 1000000, 100, '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
+(169, 61, 72, 'Airpots Pro 2021', 500000, 100, '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
+(170, 61, 72, 'Airpots 3 Mag Safe', 500000, 100, '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
+(171, 62, 73, 'Đen', 200000, 100, '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
+(172, 62, 73, 'Xám/xanh', 200000, 100, '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
+(173, 62, 73, 'Bạc', 200000, 100, '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
+(174, 63, 74, 'Nhỏ', 10000, 100, '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
+(175, 63, 74, 'Lớn', 11000, 100, '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
+(176, 64, 75, 'Đen', 20000, 100, '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
+(177, 64, 75, 'Trắng', 20000, 100, '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
+(178, 65, 76, 'Xanh', 10000, 100, '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
+(179, 65, 76, 'Đen', 10000, 100, '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
+(180, 65, 76, 'Trắng', 10000, 100, '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
+(181, 66, 77, 'X', 20000, 100, '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
+(182, 66, 77, 'XL', 21000, 100, '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
+(183, 66, 77, 'XXL', 22000, 100, '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
+(184, 67, 78, 'Xanh đậm', 10000, 100, '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
+(185, 67, 78, 'Đen', 10000, 100, '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
+(186, 67, 78, 'Trắng', 10000, 100, '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
+(187, 68, 79, 'Đen', 10000, 100, '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
+(188, 68, 79, 'Xanh đậm', 10000, 100, '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
+(189, 68, 79, 'Trắng', 10000, 100, '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
+(190, 69, 80, 'Xanh đậm', 10000, 100, '2023-06-09 09:29:51', '2023-06-09 09:29:51', NULL),
+(191, 70, 81, '29', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(192, 70, 81, '30', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(193, 70, 81, '31', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(194, 70, 81, '32', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(195, 70, 81, '33', 10000, 100, '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(196, 71, 82, '31', 10000, 100, '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
+(197, 71, 82, '32', 10000, 100, '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
+(198, 72, 83, '10', 10000, 100, '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
+(199, 72, 83, '11', 10000, 100, '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
+(200, 73, 84, '8', 10000, 100, '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
+(201, 73, 84, '9', 10000, 100, '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
+(202, 74, 85, '11', 10000, 100, '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(203, 74, 85, '12', 10000, 100, '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(204, 75, 86, '34MM', 10000, 100, '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
+(205, 75, 86, '38MM', 10000, 100, '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
+(206, 76, 87, '30', 10000, 100, '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
+(207, 76, 87, '40', 10000, 100, '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
+(208, 77, 88, '25MM', 20000, 100, '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
+(209, 77, 88, '30MM', 20000, 100, '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
+(210, 77, 88, '35MM', 30000, 100, '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
+(211, 78, 89, '30MM', 10000, 100, '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
+(212, 79, 90, 'Đen', 1000000, 100, '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
+(213, 79, 90, 'Trắng ', 1000000, 100, '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
+(214, 80, 91, 'Đen', 1000000, 100, '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
+(215, 81, 92, 'Cho 2 người', 200000, 100, '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
+(216, 81, 92, 'Cho 3 người', 500000, 100, '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
+(217, 82, 93, 'Trắng', 1000000, 100, '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
+(218, 83, 94, 'Tập 1', 10000, 100, '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
+(219, 83, 94, 'Tập 2', 10000, 100, '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
+(220, 84, 95, 'Mới nhất', 10000, 100, '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
+(221, 85, 96, 'Mới nhất', 10000, 100, '2023-06-10 05:45:12', '2023-06-10 05:45:12', NULL),
+(222, 86, 97, 'Mới nhất', 10000, 100, '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
+(223, 87, 98, 'Hồng', 10000, 100, '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL),
+(224, 87, 98, 'Đen', 10000, 100, '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL),
+(225, 85, 96, 'Lớp 6', 20000, 200, '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL),
+(226, 85, 96, 'Lớp 12', 10000, 100, '2023-06-11 12:20:26', '2023-06-11 12:20:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -927,12 +981,12 @@ INSERT INTO `ProductOption` (`id`, `product_id`, `specification_id`, `name`, `pr
 --
 
 CREATE TABLE `ProductSpecification` (
-                                        `id` bigint UNSIGNED NOT NULL,
-                                        `product_id` bigint UNSIGNED NOT NULL,
-                                        `properties` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                                        `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                        `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                        `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `properties` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -940,47 +994,47 @@ CREATE TABLE `ProductSpecification` (
 --
 
 INSERT INTO `ProductSpecification` (`id`, `product_id`, `properties`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                    (58, 47, 'Ram', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
-                                                                                                                    (59, 48, 'Ram', '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
-                                                                                                                    (60, 49, 'Ram', '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
-                                                                                                                    (61, 50, 'Ram', '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
-                                                                                                                    (62, 51, 'Loại', '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
-                                                                                                                    (63, 52, 'Màu', '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
-                                                                                                                    (64, 53, 'Màu', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
-                                                                                                                    (65, 54, 'Màu', '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
-                                                                                                                    (66, 55, 'Màu', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
-                                                                                                                    (67, 56, 'Màu', '2023-06-08 08:47:40', '2023-06-08 08:47:40', NULL),
-                                                                                                                    (68, 57, 'Size', '2023-06-08 08:50:39', '2023-06-08 08:50:39', NULL),
-                                                                                                                    (69, 58, 'Loại', '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
-                                                                                                                    (70, 59, 'Màu', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
-                                                                                                                    (71, 60, 'Màu', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
-                                                                                                                    (72, 61, 'Loại', '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
-                                                                                                                    (73, 62, 'Màu', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
-                                                                                                                    (74, 63, 'Cỡ', '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
-                                                                                                                    (75, 64, 'Màu', '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
-                                                                                                                    (76, 65, 'Màu', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
-                                                                                                                    (77, 66, 'Kích cỡ', '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
-                                                                                                                    (78, 67, 'Màu', '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
-                                                                                                                    (79, 68, 'Màu sắc', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
-                                                                                                                    (80, 69, 'Màu sắc', '2023-06-09 09:29:51', '2023-06-09 09:29:51', NULL),
-                                                                                                                    (81, 70, 'Kích thước', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
-                                                                                                                    (82, 71, 'Kích thước', '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
-                                                                                                                    (83, 72, 'Size', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
-                                                                                                                    (84, 73, 'Size', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
-                                                                                                                    (85, 74, 'Size', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
-                                                                                                                    (86, 75, 'Size', '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
-                                                                                                                    (87, 76, 'Size', '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
-                                                                                                                    (88, 77, 'Size', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
-                                                                                                                    (89, 78, 'Size', '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
-                                                                                                                    (90, 79, 'Màu', '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
-                                                                                                                    (91, 80, 'Màu', '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
-                                                                                                                    (92, 81, 'Bộ ', '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
-                                                                                                                    (93, 82, 'Màu', '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
-                                                                                                                    (94, 83, 'Loại', '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
-                                                                                                                    (95, 84, 'Loại', '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
-                                                                                                                    (96, 85, 'Loại', '2023-06-10 05:45:12', '2023-06-10 05:45:12', NULL),
-                                                                                                                    (97, 86, 'Loại', '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
-                                                                                                                    (98, 87, 'Màu', '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL);
+(58, 47, 'Ram', '2023-06-07 14:15:17', '2023-06-07 14:15:17', NULL),
+(59, 48, 'Ram', '2023-06-07 14:24:55', '2023-06-07 14:24:55', NULL),
+(60, 49, 'Ram', '2023-06-07 14:29:01', '2023-06-07 14:29:01', NULL),
+(61, 50, 'Ram', '2023-06-07 14:34:46', '2023-06-07 14:34:46', NULL),
+(62, 51, 'Loại', '2023-06-07 14:43:24', '2023-06-07 14:43:24', NULL),
+(63, 52, 'Màu', '2023-06-07 14:50:45', '2023-06-07 14:50:45', NULL),
+(64, 53, 'Màu', '2023-06-07 14:56:17', '2023-06-07 14:56:17', NULL),
+(65, 54, 'Màu', '2023-06-07 15:02:35', '2023-06-07 15:02:35', NULL),
+(66, 55, 'Màu', '2023-06-07 15:15:08', '2023-06-07 15:15:08', NULL),
+(67, 56, 'Màu', '2023-06-08 08:47:40', '2023-06-08 08:47:40', NULL),
+(68, 57, 'Size', '2023-06-08 08:50:39', '2023-06-08 08:50:39', NULL),
+(69, 58, 'Loại', '2023-06-08 08:53:54', '2023-06-08 08:53:54', NULL),
+(70, 59, 'Màu', '2023-06-08 09:02:45', '2023-06-08 09:02:45', NULL),
+(71, 60, 'Màu', '2023-06-08 09:09:36', '2023-06-08 09:09:36', NULL),
+(72, 61, 'Loại', '2023-06-08 12:26:05', '2023-06-08 12:26:05', NULL),
+(73, 62, 'Màu', '2023-06-08 12:29:25', '2023-06-08 12:29:25', NULL),
+(74, 63, 'Cỡ', '2023-06-09 08:28:12', '2023-06-09 08:28:12', NULL),
+(75, 64, 'Màu', '2023-06-09 09:05:49', '2023-06-09 09:05:49', NULL),
+(76, 65, 'Màu', '2023-06-09 09:09:17', '2023-06-09 09:09:17', NULL),
+(77, 66, 'Kích cỡ', '2023-06-09 09:14:16', '2023-06-09 09:14:16', NULL),
+(78, 67, 'Màu', '2023-06-09 09:19:02', '2023-06-09 09:19:02', NULL),
+(79, 68, 'Màu sắc', '2023-06-09 09:21:46', '2023-06-09 09:21:46', NULL),
+(80, 69, 'Màu sắc', '2023-06-09 09:29:51', '2023-06-09 09:29:51', NULL),
+(81, 70, 'Kích thước', '2023-06-09 09:57:40', '2023-06-09 09:57:40', NULL),
+(82, 71, 'Kích thước', '2023-06-09 10:01:46', '2023-06-09 10:01:46', NULL),
+(83, 72, 'Size', '2023-06-09 10:05:45', '2023-06-09 10:05:45', NULL),
+(84, 73, 'Size', '2023-06-09 10:08:50', '2023-06-09 10:08:50', NULL),
+(85, 74, 'Size', '2023-06-09 10:12:14', '2023-06-09 10:12:14', NULL),
+(86, 75, 'Size', '2023-06-09 10:22:09', '2023-06-09 10:22:09', NULL),
+(87, 76, 'Size', '2023-06-09 10:24:22', '2023-06-09 10:24:22', NULL),
+(88, 77, 'Size', '2023-06-09 10:27:23', '2023-06-09 10:27:23', NULL),
+(89, 78, 'Size', '2023-06-09 10:32:00', '2023-06-09 10:32:00', NULL),
+(90, 79, 'Màu', '2023-06-10 05:08:55', '2023-06-10 05:08:55', NULL),
+(91, 80, 'Màu', '2023-06-10 05:11:52', '2023-06-10 05:11:52', NULL),
+(92, 81, 'Bộ ', '2023-06-10 05:15:03', '2023-06-10 05:15:03', NULL),
+(93, 82, 'Màu', '2023-06-10 05:18:54', '2023-06-10 05:18:54', NULL),
+(94, 83, 'Loại', '2023-06-10 05:42:09', '2023-06-10 05:42:09', NULL),
+(95, 84, 'Loại', '2023-06-10 05:43:37', '2023-06-10 05:43:37', NULL),
+(96, 85, 'Loại', '2023-06-10 05:45:12', '2023-06-10 05:45:12', NULL),
+(97, 86, 'Loại', '2023-06-10 05:47:29', '2023-06-10 05:47:29', NULL),
+(98, 87, 'Màu', '2023-06-10 05:58:57', '2023-06-10 05:58:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -989,20 +1043,20 @@ INSERT INTO `ProductSpecification` (`id`, `product_id`, `properties`, `created_a
 --
 
 CREATE TABLE `Provider` (
-                            `id` bigint UNSIGNED NOT NULL,
-                            `user_id` bigint UNSIGNED NOT NULL,
-                            `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-                            `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                            `district` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                            `ward` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                            `province_id` int DEFAULT NULL,
-                            `district_id` int DEFAULT NULL,
-                            `ward_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                            `street` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                            `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'https://img.freepik.com/free-vector/shop-with-sign-we-are-open_52683-38687.jpg?w=2000',
-                            `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                            `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                            `deleted_at` datetime DEFAULT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `district` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ward` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `province_id` int DEFAULT NULL,
+  `district_id` int DEFAULT NULL,
+  `ward_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `street` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'https://img.freepik.com/free-vector/shop-with-sign-we-are-open_52683-38687.jpg?w=2000',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1010,19 +1064,19 @@ CREATE TABLE `Provider` (
 --
 
 INSERT INTO `Provider` (`id`, `user_id`, `name`, `province`, `district`, `ward`, `province_id`, `district_id`, `ward_code`, `street`, `image_path`, `created_at`, `updated_at`, `deleted_at`) VALUES
-                                                                                                                                                                                                  (21, 41, 'Computers', 'Lào Cai', 'Huyện Si Ma Cai', 'Xã Nàn Xín', 269, 2264, '80208', 'Đường số 1', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686146791/Product/kinhrwogtefupatc2lbt.png', '2023-06-07 14:06:32', '2023-06-07 14:06:32', NULL),
-                                                                                                                                                                                                  (22, 41, 'Mouses', 'Sơn La', 'Huyện Vân Hồ', 'Xã Quang Minh', 266, 2255, '141208', 'Đường số 2', 'https://i.pcmag.com/imagery/roundups/05UuGuaC1DeBtIUmi0vstl3-15..v1674505590.jpg', '2023-06-07 14:36:09', '2023-06-07 14:36:09', NULL),
-                                                                                                                                                                                                  (23, 41, 'Keyboards', 'Sơn La', 'Huyện Vân Hồ', 'Xã Vân Hồ', 266, 2255, '141213', 'Đường số 3', 'https://5.imimg.com/data5/WQ/TL/CT/SELLER-32460504/81l0xaniall-sl1500-.jpg', '2023-06-07 14:37:01', '2023-06-07 14:37:01', NULL),
-                                                                                                                                                                                                  (24, 41, 'Earphones', 'Lào Cai', 'Huyện Si Ma Cai', 'Xã Sán Chải', 269, 2264, '80210', 'Đường số 4', 'https://www.energysistem.com/cdnassets/products/45305/principal_2000.jpg', '2023-06-07 14:39:00', '2023-06-07 14:39:00', NULL),
-                                                                                                                                                                                                  (25, 42, 'Hat', 'Hưng Yên', 'Huyện Văn Giang', 'Xã Phụng Công', 268, 2045, '221007', 'Đường số 1', 'https://cap.com.vn/wp-content/uploads/2019/03/mu-luoi-trai-nam-nu-400x400.jpg', '2023-06-09 05:51:12', '2023-06-09 05:51:12', NULL),
-                                                                                                                                                                                                  (26, 42, 'Shirt', 'Hòa Bình', 'Huyện Yên Thủy', 'Xã Lạc Thịnh', 267, 2270, '231009', 'Đường số 2', 'https://dosi-in.com/images/detailed/42/CDL10_1.jpg', '2023-06-09 05:52:01', '2023-06-09 05:52:01', NULL),
-                                                                                                                                                                                                  (27, 42, 'Trousers', 'Hưng Yên', 'Huyện Văn Lâm', 'Xã Đại Đồng', 268, 2046, '220903', 'Đường số 3', 'https://product.hstatic.net/1000096703/product/1_65dacd07fc6f4ef3b76116de6eb63b59_grande.jpg', '2023-06-09 05:53:19', '2023-06-09 05:53:19', NULL),
-                                                                                                                                                                                                  (28, 42, 'Jewelry', 'Yên Bái', 'Huyện Trạm Tấu', 'Xã Trạm Tấu', 263, 2248, '130810', 'Đường số 4', 'https://ngoctham.com/wp-content/uploads/2021/07/D11_3_Mobile.jpg', '2023-06-09 05:55:02', '2023-06-09 05:55:02', NULL),
-                                                                                                                                                                                                  (29, 44, 'Watches', 'Cà Mau', 'Huyện U Minh', 'Xã Khánh Hội', 252, 2042, '610304', 'Khóm 3', 'https://cdn.shopify.com/s/files/1/0027/5536/2879/collections/CP_Male_Native_961fa23a-161f-4a6d-ad4d-fc4ca0ddec96_970x.webp?v=1673502035', '2023-06-09 10:18:49', '2023-06-09 10:18:49', NULL),
-                                                                                                                                                                                                  (30, 44, 'Kitchen', 'Sơn La', 'Huyện Vân Hồ', 'Xã Suối Bàng', 266, 2255, '141210', 'Đường số 1', 'https://vnn-imgs-f.vgcloud.vn/2021/09/02/01/1-nha-bep.jpg', '2023-06-10 05:04:57', '2023-06-10 05:04:57', NULL),
-                                                                                                                                                                                                  (31, 44, 'Tables and chairs\n', 'Hưng Yên', 'Huyện Văn Lâm', 'Xã Tân Quang', 268, 2046, '220909', 'Khóm 3', 'https://loiphong.vn/uploaded/08.DO-NOI-THAT-VA-TRANG-TRI/15.ban-ghe-go/ban-ghe-go-phong-khach-18.jpg', '2023-06-10 05:06:08', '2023-06-10 05:06:08', NULL),
-                                                                                                                                                                                                  (32, 43, 'Sách lập trình', 'Hưng Yên', 'Huyện Phù Cừ', 'Xã Tống Phan', 268, 2194, '220713', 'ktx khu A', 'https://ironhackvietnam.edu.vn/wp-content/uploads/2021/03/nhung-cuon-sach-hay-ve-lap-trinh-tieng-viet.jpg', '2023-06-10 05:38:15', '2023-06-10 05:38:15', NULL),
-                                                                                                                                                                                                  (33, 40, 'Iphone2', 'Hưng Yên', 'Huyện Phù Cừ', 'Xã Tống Phan', 268, 2194, '220713', 'Đường số 2', 'https://freepngimg.com/thumb/apple_iphone/117091-12-iphone-free-clipart-hd.png', '2023-06-10 05:53:21', '2023-06-10 05:53:21', NULL);
+(21, 41, 'Computers', 'Lào Cai', 'Huyện Si Ma Cai', 'Xã Nàn Xín', 269, 2264, '80208', 'Đường số 1', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686146791/Product/kinhrwogtefupatc2lbt.png', '2023-06-07 14:06:32', '2023-06-07 14:06:32', NULL),
+(22, 41, 'Mouses', 'Sơn La', 'Huyện Vân Hồ', 'Xã Quang Minh', 266, 2255, '141208', 'Đường số 2', 'https://i.pcmag.com/imagery/roundups/05UuGuaC1DeBtIUmi0vstl3-15..v1674505590.jpg', '2023-06-07 14:36:09', '2023-06-07 14:36:09', NULL),
+(23, 41, 'Keyboards', 'Sơn La', 'Huyện Vân Hồ', 'Xã Vân Hồ', 266, 2255, '141213', 'Đường số 3', 'https://5.imimg.com/data5/WQ/TL/CT/SELLER-32460504/81l0xaniall-sl1500-.jpg', '2023-06-07 14:37:01', '2023-06-07 14:37:01', NULL),
+(24, 41, 'Earphones', 'Lào Cai', 'Huyện Si Ma Cai', 'Xã Sán Chải', 269, 2264, '80210', 'Đường số 4', 'https://www.energysistem.com/cdnassets/products/45305/principal_2000.jpg', '2023-06-07 14:39:00', '2023-06-07 14:39:00', NULL),
+(25, 42, 'Hat', 'Hưng Yên', 'Huyện Văn Giang', 'Xã Phụng Công', 268, 2045, '221007', 'Đường số 1', 'https://cap.com.vn/wp-content/uploads/2019/03/mu-luoi-trai-nam-nu-400x400.jpg', '2023-06-09 05:51:12', '2023-06-09 05:51:12', NULL),
+(26, 42, 'Shirt', 'Hòa Bình', 'Huyện Yên Thủy', 'Xã Lạc Thịnh', 267, 2270, '231009', 'Đường số 2', 'https://dosi-in.com/images/detailed/42/CDL10_1.jpg', '2023-06-09 05:52:01', '2023-06-09 05:52:01', NULL),
+(27, 42, 'Trousers', 'Hưng Yên', 'Huyện Văn Lâm', 'Xã Đại Đồng', 268, 2046, '220903', 'Đường số 3', 'https://product.hstatic.net/1000096703/product/1_65dacd07fc6f4ef3b76116de6eb63b59_grande.jpg', '2023-06-09 05:53:19', '2023-06-09 05:53:19', NULL),
+(28, 42, 'Jewelry', 'Yên Bái', 'Huyện Trạm Tấu', 'Xã Trạm Tấu', 263, 2248, '130810', 'Đường số 4', 'https://ngoctham.com/wp-content/uploads/2021/07/D11_3_Mobile.jpg', '2023-06-09 05:55:02', '2023-06-09 05:55:02', NULL),
+(29, 44, 'Watches', 'Cà Mau', 'Huyện U Minh', 'Xã Khánh Hội', 252, 2042, '610304', 'Khóm 3', 'https://cdn.shopify.com/s/files/1/0027/5536/2879/collections/CP_Male_Native_961fa23a-161f-4a6d-ad4d-fc4ca0ddec96_970x.webp?v=1673502035', '2023-06-09 10:18:49', '2023-06-09 10:18:49', NULL),
+(30, 44, 'Kitchen', 'Sơn La', 'Huyện Vân Hồ', 'Xã Suối Bàng', 266, 2255, '141210', 'Đường số 1', 'https://vnn-imgs-f.vgcloud.vn/2021/09/02/01/1-nha-bep.jpg', '2023-06-10 05:04:57', '2023-06-10 05:04:57', NULL),
+(31, 44, 'Tables and chairs\n', 'Hưng Yên', 'Huyện Văn Lâm', 'Xã Tân Quang', 268, 2046, '220909', 'Khóm 3', 'https://loiphong.vn/uploaded/08.DO-NOI-THAT-VA-TRANG-TRI/15.ban-ghe-go/ban-ghe-go-phong-khach-18.jpg', '2023-06-10 05:06:08', '2023-06-10 05:06:08', NULL),
+(32, 43, 'Sách lập trình', 'Hưng Yên', 'Huyện Phù Cừ', 'Xã Tống Phan', 268, 2194, '220713', 'ktx khu A', 'https://ironhackvietnam.edu.vn/wp-content/uploads/2021/03/nhung-cuon-sach-hay-ve-lap-trinh-tieng-viet.jpg', '2023-06-10 05:38:15', '2023-06-10 05:38:15', NULL),
+(33, 40, 'Iphone2', 'Hưng Yên', 'Huyện Phù Cừ', 'Xã Tống Phan', 268, 2194, '220713', 'Đường số 2', 'https://freepngimg.com/thumb/apple_iphone/117091-12-iphone-free-clipart-hd.png', '2023-06-10 05:53:21', '2023-06-10 05:53:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -1031,14 +1085,14 @@ INSERT INTO `Provider` (`id`, `user_id`, `name`, `province`, `district`, `ward`,
 --
 
 CREATE TABLE `RequestContact` (
-                                  `id` bigint UNSIGNED NOT NULL,
-                                  `subject` varchar(255) NOT NULL,
-                                  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-                                  `attached_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-                                  `type` enum('SHOP','PAYMENT','ORDER','FEEDBACK') NOT NULL,
-                                  `seen` tinyint(1) NOT NULL DEFAULT '0',
-                                  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` bigint UNSIGNED NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `attached_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `type` enum('SHOP','PAYMENT','ORDER','FEEDBACK') NOT NULL,
+  `seen` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -1046,17 +1100,17 @@ CREATE TABLE `RequestContact` (
 --
 
 INSERT INTO `RequestContact` (`id`, `subject`, `content`, `attached_file`, `type`, `seen`, `created_at`, `updated_at`) VALUES
-                                                                                                                           (2, 'ahihi', 'xin mở shop', '', 'SHOP', 1, '2023-06-05 09:57:48', '2023-06-05 09:57:48'),
-                                                                                                                           (3, 'Title', 'I lớp du chịch chịch', '', 'SHOP', 0, '2023-06-05 10:09:14', '2023-06-05 10:09:14'),
-                                                                                                                           (4, 'Title', 'I lớp du chịch chịch', 'a, b', 'SHOP', 0, '2023-06-05 10:09:34', '2023-06-05 10:09:34'),
-                                                                                                                           (5, 'Title', 'I lớp du chịch chịch', 'a, b', 'SHOP', 0, '2023-06-05 14:02:01', '2023-06-05 14:02:01'),
-                                                                                                                           (6, 'về mở shop', 'xin mở shop', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686042509/Product/ed8xxe250fdasvzgo4yr.jpg, http://res.cloudinary.com/damzcas3k/image/upload/v1686042515/Product/xgd7sp5a9wrztnfjutkd.jpg', 'SHOP', 0, '2023-06-06 09:08:53', '2023-06-06 09:08:53'),
-                                                                                                                           (7, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:16', '2023-06-06 09:54:16'),
-                                                                                                                           (8, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:17', '2023-06-06 09:54:17'),
-                                                                                                                           (9, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 1, '2023-06-06 09:54:18', '2023-06-06 09:54:18'),
-                                                                                                                           (10, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:22', '2023-06-06 09:54:22'),
-                                                                                                                           (11, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:23', '2023-06-06 09:54:23'),
-                                                                                                                           (12, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:28', '2023-06-06 09:54:28');
+(2, 'ahihi', 'xin mở shop', '', 'SHOP', 1, '2023-06-05 09:57:48', '2023-06-05 09:57:48'),
+(3, 'Title', 'I lớp du chịch chịch', '', 'SHOP', 0, '2023-06-05 10:09:14', '2023-06-05 10:09:14'),
+(4, 'Title', 'I lớp du chịch chịch', 'a, b', 'SHOP', 0, '2023-06-05 10:09:34', '2023-06-05 10:09:34'),
+(5, 'Title', 'I lớp du chịch chịch', 'a, b', 'SHOP', 0, '2023-06-05 14:02:01', '2023-06-05 14:02:01'),
+(6, 'về mở shop', 'xin mở shop', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686042509/Product/ed8xxe250fdasvzgo4yr.jpg, http://res.cloudinary.com/damzcas3k/image/upload/v1686042515/Product/xgd7sp5a9wrztnfjutkd.jpg', 'SHOP', 0, '2023-06-06 09:08:53', '2023-06-06 09:08:53'),
+(7, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:16', '2023-06-06 09:54:16'),
+(8, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:17', '2023-06-06 09:54:17'),
+(9, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 1, '2023-06-06 09:54:18', '2023-06-06 09:54:18'),
+(10, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:22', '2023-06-06 09:54:22'),
+(11, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:23', '2023-06-06 09:54:23'),
+(12, 'test dài', 'assssssssssssssssssssssssssssssssdddddddddddddddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'http://res.cloudinary.com/damzcas3k/image/upload/v1686045155/Product/ajmnmknjuznfpwtttmsy.jpg', 'SHOP', 0, '2023-06-06 09:54:28', '2023-06-06 09:54:28');
 
 -- --------------------------------------------------------
 
@@ -1065,14 +1119,14 @@ INSERT INTO `RequestContact` (`id`, `subject`, `content`, `attached_file`, `type
 --
 
 CREATE TABLE `Smtp` (
-                        `id` bigint UNSIGNED NOT NULL,
-                        `subject` varchar(255) NOT NULL,
-                        `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-                        `to_emails` varchar(255) NOT NULL,
-                        `cc` varchar(255) NOT NULL,
-                        `bcc` varchar(255) NOT NULL,
-                        `attach_files` varchar(255) NOT NULL,
-                        `status` enum('WAITING','SENDING','FAILED','SUCCESS') NOT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `to_emails` varchar(255) NOT NULL,
+  `cc` varchar(255) NOT NULL,
+  `bcc` varchar(255) NOT NULL,
+  `attach_files` varchar(255) NOT NULL,
+  `status` enum('WAITING','SENDING','FAILED','SUCCESS') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -1080,8 +1134,8 @@ CREATE TABLE `Smtp` (
 --
 
 INSERT INTO `Smtp` (`id`, `subject`, `content`, `to_emails`, `cc`, `bcc`, `attach_files`, `status`) VALUES
-                                                                                                        (64, 'Reset password', '<h1>633476</h1>', 'khanhsd0901@gmail.com', '', '', '', 'SUCCESS'),
-                                                                                                        (65, 'New order from ', '<!doctype html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n\n<head>\n  <title> Notificatin [CES] </title>\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <style type=\"text/css\">\n    #outlook a {\n      padding: 0;\n    }\n\n    body {\n      margin: 0;\n      padding: 0;\n      -webkit-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n\n    table,\n    td {\n      border-collapse: collapse;\n      mso-table-lspace: 0pt;\n      mso-table-rspace: 0pt;\n    }\n\n    img {\n      border: 0;\n      height: auto;\n      line-height: 100%;\n      outline: none;\n      text-decoration: none;\n      -ms-interpolation-mode: bicubic;\n    }\n\n    p {\n      display: block;\n      margin: 13px 0;\n    }\n  </style>\n  <link href=\"https://fonts.googleapis.com/css?family=Roboto:400,500,700\" rel=\"stylesheet\" type=\"text/css\">\n  <style type=\"text/css\">\n    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (min-width:480px) {\n      .mj-column-per-100 {\n        width: 100% !important;\n        max-width: 100%;\n      }\n\n      .mj-column-per-50 {\n        width: 50% !important;\n        max-width: 50%;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (max-width:480px) {\n      table.mj-full-width-mobile {\n        width: 100% !important;\n      }\n\n      td.mj-full-width-mobile {\n        width: auto !important;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    a,\n    span,\n    td,\n    th {\n      -webkit-font-smoothing: antialiased !important;\n      -moz-osx-font-smoothing: grayscale !important;\n    }\n  </style>\n</head>\n\n<body style=\"background-color:#f3f3f5;\">\n<div style=\"display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;\"> Preview - Notification from CES </div>\n<div style=\"background-color:#f3f3f5;\">\n\n  <div style=\"margin:0px auto;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n              <tr>\n                <td style=\"font-size:0px;word-break:break-word;\">\n\n                  <div style=\"height:20px;\"> &nbsp; </div>\n\n                </td>\n              </tr>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n  <div style=\"background:#54595f;background-color:#54595f;margin:0px auto;border-radius:4px 4px 0 0;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#54595f;background-color:#54595f;width:100%;border-radius:4px 4px 0 0;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                      <tr>\n                        <td style=\"font-size:0px;word-break:break-word;\">\n\n                          <div style=\"height:20px;\"> &nbsp; </div>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:0px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:24px;font-weight:400;line-height:30px;text-align:center;color:#ffffff;\">\n                            <h1 style=\"margin: 0; font-size: 24px; line-height: normal; font-weight: 400;\">A new order has been created</h1>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:center;color:#aaaaaa;\">\n                            <p style=\"margin: 0;\">Order Number: 0 | Order Date: 1/1/1 </p>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <p style=\"border-top: solid 1px #999999; font-size: 1px; margin: 0px auto; width: 100%;\">\n                          </p>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:white;\">\n                            <p style=\"margin: 0;\"><br>  bought your products, please contact client soon. </p>\n                          </div>\n                        </td>\n                      </tr>\n                    </table>\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n              <div style=\"margin:0px auto;max-width:600px;\">\n                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n                  <tbody>\n                    <tr>\n                      <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\">\n                            <tbody>\n                              <tr>\n                                <td style=\"vertical-align:top;padding:0px 25px;\">\n                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color:#34393E;\" width=\"100%\">\n                                    <tr>\n                                      <td align=\"left\" class=\"receipt-table\" style=\"font-size:0px;padding:30px;word-break:break-word;\">\n                                        <table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" border=\"0\" style=\"color:#000000;font-family:Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;\">\n                                          <tr>\n                                            <th colspan=\"3\" style=\"font-size: 20px; line-height: 30px; font-weight: 500; color: #fff; padding: 0px 0px 10px 0px; text-align: center; border-bottom: 1px solid #555;\" align=\"center\">Order summary </th>\n                                          </tr>\n\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Total</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0$</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Discount</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0%</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; padding: 10px 0px 0px 0px; text-align: left;\" colspan=\"2\" align=\"left\">Summary</td>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; text-align: right; padding: 10px 0px 0px 0px;\" align=\"right\">0$</td>\n                                          </tr>\n                                        </table>\n                                      </td>\n                                    </tr>\n                                  </table>\n                                </td>\n                              </tr>\n                            </tbody>\n                          </table>\n                        </div>\n\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;\">\n\n                    <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                        <tr>\n                          <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                            <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:#ffffff;\">\n                              <p style=\"margin: 0;\">You\'re receiving this email because a client bought your products at CES. If you have any questions, contact us at <a href=\"#\" style=\"color: #009BF9; text-decoration: none; word-break: normal;\">dummyshop@gmail.com</a></p>\n                            </div>\n                          </td>\n                        </tr>\n                      </table>\n                    </div>\n\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n\n\n</div>\n</body>\n\n</html>', 'khanhsd09011@gmail.com', '', '', '', 'SUCCESS'),
+(64, 'Reset password', '<h1>633476</h1>', 'khanhsd0901@gmail.com', '', '', '', 'SUCCESS'),
+(65, 'New order from ', '<!doctype html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n\n<head>\n  <title> Notificatin [CES] </title>\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <style type=\"text/css\">\n    #outlook a {\n      padding: 0;\n    }\n\n    body {\n      margin: 0;\n      padding: 0;\n      -webkit-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n\n    table,\n    td {\n      border-collapse: collapse;\n      mso-table-lspace: 0pt;\n      mso-table-rspace: 0pt;\n    }\n\n    img {\n      border: 0;\n      height: auto;\n      line-height: 100%;\n      outline: none;\n      text-decoration: none;\n      -ms-interpolation-mode: bicubic;\n    }\n\n    p {\n      display: block;\n      margin: 13px 0;\n    }\n  </style>\n  <link href=\"https://fonts.googleapis.com/css?family=Roboto:400,500,700\" rel=\"stylesheet\" type=\"text/css\">\n  <style type=\"text/css\">\n    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (min-width:480px) {\n      .mj-column-per-100 {\n        width: 100% !important;\n        max-width: 100%;\n      }\n\n      .mj-column-per-50 {\n        width: 50% !important;\n        max-width: 50%;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (max-width:480px) {\n      table.mj-full-width-mobile {\n        width: 100% !important;\n      }\n\n      td.mj-full-width-mobile {\n        width: auto !important;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    a,\n    span,\n    td,\n    th {\n      -webkit-font-smoothing: antialiased !important;\n      -moz-osx-font-smoothing: grayscale !important;\n    }\n  </style>\n</head>\n\n<body style=\"background-color:#f3f3f5;\">\n<div style=\"display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;\"> Preview - Notification from CES </div>\n<div style=\"background-color:#f3f3f5;\">\n\n  <div style=\"margin:0px auto;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n              <tr>\n                <td style=\"font-size:0px;word-break:break-word;\">\n\n                  <div style=\"height:20px;\"> &nbsp; </div>\n\n                </td>\n              </tr>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n  <div style=\"background:#54595f;background-color:#54595f;margin:0px auto;border-radius:4px 4px 0 0;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#54595f;background-color:#54595f;width:100%;border-radius:4px 4px 0 0;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                      <tr>\n                        <td style=\"font-size:0px;word-break:break-word;\">\n\n                          <div style=\"height:20px;\"> &nbsp; </div>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:0px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:24px;font-weight:400;line-height:30px;text-align:center;color:#ffffff;\">\n                            <h1 style=\"margin: 0; font-size: 24px; line-height: normal; font-weight: 400;\">A new order has been created</h1>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:center;color:#aaaaaa;\">\n                            <p style=\"margin: 0;\">Order Number: 0 | Order Date: 1/1/1 </p>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <p style=\"border-top: solid 1px #999999; font-size: 1px; margin: 0px auto; width: 100%;\">\n                          </p>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:white;\">\n                            <p style=\"margin: 0;\"><br>  bought your products, please contact client soon. </p>\n                          </div>\n                        </td>\n                      </tr>\n                    </table>\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n              <div style=\"margin:0px auto;max-width:600px;\">\n                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n                  <tbody>\n                    <tr>\n                      <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\">\n                            <tbody>\n                              <tr>\n                                <td style=\"vertical-align:top;padding:0px 25px;\">\n                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color:#34393E;\" width=\"100%\">\n                                    <tr>\n                                      <td align=\"left\" class=\"receipt-table\" style=\"font-size:0px;padding:30px;word-break:break-word;\">\n                                        <table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" border=\"0\" style=\"color:#000000;font-family:Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;\">\n                                          <tr>\n                                            <th colspan=\"3\" style=\"font-size: 20px; line-height: 30px; font-weight: 500; color: #fff; padding: 0px 0px 10px 0px; text-align: center; border-bottom: 1px solid #555;\" align=\"center\">Order summary </th>\n                                          </tr>\n\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Total</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0$</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Discount</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0%</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; padding: 10px 0px 0px 0px; text-align: left;\" colspan=\"2\" align=\"left\">Summary</td>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; text-align: right; padding: 10px 0px 0px 0px;\" align=\"right\">0$</td>\n                                          </tr>\n                                        </table>\n                                      </td>\n                                    </tr>\n                                  </table>\n                                </td>\n                              </tr>\n                            </tbody>\n                          </table>\n                        </div>\n\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;\">\n\n                    <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                        <tr>\n                          <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                            <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:#ffffff;\">\n                              <p style=\"margin: 0;\">You\'re receiving this email because a client bought your products at CES. If you have any questions, contact us at <a href=\"#\" style=\"color: #009BF9; text-decoration: none; word-break: normal;\">dummyshop@gmail.com</a></p>\n                            </div>\n                          </td>\n                        </tr>\n                      </table>\n                    </div>\n\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n\n\n</div>\n</body>\n\n</html>', 'khanhsd09011@gmail.com', '', '', '', 'SUCCESS'),
 (66, 'Thanks for your purchase', '<!doctype html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n\n<head>\n  <title> Notificatin [CES] </title>\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <style type=\"text/css\">\n    #outlook a {\n      padding: 0;\n    }\n\n    body {\n      margin: 0;\n      padding: 0;\n      -webkit-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n\n    table,\n    td {\n      border-collapse: collapse;\n      mso-table-lspace: 0pt;\n      mso-table-rspace: 0pt;\n    }\n\n    img {\n      border: 0;\n      height: auto;\n      line-height: 100%;\n      outline: none;\n      text-decoration: none;\n      -ms-interpolation-mode: bicubic;\n    }\n\n    p {\n      display: block;\n      margin: 13px 0;\n    }\n  </style>\n  <link href=\"https://fonts.googleapis.com/css?family=Roboto:400,500,700\" rel=\"stylesheet\" type=\"text/css\">\n  <style type=\"text/css\">\n    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (min-width:480px) {\n      .mj-column-per-100 {\n        width: 100% !important;\n        max-width: 100%;\n      }\n\n      .mj-column-per-50 {\n        width: 50% !important;\n        max-width: 50%;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (max-width:480px) {\n      table.mj-full-width-mobile {\n        width: 100% !important;\n      }\n\n      td.mj-full-width-mobile {\n        width: auto !important;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    a,\n    span,\n    td,\n    th {\n      -webkit-font-smoothing: antialiased !important;\n      -moz-osx-font-smoothing: grayscale !important;\n    }\n  </style>\n</head>\n\n<body style=\"background-color:#f3f3f5;\">\n<div style=\"display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;\"> Preview - Notification from CES </div>\n<div style=\"background-color:#f3f3f5;\">\n\n  <div style=\"margin:0px auto;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n              <tr>\n                <td style=\"font-size:0px;word-break:break-word;\">\n\n                  <div style=\"height:20px;\"> &nbsp; </div>\n\n                </td>\n              </tr>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n  <div style=\"background:#54595f;background-color:#54595f;margin:0px auto;border-radius:4px 4px 0 0;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#54595f;background-color:#54595f;width:100%;border-radius:4px 4px 0 0;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                      <tr>\n                        <td style=\"font-size:0px;word-break:break-word;\">\n\n                          <div style=\"height:20px;\"> &nbsp; </div>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:0px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:24px;font-weight:400;line-height:30px;text-align:center;color:#ffffff;\">\n                            <h1 style=\"margin: 0; font-size: 24px; line-height: normal; font-weight: 400;\">Thank you for your order</h1>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:center;color:#aaaaaa;\">\n                            <p style=\"margin: 0;\">Order Number: 0 | Order Date: 1/1/1 </p>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <p style=\"border-top: solid 1px #999999; font-size: 1px; margin: 0px auto; width: 100%;\">\n                          </p>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:white;\">\n                            <p style=\"margin: 0;\">Hi ,<br> Thank you for your purchase. Please find your order summary below. </p>\n                          </div>\n                        </td>\n                      </tr>\n                    </table>\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n              <div style=\"margin:0px auto;max-width:600px;\">\n                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n                  <tbody>\n                    <tr>\n                      <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\">\n                            <tbody>\n                              <tr>\n                                <td style=\"vertical-align:top;padding:0px 25px;\">\n                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color:#34393E;\" width=\"100%\">\n                                    <tr>\n                                      <td align=\"left\" class=\"receipt-table\" style=\"font-size:0px;padding:30px;word-break:break-word;\">\n                                        <table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" border=\"0\" style=\"color:#000000;font-family:Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;\">\n                                          <tr>\n                                            <th colspan=\"3\" style=\"font-size: 20px; line-height: 30px; font-weight: 500; color: #fff; padding: 0px 0px 10px 0px; text-align: center; border-bottom: 1px solid #555;\" align=\"center\">Order summary </th>\n                                          </tr>\n\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Total</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0$</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Discount</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0%</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; padding: 10px 0px 0px 0px; text-align: left;\" colspan=\"2\" align=\"left\">Summary</td>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; text-align: right; padding: 10px 0px 0px 0px;\" align=\"right\">0$</td>\n                                          </tr>\n                                        </table>\n                                      </td>\n                                    </tr>\n                                  </table>\n                                </td>\n                              </tr>\n                            </tbody>\n                          </table>\n                        </div>\n\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;\">\n\n                    <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                        <tr>\n                          <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                            <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:#ffffff;\">\n                              <p style=\"margin: 0;\">You\'re receiving this email because you made a purchase at CES. If you have any questions, contact us at <a href=\"#\" style=\"color: #009BF9; text-decoration: none; word-break: normal;\">dummyshop@gmail.com</a></p>\n                            </div>\n                          </td>\n                        </tr>\n                      </table>\n                    </div>\n\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n\n\n</div>\n</body>\n\n</html>', 'khanhsd0901@gmail.com', '', '', '', 'SUCCESS'),
 (67, 'New order from ', '<!doctype html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n\n<head>\n  <title> Notificatin [CES] </title>\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <style type=\"text/css\">\n    #outlook a {\n      padding: 0;\n    }\n\n    body {\n      margin: 0;\n      padding: 0;\n      -webkit-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n\n    table,\n    td {\n      border-collapse: collapse;\n      mso-table-lspace: 0pt;\n      mso-table-rspace: 0pt;\n    }\n\n    img {\n      border: 0;\n      height: auto;\n      line-height: 100%;\n      outline: none;\n      text-decoration: none;\n      -ms-interpolation-mode: bicubic;\n    }\n\n    p {\n      display: block;\n      margin: 13px 0;\n    }\n  </style>\n  <link href=\"https://fonts.googleapis.com/css?family=Roboto:400,500,700\" rel=\"stylesheet\" type=\"text/css\">\n  <style type=\"text/css\">\n    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (min-width:480px) {\n      .mj-column-per-100 {\n        width: 100% !important;\n        max-width: 100%;\n      }\n\n      .mj-column-per-50 {\n        width: 50% !important;\n        max-width: 50%;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (max-width:480px) {\n      table.mj-full-width-mobile {\n        width: 100% !important;\n      }\n\n      td.mj-full-width-mobile {\n        width: auto !important;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    a,\n    span,\n    td,\n    th {\n      -webkit-font-smoothing: antialiased !important;\n      -moz-osx-font-smoothing: grayscale !important;\n    }\n  </style>\n</head>\n\n<body style=\"background-color:#f3f3f5;\">\n<div style=\"display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;\"> Preview - Notification from CES </div>\n<div style=\"background-color:#f3f3f5;\">\n\n  <div style=\"margin:0px auto;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n              <tr>\n                <td style=\"font-size:0px;word-break:break-word;\">\n\n                  <div style=\"height:20px;\"> &nbsp; </div>\n\n                </td>\n              </tr>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n  <div style=\"background:#54595f;background-color:#54595f;margin:0px auto;border-radius:4px 4px 0 0;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#54595f;background-color:#54595f;width:100%;border-radius:4px 4px 0 0;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                      <tr>\n                        <td style=\"font-size:0px;word-break:break-word;\">\n\n                          <div style=\"height:20px;\"> &nbsp; </div>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:0px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:24px;font-weight:400;line-height:30px;text-align:center;color:#ffffff;\">\n                            <h1 style=\"margin: 0; font-size: 24px; line-height: normal; font-weight: 400;\">A new order has been created</h1>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:center;color:#aaaaaa;\">\n                            <p style=\"margin: 0;\">Order Number: 0 | Order Date: 1/1/1 </p>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <p style=\"border-top: solid 1px #999999; font-size: 1px; margin: 0px auto; width: 100%;\">\n                          </p>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:white;\">\n                            <p style=\"margin: 0;\"><br>  bought your products, please contact client soon. </p>\n                          </div>\n                        </td>\n                      </tr>\n                    </table>\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n              <div style=\"margin:0px auto;max-width:600px;\">\n                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n                  <tbody>\n                    <tr>\n                      <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\">\n                            <tbody>\n                              <tr>\n                                <td style=\"vertical-align:top;padding:0px 25px;\">\n                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color:#34393E;\" width=\"100%\">\n                                    <tr>\n                                      <td align=\"left\" class=\"receipt-table\" style=\"font-size:0px;padding:30px;word-break:break-word;\">\n                                        <table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" border=\"0\" style=\"color:#000000;font-family:Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;\">\n                                          <tr>\n                                            <th colspan=\"3\" style=\"font-size: 20px; line-height: 30px; font-weight: 500; color: #fff; padding: 0px 0px 10px 0px; text-align: center; border-bottom: 1px solid #555;\" align=\"center\">Order summary </th>\n                                          </tr>\n\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Total</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0$</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Discount</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0%</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; padding: 10px 0px 0px 0px; text-align: left;\" colspan=\"2\" align=\"left\">Summary</td>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; text-align: right; padding: 10px 0px 0px 0px;\" align=\"right\">0$</td>\n                                          </tr>\n                                        </table>\n                                      </td>\n                                    </tr>\n                                  </table>\n                                </td>\n                              </tr>\n                            </tbody>\n                          </table>\n                        </div>\n\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;\">\n\n                    <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                        <tr>\n                          <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                            <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:#ffffff;\">\n                              <p style=\"margin: 0;\">You\'re receiving this email because a client bought your products at CES. If you have any questions, contact us at <a href=\"#\" style=\"color: #009BF9; text-decoration: none; word-break: normal;\">dummyshop@gmail.com</a></p>\n                            </div>\n                          </td>\n                        </tr>\n                      </table>\n                    </div>\n\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n\n\n</div>\n</body>\n\n</html>', 'khanhsd09011@gmail.com', '', '', '', 'SUCCESS'),
 (68, 'Thanks for your purchase', '<!doctype html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n\n<head>\n  <title> Notificatin [CES] </title>\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <style type=\"text/css\">\n    #outlook a {\n      padding: 0;\n    }\n\n    body {\n      margin: 0;\n      padding: 0;\n      -webkit-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n    }\n\n    table,\n    td {\n      border-collapse: collapse;\n      mso-table-lspace: 0pt;\n      mso-table-rspace: 0pt;\n    }\n\n    img {\n      border: 0;\n      height: auto;\n      line-height: 100%;\n      outline: none;\n      text-decoration: none;\n      -ms-interpolation-mode: bicubic;\n    }\n\n    p {\n      display: block;\n      margin: 13px 0;\n    }\n  </style>\n  <link href=\"https://fonts.googleapis.com/css?family=Roboto:400,500,700\" rel=\"stylesheet\" type=\"text/css\">\n  <style type=\"text/css\">\n    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (min-width:480px) {\n      .mj-column-per-100 {\n        width: 100% !important;\n        max-width: 100%;\n      }\n\n      .mj-column-per-50 {\n        width: 50% !important;\n        max-width: 50%;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    @media only screen and (max-width:480px) {\n      table.mj-full-width-mobile {\n        width: 100% !important;\n      }\n\n      td.mj-full-width-mobile {\n        width: auto !important;\n      }\n    }\n  </style>\n  <style type=\"text/css\">\n    a,\n    span,\n    td,\n    th {\n      -webkit-font-smoothing: antialiased !important;\n      -moz-osx-font-smoothing: grayscale !important;\n    }\n  </style>\n</head>\n\n<body style=\"background-color:#f3f3f5;\">\n<div style=\"display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;\"> Preview - Notification from CES </div>\n<div style=\"background-color:#f3f3f5;\">\n\n  <div style=\"margin:0px auto;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n              <tr>\n                <td style=\"font-size:0px;word-break:break-word;\">\n\n                  <div style=\"height:20px;\"> &nbsp; </div>\n\n                </td>\n              </tr>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n  <div style=\"background:#54595f;background-color:#54595f;margin:0px auto;border-radius:4px 4px 0 0;max-width:600px;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#54595f;background-color:#54595f;width:100%;border-radius:4px 4px 0 0;\">\n      <tbody>\n      <tr>\n        <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                      <tr>\n                        <td style=\"font-size:0px;word-break:break-word;\">\n\n                          <div style=\"height:20px;\"> &nbsp; </div>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:0px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:24px;font-weight:400;line-height:30px;text-align:center;color:#ffffff;\">\n                            <h1 style=\"margin: 0; font-size: 24px; line-height: normal; font-weight: 400;\">Thank you for your order</h1>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:center;color:#aaaaaa;\">\n                            <p style=\"margin: 0;\">Order Number: 0 | Order Date: 1/1/1 </p>\n                          </div>\n                        </td>\n                      </tr>\n                      <tr>\n                        <td style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <p style=\"border-top: solid 1px #999999; font-size: 1px; margin: 0px auto; width: 100%;\">\n                          </p>\n\n                        </td>\n                      </tr>\n                      <tr>\n                        <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                          <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:white;\">\n                            <p style=\"margin: 0;\">Hi ,<br> Thank you for your purchase. Please find your order summary below. </p>\n                          </div>\n                        </td>\n                      </tr>\n                    </table>\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n              <div style=\"margin:0px auto;max-width:600px;\">\n                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n                  <tbody>\n                    <tr>\n                      <td style=\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;\">\n\n                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\">\n                            <tbody>\n                              <tr>\n                                <td style=\"vertical-align:top;padding:0px 25px;\">\n                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color:#34393E;\" width=\"100%\">\n                                    <tr>\n                                      <td align=\"left\" class=\"receipt-table\" style=\"font-size:0px;padding:30px;word-break:break-word;\">\n                                        <table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" border=\"0\" style=\"color:#000000;font-family:Roboto, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;\">\n                                          <tr>\n                                            <th colspan=\"3\" style=\"font-size: 20px; line-height: 30px; font-weight: 500; color: #fff; padding: 0px 0px 10px 0px; text-align: center; border-bottom: 1px solid #555;\" align=\"center\">Order summary </th>\n                                          </tr>\n\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Total</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0$</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: left;\" colspan=\"2\" align=\"left\">Discount</td>\n                                            <td style=\"color: #ccc; font-size: 15px; line-height: 22px; font-weight: 400; word-break: normal; padding: 10px 0; text-align: right;\" align=\"right\">0%</td>\n                                          </tr>\n                                          <tr>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; padding: 10px 0px 0px 0px; text-align: left;\" colspan=\"2\" align=\"left\">Summary</td>\n                                            <td style=\"word-break: normal; color: #fff; font-size: 20px; line-height: 30px; border-top: 1px solid #555; font-weight: 500; text-align: right; padding: 10px 0px 0px 0px;\" align=\"right\">0$</td>\n                                          </tr>\n                                        </table>\n                                      </td>\n                                    </tr>\n                                  </table>\n                                </td>\n                              </tr>\n                            </tbody>\n                          </table>\n                        </div>\n\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n\n          <div style=\"margin:0px auto;max-width:600px;\">\n            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">\n              <tbody>\n              <tr>\n                <td style=\"direction:ltr;font-size:0px;padding:0px;text-align:center;\">\n\n                  <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;\">\n\n                    <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">\n                      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">\n                        <tr>\n                          <td align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n                            <div style=\"font-family:Roboto, Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:20px;text-align:left;color:#ffffff;\">\n                              <p style=\"margin: 0;\">You\'re receiving this email because you made a purchase at CES. If you have any questions, contact us at <a href=\"#\" style=\"color: #009BF9; text-decoration: none; word-break: normal;\">dummyshop@gmail.com</a></p>\n                            </div>\n                          </td>\n                        </tr>\n                      </table>\n                    </div>\n\n                  </div>\n\n                </td>\n              </tr>\n              </tbody>\n            </table>\n          </div>\n\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n\n\n</div>\n</body>\n\n</html>', 'khanhsd0901@gmail.com', '', '', '', 'SUCCESS');
@@ -1213,6 +1267,21 @@ ALTER TABLE `Comment`
 ALTER TABLE `CommentMedia`
   ADD PRIMARY KEY (`id`),
   ADD KEY `comment_id` (`comment_id`);
+
+--
+-- Indexes for table `Coupon`
+--
+ALTER TABLE `Coupon`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `CouponDetail`
+--
+ALTER TABLE `CouponDetail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `CouponDetail_ibfk_2` (`coupon_id`);
 
 --
 -- Indexes for table `Email`
@@ -1375,6 +1444,18 @@ ALTER TABLE `CommentMedia`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `Coupon`
+--
+ALTER TABLE `Coupon`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `CouponDetail`
+--
+ALTER TABLE `CouponDetail`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
 -- AUTO_INCREMENT for table `Email`
 --
 ALTER TABLE `Email`
@@ -1515,6 +1596,19 @@ ALTER TABLE `Comment`
 --
 ALTER TABLE `CommentMedia`
   ADD CONSTRAINT `CommentMedia_ibfk_1` FOREIGN KEY (`comment_id`) REFERENCES `Comment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Coupon`
+--
+ALTER TABLE `Coupon`
+  ADD CONSTRAINT `Coupon_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `CouponDetail`
+--
+ALTER TABLE `CouponDetail`
+  ADD CONSTRAINT `CouponDetail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `CouponDetail_ibfk_2` FOREIGN KEY (`coupon_id`) REFERENCES `Coupon` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `Message`

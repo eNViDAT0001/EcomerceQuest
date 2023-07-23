@@ -15,6 +15,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/cart/cart_items"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/chat"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/comment"
+	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/coupon"
 	chat2 "github.com/eNViDAT0001/Thesis/Backend/delivery/http/notification"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order"
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/order/order_items"
@@ -50,6 +51,8 @@ import (
 	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/usecase"
 	storage10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
 	usecase10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/usecase"
+	storage20 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage"
+	usecase21 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/usecase"
 	storage6 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage"
 	usecase7 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/usecase"
 	storage8 "github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/storage"
@@ -78,8 +81,8 @@ func initHandlerCollection() *HandlerCollection {
 	jwtStorage := storage2.NewJwtStorage()
 	jwtUseCase := usecase2.NewJwtUseCase(userStorage, jwtStorage)
 	httpHandler := user.NewUserHandler(useCase, jwtUseCase)
-	storage20 := storage3.NewAddressStorage()
-	userUseCase := usecase3.NewAddressUseCase(storage20)
+	storage21 := storage3.NewAddressStorage()
+	userUseCase := usecase3.NewAddressUseCase(storage21)
 	userHttpHandler := address.NewAddressHandler(userUseCase)
 	categoryStorage := storage4.NewCategoryStorage()
 	categoryUseCase := usecase4.NewCategoryUseCase(categoryStorage)
@@ -134,6 +137,9 @@ func initHandlerCollection() *HandlerCollection {
 	request_contactUseCase := usecase20.NewRequestContactUseCase(request_contactStorage, notificationUseCase)
 	request_contactHttpHandler := smtp2.NewRequestContactHandler(request_contactUseCase)
 	dummyRedisHandler := redis.NewRedisHandler()
-	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler, adminHttpHandler, request_contactHttpHandler, dummyRedisHandler)
+	couponStorage := storage20.NewCouponStorage()
+	couponUseCase := usecase21.NewCouponUseCase(couponStorage, productStorage)
+	couponHttpHandler := coupon.NewBannerHandler(couponUseCase)
+	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler, adminHttpHandler, request_contactHttpHandler, dummyRedisHandler, couponHttpHandler)
 	return handlerCollection
 }

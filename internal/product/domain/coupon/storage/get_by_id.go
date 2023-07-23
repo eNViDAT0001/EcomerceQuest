@@ -3,21 +3,20 @@ package storage
 import (
 	"context"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/storage/io"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
+	io "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage/io"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 	"gorm.io/gorm"
 )
 
-func (b couponStorage) GetBannerByID(ctx context.Context, bannerID uint) (io.BannerDetail, error) {
-	var result io.BannerDetail
+func (b couponStorage) GetCouponByID(ctx context.Context, couponID uint) (io.CouponDetail, error) {
+	var result io.CouponDetail
 	db := wrap_gorm.GetDB()
-	query := db.Table(entities.Banner{}.TableName()).
-		Select("Banner.*, IF(COUNT(Product.id) = 0, NULL, JSON_ARRAYAGG(JSON_OBJECT( 'id', Product.id, 'name', Product.name))) AS products").
-		Joins("LEFT JOIN BannerDetail ON BannerDetail.banner_id = Banner.id").
-		Joins("JOIN Product ON Product.id = BannerDetail.product_id").
-		Where("Banner.id = ?", bannerID).
-		Where("Banner.deleted_at IS NULL").
-		Group("Banner.id").
+	query := db.Table(entities.Coupon{}.TableName()).
+		Select("Coupon.*, IF(COUNT(Product.id) = 0, NULL, JSON_ARRAYAGG(JSON_OBJECT( 'id', Product.id, 'name', Product.name, 'total', CouponDetail.total))) AS products").
+		Joins("LEFT JOIN CouponDetail ON CouponDetail.coupon_id = Coupon.id").
+		Joins("JOIN Product ON Product.id = CouponDetail.product_id").
+		Where("Coupon.id = ?", couponID).
+		Group("Coupon.id").
 		Scan(&result)
 
 	err := query.Error
@@ -26,21 +25,6 @@ func (b couponStorage) GetBannerByID(ctx context.Context, bannerID uint) (io.Ban
 	}
 	if query.RowsAffected < 1 {
 		return result, gorm.ErrRecordNotFound
-	}
-
-	return result, nil
-}
-func (b couponStorage) GetBannerDetailByID(ctx context.Context, bannerID uint) (entities.Banner, error) {
-	var result entities.Banner
-	db := wrap_gorm.GetDB()
-	query := db.Table(entities.Banner{}.TableName()).
-		Where("Banner.id = ?", bannerID).
-		Where("Banner.deleted_at IS NULL").
-		Scan(&result)
-
-	err := query.Error
-	if err != nil {
-		return result, err
 	}
 
 	return result, nil

@@ -2,13 +2,15 @@ package usecase
 
 import (
 	"context"
+	coupon "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage/io"
+	ioUC "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/usecase/io"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product"
 	ioProductSto "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage/io"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/product/coupon"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/product/coupon/storage/io"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
+
 	"gorm.io/gorm"
 )
 
@@ -17,26 +19,41 @@ type couponUseCase struct {
 	productSto product.Storage
 }
 
-func (u couponUseCase) CreateCoupon(ctx context.Context, input io.CouponCreateForm, productIDs []uint) (CouponID uint, err error) {
-	return u.couponSto.CreateCoupon(ctx, input, productIDs)
+func (u couponUseCase) ValidateCouponByProductIDs(ctx context.Context, CouponCode string, productIDs []uint) ([]ioUC.ValidatedProduct, error) {
+	var result []ioUC.ValidatedProduct
+	for _, id := range productIDs {
+		cp, err := u.couponSto.ValidateCouponByProductIDs(ctx, CouponCode, id)
+		if err != nil && err != gorm.ErrRecordNotFound {
+			return nil, err
+		}
+
+		if err != gorm.ErrRecordNotFound {
+			result = append(result, ioUC.ValidatedProduct{
+				ProductID: id,
+				Total:     cp.Fixed,
+			})
+		}
+	}
+	return result, nil
 }
 
-func (u couponUseCase) GetCouponByID(ctx context.Context, CouponID uint) (io.CouponDetail, error) {
-	return u.couponSto.GetCouponByID(ctx, CouponID)
-}
-func (u couponUseCase) GetCouponDetailByID(ctx context.Context, CouponID uint) (entities.Coupon, error) {
-	return u.couponSto.GetCouponDetailByID(ctx, CouponID)
+func (u couponUseCase) CreateCoupon(ctx context.Context, input io.CouponCreateForm, products []io.CouponDetailCreateForm) (couponID uint, err error) {
+	return u.couponSto.CreateCoupon(ctx, input, products)
 }
 
-func (u couponUseCase) UpdateCoupon(ctx context.Context, CouponID uint, input io.CouponUpdateForm, productIDsIN []uint, productIDsOUT []uint) error {
-	return u.couponSto.UpdateCoupon(ctx, CouponID, input, productIDsIN, productIDsOUT)
+func (u couponUseCase) GetCouponByID(ctx context.Context, couponID uint) (io.CouponDetail, error) {
+	return u.couponSto.GetCouponByID(ctx, couponID)
 }
 
-func (u couponUseCase) DeleteCouponByIDs(ctx context.Context, CouponID []uint) error {
-	return u.couponSto.DeleteCouponByIDs(ctx, CouponID)
+func (u couponUseCase) UpdateCoupon(ctx context.Context, couponID uint, input io.CouponUpdateForm, productsIN []io.CouponDetailCreateForm, productIDsOUT []uint) error {
+	return u.couponSto.UpdateCoupon(ctx, couponID, input, productsIN, productIDsOUT)
 }
 
-func (u couponUseCase) ListCoupon(ctx context.Context, filter paging.ParamsInput) (Coupons []entities.Coupon, total int64, err error) {
+func (u couponUseCase) DeleteCouponByIDs(ctx context.Context, userID uint, couponID []uint) error {
+	return u.couponSto.DeleteCouponByIDs(ctx, userID, couponID)
+}
+
+func (u couponUseCase) ListCoupon(ctx context.Context, filter paging.ParamsInput) (coupons []entities.Coupon, total int64, err error) {
 	total, err = u.couponSto.CountListCoupon(ctx, filter, 0)
 	if err != nil {
 		return nil, 0, err
@@ -44,12 +61,12 @@ func (u couponUseCase) ListCoupon(ctx context.Context, filter paging.ParamsInput
 	if total == 0 {
 		return nil, 0, gorm.ErrRecordNotFound
 	}
-	Coupons, err = u.couponSto.ListCoupon(ctx, filter)
+	coupons, err = u.couponSto.ListCoupon(ctx, filter)
 	if err != nil {
 		return nil, 0, err
 	}
 
-	return Coupons, total, err
+	return coupons, total, err
 }
 
 func (u couponUseCase) ListProductPreviewByCouponID(ctx context.Context, CouponID uint, filter paging.ParamsInput) (products []ioProductSto.ProductPreviewItem, total int64, err error) {

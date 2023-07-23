@@ -6,9 +6,9 @@ import (
 
 type CouponDetail struct {
 	wrap_gorm.HardDeleteModel
-	ProductID uint   `gorm:"column:product_id" json:"product_id"`
-	CouponID  uint   `gorm:"column:coupon_id" json:"coupon_id"`
-	Count     string `gorm:"column:count" json:"count"`
+	ProductID uint `gorm:"column:product_id" json:"product_id"`
+	CouponID  uint `gorm:"column:coupon_id" json:"coupon_id"`
+	Total     int  `gorm:"column:total" json:"total"`
 }
 
 func (CouponDetail) WithFields() []string {

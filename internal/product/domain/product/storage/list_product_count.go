@@ -12,7 +12,9 @@ func (s productStorage) ListCountProduct(ctx context.Context, input io.ListProdu
 	var count int64
 	db := wrap_gorm.GetDB()
 
-	query := db.Model(entities.Product{}).Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL")
+	query := db.Model(entities.Product{}).
+		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
+		Joins("JOIN Category ON Product.category_id = Category.id AND Category.deleted_at IS NULL")
 
 	paging_query.SetCountListPagingQuery(&input.Paging, entities.Product{}.TableName(), query)
 

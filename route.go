@@ -248,6 +248,28 @@ func router(r *gin.Engine) {
 			authAminGroup.POST("", allHandler.bannerHandler.CreateBanner())
 			authAminGroup.PATCH("/:banner_id/user/:user_id", allHandler.bannerHandler.UpdateBanner())
 		}
+
+		couponGroup := v1.Group("/coupons")
+		{
+			authGroup := couponGroup.Group("")
+			authGroup.Use(allHandler.jwtHandler.VerifyUserToken())
+
+			// Phân quyền theo Admin
+			authAminGroup := couponGroup.Group("")
+			authAminGroup.Use(allHandler.jwtHandler.VerifyAdminToken())
+
+			couponGroup.GET("", allHandler.couponHandler.ListCoupon())
+			couponGroup.GET("/:coupon_id", allHandler.couponHandler.GetCouponByID())
+			couponGroup.GET("/:coupon_id/products", allHandler.couponHandler.ListProductByCouponID())
+			couponGroup.GET("/:coupon_id/products/preview", allHandler.couponHandler.ListProductPreviewByCouponID())
+			couponGroup.GET("/:coupon_id/products/no", allHandler.couponHandler.ListProductNotInCouponID())
+			couponGroup.GET("/:coupon_id/products/preview/no", allHandler.couponHandler.ListProductPreviewNotInCouponID())
+
+			couponGroup.DELETE("/user/:user_id", allHandler.couponHandler.DeleteCouponByIDs())
+			couponGroup.POST("/user/:user_id", allHandler.couponHandler.CreateCoupon())
+			couponGroup.PATCH("/:coupon_id/user/:user_id", allHandler.couponHandler.UpdateCoupon())
+		}
+
 		cartGroup := v1.Group("/carts")
 		{
 			cartGroup.GET("/user/:user_id", allHandler.cartHandler.ListCartByUserID())

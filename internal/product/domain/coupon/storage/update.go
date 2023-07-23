@@ -3,34 +3,27 @@ package storage
 import (
 	"context"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/domain/banner/storage/io"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage/io"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )
 
-func (b couponStorage) UpdateBanner(ctx context.Context, bannerID uint, input io.BannerUpdateForm, productIDsIN []uint, productIDsOUT []uint) error {
+func (b couponStorage) UpdateCoupon(ctx context.Context, couponID uint, input io.CouponUpdateForm, productsIN []io.CouponDetailCreateForm, productIDsOUT []uint) error {
 	database := wrap_gorm.GetDB()
 
 	err := database.Transaction(func(db *gorm.DB) error {
-		// do some database operations in the transaction (use 'tx' from this point, not 'db')
-		err := db.Model(entities.Banner{}).Where("id = ?", bannerID).Updates(&input).Error
+		err := db.Model(entities.Coupon{}).Where("id = ?", couponID).Updates(&input).Error
 		if err != nil {
 			return err
 		}
-
-		productINStorage := make([]entities.BannerDetail, 0)
-		for _, id := range productIDsIN {
-			bannerDetail := entities.BannerDetail{
-				BannerID:  bannerID,
-				ProductID: id,
-			}
-			productINStorage = append(productINStorage, bannerDetail)
+		for i, _ := range productsIN {
+			productsIN[i].CouponID = couponID
 		}
-		if len(productINStorage) > 0 {
-			err = db.Table(entities.BannerDetail{}.TableName()).Clauses(clause.OnConflict{
-				DoNothing: true,
-			}).Create(&productINStorage).Error
+		if len(productsIN) > 0 {
+			err = db.Table(entities.CouponDetail{}.TableName()).Clauses(clause.OnConflict{
+				UpdateAll: true,
+			}).Create(&productsIN).Error
 			if err != nil {
 				db.Rollback()
 				return err
@@ -38,9 +31,10 @@ func (b couponStorage) UpdateBanner(ctx context.Context, bannerID uint, input io
 		}
 
 		if len(productIDsOUT) > 0 {
-			err = db.Table(entities.BannerDetail{}.TableName()).
+			err = db.Table(entities.CouponDetail{}.TableName()).
 				Where("product_id IN ?", productIDsOUT).
-				Delete(&entities.BannerDetail{}).
+				Where("coupon_id = ?", couponID).
+				Delete(&entities.CouponDetail{}).
 				Error
 
 			if err != nil {
@@ -49,7 +43,6 @@ func (b couponStorage) UpdateBanner(ctx context.Context, bannerID uint, input io
 			}
 		}
 
-		// return nil will commit the whole transaction
 		return nil
 	})
 	if err != nil {

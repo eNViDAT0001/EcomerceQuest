@@ -8,15 +8,16 @@ import (
 )
 
 type Storage interface {
-	CreateCoupon(ctx context.Context, input io.CouponCreateForm, productIDs []uint) (CouponID uint, err error)
-	GetCouponByID(ctx context.Context, CouponID uint) (io.CouponDetail, error)
-	UpdateCoupon(ctx context.Context, CouponID uint, input io.CouponUpdateForm, productIDsIN []uint, productIDsOUT []uint) error
-	DeleteCouponByIDs(ctx context.Context, CouponID []uint) error
+	CreateCoupon(ctx context.Context, input io.CouponCreateForm, products []io.CouponDetailCreateForm) (CouponID uint, err error)
+	GetCouponByID(ctx context.Context, couponID uint) (io.CouponDetail, error)
+	UpdateCoupon(ctx context.Context, couponID uint, input io.CouponUpdateForm, productsIN []io.CouponDetailCreateForm, productIDsOUT []uint) error
+	DeleteCouponByIDs(ctx context.Context, userID uint, couponIDs []uint) error
 	ListCoupon(ctx context.Context, filter paging.ParamsInput) ([]entities.Coupon, error)
-	CountListCoupon(ctx context.Context, filter paging.ParamsInput, CouponID uint) (total int64, err error)
-	ListProductIDsByCouponID(ctx context.Context, CouponID uint, filter paging.ParamsInput) ([]uint, error)
-	ProductIDsByNotInCouponID(ctx context.Context, CouponID uint) ([]uint, error)
-	ProductIDsByCouponID(ctx context.Context, CouponID uint) ([]uint, error)
+	CountListCoupon(ctx context.Context, filter paging.ParamsInput, couponID uint) (total int64, err error)
+	ListProductIDsByCouponID(ctx context.Context, couponID uint, filter paging.ParamsInput) ([]uint, error)
+	ProductIDsByNotInCouponID(ctx context.Context, couponID uint) ([]uint, error)
+	ProductIDsByCouponID(ctx context.Context, couponID uint) ([]uint, error)
 
-	ValidateCouponByProductIDs(ctx context.Context, CouponCode uint, productIDs []uint) (bool, error)
+	ValidateCouponByProductIDs(ctx context.Context, couponCode string, productID uint) (entities.Coupon, error)
+	//UseCouponByProductIDsWithGorm(db *gorm.DB, couponCode uint, productID uint) (entities.Coupon, error)
 }

@@ -33,6 +33,7 @@ func (s productStorage) ListProductsPreview(ctx context.Context, input io.ListPr
 		Joins("LEFT JOIN ProductMedia ON ProductMedia.product_id = Product.id").
 		Joins("LEFT JOIN Comment ON Comment.product_id = Product.id").
 		Joins("JOIN Provider ON Product.provider_id = Provider.id AND Provider.deleted_at IS NULL").
+		Joins("JOIN Category ON Product.category_id = Category.id AND Category.deleted_at IS NULL").
 		Where("Product.deleted_at IS NULL").
 		Group("Product.id")
 	err := DoDummyRatingSort(input, query) // This is the DummyLine

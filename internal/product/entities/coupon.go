@@ -6,11 +6,10 @@ import (
 
 type Coupon struct {
 	wrap_gorm.HardDeleteModel
-	ProductID uint   `gorm:"column:product_id" json:"product_id"`
-	UserID    uint   `gorm:"column:user_id" json:"user_id"`
-	Name      string `gorm:"column:name" json:"name"`
-	Percent   string `gorm:"column:percent" json:"percent"`
-	Fixed     int    `gorm:"column:fixed" json:"fixed"`
+	UserID  uint    `gorm:"column:user_id" json:"user_id"`
+	Code    string  `gorm:"column:code" json:"code"`
+	Percent int     `gorm:"column:percent" json:"percent"`
+	Fixed   float64 `gorm:"column:fixed" json:"fixed"`
 }
 
 func (Coupon) WithFields() []string {

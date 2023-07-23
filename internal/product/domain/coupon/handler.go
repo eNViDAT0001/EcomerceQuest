@@ -7,7 +7,6 @@ import (
 type HttpHandler interface {
 	CreateCoupon() func(*gin.Context)
 	GetCouponByID() func(*gin.Context)
-	GetCouponDetailByID() func(*gin.Context)
 	UpdateCoupon() func(*gin.Context)
 	DeleteCouponByIDs() func(*gin.Context)
 	ListCoupon() func(*gin.Context)
@@ -16,5 +15,6 @@ type HttpHandler interface {
 	ListProductNotInCouponID() func(*gin.Context)
 	ListProductPreviewNotInCouponID() func(*gin.Context)
 
-	ValidateCouponByProductIDs() func(*gin.Context)
+	ValidateCouponByProductID() func(*gin.Context)
+	UseCoupon() func(*gin.Context)
 }

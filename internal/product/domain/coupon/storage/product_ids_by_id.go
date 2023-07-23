@@ -3,20 +3,19 @@ package storage
 import (
 	"context"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
-	entities2 "github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
-	"github.com/eNViDAT0001/Thesis/Backend/internal/store/entities"
+	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 )
 
-func (b couponStorage) ProductIDsByBannerID(ctx context.Context, bannerID uint) ([]uint, error) {
+func (b couponStorage) ProductIDsByCouponID(ctx context.Context, couponID uint) ([]uint, error) {
 	result := make([]uint, 0)
 
 	db := wrap_gorm.GetDB()
 
-	query := db.Table(entities.Banner{}.TableName()).
-		Select("DISTINCT BannerDetail.product_id").
-		Joins("JOIN BannerDetail ON BannerDetail.banner_id = Banner.id").
-		Where("Banner.id = ?", bannerID).
-		Where("Banner.deleted_at IS NULL")
+	query := db.Table(entities.Coupon{}.TableName()).
+		Select("DISTINCT CouponDetail.product_id").
+		Joins("JOIN CouponDetail ON CouponDetail.coupon_id = Coupon.id").
+		Joins("JOIN Product ON Product.id = CouponDetail.product_id AND Product.deleted_at IS NULL").
+		Where("Coupon.id = ?", couponID)
 
 	err := query.Find(&result).Error
 	if err != nil {
@@ -25,15 +24,15 @@ func (b couponStorage) ProductIDsByBannerID(ctx context.Context, bannerID uint) 
 
 	return result, nil
 }
-func (b couponStorage) ProductIDsByNotInBannerID(ctx context.Context, bannerID uint) ([]uint, error) {
+func (b couponStorage) ProductIDsByNotInCouponID(ctx context.Context, couponID uint) ([]uint, error) {
 	result := make([]uint, 0)
-	productIDs, err := b.ProductIDsByBannerID(ctx, bannerID)
+	productIDs, err := b.ProductIDsByCouponID(ctx, couponID)
 	if err != nil {
 		return result, err
 	}
 	db := wrap_gorm.GetDB()
 
-	query := db.Table(entities2.Product{}.TableName()).
+	query := db.Table(entities.Product{}.TableName()).
 		Select("Product.id").
 		Where("Product.id NOT IN (?)", productIDs).
 		Where("Product.deleted_at IS NULL")

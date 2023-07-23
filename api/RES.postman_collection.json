@@ -5342,7 +5342,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{productV1Path}}?search[]=id_12",
+							"raw": "{{productV1Path}}",
 							"host": [
 								"{{productV1Path}}"
 							],
@@ -5374,7 +5374,8 @@
 								},
 								{
 									"key": "search[]",
-									"value": "id_12"
+									"value": "id_12",
+									"disabled": true
 								},
 								{
 									"key": "search[]",
@@ -5389,6 +5390,11 @@
 								{
 									"key": "sorts[]",
 									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "compare[]",
+									"value": "price_>=_0",
 									"disabled": true
 								}
 							]
@@ -7405,6 +7411,219 @@
 					"response": []
 				},
 				{
+					"name": "Report Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adminV1Path}}/report/products",
+							"host": [
+								"{{adminV1Path}}"
+							],
+							"path": [
+								"report",
+								"products"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "",
+									"description": "\"name\", \"discount\", \"provider_id\", \"user_id\", \"category_id\", \"rating\", \"height\", \"weight\", \"length\", \"width\"",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "id_12",
+									"description": "\"name\", \"price\", \"id\"",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"description": "\"name\", \"discount\", \"price\", \"created_at\", \"provider_id\", \"user_id\", \"category_id\", \"id\", \"height\", \"weight\", \"length\", \"width\", \"rating\"",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "compare[]",
+									"value": "price_>=_0",
+									"description": "\"price_>=\", \"price_<=\", \"created_at_>=\", \"created_at_<=\"",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report Providers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adminV1Path}}/report/providers",
+							"host": [
+								"{{adminV1Path}}"
+							],
+							"path": [
+								"report",
+								"providers"
+							],
+							"query": [
+								{
+									"key": "marker",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report Orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adminV1Path}}/report/orders",
+							"host": [
+								"{{adminV1Path}}"
+							],
+							"path": [
+								"report",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"description": "\"provider_id\", \"user_id\", \"name\", \"gender\", \"status\", \"id\", \"verify_delivered\"",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "id_12",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"description": "\"name\", \"gender\", \"status\", \"phone\", \"province\", \"district\", \"ward\", \"street\", \"quantity\"",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"description": "{\"delivered_date\", \"provider_id\", \"user_id\", \"name\", \"gender\", \"status\", \"total\", \"discount\", \"id\", \"province\", \"district\", \"ward\"}\n",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "compare[]",
+									"value": "created_at_>=_0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Requests",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -7600,6 +7819,767 @@
 								{
 									"key": "request:_id",
 									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "redis",
+			"item": [
+				{
+					"name": "Set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    const resJson = pm.response.json();",
+									"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+									"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+									"    console.log(pm.variables.get(\"access_token\"));",
+									"    console.log(pm.variables.get(\"refresh_token\"));",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"eNViDAT\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}{{v1}}/redis",
+							"host": [
+								"{{host}}{{v1}}"
+							],
+							"path": [
+								"redis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    const resJson = pm.response.json();",
+									"    postman.setEnvironmentVariable(\"access_token\", resJson.data.Token.access_token);",
+									"    postman.setEnvironmentVariable(\"refresh_token\", resJson.data.Token.refresh_token);",
+									"    console.log(pm.variables.get(\"access_token\"));",
+									"    console.log(pm.variables.get(\"refresh_token\"));",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {},
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"eNViDAT\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}{{v1}}/redis?key=abc",
+							"host": [
+								"{{host}}{{v1}}"
+							],
+							"path": [
+								"redis"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "abc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coupon",
+			"item": [
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{couponV1Path}}",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "gender_0",
+									"description": "\"discount\", \"collection\", \"end_time\"",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "gender_true",
+									"description": "\"discount\", \"collection\", \"end_time\"",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"description": "\"discount\", \"collection\", \"end_time\"",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"description": "\"discount\", \"collection\", \"end_time\", \"id\"",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"description": "\"discount\", \"collection\", \"end_time\", \"id\"",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{couponV1Path}}/:coupon_id",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"path": [
+								":coupon_id"
+							],
+							"variable": [
+								{
+									"key": "coupon_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{couponV1Path}}/:coupon_id/products",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"path": [
+								":coupon_id",
+								"products"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "cursor",
+									"disabled": true
+								},
+								{
+									"key": "marker",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "6",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "coupon_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Product Preview",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{couponV1Path}}/:coupon_id/products/preview",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"path": [
+								":coupon_id",
+								"products",
+								"preview"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "cursor",
+									"disabled": true
+								},
+								{
+									"key": "marker",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "6",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "coupon_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Product not Exist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{couponV1Path}}/:coupon_id/products/no",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"path": [
+								":coupon_id",
+								"products",
+								"no"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "cursor",
+									"disabled": true
+								},
+								{
+									"key": "marker",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "6",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "coupon_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Product Preview Not Exist",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{couponV1Path}}/:coupon_id/products/preview/no",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"path": [
+								":coupon_id",
+								"products",
+								"preview",
+								"no"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "cursor",
+									"disabled": true
+								},
+								{
+									"key": "marker",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "6",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "fields[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "coupon_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Coupon",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"code\": \"Highly Recommend\",\r\n    \"percent\": 10,\r\n    \"fixed\": 3000.0,\r\n    \"products\": [\r\n        {\r\n            \"product_id\": 47,\r\n            \"total\": 2\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{couponV1Path}}/user/:user_id",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"path": [
+								"user",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Coupon",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"Highly Recommend\",\r\n    \"percent\": 10,\r\n    \"fixed\": 3000.0,\r\n    \"products_in\": [\r\n        {\r\n            \"product_id\": 47,\r\n            \"total\": 2\r\n        }\r\n    ],\r\n    \"product_ids_out\": [\r\n        1,2,3\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{couponV1Path}}/:coupon_id/user/:user_id",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"path": [
+								":coupon_id",
+								"user",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "coupon_id",
+									"value": "4"
+								},
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Coupon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{couponV1Path}}",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
 								}
 							]
 						}
