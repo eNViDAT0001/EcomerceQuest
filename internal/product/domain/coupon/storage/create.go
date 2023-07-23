@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"errors"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
@@ -13,6 +14,16 @@ func (b couponStorage) CreateCoupon(ctx context.Context, input io.CouponCreateFo
 	database := wrap_gorm.GetDB()
 
 	err = database.Transaction(func(db *gorm.DB) error {
+		var coupon entities.Coupon
+		err = db.Table(entities.Coupon{}.TableName()).First(&coupon).Error
+		if err != nil && err != gorm.ErrRecordNotFound {
+			return err
+		}
+
+		if coupon.Code == input.Code {
+			return errors.New("coupon code already exists")
+		}
+
 		err = db.Table(entities.Coupon{}.TableName()).Create(&input).Error
 		if err != nil {
 			return err

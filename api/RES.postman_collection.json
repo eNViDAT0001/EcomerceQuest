@@ -8571,15 +8571,25 @@
 							}
 						},
 						"url": {
-							"raw": "{{couponV1Path}}",
+							"raw": "{{couponV1Path}}/user/:user_id",
 							"host": [
 								"{{couponV1Path}}"
+							],
+							"path": [
+								"user",
+								":user_id"
 							],
 							"query": [
 								{
 									"key": "",
 									"value": "",
 									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "1"
 								}
 							]
 						}
