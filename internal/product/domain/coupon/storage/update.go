@@ -25,12 +25,15 @@ func (b couponStorage) UpdateCoupon(ctx context.Context, couponID uint, input io
 			productsIN[i].CouponID = couponID
 		}
 		if len(productsIN) > 0 {
-			err = db.Table(entities.CouponDetail{}.TableName()).Clauses(clause.OnConflict{
-				DoUpdates: clause.Assignments(map[string]interface{}{"total": "VALUES(total)"}),
-			}).Create(&productsIN).Error
-			if err != nil {
-				db.Rollback()
-				return err
+			for _, cp := range productsIN {
+				err = db.Table(entities.CouponDetail{}.TableName()).Clauses(clause.OnConflict{
+					Columns:   []clause.Column{{Name: "coupon_id"}, {Name: "product_id"}},
+					DoUpdates: clause.Assignments(map[string]interface{}{"total": cp.Total}),
+				}).Create(&productsIN).Error
+				if err != nil {
+					db.Rollback()
+					return err
+				}
 			}
 			event_background.AddBackgroundJobs(false, event_background.NewJob(func(ctx context.Context) error {
 				for _, cp := range productsIN {
