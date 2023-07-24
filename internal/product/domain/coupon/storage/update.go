@@ -35,16 +35,6 @@ func (b couponStorage) UpdateCoupon(ctx context.Context, couponID uint, input io
 					return err
 				}
 			}
-			event_background.AddBackgroundJobs(false, event_background.NewJob(func(ctx context.Context) error {
-				for _, cp := range productsIN {
-					err := cache.GetRedis().SetDefault(ctx, "store_"+strconv.Itoa(int(cp.ID)), cp.Total)
-					if err != nil {
-						log.Println(err)
-					}
-				}
-				return nil
-			}))
-
 		}
 
 		if len(productIDsOUT) > 0 {
@@ -62,9 +52,19 @@ func (b couponStorage) UpdateCoupon(ctx context.Context, couponID uint, input io
 
 		return nil
 	})
+
 	if err != nil {
 		return err
 	}
 
+	event_background.AddBackgroundJobs(false, event_background.NewJob(func(ctx context.Context) error {
+		for _, cp := range productsIN {
+			err := cache.GetRedis().SetDefault(ctx, "coupon_store_"+strconv.Itoa(int(cp.ID)), cp.Total)
+			if err != nil {
+				log.Println(err)
+			}
+		}
+		return nil
+	}))
 	return nil
 }

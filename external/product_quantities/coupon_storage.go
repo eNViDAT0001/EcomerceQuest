@@ -28,7 +28,7 @@ func (fRedis *couponStorage) Minus(ctx context.Context, id uint, quantity int) (
 	fRedis.mu.Lock()
 	defer fRedis.mu.Unlock()
 
-	key := fmt.Sprintf("store_%d", id)
+	key := fmt.Sprintf("coupon_store_%d", id)
 	value, err := cache.GetRedis().Get(ctx, key)
 	if err == redis.Nil {
 		return false, nil

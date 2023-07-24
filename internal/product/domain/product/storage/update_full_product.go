@@ -2,12 +2,14 @@ package storage
 
 import (
 	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/external/cache"
 	"github.com/eNViDAT0001/Thesis/Backend/external/enum"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 	"gorm.io/gorm"
+	"strconv"
 )
 
 func (s productStorage) UpdateFullProduct(ctx context.Context, productID uint, product io.ProductFullUpdateForm) error {
@@ -99,6 +101,15 @@ func (s productStorage) UpdateFullProduct(ctx context.Context, productID uint, p
 	})
 	if err != nil {
 		return err
+	}
+
+	for _, option := range product.Options {
+		if option.ID != 0 {
+			_ = cache.GetRedis().SetDefault(ctx, "store_"+strconv.Itoa(int(option.ID)), option.Option.Quantity)
+			continue
+		}
+
+		_ = cache.GetRedis().SetDefault(ctx, "store_"+strconv.Itoa(int(option.Option.ID)), option.Option.Quantity)
 	}
 
 	return nil
