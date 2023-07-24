@@ -2,11 +2,15 @@ package storage
 
 import (
 	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/external/cache"
+	"github.com/eNViDAT0001/Thesis/Backend/external/event_background"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
+	"log"
+	"strconv"
 )
 
 func (b couponStorage) UpdateCoupon(ctx context.Context, couponID uint, input io.CouponUpdateForm, productsIN []io.CouponDetailCreateForm, productIDsOUT []uint) error {
@@ -22,12 +26,22 @@ func (b couponStorage) UpdateCoupon(ctx context.Context, couponID uint, input io
 		}
 		if len(productsIN) > 0 {
 			err = db.Table(entities.CouponDetail{}.TableName()).Clauses(clause.OnConflict{
-				UpdateAll: true,
+				DoUpdates: clause.Assignments(map[string]interface{}{"total": "VALUES(total)"}),
 			}).Create(&productsIN).Error
 			if err != nil {
 				db.Rollback()
 				return err
 			}
+			event_background.AddBackgroundJobs(false, event_background.NewJob(func(ctx context.Context) error {
+				for _, cp := range productsIN {
+					err := cache.GetRedis().SetDefault(ctx, "store_"+strconv.Itoa(int(cp.ID)), cp.Total)
+					if err != nil {
+						log.Println(err)
+					}
+				}
+				return nil
+			}))
+
 		}
 
 		if len(productIDsOUT) > 0 {

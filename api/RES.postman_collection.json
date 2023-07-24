@@ -4812,7 +4812,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": 1,\r\n    \"name\": \"Ngừi Địp\",\r\n    \"gender\": true,\r\n    \"phone\": \"1234567890\",\r\n    \"province\": \"Bình Chánh\",\r\n    \"district\": \"Ninh Thuận\",\r\n    \"ward\": \"Quảng Bình\",\r\n    \"street\": \"Trường chinh\",\r\n    \"quantity\": 20,\r\n    \"total\": 300000,\r\n    \"discount\": 20,\r\n    \"cod\": true,\r\n    \"status_description\":\"Provider Will call you soon\",\r\n    \"items\":[\r\n        {\r\n            \"category_id\": 15,\r\n            \"product_id\": 1,\r\n            \"product_option_id\": 30,\r\n            \"provider_id\": 2,\r\n            \"name\": \"Dummy Name\",\r\n            \"price\": 1,\r\n            \"option\": \"Spec: Option\",\r\n            \"quantity\": 1,\r\n            \"discount\": 1,\r\n            \"image\": \"ádf\"\r\n        }\r\n    ],\r\n    \"cart_items_ids\": [1, 2]\r\n}"
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"name\": \"Ngừi Địp\",\r\n    \"gender\": true,\r\n    \"phone\": \"1234567890\",\r\n    \"province\": \"Bình Chánh\",\r\n    \"district\": \"Ninh Thuận\",\r\n    \"ward\": \"Quảng Bình\",\r\n    \"street\": \"Trường chinh\",\r\n    \"quantity\": 20,\r\n    \"total\": 300000,\r\n    \"discount\": 20,\r\n    \"cod\": true,\r\n    \"status_description\":\"Provider Will call you soon\",\r\n    \"items\":[\r\n        {\r\n            \"category_id\": 1,\r\n            \"product_id\": 47,\r\n            \"product_option_id\": 136,\r\n            \"provider_id\": 21,\r\n            \"name\": \"Dummy Name\",\r\n            \"price\": 1,\r\n            \"option\": \"Spec: Option\",\r\n            \"quantity\": 1,\r\n            \"discount\": 1,\r\n            \"image\": \"ádf\"\r\n        }\r\n    ],\r\n    \"cart_items_ids\": [1, 2],\r\n    \"coupon_codes\": [\"Highly Recommend\"]\r\n}"
 						},
 						"url": {
 							"raw": "{{orderV1Path}}",
@@ -8547,6 +8547,63 @@
 					"response": []
 				},
 				{
+					"name": "Validate coupon",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"Highly Recommend\",\r\n    \"product_ids\": [\r\n        47\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{couponV1Path}}/validate",
+							"host": [
+								"{{couponV1Path}}"
+							],
+							"path": [
+								"validate"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Coupon",
 					"request": {
 						"auth": {
@@ -8590,6 +8647,90 @@
 								{
 									"key": "user_id",
 									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Recommender",
+			"item": [
+				{
+					"name": "Recommended Product IDs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}{{v1}}/recommender/user/:user_id",
+							"host": [
+								"{{host}}{{v1}}"
+							],
+							"path": [
+								"recommender",
+								"user",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "gender_0",
+									"description": "\"discount\", \"collection\", \"end_time\"",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "gender_true",
+									"description": "\"discount\", \"collection\", \"end_time\"",
+									"disabled": true
+								},
+								{
+									"key": "search[]",
+									"value": "",
+									"description": "\"discount\", \"collection\", \"end_time\"",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"description": "\"discount\", \"collection\", \"end_time\", \"id\"",
+									"disabled": true
+								},
+								{
+									"key": "sorts[]",
+									"value": "",
+									"description": "\"discount\", \"collection\", \"end_time\", \"id\"",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "3"
 								}
 							]
 						}
