@@ -17,4 +17,5 @@ type CreateOrderReq struct {
 	StatusDescription string               `json:"status_description"`
 	Items             []CreateOrderItemReq `json:"items"`
 	CartItemsIDS      []uint               `json:"cart_items_ids"`
+	CouponCodes       []string             `json:"coupon_codes"`
 }

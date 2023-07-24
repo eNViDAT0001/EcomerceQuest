@@ -21,13 +21,9 @@ func init() {
 		state = "DEV"
 		viper.LoadConfigFile("./config/", "dev")
 	}
-	migrateAtStart()
 	gin.SetMode(gin.ReleaseMode)
 
 	fmt.Println("STATE:", state)
-}
-func migrateAtStart() {
-
 }
 
 func main() {
@@ -35,8 +31,6 @@ func main() {
 }
 
 func startHttpServer() {
-	defer startHttpServer()
-
 	r := gin.Default()
 	r.Use(cors.Default())
 

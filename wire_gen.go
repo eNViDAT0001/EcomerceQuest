@@ -37,21 +37,21 @@ import (
 	usecase12 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart/usecase"
 	storage12 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart_item/storage"
 	usecase13 "github.com/eNViDAT0001/Thesis/Backend/internal/cart/domain/cart_item/usecase"
-	storage19 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
+	storage20 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/storage"
 	usecase19 "github.com/eNViDAT0001/Thesis/Backend/internal/chat/domain/chat/usecase"
 	storage7 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/storage"
 	usecase9 "github.com/eNViDAT0001/Thesis/Backend/internal/file_storage/domain/media/usecase"
-	storage18 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
+	storage19 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/storage"
 	usecase16 "github.com/eNViDAT0001/Thesis/Backend/internal/notify/domain/notification/usecase"
-	storage14 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage"
+	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/storage"
 	usecase17 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order/usecase"
 	storage13 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/storage"
 	usecase18 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item/usecase"
-	storage17 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/storage"
+	storage18 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/storage"
 	usecase15 "github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/payment/usecase"
 	storage10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/storage"
 	usecase10 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/comment/usecase"
-	storage20 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage"
+	storage14 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage"
 	usecase21 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/usecase"
 	storage6 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/storage"
 	usecase7 "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/product/usecase"
@@ -67,9 +67,9 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/user/domain/user/usecase"
 	storage2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/storage"
 	usecase2 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/jwt/usecase"
-	storage16 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact/storage"
+	storage17 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact/storage"
 	usecase20 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/request_contact/usecase"
-	storage15 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
+	storage16 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/storage"
 	usecase14 "github.com/eNViDAT0001/Thesis/Backend/internal/verification/domain/smtp/usecase"
 )
 
@@ -115,20 +115,21 @@ func initHandlerCollection() *HandlerCollection {
 	cart_itemUseCase := usecase13.NewCartItemUseCase(cart_itemStorage)
 	cart_itemHttpHandler := cart_items.NewCartItemHandler(cart_itemUseCase)
 	order_itemStorage := storage13.NewOrderItemStorage()
-	orderStorage := storage14.NewOrderStorage(order_itemStorage)
-	smtpStorage := storage15.NewSmtpStorage()
-	request_contactStorage := storage16.NewRequestContactStorage()
+	couponStorage := storage14.NewCouponStorage()
+	orderStorage := storage15.NewOrderStorage(order_itemStorage, couponStorage)
+	smtpStorage := storage16.NewSmtpStorage()
+	request_contactStorage := storage17.NewRequestContactStorage()
 	smtpUseCase := usecase14.NewSmtpUseCase(smtpStorage, request_contactStorage)
-	paymentStorage := storage17.NewPaymentStorage()
+	paymentStorage := storage18.NewPaymentStorage()
 	paymentUseCase := usecase15.NewPaymentUseCase(paymentStorage)
-	notificationStorage := storage18.NewNotificationStorage()
+	notificationStorage := storage19.NewNotificationStorage()
 	notificationUseCase := usecase16.NewNotificationUseCase(notificationStorage)
 	orderUseCase := usecase17.NewOrderUseCase(orderStorage, userStorage, smtpUseCase, paymentUseCase, order_itemStorage, providerStorage, notificationUseCase)
 	orderHttpHandler := order.NewOrderHandler(orderUseCase, smtpUseCase, useCase, notificationUseCase)
 	order_itemUseCase := usecase18.NewOrderItemUseCase(order_itemStorage)
 	order_itemHttpHandler := order_items.NewOrderItemHandler(order_itemUseCase)
 	smtpHttpHandler := smtp.NewSmtpHandler(jwtUseCase, useCase, smtpUseCase)
-	chatStorage := storage19.NewChatStorage(userStorage)
+	chatStorage := storage20.NewChatStorage(userStorage)
 	chatUseCase := usecase19.NewChatUseCase(chatStorage)
 	chatHttpHandler := chat.NewChatHandler(chatUseCase)
 	notificationHttpHandler := chat2.NewNotificationHandler(notificationUseCase)
@@ -137,7 +138,6 @@ func initHandlerCollection() *HandlerCollection {
 	request_contactUseCase := usecase20.NewRequestContactUseCase(request_contactStorage, notificationUseCase)
 	request_contactHttpHandler := smtp2.NewRequestContactHandler(request_contactUseCase)
 	dummyRedisHandler := redis.NewRedisHandler()
-	couponStorage := storage20.NewCouponStorage()
 	couponUseCase := usecase21.NewCouponUseCase(couponStorage, productStorage)
 	couponHttpHandler := coupon.NewBannerHandler(couponUseCase)
 	handlerCollection := NewHandlerCollection(httpHandler, userHttpHandler, categoryHttpHandler, app_accessionHttpHandler, jwtHttpHandler, providerHttpHandler, favoriteHttpHandler, productHttpHandler, commentHttpHandler, mediaHttpHandler, bannerHttpHandler, cartHttpHandler, cart_itemHttpHandler, orderHttpHandler, order_itemHttpHandler, smtpHttpHandler, chatHttpHandler, notificationHttpHandler, paymentHttpHandler, adminHttpHandler, request_contactHttpHandler, dummyRedisHandler, couponHttpHandler)

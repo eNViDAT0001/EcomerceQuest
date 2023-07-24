@@ -29,7 +29,7 @@ func (s *orderHandler) CreateOrder() func(ctx *gin.Context) {
 			orderSto.Discount = 10
 		}
 
-		createdOrders, err := s.orderUC.CreateOrder(newCtx, orderSto, itemsSto, input.CartItemsIDS)
+		createdOrders, err := s.orderUC.CreateOrder(newCtx, orderSto, itemsSto, input.CartItemsIDS, input.CouponCodes)
 		if err != nil {
 			cc.ResponseError(err)
 			return

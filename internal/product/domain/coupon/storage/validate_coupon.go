@@ -2,19 +2,21 @@ package storage
 
 import (
 	"context"
+	"fmt"
+	"github.com/eNViDAT0001/Thesis/Backend/external/product_quantities"
 	"github.com/eNViDAT0001/Thesis/Backend/external/wrap_gorm"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
+	"gorm.io/gorm"
 )
 
 func (b couponStorage) ValidateCouponByProductIDs(ctx context.Context, couponCode string, productID uint) (entities.Coupon, error) {
 	var result entities.Coupon
 	db := wrap_gorm.GetDB()
 	err := db.Table(entities.Coupon{}.TableName()).
-		Joins("JOIN CouponDetail ON CouponDetail.id = CouponDetail.coupon_id").
+		Joins("JOIN CouponDetail ON Coupon.id = CouponDetail.coupon_id").
+		Where("Coupon.code = ?", couponCode).
 		Where("CouponDetail.product_id = ?", productID).
-		Where("CouponDetail.code = ?", couponCode).
 		Where("CouponDetail.total > 0").
-		Where("CouponDetail.deleted_at IS NULL").
 		Group("Coupon.id").
 		First(&result).
 		Error
@@ -38,34 +40,47 @@ func (b couponStorage) ValidateCouponByProductIDs(ctx context.Context, couponCod
 	return result, nil
 }
 
-//
-//func (b couponStorage) UseCouponByProductIDsWithGorm(ctx context.Context, db *gorm.DB, coupon []entities.Coupon, productIDs []uint) (entities.Coupon, error) {
-//	quantityStore := product_quantities.GetCouponStore()
-//	store := map[uint]int{}
-//
-//	for i, v := range productIDs {
-//
-//		store[productIDs] += v.Quantity
-//	}
-//	ok, invalidKey := quantityStore.Reduce(ctx, store)
-//
-//	for invalidKey != 0 {
-//		var option entities2.ProductOption
-//		err = query.Table(entities2.ProductOption{}.TableName()).
-//			Where("id = ?", invalidKey).First(&option).Error
-//		if err != nil {
-//			query.Rollback()
-//			return nil, err
-//		}
-//
-//		quantityStore.Add(ctx, invalidKey, option.Quantity)
-//		ok, invalidKey = quantityStore.Reduce(ctx, store)
-//	}
-//
-//	if !ok {
-//		query.Rollback()
-//		return nil, fmt.Errorf("product is not have enough quantity")
-//	}
-//
-//	return result, nil
-//}
+func (b couponStorage) UseCouponByProductIDsWithGorm(ctx context.Context, db *gorm.DB, codes []string, productIDs []uint) error {
+	quantityStore := product_quantities.GetCouponStore()
+	store := map[uint]int{}
+
+	for _, code := range codes {
+		var couponDetail entities.CouponDetail
+		err := db.Table(entities.CouponDetail{}.TableName()).
+			Joins("JOIN Coupon ON Coupon.id = CouponDetail.coupon_id AND Coupon.code = ?", code).
+			Joins("JOIN ProductPreview ON ProductPreview.id = CouponDetail.product_id AND ProductPreview.id IN ?", productIDs).
+			First(&couponDetail).Error
+		if err != nil {
+			return err
+		}
+
+		store[couponDetail.ID] = 1
+	}
+
+	ok, invalidKey := quantityStore.Reduce(ctx, store)
+	for invalidKey != 0 {
+		var couponDetail entities.CouponDetail
+		err := db.Table(entities.CouponDetail{}.TableName()).Where("id = ?", invalidKey).First(&couponDetail).Error
+		if err != nil {
+			return err
+		}
+
+		quantityStore.Add(ctx, invalidKey, couponDetail.Total)
+		ok, invalidKey = quantityStore.Reduce(ctx, store)
+	}
+
+	if !ok {
+		return fmt.Errorf("coupon is not have enough quantity")
+	}
+
+	for k, v := range store {
+		err := db.Table(entities.CouponDetail{}.TableName()).
+			Where("id = ?", k).
+			UpdateColumn("total", gorm.Expr("total - ?", v)).
+			Error
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -16,13 +16,13 @@ func (Coupon) WithFields() []string {
 	return []string{"product_id", "user_id"}
 }
 func (Coupon) SearchFields() []string {
-	return []string{"Name", "percent", "fixed"}
+	return []string{"code", "percent", "fixed"}
 }
 func (Coupon) SortFields() []string {
-	return []string{"percent", "Fixed", "id"}
+	return []string{"percent", "fixed", "id"}
 }
 func (Coupon) CompareFields() []string {
-	return []string{"percent", "Fixed"}
+	return []string{"percent", "fixed"}
 }
 func (Coupon) TableName() string {
 	return "Coupon"

@@ -8,11 +8,13 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/domain/order_item"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/order/entities"
+	coupon "github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon"
 	"time"
 )
 
 type orderStorage struct {
 	orderItemSto order_item.Storage
+	couponSto    coupon.Storage
 }
 
 func (s orderStorage) ListUnPayOrder(ctx context.Context) ([]entities.Order, error) {
@@ -126,7 +128,6 @@ func (s *orderStorage) CountPreviewByProviderID(ctx context.Context, providerID 
 	return total, nil
 }
 
-//
 func (s *orderStorage) CountList(ctx context.Context, input paging.ParamsInput) (total int64, err error) {
 	db := wrap_gorm.GetDB()
 	query := db.Model(entities.Order{})
@@ -155,6 +156,6 @@ func (s *orderStorage) CountPreview(ctx context.Context, input paging.ParamsInpu
 	return total, nil
 }
 
-func NewOrderStorage(orderItemSto order_item.Storage) order.Storage {
-	return &orderStorage{orderItemSto: orderItemSto}
+func NewOrderStorage(orderItemSto order_item.Storage, couponSto coupon.Storage) order.Storage {
+	return &orderStorage{orderItemSto: orderItemSto, couponSto: couponSto}
 }

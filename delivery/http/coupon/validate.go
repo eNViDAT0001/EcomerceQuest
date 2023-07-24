@@ -5,6 +5,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/delivery/http/coupon/io"
 	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 func (s couponHandler) ValidateCouponByProductID() func(*gin.Context) {
@@ -19,7 +20,7 @@ func (s couponHandler) ValidateCouponByProductID() func(*gin.Context) {
 		}
 
 		result, err := s.couponUC.ValidateCouponByProductIDs(newCtx, input.Code, input.ProductIDs)
-		if err != nil {
+		if err != nil && err != gorm.ErrRecordNotFound {
 			cc.ResponseError(err)
 			return
 		}

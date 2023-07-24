@@ -33,7 +33,7 @@ type Storage interface {
 
 	GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error)
 
-	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error)
+	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint, couponCodes []string) (createdOrders []io.CreateOrderForm, err error)
 
 	UpdateOrderStatus(ctx context.Context, orderID uint, status entities.OrderStatus) error
 	UpdateOrder(ctx context.Context, orderID uint, input io.UpdateOrderForm) error

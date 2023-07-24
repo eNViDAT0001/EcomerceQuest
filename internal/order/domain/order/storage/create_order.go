@@ -13,11 +13,13 @@ import (
 	"gorm.io/gorm"
 )
 
-func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error) {
+func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint, couponCodes []string) (createdOrders []io.CreateOrderForm, err error) {
 	db := wrap_gorm.GetDB()
 
+	var productIDs []uint
 	providersItems := map[uint][]io2.CreateOrderItemForm{}
 	for _, item := range items {
+		productIDs = append(productIDs, item.ProductID)
 		_, ok := providersItems[item.ProviderID]
 		if !ok {
 			storage := []io2.CreateOrderItemForm{item}
@@ -116,6 +118,12 @@ func (s orderStorage) CreateOrder(ctx context.Context, order io.CreateOrderForm,
 			quantityStore.Restore(ctx, store)
 			return nil, err
 		}
+	}
+	err = s.couponSto.UseCouponByProductIDsWithGorm(ctx, query, couponCodes, productIDs)
+	if err != nil {
+		query.Rollback()
+		quantityStore.Restore(ctx, store)
+		return nil, err
 	}
 
 	err = query.Table(entities.OrderItem{}.TableName()).Create(&items).Error

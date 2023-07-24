@@ -20,7 +20,7 @@ type couponUseCase struct {
 }
 
 func (u couponUseCase) ValidateCouponByProductIDs(ctx context.Context, CouponCode string, productIDs []uint) ([]ioUC.ValidatedProduct, error) {
-	var result []ioUC.ValidatedProduct
+	result := make([]ioUC.ValidatedProduct, 0)
 	for _, id := range productIDs {
 		cp, err := u.couponSto.ValidateCouponByProductIDs(ctx, CouponCode, id)
 		if err != nil && err != gorm.ErrRecordNotFound {

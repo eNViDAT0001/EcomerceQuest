@@ -1,12 +1,17 @@
 package main
 
 import (
+	"context"
+	"github.com/eNViDAT0001/Thesis/Backend/delivery/grpc/grpc_base"
+	"github.com/eNViDAT0001/Thesis/Backend/external/request"
 	"github.com/eNViDAT0001/Thesis/Backend/socket"
+	proto "github.com/eNViDAT0001/Thesis/Backend/thesis_proto"
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
 	"github.com/roylee0704/gron"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -35,6 +40,24 @@ func router(r *gin.Engine) {
 			c.JSON(http.StatusOK, gin.H{
 				"message": "Hi there",
 			})
+		})
+		v1.GET("/recommender/user/:user_id", func(ctx *gin.Context) {
+			cc := request.FromContext(ctx)
+			userID, err := strconv.Atoi(cc.Param("user_id"))
+			if err != nil {
+				cc.ResponseError(err)
+				return
+			}
+			productIDs, err := grpc_base.GetServices().RecommenderService.
+				LisRecommendedProductIDsByUserID(context.Background(), &proto.RecommendReq{UserId: int32(userID)})
+			if err != nil {
+				cc.ResponseError(err)
+				return
+			}
+			result := map[string][]uint{
+				"recommended": productIDs,
+			}
+			cc.Ok(result)
 		})
 		v1.GET("/recommender", allHandler.productHandler.ListRecommendedProductsIds())
 
@@ -152,6 +175,11 @@ func router(r *gin.Engine) {
 			authAminGroup.POST("", allHandler.categoryHandler.CreateCategory())
 			authAminGroup.PATCH("/:category_id", allHandler.categoryHandler.UpdateCategory())
 
+			authAminGroup.DELETE("/:category_id/node", allHandler.categoryHandler.DeleteNodeByCategoryID())
+			authAminGroup.DELETE("/:category_id", allHandler.categoryHandler.DeleteByCategoryID())
+
+			authAminGroup.PATCH("/:category_id/node", allHandler.categoryHandler.RecoverCategoryNodeByID())
+			authAminGroup.PATCH("/:category_id/single", allHandler.categoryHandler.RecoverCategoryByID())
 		}
 		commentGroup := v1.Group("/comments")
 		{
@@ -264,6 +292,7 @@ func router(r *gin.Engine) {
 			couponGroup.GET("/:coupon_id/products/preview", allHandler.couponHandler.ListProductPreviewByCouponID())
 			couponGroup.GET("/:coupon_id/products/no", allHandler.couponHandler.ListProductNotInCouponID())
 			couponGroup.GET("/:coupon_id/products/preview/no", allHandler.couponHandler.ListProductPreviewNotInCouponID())
+			couponGroup.POST("/validate", allHandler.couponHandler.ValidateCouponByProductID())
 
 			couponGroup.DELETE("/user/:user_id", allHandler.couponHandler.DeleteCouponByIDs())
 			couponGroup.POST("/user/:user_id", allHandler.couponHandler.CreateCoupon())

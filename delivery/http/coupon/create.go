@@ -32,14 +32,16 @@ func (s couponHandler) CreateCoupon() func(*gin.Context) {
 			return
 		}
 
-		bannerID, err := s.couponUC.CreateCoupon(newCtx, inputSto, productSto)
+		couponID, err := s.couponUC.CreateCoupon(newCtx, inputSto, productSto)
 		if err != nil {
 			cc.ResponseError(err)
 			return
 		}
+
 		result := map[string]interface{}{
-			"BannerID": bannerID,
+			"CouponID": couponID,
 		}
+
 		cc.Ok(result)
 	}
 }

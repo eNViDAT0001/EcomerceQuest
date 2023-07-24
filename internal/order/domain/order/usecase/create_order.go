@@ -15,8 +15,8 @@ import (
 	"strconv"
 )
 
-func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []orderItemsIO.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error) {
-	createdOrders, err = u.orderSto.CreateOrder(ctx, order, items, cartItemsIDs)
+func (u *orderUseCase) CreateOrder(ctx context.Context, order io.CreateOrderForm, items []orderItemsIO.CreateOrderItemForm, cartItemsIDs []uint, couponCodes []string) (createdOrders []io.CreateOrderForm, err error) {
+	createdOrders, err = u.orderSto.CreateOrder(ctx, order, items, cartItemsIDs, couponCodes)
 	if err != nil {
 		return createdOrders, err
 	}

@@ -12,4 +12,10 @@ type HttpHandler interface {
 	GetCategoryParentsTreeWithCategoryID() func(*gin.Context)
 	GetCategoryRoofList() func(*gin.Context)
 	GetCategoryTree() func(*gin.Context)
+
+	RecoverCategoryByID() func(*gin.Context)
+	RecoverCategoryNodeByID() func(*gin.Context)
+
+	DeleteByCategoryID() func(*gin.Context)
+	DeleteNodeByCategoryID() func(*gin.Context)
 }

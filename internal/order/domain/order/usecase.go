@@ -21,11 +21,11 @@ type UseCase interface {
 	ListInvalidOrder(ctx context.Context) (unPayOrders []entities.Order, unConfirmedOrders []entities.Order, err error)
 
 	ListOrderReport(ctx context.Context, input paging.ParamsInput) (orders []io.OrderReportQuantity, total int64, err error)
-	
+
 	GetByOrderID(ctx context.Context, orderID uint) (entities.Order, error)
 	GetFullDetailByOrderID(ctx context.Context, orderID uint) (io.OrderFullDetail, error)
 
-	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint) (createdOrders []io.CreateOrderForm, err error)
+	CreateOrder(ctx context.Context, order io.CreateOrderForm, items []io2.CreateOrderItemForm, cartItemsIDs []uint, couponCodes []string) (createdOrders []io.CreateOrderForm, err error)
 
 	UpdateOrderStatus(ctx context.Context, orderID uint, status entities.OrderStatus) error
 	UpdateDeliveredOrderStatus(ctx context.Context, orderID uint, image string) error

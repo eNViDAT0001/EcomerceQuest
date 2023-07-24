@@ -5,6 +5,7 @@ import (
 	"github.com/eNViDAT0001/Thesis/Backend/external/paging"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/domain/coupon/storage/io"
 	"github.com/eNViDAT0001/Thesis/Backend/internal/product/entities"
+	"gorm.io/gorm"
 )
 
 type Storage interface {
@@ -19,5 +20,5 @@ type Storage interface {
 	ProductIDsByCouponID(ctx context.Context, couponID uint) ([]uint, error)
 
 	ValidateCouponByProductIDs(ctx context.Context, couponCode string, productID uint) (entities.Coupon, error)
-	//UseCouponByProductIDsWithGorm(db *gorm.DB, couponCode uint, productID uint) (entities.Coupon, error)
+	UseCouponByProductIDsWithGorm(ctx context.Context, db *gorm.DB, couponCode []string, productIDs []uint) error
 }

@@ -9,7 +9,7 @@ DB_USER: admin
 DB_PASSWORD: admin
 
 RECOMMENDER:
-  HOST: localhost
+  HOST: 127.0.0.1
   PORT: 9180
 
 REDIS:

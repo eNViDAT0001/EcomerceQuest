@@ -16,4 +16,10 @@ type UseCase interface {
 	GetCategoryChildrenByCategoryID(ctx context.Context, categoryID uint) ([]entities.Category, error)
 	GetCategoryRoofList(ctx context.Context) ([]ioUC.CategoryPreview, error)
 	GetCategoryTree(ctx context.Context) ([]ioSto.CategoryChildrenTree, error)
+
+	RecoverCategoryByID(ctx context.Context, categoryID uint) error
+	RecoverCategoryNodeByID(ctx context.Context, categoryID uint) error
+
+	DeleteCategoryByID(ctx context.Context, categoryID uint, parentID *uint) error
+	DeleteCategoryNodeByID(ctx context.Context, categoryID uint) error
 }
