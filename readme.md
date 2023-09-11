@@ -24,10 +24,18 @@
 - User
   - User
   - Address
+- Realtime
+  - Chat
+  - Notification
+- Integration
+  - Paypal
+  - Chat
+- Queue
+  - Send Email
+  - Send Notification
 ```
 Moreover, I'm also write some package in external folder:
 ```text
-- fakeRedis: A simple cache package for cache product's quantity to avoid race condition
 - paging: Get Params from URL and do some Paging stuff
 - wrap_stuff: Get singleton instance and do stuffs
 - request: Reduce some code in Gin
