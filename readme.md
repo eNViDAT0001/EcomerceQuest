@@ -33,7 +33,7 @@
 - Queue
   - Send Email
   - Send Notification
-- Recommendation with gRPC
+- Recommendation in python with gRPC
 ```
 Moreover, I'm also write some package in external folder:
 ```text
